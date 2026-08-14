@@ -143,6 +143,9 @@ The `.opencode/skills/openstate/SKILL.md` skill tells the AI when to use them.
 | [PUBLIC-LICENSE](PUBLIC-LICENSE) | MIT for surface components |
 | [NOTICE](NOTICE) | Attribution & commercial licensing |
 | [SPONSORS.md](SPONSORS.md) | Sponsor tiers & recognition |
+| [SKILL.md](SKILL.md) | AI usage skill |
+| [docs/STATE-FORMAT.md](docs/STATE-FORMAT.md) | State format reference |
+| [docs/FAQ.md](docs/FAQ.md) | Frequently asked questions |
 
 ---
 
