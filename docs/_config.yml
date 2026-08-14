@@ -1,0 +1,14 @@
+title: openstate
+description: A continuously maintained, retractable project-state model for coding agents
+theme: minima
+plugins:
+  - jekyll-relative-links
+relative_links:
+  enabled: true
+  collections: true
+include:
+  - assets
+exclude:
+  - tools
+  - analytics
+  - media

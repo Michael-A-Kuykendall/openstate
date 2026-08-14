@@ -99,7 +99,7 @@ Each assessment:
 3. Produces identical facts as if session ran live
 4. Idempotent — re-running absorbs nothing new (journaled)
 
-**71 assessments run** across 34 sessions. Every prior session's work is now in the current battery.
+**77 assessments run** across 34 sessions. Every prior session's work is now in the current battery.
 
 ---
 
@@ -117,7 +117,7 @@ Re-running `openstate_assess ses_01a8f4e2` → **absorbs 0 new parts**. The jour
 
 ---
 
-## 77 assessments = 71 prior sessions absorbed
+## 77 assessments = 77 prior sessions absorbed
 
 | Repo | Sessions | Assessments | Capsules |
 |------|----------|-------------|----------|
@@ -129,9 +129,9 @@ Re-running `openstate_assess ses_01a8f4e2` → **absorbs 0 new parts**. The jour
 | project-zeta | 1 | 3 | 0 |
 | project-eta | 1 | 3 | 0 |
 
-**Total: 34 sessions → 71 assessments → 30 capsules**
+**Total: 34 sessions → 77 assessments → 30 capsules**
 
-The gap (71 assessments vs 34 sessions) = sessions assessed multiple times (re-assess after corrections, cross-repo imports, etc.).
+The gap (77 assessments vs 34 sessions) = sessions assessed multiple times (re-assess after corrections, cross-repo imports, etc.).
 
 ---
 

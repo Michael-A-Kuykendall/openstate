@@ -57,7 +57,7 @@ Captures events: `message.updated`, `tool.execute.before/after`, `file.edited`, 
 
 ### 2. Local Rust State Engine
 
-Converts observations into live project facts using Saturation Fabric semantics (derivation, retraction, alternative support, provenance).
+Converts observations into live project facts with continuous derivation, automatic retraction on contradictory evidence, and full provenance chains.
 
 ### 3. Resume Capsule
 
@@ -143,7 +143,6 @@ The `.opencode/skills/openstate/SKILL.md` skill tells the AI when to use them.
 | [PUBLIC-LICENSE](PUBLIC-LICENSE) | MIT for surface components |
 | [NOTICE](NOTICE) | Attribution & commercial licensing |
 | [SPONSORS.md](SPONSORS.md) | Sponsor tiers & recognition |
-| [docs/STARTUP-SPLASH-ATTEMPTS.md](docs/STARTUP-SPLASH-ATTEMPTS.md) | What not to do with the terminal |
 
 ---
 
