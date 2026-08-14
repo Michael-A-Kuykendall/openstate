@@ -1,0 +1,628 @@
+{
+  "repo": "project-alpha",
+  "tags": [
+    [
+      "corrected",
+      15394
+    ],
+    [
+      "command_result",
+      7633
+    ],
+    [
+      "completed",
+      4985
+    ],
+    [
+      "validation_state",
+      351
+    ],
+    [
+      "in_progress",
+      229
+    ],
+    [
+      "observation",
+      214
+    ],
+    [
+      "decision",
+      209
+    ],
+    [
+      "objective",
+      87
+    ],
+    [
+      "git_state",
+      59
+    ],
+    [
+      "recurring_failure",
+      47
+    ],
+    [
+      "failed_attempt",
+      28
+    ],
+    [
+      "blocker",
+      28
+    ],
+    [
+      "file_activity",
+      15
+    ],
+    [
+      "aborted",
+      8
+    ],
+    [
+      "session_failure",
+      1
+    ]
+  ],
+  "live_closed": {
+    "True": 25770,
+    "False": 3518
+  },
+  "tools": [
+    [
+      "tool.execute.before serena_replace_content",
+      31
+    ],
+    [
+      "tool.execute.before serena_read_file",
+      21
+    ],
+    [
+      "tool.execute.before serena_replace_in_files",
+      13
+    ],
+    [
+      "tool.execute.before bash",
+      12
+    ],
+    [
+      "tool.execute.before serena_find_symbol",
+      12
+    ],
+    [
+      "tool.execute.before skill",
+      9
+    ],
+    [
+      "tool.execute.before serena_search_for_pattern",
+      9
+    ],
+    [
+      "tool.execute.before glob",
+      8
+    ],
+    [
+      "tool.execute.before serena_get_current_config",
+      5
+    ],
+    [
+      "tool.execute.before serena_get_symbols_overview",
+      5
+    ],
+    [
+      "tool.execute.before todowrite",
+      4
+    ],
+    [
+      "tool.execute.before serena_get_diagnostics_for_file",
+      4
+    ],
+    [
+      "tool.execute.before read",
+      2
+    ],
+    [
+      "tool.execute.before grep",
+      2
+    ],
+    [
+      "tool.execute.before websearch",
+      2
+    ],
+    [
+      "tool.execute.before webfetch",
+      2
+    ],
+    [
+      "tool.execute.before serena_write_memory",
+      2
+    ],
+    [
+      "tool.execute.after bash",
+      1
+    ],
+    [
+      "tool.execute.after project-epsilon_doctor",
+      1
+    ],
+    [
+      "tool.execute.after skill",
+      1
+    ],
+    [
+      "tool.execute.after todowrite",
+      1
+    ],
+    [
+      "tool.execute.after read",
+      1
+    ],
+    [
+      "tool.execute.after edit",
+      1
+    ],
+    [
+      "tool.execute.after grep",
+      1
+    ],
+    [
+      "tool.execute.after glob",
+      1
+    ],
+    [
+      "tool.execute.after write",
+      1
+    ],
+    [
+      "tool.execute.after question",
+      1
+    ],
+    [
+      "tool.execute.after webfetch",
+      1
+    ],
+    [
+      "tool.execute.before edit",
+      1
+    ],
+    [
+      "tool.execute.before write",
+      1
+    ]
+  ],
+  "commands": [
+    [
+      "cd /repo",
+      40
+    ],
+    [
+      "cat > /tmp/work",
+      26
+    ],
+    [
+      "python3 - <<'EOF'\nimport re\nsrc = open('/tmp/work",
+      7
+    ],
+    [
+      "cd /repo/tmp/work",
+      6
+    ],
+    [
+      "cargo build 2>&1 | tee /tmp/work",
+      6
+    ],
+    [
+      "python3 -c \"\nimport json\nd=json.load(open('/tmp/work",
+      6
+    ],
+    [
+      "python3 -c \"\nimport json\nd = json.load(open('/tmp/work",
+      6
+    ],
+    [
+      "cargo check --all-targets --features isf 2>&1 | tee /tmp/work",
+      5
+    ],
+    [
+      "cargo test --package airframe --test rope_factor_verify -- --nocapture 2>&1 | tee /tmp/work",
+      4
+    ],
+    [
+      "python3 - <<'EOF'\nimport json, math\nd = json.load(open('/tmp/work",
+      3
+    ],
+    [
+      "cat /tmp/work",
+      3
+    ],
+    [
+      "cargo test -p airframe --features isf --test test_contracts -- --test-threads=1 2>&1 | tee /tmp/work",
+      3
+    ],
+    [
+      "python3 -c \"\nimport json\na=json.load(open('/tmp/work/tmp/work",
+      3
+    ],
+    [
+      "cd /repo/airframe && python3 - <<'EOF'\nimport json, math\nd=json.load(open('/tmp/work",
+      3
+    ],
+    [
+      "cd /repo/c \"scripts\\_tl_gen.bat\" > /tmp/work",
+      2
+    ],
+    [
+      "cd /repo/repo",
+      2
+    ],
+    [
+      "cd /repo/trial/llama-3 succeeded",
+      2
+    ],
+    [
+      "python3 /tmp/work",
+      2
+    ],
+    [
+      "cd /repo/shimmy && cargo build 2>&1 | tail -3 succeeded",
+      2
+    ],
+    [
+      "cat /repo/opencode.jsonc 2>&1 succeeded",
+      2
+    ],
+    [
+      "cargo check --features isf --all-targets 2>&1 | tee /tmp/work",
+      2
+    ],
+    [
+      "cargo build --features isf 2>&1 | tee /tmp/work",
+      2
+    ],
+    [
+      "./target/debug/layer_dump_gpu ~/models/Gemma-4/gemma-4-E4B-it-Q4_K_M/gemma-4-E4B-it-Q4_K_M.gguf \"The capital of France is\" /tmp/work",
+      2
+    ],
+    [
+      "cargo test -p airframe --features isf --test ple_shader_compile_tmp -- --nocapture 2>&1 | grep -iE \"test result|error|panic|Validation|naga|WGSL|failed\" | head -20",
+      2
+    ],
+    [
+      "cargo test -p airframe --features isf --test ple_shader_compile_tmp -- --nocapture 2>&1 | grep -iE \"test result|error|panic|Validation|failed|ok\\.\" | head -10",
+      2
+    ],
+    [
+      "cargo test -p airframe --features isf --test ple_shader_compile_tmp -- --nocapture 2>&1 | grep -iE \"test result|error|panic|Validation|failed|ok\\.|Too many|entry point\" | head -15",
+      2
+    ],
+    [
+      "cargo test -p airframe-observe 2>&1 | tee /tmp/work",
+      2
+    ],
+    [
+      "gh api repos/Michael-A-Kuykendall/project-epsilon/contents/install.sh --jq .content | base64 -d | bash succeeded",
+      1
+    ],
+    [
+      "pgrep -fla project-epsilon 2>/dev/null || echo \"no project-epsilon process found\" succeeded",
+      1
+    ],
+    [
+      "wc -l /repo/.project-epsilon/state.jsonl && echo \"---last 5 lines---\" && tail -5 /repo/.op succeeded",
+      1
+    ]
+  ],
+  "sessions": 14,
+  "first": "2026-08-06T21:51:07.377604520Z",
+  "last": "2026-08-14T15:05:05.777431310Z",
+  "capsules": 10,
+  "assesses": 25,
+  "blockers": [
+    [
+      "blocked by: edit failed (exit 1)",
+      1
+    ],
+    [
+      "blocked by: id; echo \"=== sudo? ===\"; sudo -n true 2>&1 && echo \"sudo OK\" || echo \"no passwordless sudo\"; echo \"=== sources present? ===\"; cat /etc/apt/",
+      1
+    ],
+    [
+      "blocked by: cd /repo/airframe && echo \"=== shimmy CI ===\"; cat ../shimmy/.github/workflows/ci.yml 2>/dev/null | he",
+      1
+    ],
+    [
+      "blocked by: webfetch failed (exit 1)",
+      1
+    ],
+    [
+      "blocked by: cd /repo/airframe && cargo test -p airframe --features isf --test test_contracts -- --test-threads=1 2",
+      1
+    ],
+    [
+      "blocked by: echo \"=== persistent shell CWD right now ===\"; pwd; echo \"=== what does cd ../shimmy resolve to from airframe/ ===\"; cd ~/r",
+      1
+    ],
+    [
+      "blocked by: skill failed (exit 1)",
+      1
+    ],
+    [
+      "blocked by: serena_read_memory failed (exit 1)",
+      1
+    ],
+    [
+      "blocked by: serena_get_symbols_overview failed (exit 1)",
+      1
+    ],
+    [
+      "blocked by: serena_find_symbol failed (exit 1)",
+      1
+    ]
+  ],
+  "failed": [
+    [
+      "edit failed (exit 1)",
+      1
+    ],
+    [
+      "id; echo \"=== sudo? ===\"; sudo -n true 2>&1 && echo \"sudo OK\" || echo \"no passwordless sudo\"; echo \"=== sources present? ===\"; cat /etc/apt/ failed (exit 1)",
+      1
+    ],
+    [
+      "cd /repo/airframe && echo \"=== shimmy CI ===\"; cat ../shimmy/.github/workflows/ci.yml 2>/dev/null | he failed (exit 1)",
+      1
+    ],
+    [
+      "webfetch failed (exit 1)",
+      1
+    ],
+    [
+      "cd /repo/airframe && cargo test -p airframe --features isf --test test_contracts -- --test-threads=1 2 failed (exit 1)",
+      1
+    ],
+    [
+      "echo \"=== persistent shell CWD right now ===\"; pwd; echo \"=== what does cd ../shimmy resolve to from airframe/ ===\"; cd ~/r failed (exit 1)",
+      1
+    ],
+    [
+      "skill failed (exit 1)",
+      1
+    ],
+    [
+      "serena_read_memory failed (exit 1)",
+      1
+    ],
+    [
+      "serena_get_symbols_overview failed (exit 1)",
+      1
+    ],
+    [
+      "serena_find_symbol failed (exit 1)",
+      1
+    ]
+  ],
+  "objectives": [
+    [
+      "I want to stress that I don't want you monkeying around with any other session or any other things than the ones that have to do with you I hope you just didn't turn anything off that wasn't yours bec",
+      1
+    ],
+    [
+      "Use your export skill This was recreated recently from ther Widnows based version so error check and correct the script if it has issues; Goal is to get the last session get the markdown done and then",
+      1
+    ],
+    [
+      "Both goals done. Let me update the todos and clean up the stale wrong export file.",
+      1
+    ],
+    [
+      "Done. Both goals are complete.\n\n**1. Export script fixed and verified on Linux** (`~/.opencode/export-last-session.py`):\n- `oc-wsl` \u2192 `opencode` (all references in both `.py` and `.ps1`)\n- `norm_dir` ",
+      1
+    ],
+    [
+      "No actually I want you to understand your purpose your purpose is not to ejaculate the inner details of the application to the development manager A developer working on an application should never be",
+      1
+    ],
+    [
+      "OK so that actually brings up we should architect Linux testing What happened here is I did all of my stuff in Windows subsystem on a windows open code but if we have both that and the Linux and then ",
+      1
+    ],
+    [
+      "Step one let's install the newest version of shimmy locally But then step two let's definitively define in the agents MB and wherever necessary especially in all the skills exactly how we prefer to us",
+      1
+    ],
+    [
+      "Both goals done. Here's the complete picture:\n\n## What I did\n\n**1. Confirmed the workspace shimmy is current** \u2014 `shimmy/target/debug/shimmy.exe` = **2.4.2** (the newest on crates.io), rebuilt it fres",
+      1
+    ],
+    [
+      "Just to be sure the rest of the models were reading stuff and doing stuff automatically off the GGUF and I want to make sure that we're not hand coding anything the idea was mathematics should run thi",
+      1
+    ],
+    [
+      "     Audit for me one more time the solutions you are proposing ensure that we've covered everything correctly make sure that with any other models we are doing the same thing and try to flag any othe",
+      1
+    ]
+  ],
+  "decisions": [
+    [
+      "The assess tool keeps defaulting to the current session despite passing the target ID \u2014 likely because the engine sidecar is in a stale state after the recent install. The doctor itself recommended re",
+      1
+    ],
+    [
+      "I want to stress that I don't want you monkeying around with any other session or any other things than the ones that have to do with you I hope you just didn't turn anything off that wasn't yours bec",
+      1
+    ],
+    [
+      "Are you using the tool correctly because if this is a tool problem I will take it back to the tool place and fix it ",
+      1
+    ],
+    [
+      "Use your export skill This was recreated recently from ther Widnows based version so error check and correct the script if it has issues; Goal is to get the last session get the markdown done and then",
+      1
+    ],
+    [
+      "Adding back `re` import since `sanitize_id` uses it, and fixing the rename SQL injection\n",
+      1
+    ],
+    [
+      "So you're going to need to do that again and make sure that you get this current directory's last work by session ID what you talking about is you either got the current session or the previous sectio",
+      1
+    ],
+    [
+      "Done. Both goals are complete.\n\n**1. Export script fixed and verified on Linux** (`~/.opencode/export-last-session.py`):\n- `oc-wsl` \u2192 `opencode` (all references in both `.py` and `.ps1`)\n- `norm_dir` ",
+      1
+    ],
+    [
+      "Wait I thought you were using the large blob is that what was required for the that specific phi 4? Pull me in on you know like the bead you're working and what we have leftover because I kind of lost",
+      1
+    ],
+    [
+      "Right \u2014 appropriately sized. And the size that's genuinely required is `MAX_CHUNKS=8` (the loader's declared ceiling), because phi-4 needs 5 chunks and qwen3-coder-30b needs 6, but the shaders and bin",
+      1
+    ],
+    [
+      "These are the LayerParams initializers (each has `blob_base_words: 0,` followed by `_pad: 0,`). I'll replace the `_pad` line after `blob_base_words` in each with `chunk_words: 0,`. Since the pattern `",
+      1
+    ]
+  ],
+  "inprog": [
+    [
+      "editing /repo/airframe/src/core/spec.rs",
+      32
+    ],
+    [
+      "editing /tmp/work",
+      21
+    ],
+    [
+      "editing /repo/AGENTS.md",
+      15
+    ],
+    [
+      "editing /repo/airframe/tests/ple_input_verify.rs",
+      11
+    ],
+    [
+      "editing /repo/FAMILY_FACTORY.md",
+      10
+    ],
+    [
+      "editing /repo/airframe/tests/offsets_diag_tmp.rs",
+      10
+    ],
+    [
+      "editing /repo/airframe/src/backend/bindless/metadata.rs",
+      8
+    ],
+    [
+      "editing /repo/airframe/src/backend/bindless/pipeline/inference.rs",
+      8
+    ],
+    [
+      "editing /repo/airframe/.github/prompts/model-onboarding.prompt.md",
+      8
+    ],
+    [
+      "editing /repo/airframe/src/runtime/gpu.rs",
+      6
+    ],
+    [
+      "editing /repo/scripts/gen_snapshot.sh",
+      6
+    ],
+    [
+      "editing /repo/.opencode/skills/beads/SKILL.md",
+      6
+    ],
+    [
+      "editing /repo/airframe/src/core/model.rs",
+      5
+    ],
+    [
+      "editing /repo/airframe/scripts/scan_gguf_models.py",
+      5
+    ],
+    [
+      "editing /repo/MODEL_LOCATIONS.md",
+      4
+    ],
+    [
+      "editing /repo/airframe/scripts/phi_smoke_formula.sh",
+      4
+    ],
+    [
+      "editing /repo/airframe/src/backend/bindless/sh_layer_v1.wgsl",
+      4
+    ],
+    [
+      "editing /repo/airframe/src/backend/bindless/sh_ple_block.wgsl",
+      4
+    ],
+    [
+      "editing /repo/airframe/src/bin/layer_dump_gpu.rs",
+      3
+    ],
+    [
+      "editing /repo/airframe/src/backend/bindless/preflight.rs",
+      3
+    ]
+  ],
+  "corrected": 15394,
+  "recurring": [
+    [
+      "recurring: could not find oldstring in the file. it must match exactly, including whitespace, indentation, and line endings",
+      7
+    ],
+    [
+      "recurring: the user rejected permission to use this specific tool call",
+      3
+    ],
+    [
+      "recurring: found multiple matches for oldstring. provide more surrounding context to make the match unique",
+      2
+    ],
+    [
+      "recurring: error executing tool read_file: filenotfounderror: [errno 2] no such file or directory: ' mnt c users micha repos project-alpha airframe src main.rs'",
+      2
+    ],
+    [
+      "recurring: file not found: mnt c users micha repos project-alpha c: users micha downloads airframe_shimmy_architecture_audit.md",
+      2
+    ],
+    [
+      "recurring: error executing tool replace_in_files: valueerror: expected_count=2, but the pattern matches N occurrence(s) - no changes were applied. review the prospective changes below; re-issue with the corrected expectation, a refined pattern, or occurrence_ids selecting the intended subset",
+      2
+    ],
+    [
+      "recurring: statuscode: non 2xx status code (404 get https: raw.githubusercontent.com steveyegge beads main docs upgrading.md)",
+      1
+    ],
+    [
+      "recurring: skill \"release\" not found. available skills: airframe-discipline, airframe-inference, project-zeta, coordinator, customize-opencode, deploy, export-last-session, find-skills, merge, open-pr, project-epsilon, rebase, rust-quality-gate, saturation-fabric, workmux, worktree",
+      1
+    ],
+    [
+      "recurring: skill \"serena-startup\" not found. available skills: airframe-discipline, airframe-inference, project-zeta, coordinator, customize-opencode, deploy, export-last-session, find-skills, merge, open-pr, project-epsilon, rebase, rust-quality-gate, saturation-fabric, workmux, worktree",
+      1
+    ],
+    [
+      "recurring: error executing tool read_memory: filenotfounderror: memory named 'core' not found",
+      1
+    ]
+  ],
+  "file_edits_per_session": {},
+  "cmds_per_session": {
+    "ses_026fc3141ffelPicy67L0PMTY4": 159,
+    "ses_022b9ad1dffe5icYA8HEdN5ppj": 287,
+    "ses_02106c47dffewHuikp0XbNZxuB": 19,
+    "ses_01e101a3bffeDa241TNpHjLYrR": 17,
+    "ses_01e01159fffedMnwGhhyp9ecSk": 24,
+    "ses_01e011588ffeWmaIA9z6LG3b76": 16,
+    "ses_01e0115dcffeBcY2XRzG69fa4L": 9,
+    "ses_01dbb2856ffeEM6u4p3VCyXDsw": 40,
+    "ses_0197d9b6bffeAxUY7qhiwkxcCG": 206,
+    "ses_01832b1faffegt8ryQtpuMAgE6": 668,
+    "ses_007aed8a1ffeQjVo2eEp4rjmZh": 311,
+    "ses_004bcdf72ffeO02crbDppTcvfX": 91,
+    "ses_003a7d3efffeeWDItTzLsbJxn3": 98,
+    "ses_002ea57cdffesSYopFPHS0fHH7": 168
+  }
+}

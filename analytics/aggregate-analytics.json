@@ -1,0 +1,416 @@
+{
+  "total_repos": 8,
+  "total_sessions": 34,
+  "total_capsules": 30,
+  "total_assesses": 77,
+  "total_corrected": 30007,
+  "aggregated_tags": [
+    [
+      "corrected",
+      30007
+    ],
+    [
+      "command_result",
+      16457
+    ],
+    [
+      "completed",
+      10346
+    ],
+    [
+      "validation_state",
+      1231
+    ],
+    [
+      "observation",
+      1063
+    ],
+    [
+      "in_progress",
+      680
+    ],
+    [
+      "git_state",
+      507
+    ],
+    [
+      "decision",
+      499
+    ],
+    [
+      "objective",
+      229
+    ],
+    [
+      "file_activity",
+      176
+    ],
+    [
+      "recurring_failure",
+      173
+    ],
+    [
+      "failed_attempt",
+      81
+    ],
+    [
+      "blocker",
+      62
+    ],
+    [
+      "aborted",
+      14
+    ],
+    [
+      "session_failure",
+      14
+    ]
+  ],
+  "aggregated_tools": [
+    [
+      "tool.execute.before bash",
+      374
+    ],
+    [
+      "tool.execute.before read",
+      62
+    ],
+    [
+      "tool.execute.before serena_replace_content",
+      45
+    ],
+    [
+      "tool.execute.before serena_read_file",
+      32
+    ],
+    [
+      "tool.execute.before todowrite",
+      24
+    ],
+    [
+      "tool.execute.before serena_find_symbol",
+      17
+    ],
+    [
+      "tool.execute.before serena_search_for_pattern",
+      17
+    ],
+    [
+      "tool.execute.before skill",
+      17
+    ],
+    [
+      "tool.execute.before serena_replace_in_files",
+      13
+    ],
+    [
+      "tool.execute.before serena_write_memory",
+      9
+    ],
+    [
+      "tool.execute.before project-zeta_vault_sql",
+      9
+    ],
+    [
+      "tool.execute.before glob",
+      8
+    ],
+    [
+      "tool.execute.after bash",
+      7
+    ],
+    [
+      "tool.execute.after write",
+      7
+    ],
+    [
+      "tool.execute.after read",
+      7
+    ],
+    [
+      "tool.execute.after skill",
+      7
+    ],
+    [
+      "tool.execute.after edit",
+      7
+    ],
+    [
+      "tool.execute.before serena_create_text_file",
+      7
+    ],
+    [
+      "tool.execute.after grep",
+      6
+    ],
+    [
+      "tool.execute.before project-epsilon_assess",
+      6
+    ],
+    [
+      "tool.execute.after webfetch",
+      5
+    ],
+    [
+      "tool.execute.after project-zeta_search_chats",
+      5
+    ],
+    [
+      "tool.execute.after todowrite",
+      5
+    ],
+    [
+      "tool.execute.before edit",
+      5
+    ],
+    [
+      "tool.execute.after project-epsilon_state",
+      5
+    ],
+    [
+      "tool.execute.before serena_get_current_config",
+      5
+    ],
+    [
+      "tool.execute.before serena_get_symbols_overview",
+      5
+    ],
+    [
+      "tool.execute.after question",
+      4
+    ],
+    [
+      "tool.execute.after glob",
+      4
+    ],
+    [
+      "tool.execute.after project-zeta_vault_stats",
+      4
+    ],
+    [
+      "tool.execute.before write",
+      4
+    ],
+    [
+      "tool.execute.after project-epsilon_doctor",
+      4
+    ],
+    [
+      "tool.execute.after project-epsilon_sessions",
+      4
+    ],
+    [
+      "tool.execute.before serena_get_diagnostics_for_file",
+      4
+    ],
+    [
+      "tool.execute.before webfetch",
+      4
+    ],
+    [
+      "tool.execute.after project-zeta_vault_sql",
+      3
+    ],
+    [
+      "tool.execute.after project-zeta_get_activity_digest",
+      2
+    ],
+    [
+      "tool.execute.after websearch",
+      2
+    ],
+    [
+      "tool.execute.after project-zeta_describe_lake",
+      2
+    ],
+    [
+      "tool.execute.after invalid",
+      2
+    ],
+    [
+      "tool.execute.after project-zeta_find_by_files",
+      2
+    ],
+    [
+      "tool.execute.after serena_get_symbols_overview",
+      2
+    ],
+    [
+      "tool.execute.after serena_read_file",
+      2
+    ],
+    [
+      "tool.execute.after serena_replace_symbol_body",
+      2
+    ],
+    [
+      "tool.execute.after serena_find_symbol",
+      2
+    ],
+    [
+      "tool.execute.after serena_initial_instructions",
+      2
+    ],
+    [
+      "tool.execute.after serena_find_referencing_symbols",
+      2
+    ],
+    [
+      "tool.execute.after project-epsilon_assess",
+      2
+    ],
+    [
+      "tool.execute.after project-epsilon_capsule",
+      2
+    ],
+    [
+      "tool.execute.after project-epsilon_report",
+      2
+    ],
+    [
+      "tool.execute.after project-epsilon_checkpoint",
+      2
+    ],
+    [
+      "tool.execute.before grep",
+      2
+    ],
+    [
+      "tool.execute.before websearch",
+      2
+    ],
+    [
+      "tool.execute.before project-zeta_search_chats",
+      2
+    ],
+    [
+      "tool.execute.before project-zeta_get_timeline",
+      2
+    ],
+    [
+      "tool.execute.after project-zeta_refresh_opencode",
+      2
+    ],
+    [
+      "tool.execute.after project-zeta_get_timeline",
+      2
+    ],
+    [
+      "tool.execute.after project-zeta_find_by_command",
+      1
+    ],
+    [
+      "tool.execute.after project-zeta_aggregate_commands",
+      1
+    ],
+    [
+      "tool.execute.after task",
+      1
+    ],
+    [
+      "tool.execute.after project-zeta_aggregate_files",
+      1
+    ],
+    [
+      "tool.execute.after project-zeta_list_topics",
+      1
+    ],
+    [
+      "tool.execute.after project-zeta_get_file_intent_history",
+      1
+    ],
+    [
+      "tool.execute.after serena_create_text_file",
+      1
+    ],
+    [
+      "tool.execute.after serena_replace_in_files",
+      1
+    ],
+    [
+      "tool.execute.after serena_insert_after_symbol",
+      1
+    ],
+    [
+      "tool.execute.after serena_get_diagnostics_for_file",
+      1
+    ],
+    [
+      "tool.execute.after serena_search_for_pattern",
+      1
+    ],
+    [
+      "tool.execute.before project-zeta__dev_read_extension_log",
+      1
+    ],
+    [
+      "tool.execute.before task",
+      1
+    ],
+    [
+      "tool.execute.after project-epsilon_close",
+      1
+    ],
+    [
+      "tool.execute.before serena_initial_instructions",
+      1
+    ],
+    [
+      "tool.execute.before serena_onboarding",
+      1
+    ],
+    [
+      "tool.execute.after serena_onboarding",
+      1
+    ],
+    [
+      "tool.execute.before project-epsilon_checkpoint",
+      1
+    ],
+    [
+      "tool.execute.before project-zeta_refresh_opencode",
+      1
+    ],
+    [
+      "tool.execute.before project-zeta_get_workspace_summary",
+      1
+    ],
+    [
+      "tool.execute.after project-zeta_get_workspace_summary",
+      1
+    ],
+    [
+      "tool.execute.before project-zeta_get_session",
+      1
+    ],
+    [
+      "tool.execute.after project-zeta_get_session",
+      1
+    ],
+    [
+      "tool.execute.before question",
+      1
+    ],
+    [
+      "tool.execute.after serena_read_memory",
+      1
+    ],
+    [
+      "tool.execute.after project-epsilon_reset",
+      1
+    ],
+    [
+      "tool.execute.before invalid",
+      1
+    ],
+    [
+      "tool.execute.after project-zeta_get_model_usage",
+      1
+    ]
+  ],
+  "avg_edits_per_session": 0,
+  "avg_cmds_per_session": 113.73529411764706,
+  "median_edits_per_session": 0,
+  "median_cmds_per_session": 68.0,
+  "repo_count": 8
+}

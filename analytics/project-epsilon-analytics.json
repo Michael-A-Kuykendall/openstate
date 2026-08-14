@@ -1,0 +1,388 @@
+{
+  "repo": "project-epsilon",
+  "tags": [
+    [
+      "corrected",
+      1654
+    ],
+    [
+      "command_result",
+      519
+    ],
+    [
+      "completed",
+      462
+    ],
+    [
+      "validation_state",
+      210
+    ],
+    [
+      "observation",
+      136
+    ],
+    [
+      "git_state",
+      74
+    ],
+    [
+      "in_progress",
+      43
+    ],
+    [
+      "file_activity",
+      37
+    ],
+    [
+      "session_failure",
+      1
+    ]
+  ],
+  "live_closed": {
+    "True": 2694,
+    "False": 442
+  },
+  "tools": [
+    [
+      "tool.execute.before bash",
+      54
+    ],
+    [
+      "tool.execute.before project-zeta_vault_sql",
+      4
+    ],
+    [
+      "tool.execute.after project-epsilon_state",
+      2
+    ],
+    [
+      "tool.execute.before project-zeta_search_chats",
+      2
+    ],
+    [
+      "tool.execute.before skill",
+      2
+    ],
+    [
+      "tool.execute.before project-zeta_get_timeline",
+      2
+    ],
+    [
+      "tool.execute.before read",
+      2
+    ],
+    [
+      "tool.execute.after bash",
+      1
+    ],
+    [
+      "tool.execute.after todowrite",
+      1
+    ],
+    [
+      "tool.execute.before project-epsilon_checkpoint",
+      1
+    ],
+    [
+      "tool.execute.after edit",
+      1
+    ],
+    [
+      "tool.execute.after read",
+      1
+    ],
+    [
+      "tool.execute.after webfetch",
+      1
+    ],
+    [
+      "tool.execute.after write",
+      1
+    ],
+    [
+      "tool.execute.after grep",
+      1
+    ],
+    [
+      "tool.execute.after project-zeta_vault_sql",
+      1
+    ],
+    [
+      "tool.execute.before edit",
+      1
+    ],
+    [
+      "tool.execute.before write",
+      1
+    ],
+    [
+      "tool.execute.after skill",
+      1
+    ],
+    [
+      "tool.execute.after project-zeta_search_chats",
+      1
+    ],
+    [
+      "tool.execute.before project-zeta_refresh_opencode",
+      1
+    ],
+    [
+      "tool.execute.after project-zeta_refresh_opencode",
+      1
+    ],
+    [
+      "tool.execute.after project-zeta_get_timeline",
+      1
+    ],
+    [
+      "tool.execute.before project-zeta_get_workspace_summary",
+      1
+    ],
+    [
+      "tool.execute.after project-zeta_get_workspace_summary",
+      1
+    ],
+    [
+      "tool.execute.after project-epsilon_sessions",
+      1
+    ],
+    [
+      "tool.execute.before project-epsilon_assess",
+      1
+    ],
+    [
+      "tool.execute.before project-zeta_get_session",
+      1
+    ],
+    [
+      "tool.execute.after project-zeta_get_session",
+      1
+    ],
+    [
+      "tool.execute.before question",
+      1
+    ]
+  ],
+  "commands": [
+    [
+      "cd /repo",
+      84
+    ],
+    [
+      "cd /repo/node_modules/@opencode-ai/sdk/dist/gen/types.gen.d.ts succeeded",
+      2
+    ],
+    [
+      "cd /repo/engine/tests/pipeline.rs succeeded",
+      2
+    ],
+    [
+      "project-epsilon_state succeeded",
+      1
+    ],
+    [
+      "kill -9 69781 2>/dev/null; sleep 1\ncp -f /repo/target/release/project-epsilon-engine /repo/.opencode/bin/ope succeeded",
+      1
+    ],
+    [
+      "todowrite succeeded",
+      1
+    ],
+    [
+      "cd /repo/release/project-epsilon-engine .opencode/bin/project-epsilon-engine\nkill -9 72304 succeeded",
+      1
+    ],
+    [
+      "cd /repo/.project-epsilon && ls -la state.jsonl && echo \"=== git facts persisted? ===\" && grep -c \"git\\.\" state.jsonl; echo \"=== edit_cou succeeded",
+      1
+    ],
+    [
+      "edit succeeded",
+      1
+    ],
+    [
+      "read succeeded",
+      1
+    ],
+    [
+      "cd /repo/release/project-epsilon-engine .opencode/bin/project-epsilon-engine && echo \"= succeeded",
+      1
+    ],
+    [
+      "cd /repo/release/project-epsilon-engine .opencode/bin/project-epsilon-engine && md5sum  succeeded",
+      1
+    ],
+    [
+      "webfetch succeeded",
+      1
+    ],
+    [
+      "ls /repo/node_modules/@opencode-ai/plugin/ && echo \"---\" && cat /repo/node_modules/@opencode-ai/plugin succeeded",
+      1
+    ],
+    [
+      "find /repo/node_modules/@opencode-ai/plugin\" -type d 2>/dev/null | head -5 succeeded",
+      1
+    ],
+    [
+      "cat /repo/src/plugin/node_modules/@opencode-ai/plugin/package.json 2>/dev/null | head -20 succeeded",
+      1
+    ],
+    [
+      "ls /repo/src/plugin/node_modules/@opencode-ai/plugin/dist/ succeeded",
+      1
+    ],
+    [
+      "write succeeded",
+      1
+    ],
+    [
+      "cd /repo/src/plugin && npm run build 2>&1 | tail -2 && npm run bundle 2>&1 | tail -2 && npm test 2>&1 | tail -5 succeeded",
+      1
+    ],
+    [
+      "ls /repo/tools/ 2>/dev/null; cat /repo/tools/README.md 2>/dev/null | head -5 succeeded",
+      1
+    ],
+    [
+      "mkdir -p /repo/tools/vscode-extension/src && echo \"created\" succeeded",
+      1
+    ],
+    [
+      "rm -f /repo/tools/vscode-extension/src/extension.js /repo/tools/vscode-extension/src/extension.js.map; succeeded",
+      1
+    ],
+    [
+      "ls /repo/tools/vscode-extension/src/ /repo/tools/vscode-extension/ succeeded",
+      1
+    ],
+    [
+      "rm -rf /repo/tools/vscode-extension && echo \"VS Code extension removed\"; ls /repo/tools/ succeeded",
+      1
+    ],
+    [
+      "ls /repo/node_modules/@opentui/ 2>/dev/null || echo \"no @opentui in root node_modules\"; ls /repo/.open succeeded",
+      1
+    ],
+    [
+      "which opencode oc-wsl 2>/dev/null; readlink -f $(which oc-wsl 2>/dev/null || which opencode 2>/dev/null) 2>/dev/null succeeded",
+      1
+    ],
+    [
+      "ls ~/.opencode/bin/ && echo \"---\" && ls ~/.opencode/bin/node_modules/@opentui/ 2>/dev/null || echo \"no @opentui there\"; find /home/micha succeeded",
+      1
+    ],
+    [
+      "cat ~/.local/bin/oc-wsl 2>/dev/null | head -20; echo \"===\"; readlink -f ~/.local/bin/oc-wsl succeeded",
+      1
+    ],
+    [
+      "tail -80 ~/.local/share/opencode/log/opencode.log 2>/dev/null | grep -iE \"project-epsilon|splash|plugin|tui|error|fail\" | tail -40 succeeded",
+      1
+    ],
+    [
+      "grep -n \"project-epsilon_\\|isSelfTool\\|tool.execute.before\\|tool.execute.after\" /repo/.opencode/plugins/project-epsilon.js | head -20 succeeded",
+      1
+    ]
+  ],
+  "sessions": 3,
+  "first": "2026-08-04T15:15:44.255670543Z",
+  "last": "2026-08-14T16:37:45.197257698Z",
+  "capsules": 4,
+  "assesses": 7,
+  "blockers": [],
+  "failed": [],
+  "objectives": [],
+  "decisions": [],
+  "inprog": [
+    [
+      "editing /repo/install.sh",
+      4
+    ],
+    [
+      "editing /repo/ROADMAP.md",
+      2
+    ],
+    [
+      "editing /repo/.gitignore",
+      2
+    ],
+    [
+      "tool.execute.after project-epsilon_state",
+      1
+    ],
+    [
+      "editing /repo/src/engine/src/capsule.rs",
+      1
+    ],
+    [
+      "editing /repo/src/plugin/commands.ts",
+      1
+    ],
+    [
+      "editing /repo/src/plugin/index.ts",
+      1
+    ],
+    [
+      "editing /repo/src/engine/src/persist.rs",
+      1
+    ],
+    [
+      "editing /repo/src/engine/tests/pipeline.rs",
+      1
+    ],
+    [
+      "editing /repo/src/engine/src/frontier.rs",
+      1
+    ],
+    [
+      "editing /repo/Cargo.toml",
+      1
+    ],
+    [
+      "editing /repo/LICENSE",
+      1
+    ],
+    [
+      "editing /repo/PUBLIC-LICENSE",
+      1
+    ],
+    [
+      "editing /repo/CONTRIBUTING.md",
+      1
+    ],
+    [
+      "editing /repo/DCO.md",
+      1
+    ],
+    [
+      "editing /repo/GOVERNANCE.md",
+      1
+    ],
+    [
+      "editing /repo/CODEOWNERS",
+      1
+    ],
+    [
+      "editing /repo/SECURITY.md",
+      1
+    ],
+    [
+      "editing /repo/CODE_OF_CONDUCT.md",
+      1
+    ],
+    [
+      "editing /repo/NOTICE",
+      1
+    ]
+  ],
+  "corrected": 1654,
+  "recurring": [],
+  "file_edits_per_session": {},
+  "cmds_per_session": {
+    "ses_0289248d2ffeLaL00Yv6RuabxB": 68,
+    "ses_01dc3a22bffe6rRF5DHYtR3mSQ": 46,
+    "ses_002aa970affeM7YpBO4CxkiAEK": 80
+  }
+}

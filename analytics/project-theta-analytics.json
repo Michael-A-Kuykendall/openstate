@@ -1,0 +1,28 @@
+{
+  "repo": "project-theta",
+  "tags": [
+    [
+      "observation",
+      1
+    ]
+  ],
+  "live_closed": {
+    "True": 1
+  },
+  "tools": [],
+  "commands": [],
+  "sessions": 0,
+  "first": "2026-08-12T16:50:35.816995990Z",
+  "last": "2026-08-12T16:50:35.816995990Z",
+  "capsules": 0,
+  "assesses": 0,
+  "blockers": [],
+  "failed": [],
+  "objectives": [],
+  "decisions": [],
+  "inprog": [],
+  "corrected": 0,
+  "recurring": [],
+  "file_edits_per_session": {},
+  "cmds_per_session": {}
+}

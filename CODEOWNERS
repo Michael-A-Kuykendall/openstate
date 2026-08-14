@@ -1,0 +1,27 @@
+# This file defines code review ownership for openstate.
+# All changes require review and approval from the lead maintainer.
+
+# Global ownership - require maintainer review for everything
+* @Michael-A-Kuykendall
+
+# Critical files require explicit maintainer approval
+Cargo.toml @Michael-A-Kuykendall
+src/engine/Cargo.toml @Michael-A-Kuykendall
+src/engine/src/main.rs @Michael-A-Kuykendall
+src/engine/src/store.rs @Michael-A-Kuykendall
+src/engine/src/rules.rs @Michael-A-Kuykendall
+src/engine/src/intel.rs @Michael-A-Kuykendall
+src/engine/src/report.rs @Michael-A-Kuykendall
+src/engine/src/fact.rs @Michael-A-Kuykendall
+src/plugin/dist/openstate.js @Michael-A-Kuykendall
+src/skill/openstate/SKILL.md @Michael-A-Kuykendall
+install.sh @Michael-A-Kuykendall
+
+# Governance and project files
+LICENSE @Michael-A-Kuykendall
+PUBLIC-LICENSE @Michael-A-Kuykendall
+CONTRIBUTING.md @Michael-A-Kuykendall
+DCO.md @Michael-A-Kuykendall
+CODEOWNERS @Michael-A-Kuykendall
+README.md @Michael-A-Kuykendall
+ROADMAP.md @Michael-A-Kuykendall
