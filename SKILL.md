@@ -11,9 +11,24 @@ openstate is a **decision log, not an edit log** — it records what is *true, d
 
 ---
 
+## ⚠️ CRITICAL: Load this skill BEFORE using any openstate tools
+
+**This skill MUST be loaded first.** You CANNOT use `openstate_state`, `openstate_assess`, or any other openstate tool until:
+
+1. **An OpenCode session has started** — the session ID is assigned by OpenCode at startup. You can see it via `openstate_sessions` or it appears in session metadata. There is NO session before OpenCode spawns you.
+2. **This skill is loaded via the `skill openstate` tool** — loading the skill is what makes the openstate tool family available in your tool surface. If the tools aren't in your tool list, the skill is NOT loaded.
+
+**Common mistake:** Trying to call `openstate_assess` or `openstate_state` in a brand-new session before loading this skill. The tools will fail or produce empty/confused results because there is no session context yet. The OpenCode session ID is generated when OpenCode starts; the openstate tools then track facts *for that session ID*. If you skip loading the skill, you're working without the battery.
+
+**Fix:** Run `skill openstate` FIRST (this loads the tool family), THEN follow the Session Start ritual below.
+
+---
+
 ## Session Start — the mandatory 3-step ritual
 
-Immediately when a session starts in this repo, do ALL of these before touching user code:
+**Prerequisites:** (a) this skill is loaded via `skill openstate`, and (b) an OpenCode session is running (session ID exists). If either is missing, the ritual below will fail.
+
+Do ALL of these steps immediately when a session starts, before touching user code:
 
 1. `openstate_state` — recover the objective, decisions, in-progress work, blockers.
 2. `openstate_capsule` — get the compact resume contract (frontier views lead it).
@@ -40,10 +55,13 @@ If anything looks broken/stuck, ALSO call `openstate_report` before diving in �
 | `openstate_close <fact_id \| session_id> <reason>` | Mark a false positive / resolved item live=false with an audit reason. Cascades to dependents. Idempotent |
 | `openstate_assess <session_id?>` | Replay a session's full event history into the battery. Omit id = current session; pass id = recover a PRIOR session. Idempotent (journaled) |
 | `openstate_sessions` | List recent opencode session ids + titles to pick one for assess |
-| `openstate_doctor` | Health check: engine PID/uptime, live vs total facts, state path, journal health, last checkpoint. Run FIRST on "engine unavailable" |
+| `openstate_doctor` | **Health check + AUTO-FIX**: restores the engine binary's execute permission (lost +x breaks the sidecar) and removes stale `.openstate` lock files (PID-liveness checked — a live engine's lock is never touched), then reports PID/uptime, live vs total facts, state path, journal health, last checkpoint. Run FIRST on "engine unavailable" |
 | `openstate_restart` | Checkpoint + kill + respawn the engine sidecar. Engine recovery WITHOUT an OpenCode restart |
+| `openstate_toast <enabled>` | Toggle the completion toasts ON/OFF (persisted per-project in `.openstate/toasts.json`, default ON). Toasts are transient; the sidebar ticker shows live status either way. |
 | `openstate_export` | Dump the full state store as a timestamped JSON file (on-demand only) |
 | `openstate_reset` | **Irreversible** full wipe of facts AND the assess journal. Only for starting over / privacy scrub / confused-state recovery |
+
+> **Note:** These tools only appear in your tool list after you run `skill openstate`. If you don't see them, the skill is not loaded — load it first.
 
 ---
 
@@ -92,6 +110,8 @@ Both `openstate_report` and `openstate_capsule` lead with three deterministic vi
 
 ## The recovery loop (after a restart or in a fresh session)
 
+**Before this loop:** load this skill via `skill openstate` so the tool family is available. The tools below do NOT exist until the skill is loaded.
+
 1. **`openstate_sessions`** — list prior sessions (if you need history the current session can't see).
 2. **`openstate_assess <prior_session_id>`** — replay that session's message text and tool calls into the battery. Omit the id to assess the current session. Idempotent: every part is journaled in `.openstate/imported-parts.jsonl`, so re-running absorbs nothing new. Guarded: a session from a DIFFERENT project is refused unless you pass `confirm=true`; a stale journal on an empty store is refused until `openstate_reset`.
 3. **`openstate_report`** — read what is broken/stuck/unresolved right now (the frontier views + black-box sections).
@@ -121,6 +141,25 @@ That loop gives you the "why" and the "what is true". For exact edit reconstruct
 
 ---
 
+## Tool-failure & anti-pattern audit (the "why is my process slow" check)
+
+When asked to audit tool failures / bespoke-Python usage, do it ENTIRELY through openstate:
+
+1. `openstate_assess` the current session AND the prior session(s).
+2. `openstate_report` → read `failed_attempts` + `recurring_failures`. These ARE the
+   tool-failure list. `recurring_failures.signature` groups them by root cause so you
+   don't re-infer.
+3. `openstate_state` (or `report_timeline`) → scan the `tool.execute.after` /
+   `command_result` propositions for inline `python3 -c` and `rg`/`sed` calls used to
+   READ files — those are the bespoke-parsing anti-pattern.
+4. Report the failures + the pattern; assign blame to app vs model honestly.
+5. `openstate_checkpoint` to persist.
+
+**Do NOT** open `.openstate/state.jsonl` or the opencode tool-output files directly, and
+**do NOT** run bash/python to grep them. The tools above already compile this data.
+
+---
+
 ## Interpreting the black-box signals — do NOT misread the battery
 
 - A `recurring_failure` like "oldString not found" is the feature **working** — it aggregated repeated failures by root cause so you can see *the pattern that stalls reconstruction*. It is not a bug report.
@@ -132,12 +171,26 @@ That loop gives you the "why" and the "what is true". For exact edit reconstruct
 
 ---
 
+## Feedback surfaces — sidebar ticker + completion toasts
+
+Two complementary, human-visible surfaces report openstate activity (both driven by `message.part.updated` ToolPart transitions — this is the ONLY correct event path; the old `session.next.tool.*` names never fire):
+
+- **Right sidebar** (`● openstate / battery ready`): live status. While an `openstate_*` command runs, "battery ready" swaps to `<command>: …` and the green dot animates (pulses glyph + color). It settles back after each command. Always on — this is the silent, always-available surface.
+- **Completion toast**: a transient TUI notification confirming what finished — e.g. `✓ doctor · engine OK · 7796 facts` (takes the tool's own first output line, ~6s, coalesced into ONE toast for back-to-back bursts). This is the glanceable "what just happened" surface.
+
+**To turn toasts off:** call `openstate_toast` with `enabled: false` (an AI-driven toggle — just ask your agent "turn off the openstate toasts"). Persisted per-project in `.openstate/toasts.json`; default ON. The sidebar ticker keeps working regardless. The user does NOT need a command-palette toggle — it is a tool the agent calls on request.
+
+If toasts seem missing: (a) check `.openstate/toasts.json` doesn't say `{"enabled": false}`, (b) confirm the TUI plugin is registered in `.opencode/tui.json`. Tool *return text* is visible only when the user enables generic tool output in the TUI — it feeds the model regardless.
+
+---
+
 ## Engine unavailable / recovery
 
-1. Run `openstate_doctor` FIRST — it tells you whether the engine is down, starved (busy draining its pipe), or healthy but idle.
-2. If the engine is **down**: run `openstate_restart` — it checkpoints state, kills the sidecar, and respawns fresh. **No OpenCode restart needed.**
+1. Run `openstate_doctor` FIRST — it AUTO-FIXES the two common local failure modes (engine binary lost its `+x`; stale `.openstate` lock files from dead engines), then reports whether the engine is down, starved (busy draining its pipe), or healthy but idle.
+2. If the engine is **down**: run `openstate_restart` — it checkpoints state, kills the sidecar, and respawns fresh. **No OpenCode restart needed.** After doctor cleared stale locks, the restart respawns the engine onto the **primary** `state.jsonl` — a stale lock otherwise silently degrades the engine to a pid-suffixed copy (`state.jsonl.<pid>`), drifting your battery away from the primary state.
 3. If the engine is **truly gone** (restart doesn't help): restart OpenCode to respawn the sidecar, or re-run `./install.sh` — it stops any prior engine process before deploying, so a reinstall never leaves a stale engine holding the state lock.
 4. Checkpoint retries automatically on transient stalls — a single "unavailable" is usually self-healing. Do not panic; do not reset on a transient error.
+5. **Known drift**: if repo paths changed mounts (e.g. `/mnt/c/...` → `/home/...`), old `in_progress` "editing X" facts may never get their paired close event — close them per-fact with `openstate_close <fact_id>` so they stop coloring the report.
 
 ---
 

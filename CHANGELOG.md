@@ -5,6 +5,17 @@ All notable changes to openstate will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- **Completion toasts** — transient TUI notifications confirming each openstate command finished (`✓ doctor · engine OK · 7796 facts`), coalesced into one for back-to-back bursts. Driven by `message.part.updated` ToolPart events.
+- **`openstate_toast` tool** — AI-driven toggle to turn the completion toasts on/off (`enabled: false`), persisted per-project in `.openstate/toasts.json` (default ON). The sidebar ticker keeps working regardless.
+- **Sidebar ticker now covers every openstate command** — "battery ready" swaps to the running command's name with an animated (pulsing + color-shifting) green dot, then settles back.
+
+### Changed
+
+- **Correct/only-working tool-lifecycle signal**: the TUI plugin now listens to `message.part.updated` (ToolPart `pending → running → completed|error`). The former `session.next.tool.*` event names exist in the SDK type union but never fire on the TUI event bus, which is why the sidebar/ticker stayed idle; `message.part.updated` is the path the plugin itself already relies on.
+
 ## [0.1.0] - 2026-08-14
 
 ### Added

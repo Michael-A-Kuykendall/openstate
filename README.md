@@ -98,14 +98,27 @@ State lives per-project in `.openstate/state.jsonl`. Query it directly with Duck
 curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash
 
 # Restart OpenCode
-# You now have 13 AI tools + TUI sidebar + skill
-```
+ # You now have 14 AI tools + TUI sidebar (live ticker + completion toasts) + skill
+ ```
+
+---
+
+## Human-visible feedback
+
+Two surfaces report openstate activity (both driven by OpenCode's `message.part.updated` ToolPart events — the one signal path that actually fires for custom-tool lifecycle):
+
+- **Right sidebar ticker** (`● openstate / battery ready`) — live status. While an `openstate_*` command runs, "battery ready" swaps to `<command>: …` and the green dot animates, then settles back. Always on.
+- **Completion toasts** — a transient TUI notification confirming what finished (e.g. `✓ doctor · engine OK · 7796 facts`), coalesced into one toast for back-to-back bursts. On by default.
+
+**Turning toasts off:** an AI-driven toggle — ask the agent "turn off the openstate toasts", which calls `openstate_toast` with `enabled: false`. Persisted per-project in `.openstate/toasts.json`. The sidebar ticker keeps working regardless.
+
+> Note on tool output in the transcript: a tool's returned text feeds the model and appears in the chat only when the user enables "Show generic tool output" in the TUI (an opt-in OpenCode setting). The sidebar + toasts above are the guaranteed human-visible surfaces.
 
 ---
 
 ## AI Tools
 
-The AI gets 13 tools automatically via the OpenCode plugin:
+The AI gets 14 tools automatically via the OpenCode plugin:
 
 | Tool | Purpose |
 |------|---------|
@@ -122,6 +135,7 @@ The AI gets 13 tools automatically via the OpenCode plugin:
 | `openstate_sessions` | List prior sessions for assessment |
 | `openstate_doctor` | Engine health check |
 | `openstate_restart` | Restart engine sidecar |
+| `openstate_toast` | Toggle the completion toasts ON/OFF (per-project; default ON) |
 
 The `.opencode/skills/openstate/SKILL.md` skill tells the AI when to use them.
 

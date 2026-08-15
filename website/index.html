@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OpenState — A continuously maintained, retractable project-state model for coding agents</title>
+<meta name="description" content="OpenState gives AI coding agents a continuously maintained, provenance-backed model of project state. Local, private, free forever, OpenCode-compatible." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="#top">
+      <img class="brand-logo" src="logo-header.jpg" alt="OpenState logo" />
+    </a>
+    <nav class="nav">
+      <a href="#problem">Problem</a>
+      <a href="#solution">Solution</a>
+      <a href="#proof">Proof</a>
+      <a href="#how">How</a>
+      <a href="#tools">Tools</a>
+      <a href="#install">Install</a>
+      <a href="#principles">Principles</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="shell hero-grid">
+    <div class="hero-text">
+      <p class="eyebrow">OpenState &mdash; 01 / State Model</p>
+      <h1>A continuously maintained,<br /><em>retractable</em> project-state<br />model for coding agents.</h1>
+      <p class="hero-lede">Events stream into a local engine.<br />The engine maintains <strong>current project truth</strong> &mdash; not a transcript.<br />The next session receives a structured continuation contract instead of a lossy summary.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#install">Install</a>
+        <a class="btn btn-ghost" href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">View on GitHub</a>
+        <a class="btn btn-link" href="https://github.com/sponsors/Michael-A-Kuykendall" target="_blank" rel="noopener">Sponsor &rarr;</a>
+      </div>
+      <p class="hero-tags">Local &nbsp;/&nbsp; Private &nbsp;/&nbsp; Free forever &nbsp;/&nbsp; OpenCode-compatible</p>
+    </div>
+    <div class="hero-mark">
+      <img class="hero-logo" src="logo-md.jpg" alt="OpenState logotype rendered on a cube" />
+      <p class="hero-caption"><em>The battery is for the AI. Humans ask the AI.</em></p>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="problem">
+  <div class="shell">
+    <p class="eyebrow">Problem &mdash; The forgetful agent</p>
+    <h2>Every session ends the same way:</h2>
+    <div class="flow">
+      <span>600k tokens</span><span class="arrow">&rarr;</span><span>compact / end</span><span class="arrow">&rarr;</span><span>summarize</span><span class="arrow">&rarr;</span><span class="signal">hope it survived</span>
+    </div>
+    <p class="lede">What that actually costs:</p>
+    <ul class="tick-list">
+      <li>Re-running commands that already failed</li>
+      <li>Re-reading the same files</li>
+      <li>Re-trying approaches you already rejected</li>
+      <li>Losing mid-edit state the moment something crashes</li>
+      <li>Every new session starting with a smoothie of guesswork</li>
+    </ul>
+    <p class="punch">The agent forgets. You pay for it.</p>
+  </div>
+</section>
+
+<section class="band" id="solution">
+  <div class="shell">
+    <p class="eyebrow">Solution &mdash; State, not story</p>
+    <h2>The engine does not summarize what happened.<br />It maintains what is <em>true right now</em>.</h2>
+    <div class="cols">
+      <div class="col">
+        <h3>Events flow in</h3>
+        <p>Messages, tool calls, file edits, todos, git &mdash; everything streams into a local engine while you work.</p>
+      </div>
+      <div class="col">
+        <h3>Facts retract</h3>
+        <p>Derived facts auto-retract the moment contradicting evidence arrives. Always current. Never stale.</p>
+      </div>
+      <div class="col">
+        <h3>Provenance, always</h3>
+        <p>Every fact carries a full justification chain. Ask <code>openstate_why</code> and you get the receipts.</p>
+      </div>
+      <div class="col">
+        <h3>A real continuation contract</h3>
+        <p>The next session receives a 1,000&ndash;5,000-token resume capsule of exact state &mdash; not a summary that hoped for the best.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="proof">
+  <div class="shell">
+    <p class="eyebrow">Proof &mdash; Real numbers, real sessions</p>
+    <h2>Eight projects. Thirty-four sessions. Zero context lost.</h2>
+    <table class="metric-table">
+      <tbody>
+        <tr><td>Facts tracked</td><td class="num"><strong>60,732</strong></td></tr>
+        <tr><td>Self-corrections</td><td class="num"><strong>30,007</strong></td></tr>
+        <tr><td>Commands executed</td><td class="num"><strong>16,457</strong></td></tr>
+        <tr><td>Items completed</td><td class="num"><strong>10,346</strong></td></tr>
+        <tr><td>Decisions recorded</td><td class="num"><strong>499</strong></td></tr>
+        <tr><td>Failure patterns caught</td><td class="num"><strong>173</strong></td></tr>
+        <tr><td>Crashes &rarr; work lost</td><td class="num"><strong>14 &rarr; 0</strong></td></tr>
+        <tr><td>Resume capsules</td><td class="num"><strong>30</strong></td></tr>
+      </tbody>
+    </table>
+    <p class="punch">Self-correction is not error.<br />It is truth-convergence velocity.</p>
+    <p class="lede">Every number is queried verbatim from the engine's own state files. Nothing fabricated. Nothing summarized into a pretty lie.</p>
+    <div class="chart-grid">
+      <figure>
+        <a href="charts/velocity-comparison.png" class="lightbox" aria-label="Open velocity comparison chart full size"><img src="charts/velocity-comparison.png" alt="Velocity comparison chart" loading="lazy" /><span class="zoom">&#x26F6; view full size</span></a>
+        <figcaption>Before / after throughput &mdash; less re-work, same model.</figcaption>
+      </figure>
+      <figure>
+        <a href="charts/correction-velocity.png" class="lightbox" aria-label="Open correction velocity chart full size"><img src="charts/correction-velocity.png" alt="Correction velocity chart" loading="lazy" /><span class="zoom">&#x26F6; view full size</span></a>
+        <figcaption>Self-correction as truth-convergence velocity.</figcaption>
+      </figure>
+      <figure>
+        <a href="charts/tool-usage.png" class="lightbox" aria-label="Open tool usage chart full size"><img src="charts/tool-usage.png" alt="Tool usage distribution chart" loading="lazy" /><span class="zoom">&#x26F6; view full size</span></a>
+        <figcaption>Which tools burn the most turns.</figcaption>
+      </figure>
+      <figure>
+        <a href="charts/tag-distribution.png" class="lightbox" aria-label="Open tag distribution chart full size"><img src="charts/tag-distribution.png" alt="Tag distribution chart" loading="lazy" /><span class="zoom">&#x26F6; view full size</span></a>
+        <figcaption>What the engine tracks, at a glance.</figcaption>
+      </figure>
+      <figure>
+        <a href="charts/repo-comparison.png" class="lightbox" aria-label="Open repo comparison chart full size"><img src="charts/repo-comparison.png" alt="Repo comparison chart" loading="lazy" /><span class="zoom">&#x26F6; view full size</span></a>
+        <figcaption>The same effect in every repo.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="how">
+  <div class="shell">
+    <p class="eyebrow">How it works &mdash; Three layers</p>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01</span>
+        <h3>Observer</h3>
+        <p>A tiny OpenCode plugin captures the live event stream: messages, tools, files, todos, git, session lifecycle.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <h3>State Engine</h3>
+        <p>A distilled Rust binary turns observations into live, retractable project facts with full provenance.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <h3>Resume Capsule</h3>
+        <p>A structured continuation contract injected automatically &mdash; 1,000&ndash;5,000 tokens of exact state.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="tools">
+  <div class="shell">
+    <p class="eyebrow">The AI's toolkit &mdash; 14 tools</p>
+    <h2>They are just there.</h2>
+    <table class="tool-table">
+      <tbody>
+        <tr><td><code>openstate_state</code></td><td>Full project state: objective, decisions, in-progress, blockers, next actions</td></tr>
+        <tr><td><code>openstate_capsule</code></td><td>Start-of-session resume contract</td></tr>
+        <tr><td><code>openstate_report</code></td><td>Black-box &ldquo;what&rsquo;s broken / stuck&rdquo; readout</td></tr>
+        <tr><td><code>openstate_report_timeline</code></td><td>Chronological session &rarr; facts map</td></tr>
+        <tr><td><code>openstate_why</code></td><td>Provenance chain, back to the original user message</td></tr>
+        <tr><td><code>openstate_checkpoint</code></td><td>Force-flush state to disk</td></tr>
+        <tr><td><code>openstate_close</code></td><td>Retract a false positive</td></tr>
+        <tr><td><code>openstate_assess</code></td><td>Absorb a current or prior session</td></tr>
+        <tr><td><code>openstate_sessions</code></td><td>List prior sessions for recovery</td></tr>
+        <tr><td><code>openstate_doctor</code></td><td>Engine health check + auto-fix</td></tr>
+        <tr><td><code>openstate_restart</code></td><td>Restart the engine sidecar</td></tr>
+        <tr><td><code>openstate_export</code></td><td>Full state dump as JSON</td></tr>
+        <tr><td><code>openstate_reset</code></td><td>Deliberate full wipe</td></tr>
+        <tr><td><code>openstate_toast</code></td><td>Toggle completion toasts</td></tr>
+      </tbody>
+    </table>
+    <p class="lede">Two human surfaces ride alongside: a sidebar ticker (<code>● openstate / battery ready</code>) that animates while a command runs, and completion toasts that confirm what finished &mdash; coalesced for bursts, toggleable via <code>openstate_toast</code>.</p>
+  </div>
+</section>
+
+<section class="band" id="install">
+  <div class="shell">
+    <p class="eyebrow">Install &mdash; Thirty seconds</p>
+    <pre class="code-block"><span># one line, per-repo, verified</span>
+curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash
+<span class="cmt"># verify an existing install</span>
+./install.sh --check</pre>
+    <ul class="tick-list">
+      <li>Installs into <code>.opencode/</code> &mdash; nothing global, nothing shared</li>
+      <li>Prebuilt, hardened binary &mdash; no toolchain required</li>
+      <li>Checksum verified, engine smoke-tested before install</li>
+      <li>Restart OpenCode. Done. 14 tools + sidebar + toasts + skill.</li>
+    </ul>
+    <p class="lede"><a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">Read the README</a> &nbsp;&middot;&nbsp; <a href="https://github.com/Michael-A-Kuykendall/openstate/releases" target="_blank" rel="noopener">Releases</a> &nbsp;&middot;&nbsp; <a href="https://github.com/Michael-A-Kuykendall/openstate/discussions" target="_blank" rel="noopener">Discussions</a></p>
+  </div>
+</section>
+
+<section class="band alt" id="principles">
+  <div class="shell">
+    <p class="eyebrow">Principles</p>
+    <div class="principles">
+      <div class="principle">
+        <span class="p-num">01</span>
+        <h3>Automatic, or it does not exist</h3>
+        <p>Events flow in. Nothing to babysit. Nothing to export.</p>
+      </div>
+      <div class="principle">
+        <span class="p-num">02</span>
+        <h3>State, not story</h3>
+        <p>Deterministic current truth. Never a silver-tongued summary.</p>
+      </div>
+      <div class="principle">
+        <span class="p-num">03</span>
+        <h3>Fail-closed, degrade graceful</h3>
+        <p>Crash recovery is a design goal, not a patch.</p>
+      </div>
+      <div class="principle">
+        <span class="p-num">04</span>
+        <h3>Free forever</h3>
+        <p>No asterisks. No &ldquo;free for now.&rdquo; No pivot. Engine binary proprietary. Surface MIT.</p>
+      </div>
+    </div>
+    <p class="lede">Commercial embedding licenses available &mdash; <a href="mailto:michaelallenkuykendall@gmail.com">michaelallenkuykendall@gmail.com</a></p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <span class="footer-brand">OpenState</span>
+    <span class="footer-tag">A continuously maintained, retractable project-state model &mdash; 2026</span>
+    <span class="footer-links"><a href="https://github.com/sponsors/Michael-A-Kuykendall" target="_blank" rel="noopener">Sponsor</a> &middot; <a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">GitHub</a></span>
+  </div>
+</footer>
+
+<div class="lightbox-modal" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+  <button class="lightbox-close" type="button" aria-label="Close">&times;</button>
+  <figure>
+    <img src="" alt="" />
+    <figcaption></figcaption>
+  </figure>
+</div>
+
+<script>
+(function () {
+  var modal = document.getElementById("lightbox");
+  var img = modal.querySelector("img");
+  var cap = modal.querySelector("figcaption");
+  var close = modal.querySelector(".lightbox-close");
+  function open(e) {
+    e.preventDefault();
+    img.src = this.href;
+    img.alt = this.querySelector("img")?.alt || "chart";
+    var fig = this.closest("figure");
+    cap.textContent = fig?.querySelector("figcaption")?.textContent || "";
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("no-scroll");
+  }
+  function closeModal() {
+    modal.setAttribute("aria-hidden", "true");
+    img.src = "";
+    document.body.classList.remove("no-scroll");
+  }
+  document.querySelectorAll("a.lightbox").forEach(function (a) {
+    a.addEventListener("click", open);
+  });
+  close.addEventListener("click", closeModal);
+  modal.addEventListener("click", function (e) {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && modal.getAttribute("aria-hidden") === "false") closeModal();
+  });
+})();
+</script>
+</body>
+</html>
