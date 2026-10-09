@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pricing — OpenState</title>
+<meta name="description" content="OpenState is paid through Stripe Checkout. The license worker opens checkout at GET /buy. This local preview does not charge a card." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Commissioner:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="logo-header.jpg" alt="OpenState logo" />
+    </a>
+    <nav class="nav">
+      <a href="index.html#install">Install</a>
+      <a href="pricing.html" aria-current="page">Pricing</a>
+      <a href="license.html">License</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="shell">
+    <p class="eyebrow">Pricing</p>
+    <h1>Pay through <em>Stripe</em>.</h1>
+    <p class="hero-lede">Checkout is a Stripe Checkout Session. The price is the price on the OpenState product in Stripe. This page does not invent one, and this local preview does not charge a card.</p>
+  </div>
+</section>
+
+<section class="band" id="checkout">
+  <div class="shell">
+    <div class="offer-grid">
+      <article class="offer">
+        <p class="eyebrow">Checkout</p>
+        <h2>Stripe hosts the payment</h2>
+        <p class="lede">The license worker creates the session and redirects the browser. The same route Chat Chronicle uses, on the OpenState worker, once that worker is deployed:</p>
+        <p class="route">GET /buy?tier=openstate</p>
+        <p class="lede">This preview does not call a worker. The button explains what happens after payment.</p>
+        <p><a class="btn btn-primary" href="license.html">How the license is issued</a></p>
+      </article>
+      <article class="offer">
+        <p class="eyebrow">What you are buying</p>
+        <h2>The engine, on your machine</h2>
+        <ul class="tick-list">
+          <li>The OpenCode install, via <code>install.sh</code></li>
+          <li>A Keygen license issued after Stripe marks the checkout complete</li>
+          <li>Project state stays in the repository. It is not uploaded to complete the sale</li>
+        </ul>
+        <p class="lede"><a href="license.html">License and activation</a></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <span class="footer-brand">OpenState</span>
+    <span class="footer-tag">Local preview &mdash; GitHub Pages is not enabled from this page</span>
+    <span class="footer-links"><a href="index.html">Home</a> &middot; <a href="license.html">License</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

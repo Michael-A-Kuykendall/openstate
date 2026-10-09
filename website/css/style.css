@@ -180,6 +180,11 @@ h3 { font-size: 1.35rem; font-weight: 600; margin-bottom: 10px; }
 .lightbox-close:hover { border-color: var(--paper); color: var(--signal); }
 body.no-scroll { overflow: hidden; }
 
+.offer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; margin-top: 28px; }
+.offer { border: 1px solid var(--rule); background: var(--paper); padding: 28px 24px 32px; }
+.offer h2 { font-size: 1.6rem; max-width: none; margin-bottom: 12px; }
+.route { font-family: var(--mono); font-size: 0.92rem; background: var(--paper-deep); padding: 14px 16px; margin: 18px 0; }
+
 @media (max-width: 840px) {
   .nav { display: none; }
   .hero-grid { grid-template-columns: 1fr; }

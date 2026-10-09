@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>License — OpenState</title>
+<meta name="description" content="After Stripe checkout, Keygen issues the OpenState license. The engine and the project state stay on the machine." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Commissioner:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="logo-header.jpg" alt="OpenState logo" />
+    </a>
+    <nav class="nav">
+      <a href="index.html#install">Install</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="license.html" aria-current="page">License</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="shell">
+    <p class="eyebrow">License</p>
+    <h1>Keygen issues the key.</h1>
+    <p class="hero-lede">Stripe confirms the payment. The license worker then creates the Keygen license. OpenState does not add a second account system on top of that.</p>
+  </div>
+</section>
+
+<section class="band" id="issue">
+  <div class="shell">
+    <h2>What happens after checkout</h2>
+    <ol class="tick-list">
+      <li>Stripe sends <code>checkout.session.completed</code> to the worker.</li>
+      <li>The worker reads <code>keygen_policy_id</code> from the Stripe product.</li>
+      <li>Keygen creates the license and the success page shows the key.</li>
+      <li>The install is still <code>install.sh</code>. The key is the entitlement record, not a second installer.</li>
+    </ol>
+    <p class="route">POST https://api.keygen.sh/v1/accounts/&lt;account&gt;/licenses</p>
+    <p class="lede">Validation is Keygen's <code>validate-key</code> action. Project files stay on disk. A lost key is recovered with the email used at Stripe checkout.</p>
+    <p><a class="btn btn-primary" href="pricing.html">Back to pricing</a> <a class="btn btn-ghost" href="index.html#install">Install</a></p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <span class="footer-brand">OpenState</span>
+    <span class="footer-tag">Local preview &mdash; GitHub Pages is not enabled from this page</span>
+    <span class="footer-links"><a href="index.html">Home</a> &middot; <a href="pricing.html">Pricing</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
