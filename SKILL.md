@@ -148,6 +148,8 @@ Text-edit refusals carry evidence: `ambiguous_anchor` lists every match `offset`
 
 `current_task` and the first `user_priorities` entry use one ordering: highest score, then latest timestamp, then the most recently recorded directive. Report and capsule compute the cursor the same way and return identical output for an unchanged store.
 
+Fact counts differ on purpose and add up: `openstate_doctor` reports `live_facts` (every fact in the store) and `closed_audit` (close bookkeeping records); `openstate_state` reports `total` = `live_facts` - `closed_audit`; `openstate_report` reports `total_live` (facts in the requesting session's scope) and `scoped_out` (other sessions' facts), with `total_live` + `scoped_out` = state `total`.
+
 The capsule is an orientation surface: its non-directive content is capped at 1,500 serialized bytes, retaining the newest selected objective and decision as bounded entries. User directives are never shortened; the report and timeline remain the pulled diagnostic surfaces for complete detail.
 
 ```json
