@@ -76,13 +76,15 @@ Outside of A/B — call `openstate_reset` only when the user explicitly wants to
 
 The same 22 structural tools are exposed by the OpenCode plugin and MCP server. Code edits use `openstate_ast_search` first, then preview, then apply. `query_kind=text` provides literal text search for prose and document files, including Markdown, and returns exact spans; text writes still use an exact unique anchor. AST search, symbol navigation, and every symbol preview accept optional `target_directory`; text and create previews accept it too. It is an operation root, not a permission grant: it must be inside the current repository/workspace or an explicitly configured `OPENSTATE_ALLOWED_DIRECTORIES` root, and `scope_path` plus `dest_scope_path` remain relative to it. Applies use only the returned `preview_id` and revalidate the stored root. Omit `target_directory` for normal in-repository work.
 
+Symbol tools take `language` (default `rust`): rust, python, typescript, tsx, javascript, go, c, cpp, java, bash, csharp, kotlin, lua, php, ruby, scala, solidity, swift. `openstate_diagnostics` (cargo) and `openstate_find_implementations` (impl blocks) are Rust only.
+
 | Tool | Purpose |
 |------|---------|
 | `openstate_diagnostics` | Bounded repository-declared Rust cargo check; returns `success`, `error`, `timeout`, or `unavailable`. `success` = per-file result; `workspace_exit_code` is the whole-workspace cargo exit (the `note` qualifies when they differ) |
 | `openstate_ast_search` | Find a definition, identifier, or literal text before editing |
-| `openstate_find_referencing_symbols` | Find lexical Rust declarations and references; not type-resolved |
-| `openstate_symbol_overview` | List Rust symbols with identity, range, kind, and visibility |
-| `openstate_find_declaration` | Find a Rust declaration by name |
+| `openstate_find_referencing_symbols` | Find lexical declarations and references; not type-resolved |
+| `openstate_symbol_overview` | List symbols with identity, range, kind, and visibility |
+| `openstate_find_declaration` | Find a declaration by name |
 | `openstate_find_implementations` | Find Rust impl blocks lexically |
 | `openstate_read_symbol` | Return one complete bounded AST definition/body from an exact file, identity-keyed; pages with `cursor` |
 | `openstate_read_text_region` | Return a bounded real region around one unique literal anchor (prose/config) |
@@ -92,13 +94,13 @@ The same 22 structural tools are exposed by the OpenCode plugin and MCP server. 
 | `openstate_edit_text_apply` | Apply the text edit preview |
 | `openstate_create_file_preview` | Preview creating a new repository-relative file that does not yet exist; accepts optional `target_directory` beneath configured approved roots |
 | `openstate_create_file_apply` | Create the file from the preview identity |
-| `openstate_move_symbol_preview` | Preview moving a Rust function/type to a destination anchor |
+| `openstate_move_symbol_preview` | Preview moving a function/type to a destination anchor |
 | `openstate_move_symbol_apply` | Apply the move preview |
-| `openstate_delete_symbol_preview` | Preview deleting one Rust function/type |
+| `openstate_delete_symbol_preview` | Preview deleting one function/type |
 | `openstate_delete_symbol_apply` | Apply the delete preview |
-| `openstate_rename_symbol_preview` | Preview renaming Rust identifier tokens |
+| `openstate_rename_symbol_preview` | Preview renaming identifier tokens |
 | `openstate_rename_symbol_apply` | Apply the rename preview |
-| `openstate_insert_symbol_preview` | Preview inserting a Rust snippet before/after an anchor (`target_name` = the anchor function name) |
+| `openstate_insert_symbol_preview` | Preview inserting a function snippet before/after an anchor (`target_name` = the anchor function name) |
 | `openstate_insert_symbol_apply` | Apply the insertion preview |
 
 ### Structural errors and limitations
