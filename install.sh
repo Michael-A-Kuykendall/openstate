@@ -214,7 +214,7 @@ skill_is_valid() {
 # State-path validation (openstate-es8): .openstate must be absent, a real
 # directory, or a symlink resolving to a directory. Anything else — a regular
 # file holding a path, a dangling symlink — means every engine run stalls
-# (the dzero-apex incident) while bundle --check stays green. Fail HERE with
+# (seen in a real install) while bundle --check stays green. Fail HERE with
 # the one-line fix instead of letting sessions die mysteriously later.
 # ---------------------------------------------------------------------------
 validate_state_path() {

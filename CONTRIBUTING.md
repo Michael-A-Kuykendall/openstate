@@ -39,7 +39,7 @@ Features should align with the **openstate philosophy**:
 - **Per-repo install**: `install.sh` targets `.opencode/` (not global)
 - **Semantic fact lifecycle**: facts enter on real events, exit on paired events
 - **Crash recovery**: in-progress work persists across process death
-- **Provenance**: every fact has a justification chain
+- **Provenance**: `openstate_why` shows where any fact came from
 - **Compact/prune**: dead records collected at session boundaries
 
 ## What We Welcome

@@ -174,7 +174,7 @@ Plus 22 structural tools (AST and text search, bounded reads, references, declar
 - **Per-repo install** — `install.sh` targets `.opencode/` (not global), so openstate only activates in repos that opt in.
 - **Semantic fact lifecycle** — facts enter on a real extension event and exit only when a *paired* event proves them invalid.
 - **Crash recovery** — in-progress work persists across process death: persistence is **deliberate** (explicit `checkpoint`, guaranteed dispose-flush on app close, stdin-EOF last resort).
-- **Provenance** — `openstate_why` explains every fact's justification chain.
+- **Provenance** — `openstate_why` shows where any fact came from.
 - **Compact/prune** — dead records are collected at session boundaries and on demand; the store stays bounded.
 - **Invisible infrastructure** — minimal surface area, zero-config, drop-in.
 
@@ -201,7 +201,7 @@ See [GOVERNANCE.md](GOVERNANCE.md) — lead maintainer authority, roadmap owners
 
 ### Security
 
-See [SECURITY.md](SECURITY.md) — private disclosure via GitHub Security Advisories or `security@openstate.dev`.
+See [SECURITY.md](SECURITY.md) — private disclosure via GitHub Security Advisories or `michaelallenkuykendall@gmail.com`.
 
 ---
 

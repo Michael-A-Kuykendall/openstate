@@ -21,7 +21,7 @@
   persistence is **deliberate** — explicit `checkpoint`, a guaranteed
   dispose-flush on app close, and a stdin-EOF last resort. Nothing flushes
   automatically (no idle/timer), so only human/AI-confirmed state is remembered.
-- ✅ **Provenance** — `openstate_why` explains every fact's justification chain.
+- ✅ **Provenance** — `openstate_why` shows where any fact came from.
 - ✅ **Compact/prune** — dead records are collected at session boundaries and
   on demand; the store stays bounded.
 - ✅ **TUI status strip** — `● openstate / battery ready · backing up` rendered

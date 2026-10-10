@@ -107,8 +107,8 @@ The engine never reads secret files. It tracks git state, file edits, and tool c
 2. **Rust Engine** derives facts, maintains provenance, handles retraction
 3. **Capsule** injected at session start
 
-### What's "Saturation Fabric"?
-The internal derivation engine — continuous, incremental, with automatic retraction on contradictory evidence. The public name is **"continuously maintained, retractable project-state model."**
+### What does "retractable" mean here?
+When a later event contradicts or completes something (a fix lands, a decision is replaced, a run succeeds after failing), the outdated fact leaves the state, so the capsule and report only show what is still true.
 
 ### Is the engine open source?
 No — the binary is proprietary (EULA). The surface (docs, skill, installer, plugin) is MIT. Commercial embedding licenses available.
@@ -188,4 +188,4 @@ Non-maintainers: issues, discussions, testing welcome.
 Yes — all commits must be signed off (`git commit -s`).
 
 ### Security issues?
-See [SECURITY.md](../SECURITY.md) — private disclosure via GitHub Security Advisories or `security@openstate.dev`.
+See [SECURITY.md](../SECURITY.md) — private disclosure via GitHub Security Advisories or `michaelallenkuykendall@gmail.com`.

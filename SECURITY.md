@@ -24,7 +24,7 @@ Instead, please report security issues privately using one of these methods:
    - Fill out the advisory form with details
 
 2. **Direct Email**
-   - Send details to: security@openstate.dev
+   - Send details to: michaelallenkuykendall@gmail.com
    - Use PGP encryption if possible (key available on request)
    - Include "SECURITY" in the subject line
 
