@@ -61,7 +61,7 @@ Outside of A/B — call `openstate_reset` only when the user explicitly wants to
 | `openstate_capsule` | whole store | Compact resume contract with frontier views |
 | `openstate_report` | whole store | Broken, stuck, or unresolved items plus frontier views |
 | `openstate_report_timeline` | whole store | Facts grouped by source session in timestamp order |
-| `openstate_why <fact_id>` | whole store | Provenance chain for a fact |
+| `openstate_why <fact_id>` | whole store | Rule chain for a derived fact; for a base fact, that it is base and which session recorded it |
 | `openstate_assess <session_id?>` | writes | Idempotently replay a session into the store |
 | `openstate_sessions` | read-only | List sessions available for assessment |
 | `openstate_checkpoint` | writes | Atomically flush state to disk |
