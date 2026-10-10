@@ -40,7 +40,7 @@ OpenState tools are the sanctioned surface for this repo. They are bounded (~8 K
 3. If something looks broken/stuck (per the capsule), run `openstate_report`.
 
 **B — Review or reassess specific named session(s)** (user says "assess session X", "the last N sessions", "what happened before") — do this INSTEAD of A, not in addition:
-1. `openstate_reset` — clears the store so the next reads reflect ONLY what you replay. Reset is safe and recoverable here (it clears the assess journal too, so replaying re-absorbs full history, nothing is skipped as "already seen"); it is not a destructive last resort in this workflow.
+1. `openstate_reset` — clears the store so the next reads reflect ONLY what you replay. It clears the assess journal too, so replaying re-absorbs full history. It is recoverable only for sessions this host can replay: OpenCode sessions still in this repo's history. Facts from `claude:` sessions rebuild only through the Claude Code MCP server's `openstate_assess`; check `openstate_report_timeline` for the stored sessions before resetting a mixed store.
 2. `openstate_assess <session_id>` for each named session, or ONE selector call — `newest-N`, `oldest-N`, `range:A-B`, or a title substring — when you want a span. A selector replays every matched session newest-first; an unresolvable selector refuses with `unknown_selector` rather than absorbing nothing.
 3. `openstate_report` / `openstate_capsule` — now reflect only the replayed sessions.
 4. `openstate_checkpoint` to persist.
