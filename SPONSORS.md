@@ -15,7 +15,7 @@
 
 **Want to support openstate?** [Become a sponsor](https://github.com/sponsors/Michael-A-Kuykendall)
 
-openstate is free forever, but your sponsorship helps me:
+Sponsorship is separate from buying a license, and it helps me:
 - Fix bugs faster
 - Add new features
 - Maintain compatibility with new AI tools

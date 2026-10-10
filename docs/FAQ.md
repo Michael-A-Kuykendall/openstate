@@ -5,10 +5,10 @@
 ## General
 
 ### What is openstate?
-A local-first session-state engine that gives AI coding agents a continuously maintained, provenance-backed model of project state. It turns the event stream (messages, tool calls, file edits, todos, git) into live, retractable facts with full provenance.
+An **OpenCode extension**: a local-first session-state engine that gives coding agents in OpenCode a continuously maintained, provenance-backed model of project state. It turns the event stream (messages, tool calls, file edits, todos, git) into live, retractable facts with full provenance. Support for additional coding environments is planned.
 
 ### Who is this for?
-AI coding agents (OpenCode, and future editors) and developers who want their AI to have perfect context across sessions, crashes, and compactions.
+Coding agents in OpenCode — and the developers who want their AI to have perfect context across sessions, crashes, and compactions. Other editors/environments are on the roadmap.
 
 ### Is it open source?
 **Engine binary**: Proprietary (commercial EULA) — protects the core invention.  
@@ -141,7 +141,7 @@ Requires OpenCode with plugin API support. Tested on current stable.
 ## Licensing & Commercial
 
 ### Can I use it in my company?
-Yes — free forever for any use (personal, commercial, internal). The engine binary is free to use; commercial licenses are for **embedding/redistribution**.
+Yes. A purchased license covers personal, commercial and internal use. Separate commercial licenses cover **embedding or redistributing** the engine.
 
 ### Can I embed the engine in my product?
 Yes — commercial licensing available. Contact `michaelallenkuykendall@gmail.com`.
@@ -150,8 +150,8 @@ Yes — commercial licensing available. Contact `michaelallenkuykendall@gmail.co
 Surface (docs, skill, installer): Yes, MIT.  
 Engine binary: No — proprietary, no source access.
 
-### Will it stay free forever?
-**Yes.** "Free forever" applies to the binary and surface. No pivot, no asterisks.
+### Is it free?
+**No.** OpenState is sold through Stripe ([pricing](https://michael-a-kuykendall.github.io/openstate/pricing.html)); Keygen issues the license key, shown once after checkout. The documentation, skill, installer and plugin bundle remain MIT-licensed.
 
 ---
 

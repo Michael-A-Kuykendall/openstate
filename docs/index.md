@@ -1,7 +1,7 @@
 ---
 layout: default
 title: openstate
-description: A continuously maintained, retractable project-state model for coding agents
+description: A continuously maintained, retractable project-state model for coding agents in OpenCode
 ---
 
 <div align="center">
@@ -10,7 +10,7 @@ description: A continuously maintained, retractable project-state model for codi
 
 # openstate
 
-> **A continuously maintained, retractable project-state model for coding agents.**
+> **A continuously maintained, retractable project-state model for coding agents in OpenCode.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](PUBLIC-LICENSE)
 [![Security](https://img.shields.io/badge/Security-Audited-green)](SECURITY.md)
@@ -19,7 +19,7 @@ description: A continuously maintained, retractable project-state model for codi
 
 [![💝 Sponsor](https://img.shields.io/badge/💝_Sponsor-ea4aaa?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sponsors/Michael-A-Kuykendall)
 
-**openstate will be free forever.** No asterisks. No "free for now." No pivot to paid.
+**openstate is commercial software.** You buy a license through Stripe on the [pricing page](https://michael-a-kuykendall.github.io/openstate/pricing.html); Keygen issues the key. The engine runs locally, needs no account, and sends nothing anywhere.
 
 ---
 
@@ -116,7 +116,7 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
 
 ## Philosophy
 
-- **Free forever** — no asterisks, no pivot
+- **Paid license** — sold through Stripe, issued by Keygen
 - **Engine binary proprietary** — protects the invention
 - **Surface MIT** — docs, skill, installer, plugin
 - **Commercial licensing available** — `michaelallenkuykendall@gmail.com`

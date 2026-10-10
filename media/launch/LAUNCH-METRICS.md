@@ -63,7 +63,7 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
 - **Engine binary**: Proprietary EULA (protects the invention)
 - **Surface**: MIT (docs, skill, installer, plugin bundle)
 - **Commercial licensing**: `michaelallenkuykendall@gmail.com`
-- **Free forever** — no asterisks, no pivot
+- **Paid license** — sold through Stripe, issued by Keygen
 
 ---
 

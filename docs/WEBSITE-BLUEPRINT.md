@@ -4,8 +4,8 @@
 
 ## 1. Hero
 - Logo (assets/openstate-logo.jpg) centered, large
-- One-liner: **A continuously maintained, retractable project-state model for coding agents.**
-- Sub: Local • Private • Free forever • OpenCode-compatible
+- One-liner: **A continuously maintained, retractable project-state model for coding agents in OpenCode.**
+- Sub: Local • Private • Licensed • OpenCode extension
 - Big metric pills (row of 4–6):
   - 60,732 facts
   - 30,007 self-corrections
@@ -43,7 +43,7 @@ Highlight:
 - Self-correction as truth-convergence velocity
 - Zero work lost across 14 real hard crashes
 - Token savings (~20M tokens across the measured sessions)
-- Time savings estimates (honest about methodology)
+- Time savings estimates (methodology stated beside every figure)
 
 Link to the full media kit and sanitized logs.
 
@@ -61,7 +61,7 @@ Exact one-liner + verification command.
 Emphasize: per-repo only, no global install, prebuilt binary, checksum verified, smoke-tested.
 
 ## 7. Philosophy
-- Free forever (no asterisks)
+- Paid license, sold through Stripe and issued by Keygen
 - Engine binary proprietary (protects the invention); surface MIT
 - Commercial embedding licenses available — https://github.com/sponsors/Michael-A-Kuykendall
 - Automatic or it does not exist

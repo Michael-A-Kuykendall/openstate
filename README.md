@@ -4,7 +4,7 @@
 
 # openstate
 
-> **A continuously maintained, retractable project-state model for coding agents.**
+> **A continuously maintained, retractable project-state model for coding agents in OpenCode.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](PUBLIC-LICENSE)
 [![Security](https://img.shields.io/badge/Security-Audited-green)](SECURITY.md)
@@ -13,11 +13,11 @@
 
 [![💝 Sponsor this project](https://img.shields.io/badge/💝_Sponsor_this_project-ea4aaa?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sponsors/Michael-A-Kuykendall)
 
-**openstate will be free forever.** No asterisks. No "free for now." No pivot to paid.
+**openstate is commercial software.** You buy a license through Stripe on the [pricing page](https://michael-a-kuykendall.github.io/openstate/pricing.html); Keygen issues the key. The engine runs locally, needs no account, and sends nothing anywhere.
 
 ### 💝 Support openstate's Growth
 
-🚀 **If openstate helps you, consider [sponsoring](https://github.com/sponsors/Michael-A-Kuykendall) — 100% of support goes to keeping it free forever.**
+🚀 **If openstate helps you, [sponsoring](https://github.com/sponsors/Michael-A-Kuykendall) supports its development.** Sponsorship is separate from buying a license.
 
 - **$5/month**: Coffee tier ☕ - Eternal gratitude + sponsor badge
 - **$25/month**: Bug prioritizer 🐛 - Priority support + name in [SPONSORS.md](SPONSORS.md)
@@ -43,7 +43,7 @@
 
 ## What Is openstate?
 
-openstate is a **single-binary** local state engine that gives AI coding agents a continuously maintained, provenance-backed model of project state. Point your OpenCode session at openstate and it just works — locally, privately, and free.
+openstate is an **OpenCode extension** — a single-binary local state engine that gives coding agents in OpenCode a continuously maintained, provenance-backed model of project state. Point your OpenCode session at openstate and it just works — locally, privately, and free. Other coding environments are on the roadmap.
 
 **🔧 The engine is proprietary** (distributed under a commercial EULA). The surface components — documentation, skill, installer, plugin bundle — are MIT-licensed. Commercial licensing for embedding the engine in other products is available.
 
@@ -98,7 +98,7 @@ State lives per-project in `.openstate/state.jsonl`. Query it directly with Duck
 curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash
 
 # Restart OpenCode
- # You now have 14 AI tools + TUI sidebar (live ticker + completion toasts) + skill
+ # You now have 14 AI tools + TUI sidebar (status line + completion toasts) + skill
  ```
 
 ---
@@ -107,10 +107,10 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
 
 Two surfaces report openstate activity (both driven by OpenCode's `message.part.updated` ToolPart events — the one signal path that actually fires for custom-tool lifecycle):
 
-- **Right sidebar ticker** (`● openstate / battery ready`) — live status. While an `openstate_*` command runs, "battery ready" swaps to `<command>: …` and the green dot animates, then settles back. Always on.
+- **Always-on sidebar status** (`● openstate / battery ready`) — live status. While an `openstate_*` command runs, "battery ready" swaps to `<command>: …` and the green dot animates, then settles back. Always on.
 - **Completion toasts** — a transient TUI notification confirming what finished (e.g. `✓ doctor · engine OK · 7796 facts`), coalesced into one toast for back-to-back bursts. On by default.
 
-**Turning toasts off:** an AI-driven toggle — ask the agent "turn off the openstate toasts", which calls `openstate_toast` with `enabled: false`. Persisted per-project in `.openstate/toasts.json`. The sidebar ticker keeps working regardless.
+**Turning toasts off:** an AI-driven toggle — ask the agent "turn off the openstate toasts", which calls `openstate_toast` with `enabled: false`. Persisted per-project in `.openstate/toasts.json`. The sidebar status line keeps working regardless.
 
 > Note on tool output in the transcript: a tool's returned text feeds the model and appears in the chat only when the user enables "Show generic tool output" in the TUI (an opt-in OpenCode setting). The sidebar + toasts above are the guaranteed human-visible surfaces.
 
