@@ -163,7 +163,7 @@
 
 <section class="band alt" id="tools">
   <div class="shell">
-    <p class="eyebrow">The AI's toolkit &mdash; 14 tools</p>
+    <p class="eyebrow">The AI's toolkit &mdash; 14 state tools, plus 22 structural tools</p>
     <h2>They are just there.</h2>
     <table class="tool-table">
       <tbody>
@@ -171,7 +171,7 @@
         <tr><td><code>openstate_capsule</code></td><td>Start-of-session resume contract</td></tr>
         <tr><td><code>openstate_report</code></td><td>Black-box &ldquo;what&rsquo;s broken / stuck&rdquo; readout</td></tr>
         <tr><td><code>openstate_report_timeline</code></td><td>Chronological session &rarr; facts map</td></tr>
-        <tr><td><code>openstate_why</code></td><td>Provenance chain, back to the original user message</td></tr>
+        <tr><td><code>openstate_why</code></td><td>Rule chain for a derived fact; for a recorded fact, the session it came from</td></tr>
         <tr><td><code>openstate_checkpoint</code></td><td>Force-flush state to disk</td></tr>
         <tr><td><code>openstate_close</code></td><td>Retract a false positive</td></tr>
         <tr><td><code>openstate_assess</code></td><td>Absorb a current or prior session</td></tr>
@@ -198,7 +198,7 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
       <li>Installs into <code>.opencode/</code> &mdash; nothing global, nothing shared</li>
       <li>Prebuilt, hardened binary &mdash; no toolchain required</li>
       <li>Checksum verified, engine smoke-tested before install</li>
-      <li>Restart OpenCode. Done. 14 tools + sidebar + toasts + skill.</li>
+      <li>Restart OpenCode. Done. 36 tools + sidebar + toasts + skill.</li>
     </ul>
     <p class="lede"><a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">Read the README</a> &nbsp;&middot;&nbsp; <a href="https://github.com/Michael-A-Kuykendall/openstate/releases" target="_blank" rel="noopener">Releases</a> &nbsp;&middot;&nbsp; <a href="https://github.com/Michael-A-Kuykendall/openstate/discussions" target="_blank" rel="noopener">Discussions</a></p>
   </div>

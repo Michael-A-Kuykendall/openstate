@@ -29,11 +29,10 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
 
 ### What does it install?
 Per-repo, into `.opencode/`:
-- `openstate-engine` (hardened binary, 728KB)
-- `openstate.js` (plugin bundle)
-- `openstate-tui.tsx` (TUI sidebar)
-- `SKILL.md` (AI usage skill)
-- `tui.json` + `package.json` (OpenCode integration)
+- `bin/openstate-engine` (the state engine) and `bin/ast-grep` (structural search backend)
+- `plugins/openstate/index.js` (plugin) and `plugins/openstate/tui.js` (sidebar status line and toasts)
+- `skills/openstate/SKILL.md` (AI usage skill)
+- `structural-tools-profile.json` (structural tools mode) and `package.json` (TUI dependency)
 
 ### Does it need Rust/Node to install?
 **No.** The installer downloads a prebuilt binary + plugin bundle. No compiler or Node toolchain required on the target machine.
@@ -51,7 +50,8 @@ Per-repo, into `.opencode/`:
 ## Usage
 
 ### What tools does the AI get?
-13 tools automatically registered:
+36 tools automatically registered: the 14 state tools below, plus 22 structural tools (AST and text search, bounded reads, references, declarations, and preview/apply edits, renames, inserts, moves, deletes and new files; symbol tools in 18 languages).
+
 - `openstate_state` — full project state
 - `openstate_why` — provenance for any fact
 - `openstate_checkpoint` — force flush
@@ -65,13 +65,14 @@ Per-repo, into `.opencode/`:
 - `openstate_sessions` — list prior sessions
 - `openstate_doctor` — engine health
 - `openstate_restart` — restart sidecar
+- `openstate_toast` — completion toasts on/off
 
 The skill tells the AI when to use each.
 
 ### What's the "session start ritual"?
-1. `openstate_state` — recover state
-2. `openstate_capsule` — get resume contract
-3. Announce to user: "openstate loaded · objective: X · validation stale · branch: main"
+1. `openstate_capsule` — the resume contract (light; `openstate_state` and `openstate_report` are for full detail)
+2. Announce to user: "openstate loaded · objective: X · validation stale · branch: main"
+3. `openstate_report` only if something looks broken or stuck
 
 ### What is a capsule?
 A 1,000–5,000 token structured JSON contract injected at session start. Contains:
@@ -131,7 +132,7 @@ Currently: **OpenCode** (plugin + skill).
 Future: VS Code, Cursor, Claude Code, Zed — any editor with a plugin API.
 
 ### Which OS?
-Linux (x86_64, aarch64), macOS (Intel/Apple Silicon), Windows — via per-platform release binaries.
+Linux x86_64 (glibc 2.17 or newer), macOS (Intel and Apple Silicon), Windows x86_64 — via per-platform release bundles. Other platforms are refused by the installer with a clear message.
 
 ### OpenCode version?
 Requires OpenCode with plugin API support. Tested on current stable.

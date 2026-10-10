@@ -98,7 +98,7 @@ State lives per-project in `.openstate/state.jsonl`. Query it directly with Duck
 curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash
 
 # Restart OpenCode
- # You now have 14 AI tools + TUI sidebar (status line + completion toasts) + skill
+ # You now have 36 AI tools (14 state + 22 structural) + TUI sidebar (status line + completion toasts) + skill
  ```
 
 ---
@@ -118,7 +118,7 @@ Two surfaces report openstate activity (both driven by OpenCode's `message.part.
 
 ## AI Tools
 
-The AI gets 14 tools automatically via the OpenCode plugin:
+The AI gets 36 tools automatically via the OpenCode plugin: 14 state tools and 22 structural tools. The state tools:
 
 | Tool | Purpose |
 |------|---------|
@@ -137,7 +137,7 @@ The AI gets 14 tools automatically via the OpenCode plugin:
 | `openstate_restart` | Restart engine sidecar |
 | `openstate_toast` | Toggle the completion toasts ON/OFF (per-project; default ON) |
 
-The `.opencode/skills/openstate/SKILL.md` skill tells the AI when to use them.
+Plus 22 structural tools (AST and text search, bounded reads, references, declarations, and preview/apply edits, renames, inserts, moves, deletes and new files; symbol tools in 18 languages). The `.opencode/skills/openstate/SKILL.md` skill tells the AI when to use them.
 
 ---
 

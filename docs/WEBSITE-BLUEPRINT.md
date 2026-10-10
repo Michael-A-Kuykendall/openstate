@@ -53,7 +53,7 @@ Three layers:
 2. Local Rust State Engine — turns observations into live, retractable project facts with provenance
 3. Resume Capsule — structured continuation contract injected automatically
 
-13 AI tools the agent can call directly (list the table from README).
+36 AI tools the agent can call directly: 14 state tools (list the table from README) and 22 structural tools.
 No human dashboard required. The battery is for the AI; humans ask the AI.
 
 ## 6. Install (30 seconds)

@@ -90,7 +90,7 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
 - Prebuilt binary (728KB, hardened)
 - Checksum verified, smoke-tested before install
 - Per-repo `.opencode/` — zero global pollution
-- Restart OpenCode → 13 AI tools + TUI sidebar + skill
+- Restart OpenCode → 36 AI tools (14 state + 22 structural) + TUI sidebar + skill
 
 ---
 
