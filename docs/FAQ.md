@@ -38,7 +38,7 @@ Per-repo, into `.opencode/`:
 No Rust: the installer downloads a prebuilt binary and plugin bundle. It does need Node.js, which it uses to update `.opencode/package.json` and other JSON config.
 
 ### Per-repo or global?
-Per repository by default: the installer writes `.opencode/` and one marked block in `AGENTS.md`, and state goes to `.openstate/`. `--global` installs once under your OpenCode config directory instead.
+Per repository by default: the installer writes `.opencode/` (and, only if you turn the structural profile to `enforce`, one marked block in `AGENTS.md`), and state goes to `.openstate/`, which ignores itself in git. `--global` installs once under your OpenCode config directory instead.
 
 ### How do I verify?
 ```bash
@@ -91,7 +91,7 @@ A structured JSON contract injected at session start, a few hundred tokens (medi
 Yes, through the tools: `openstate_state`, `openstate_report`, `openstate_why <fact_id>`, and `openstate_export` for a full dump. The file format itself is internal and may change between versions.
 
 ### What about secrets?
-The engine sees what the agent sees: your messages, the commands it runs with their exit codes and the first 4,000 characters of tool output, file paths, and git status. What it keeps stays in `.openstate/` in your repository and is never sent anywhere. Treat `.openstate/` like shell history: keep it out of version control.
+The engine sees what the agent sees: your messages, the commands it runs with their exit codes and the first 4,000 characters of tool output, file paths, and git status. What it keeps stays in `.openstate/` in your repository and is never sent anywhere. Treat `.openstate/` like shell history: it holds commands verbatim, so a secret typed on a command line is in it. The engine writes a `.gitignore` of `*` inside `.openstate/`, so git ignores it without any change to your own `.gitignore`.
 
 ---
 

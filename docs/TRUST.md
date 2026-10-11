@@ -24,6 +24,12 @@ State is written when the agent calls `openstate_checkpoint`, when OpenCode clos
 | The state directory is not writable | The engine reports that it cannot create its lock file there and runs in memory; nothing is written. |
 | The disk is full | The write fails with "No space left on device"; the previous `state.jsonl` stays intact, no partial temporary file or lock file is left behind, and writing works again once space is freed. |
 
+## Checking it yourself
+
+- **No network calls.** The engine is closed source, so check it from outside: run OpenCode under `strace -f -e trace=network` (Linux) or with a firewall that logs outbound connections, and you will see none from `openstate-engine`. The plugin and installer are readable JavaScript and bash.
+- **Not in git.** `.openstate/` contains a `.gitignore` of `*`; `git status` never lists it.
+- **What it stored.** `openstate_export` writes everything to a JSON file you can read.
+
 ## Removing it
 
 - `./install.sh --uninstall` removes OpenState from the repository (plugin, skill, engine, ast-grep, MCP server, profile, and its block in `AGENTS.md`) and **keeps** `.openstate/`, so reinstalling picks up where you left off.

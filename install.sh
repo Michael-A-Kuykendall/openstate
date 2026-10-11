@@ -860,7 +860,7 @@ PKG_JSON="$OPENCODE_DIR/package.json" node -e '
   const add = {
     "@opencode/plugin": "2.0.18",
     "@opencode/client": "2.0.18",
-    "@opentui/solid": "^0.5.1"
+    "@opentui/solid": "0.5.12"
   };
   let obj = { dependencies: add };
   try {

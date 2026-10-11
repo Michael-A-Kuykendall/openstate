@@ -6,24 +6,12 @@
 
 > **OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction.**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](PUBLIC-LICENSE)
-[![Rust](https://img.shields.io/badge/rust-stable-brightgreen.svg)](https://rustup.rs/)
+[![License: commercial engine, MIT surface](https://img.shields.io/badge/license-commercial%20engine%2C%20MIT%20surface-blue)](LICENSE)
 [![OpenCode](https://img.shields.io/badge/OpenCode-compatible-blue)](https://opencode.ai)
 
 [![💝 Sponsor this project](https://img.shields.io/badge/💝_Sponsor_this_project-ea4aaa?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sponsors/Michael-A-Kuykendall)
 
 **openstate is commercial software.** You buy a license through Stripe on the [pricing page](https://michael-a-kuykendall.github.io/openstate/pricing.html); Keygen issues the key. The engine runs locally, needs no account, and sends nothing anywhere.
-
-### 💝 Support openstate's Growth
-
-🚀 **If openstate helps you, [sponsoring](https://github.com/sponsors/Michael-A-Kuykendall) supports its development.** Sponsorship is separate from buying a license.
-
-- **$5/month**: Coffee tier ☕ - Eternal gratitude + sponsor badge
-- **$25/month**: Bug prioritizer 🐛 - Priority support + name in [SPONSORS.md](SPONSORS.md)
-- **$100/month**: Corporate backer 🏢 - Logo placement + monthly office hours
-- **$500/month**: Infrastructure partner 🚀 - Direct support + roadmap input
-
-[**🎯 Become a Sponsor**](https://github.com/sponsors/Michael-A-Kuykendall)
 
 ---
 
@@ -86,7 +74,7 @@ Turns those events into project facts (objectives, decisions, completed and fail
 
 ### 3. Resume Capsule
 
-A structured continuation contract injected automatically on new sessions and compaction — a few hundred tokens (median about 500, at most about 1,600 across 21 real project stores), carrying the state needed to resume work.
+A structured continuation contract injected automatically on new sessions and compaction — a few hundred tokens (median about 500, at most about 1,600 across 21 real project stores), carrying the state needed to resume work. It rides on every model request of the session and stays the same text until the next compaction, so a prompt cache keeps it; `OPENSTATE_CAPSULE=off` turns it off.
 
 ---
 
@@ -135,6 +123,7 @@ State lives per-project in `.openstate/state.jsonl`. Read it through the tools (
 - **One machine, one repository.** There is no sync between machines or people.
 - **No measurement yet shows fewer repeated failures or fewer tokens.** What OpenState guarantees is the record and its delivery to the agent; whether that changes your agent's behavior is for you to judge in your own sessions.
 - **The engine is closed source** (the plugin, installer, skill and documentation are MIT).
+- **Install integrity, not authenticity.** The installer checks each download against the sha256 published with the same GitHub release; releases are not yet signed. Read `install.sh` before you pipe it into bash.
 
 ---
 
@@ -244,6 +233,17 @@ Plus 22 structural tools (AST and text search, bounded reads, references, declar
 - **GitHub Issues** — questions, bugs, feature requests
 - **Security** — see [SECURITY.md](SECURITY.md) for private disclosure
 - **Sponsors** — [GitHub Sponsors](https://github.com/sponsors/Michael-A-Kuykendall) / [SPONSORS.md](SPONSORS.md)
+
+### Sponsorship
+
+🚀 **If openstate helps you, [sponsoring](https://github.com/sponsors/Michael-A-Kuykendall) supports its development.** Sponsorship is separate from buying a license.
+
+- **$5/month**: Coffee tier ☕ - Eternal gratitude + sponsor badge
+- **$25/month**: Bug prioritizer 🐛 - Priority support + name in [SPONSORS.md](SPONSORS.md)
+- **$100/month**: Corporate backer 🏢 - Logo placement + monthly office hours
+- **$500/month**: Infrastructure partner 🚀 - Direct support + roadmap input
+
+[**🎯 Become a Sponsor**](https://github.com/sponsors/Michael-A-Kuykendall)
 
 ### Code of Conduct
 
