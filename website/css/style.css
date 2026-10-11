@@ -271,3 +271,5 @@ body.no-scroll { overflow: hidden; }
 }
 .problem-table td, .problem-table td:first-child { white-space: normal; overflow-wrap: anywhere; }
 .problem-table tr + tr td:first-child { font-weight: 600; }
+.compare-table td { width: 20%; }
+@media (max-width: 640px) { .compare-table td { width: 100%; } }

@@ -22,6 +22,7 @@
       <a href="#audience">Who it is for</a>
       <a href="#how">How</a>
       <a href="#numbers">Numbers</a>
+      <a href="#compare">Compare</a>
       <a href="#tools">Tools</a>
       <a href="#install">Install</a>
       <a href="pricing.html">Pricing</a>
@@ -152,6 +153,34 @@
       </table>
     </div>
     <p class="lede">Two human surfaces ride alongside: an always-on sidebar status line (<code>● openstate / battery ready</code>) that flips to the running command while it works, and completion toasts that confirm what finished &mdash; coalesced for bursts, toggleable via <code>openstate_toast</code>.</p>
+  </div>
+</section>
+
+<section class="band" id="compare">
+  <div class="shell">
+    <p class="eyebrow">How it compares</p>
+    <h2>Recorded from events, not written by the model.</h2>
+    <table class="tool-table problem-table compare-table">
+      <tbody>
+        <tr><td><strong>Approach</strong></td><td><strong>What is kept</strong></td><td><strong>Who writes it</strong></td><td><strong>When the agent sees it</strong></td><td><strong>Goes stale?</strong></td></tr>
+        <tr><td>Compaction summary</td><td>A prose summary of the conversation so far</td><td>The model, when the context fills up</td><td>In the same session, after compaction; a new session starts without it</td><td>It is rewritten at each compaction; details the model left out are gone</td></tr>
+        <tr><td>A notes file (<code>AGENTS.md</code>, a memory markdown file)</td><td>Whatever someone wrote there</td><td>You, or the agent when told to</td><td>Every session, in full</td><td>Yes, unless someone keeps editing it</td></tr>
+        <tr><td>Agent memory tools (Serena memories, built-in memory)</td><td>Notes the model chose to save</td><td>The model, when it decides to</td><td>When the agent reads them</td><td>Yes; nothing removes a note that stopped being true</td></tr>
+        <tr><td>Transcript search and event logs</td><td>Everything that was said and run</td><td>The host, automatically</td><td>When the agent searches</td><td>No, but it is history, not current state; the agent has to work out what still holds</td></tr>
+        <tr><td>Telling the model to remember</td><td>Nothing outside the context</td><td>&mdash;</td><td>Until the context is compacted or the session ends</td><td>&mdash;</td></tr>
+        <tr><td><strong>OpenState</strong></td><td>Decisions, failed and completed commands, blockers, the objective, test status since the last edit, changed files</td><td>The engine, from the session's events, with no model in the loop</td><td>OpenCode: in the capsule at the start of every session and after each compaction. Other hosts: when the agent calls <code>openstate_capsule</code></td><td>No: a fact is replaced or closed when a later event supersedes it</td></tr>
+      </tbody>
+    </table>
+    <h3>Known weaknesses</h3>
+    <ul class="tick-list">
+      <li><strong>It records only what passes through the host's events</strong>: messages, commands with their exit codes, file edits and git status. It does not see the model's reasoning, file contents, or work you do in your own terminal.</li>
+      <li><strong>Decisions are recognised by wording.</strong> A message that gives a reason ("because", "since", "so that", "in order to", "due to") becomes a decision; a decision stated without one is recorded as a directive or objective, and a casual "because" can be recorded as a decision. <code>openstate_close</code> removes false ones.</li>
+      <li><strong>A failure needs an exit code.</strong> A command whose tool reports no exit code is recorded as completed, not failed (it never counts as a passing test, though). Read-only commands such as <code>cat</code>, <code>ls</code> or <code>grep</code> are not recorded at all.</li>
+      <li><strong>On hosts other than OpenCode the capsule is on demand</strong>: the agent has to call <code>openstate_capsule</code> (the MCP server's instructions tell it to).</li>
+      <li><strong>One machine, one repository.</strong> There is no sync between machines or people.</li>
+      <li><strong>No measurement yet shows fewer repeated failures or fewer tokens.</strong> What OpenState guarantees is the record and its delivery to the agent; whether that changes your agent's behavior is for you to judge in your own sessions.</li>
+      <li><strong>The engine is closed source</strong> (the plugin, installer, skill and documentation are MIT).</li>
+    </ul>
   </div>
 </section>
 

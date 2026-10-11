@@ -34,6 +34,7 @@
   - [Who it is for](#who-it-is-for)
 - [🔧 Architecture](#architecture)
 - [📦 Install](#install)
+- [How it compares](#how-it-compares)
 - [Other hosts: the MCP server](#other-hosts-the-mcp-server)
 - [🚀 Quick Start](#quick-start)
 - [🛠 AI Tools](#ai-tools)
@@ -111,6 +112,29 @@ Verify an existing install: `./install.sh --check`
 Remove it with `./install.sh --uninstall` (keeps `.openstate/` state) or `./install.sh --purge` (deletes it too). What survives a crash: [docs/TRUST.md](docs/TRUST.md).
 
 State lives per-project in `.openstate/state.jsonl`. Read it through the tools (`openstate_state`, `openstate_export`), not the file: its format is internal and may change.
+
+---
+
+## How it compares
+
+| Approach | What is kept | Who writes it | When the agent sees it | Goes stale? |
+|---|---|---|---|---|
+| Compaction summary | A prose summary of the conversation so far | The model, when the context fills up | In the same session, after compaction; a new session starts without it | It is rewritten at each compaction; details the model left out are gone |
+| A notes file (`AGENTS.md`, a memory markdown file) | Whatever someone wrote there | You, or the agent when told to | Every session, in full | Yes, unless someone keeps editing it |
+| Agent memory tools (Serena memories, built-in memory) | Notes the model chose to save | The model, when it decides to | When the agent reads them | Yes; nothing removes a note that stopped being true |
+| Transcript search and event logs | Everything that was said and run | The host, automatically | When the agent searches | No, but it is history, not current state; the agent has to work out what still holds |
+| Telling the model to remember | Nothing outside the context | — | Until the context is compacted or the session ends | — |
+| **OpenState** | Decisions, failed and completed commands, blockers, the objective, test status since the last edit, changed files | The engine, from the session's events, with no model in the loop | OpenCode: in the capsule at the start of every session and after each compaction. Other hosts: when the agent calls `openstate_capsule` | No: a fact is replaced or closed when a later event supersedes it |
+
+### Known weaknesses
+
+- **It records only what passes through the host's events**: messages, commands with their exit codes, file edits and git status. It does not see the model's reasoning, file contents, or work you do in your own terminal.
+- **Decisions are recognised by wording.** A message that gives a reason ("because", "since", "so that", "in order to", "due to") becomes a decision; a decision stated without one is recorded as a directive or objective, and a casual "because" can be recorded as a decision. `openstate_close` removes false ones.
+- **A failure needs an exit code.** A command whose tool reports no exit code is recorded as completed, not failed (it never counts as a passing test, though). Read-only commands such as `cat`, `ls` or `grep` are not recorded at all.
+- **On hosts other than OpenCode the capsule is on demand**: the agent has to call `openstate_capsule` (the MCP server's instructions tell it to).
+- **One machine, one repository.** There is no sync between machines or people.
+- **No measurement yet shows fewer repeated failures or fewer tokens.** What OpenState guarantees is the record and its delivery to the agent; whether that changes your agent's behavior is for you to judge in your own sessions.
+- **The engine is closed source** (the plugin, installer, skill and documentation are MIT).
 
 ---
 
