@@ -8,11 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned
-- Integrations for Claude Code, Kiro and GitHub Copilot in VS Code.
+- Session hooks for Claude Code, Kiro and GitHub Copilot that put the capsule into the context automatically, as OpenCode does.
 
 ## [0.1.0] - release date set at go-live
 
-The first public release: an OpenCode extension, installed per repository.
+The first public release: an OpenCode extension, installed per repository, with an MCP server for other hosts.
 
 ### Added
 - **Local project-state engine** — records what is true, done, failed, blocked and decided from the OpenCode session's own events, keeps one store per repository (`.openstate/state.jsonl`), and retracts facts that a later event supersedes or that you close.
@@ -22,6 +22,7 @@ The first public release: an OpenCode extension, installed per repository.
 - **Capsule in context** — the resume capsule is added to the model's context at the start of every session and again after each compaction, unchanged in between so prompt caching keeps working; `OPENSTATE_CAPSULE=off` turns it off.
 - **Frontier views** in capsule and report — resume cursor, validation status (with a hint when nothing has been verified yet), and the git change frontier. Report and capsule are deterministic and agree on the current task.
 - **Sidebar status line and completion toasts** in the OpenCode TUI, with `openstate_toast` to turn toasts off per project.
+- **MCP server** for every other host (Claude Code, Muse, Kiro, GitHub Copilot in VS Code), shipped in the bundle as one file, `mcp/openstate-mcp.mjs`; 34 tools (all but `openstate_restart` and `openstate_toast`).
 - **Installer** — per-repository or `--global`; sha256 verification and an engine smoke test before anything is written; `--check`; `--uninstall` keeps `.openstate/` state and your own config; clear refusal on platforms without a prebuilt bundle.
 
 ### Security

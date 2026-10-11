@@ -32,7 +32,7 @@ description: OpenState keeps a running record of what is true in a project (deci
 
 ## Who it is for
 
-Developers running long coding-agent sessions in OpenCode who want each new session, and each session after a compaction, to start from what was decided, done, failed and blocked.
+Developers running long coding-agent sessions in OpenCode who want each new session, and each session after a compaction, to start from what was decided, done, failed and blocked. Claude Code, Muse, Kiro and GitHub Copilot work too, through the bundled MCP server.
 
 ## Who it is not for
 

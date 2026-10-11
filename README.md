@@ -34,6 +34,7 @@
   - [Who it is for](#who-it-is-for)
 - [🔧 Architecture](#architecture)
 - [📦 Install](#install)
+- [Other hosts: the MCP server](#other-hosts-the-mcp-server)
 - [🚀 Quick Start](#quick-start)
 - [🛠 AI Tools](#ai-tools)
 - [📖 Documentation Hub](#documentation-hub)
@@ -46,7 +47,7 @@
 
 OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction.
 
-It is an **OpenCode extension**: a local engine plus a plugin, with its state kept in your repository. Other coding environments are on the roadmap.
+It is an **OpenCode extension**: a local engine plus a plugin, with its state kept in your repository. Other MCP hosts (Claude Code, Muse, Kiro, GitHub Copilot) use the same engine through the bundled MCP server.
 
 ### Three problems it addresses
 
@@ -58,7 +59,7 @@ It is an **OpenCode extension**: a local engine plus a plugin, with its state ke
 
 ### Who it is for
 
-Developers running long coding-agent sessions in OpenCode who want each new session, and each session after a compaction, to start from what was decided, done, failed and blocked.
+Developers running long coding-agent sessions in OpenCode who want each new session, and each session after a compaction, to start from what was decided, done, failed and blocked. Claude Code, Muse, Kiro and GitHub Copilot work too, through the bundled MCP server.
 
 ### Who it is not for
 
@@ -108,6 +109,20 @@ Downloads the prebuilt engine binary + plugin bundle from GitHub Releases, verif
 Verify an existing install: `./install.sh --check`
 
 State lives per-project in `.openstate/state.jsonl`. Read it through the tools (`openstate_state`, `openstate_export`), not the file: its format is internal and may change.
+
+---
+
+## Other hosts: the MCP server
+
+The same bundle carries an MCP server, `mcp/openstate-mcp.mjs`, for every host that is not OpenCode. Run `install.sh` in the repository as above (it puts the server at `.opencode/mcp/openstate-mcp.mjs`, beside the engine), then register it with your host. It needs Node.js 18 or newer.
+
+| Host | File in the repository | Entry |
+|---|---|---|
+| Claude Code, Muse | `.mcp.json` | `{"mcpServers": {"openstate": {"command": "node", "args": ["/path/to/repo/.opencode/mcp/openstate-mcp.mjs"]}}}` |
+| Kiro | `.kiro/settings/mcp.json` | `{"mcpServers": {"openstate": {"command": "node", "args": ["/path/to/repo/.opencode/mcp/openstate-mcp.mjs"]}}}` |
+| GitHub Copilot in VS Code | `.vscode/mcp.json` | `{"servers": {"openstate": {"type": "stdio", "command": "node", "args": ["${workspaceFolder}/.opencode/mcp/openstate-mcp.mjs"]}}}` |
+
+Use the absolute path to the installed file (after `--global`, `~/.config/opencode/mcp/openstate-mcp.mjs`). The server offers 34 tools: the 14 state tools except `openstate_restart` and `openstate_toast` (both OpenCode-only), and all 22 structural tools. Each tool takes the repository directory as `repo_dir`. These hosts give OpenState no way to put the capsule into the context by itself, so the server's instructions tell the agent to call `openstate_capsule` at the start of a session and after a compaction.
 
 ---
 

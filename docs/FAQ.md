@@ -5,7 +5,7 @@
 ## General
 
 ### What is openstate?
-OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction. It is an **OpenCode extension**; support for other coding environments is planned.
+OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction. It is an **OpenCode extension**, and other MCP hosts use it through the bundled MCP server.
 
 ### Who is this for?
 Developers running long coding-agent sessions in OpenCode who want each new session, and each session after a compaction, to start from a record of what was decided, done, failed and blocked. Other editors/environments are on the roadmap.
@@ -119,8 +119,7 @@ Under 1 MB on every platform. Built stripped, with LTO, `panic=abort` and `opt-l
 ## Compatibility
 
 ### Which editors?
-Currently: **OpenCode** (plugin + skill).  
-Planned: Claude Code, Kiro and GitHub Copilot in VS Code (see the roadmap).
+**OpenCode** through the plugin, with the capsule added to the context automatically. **Claude Code, Muse, Kiro and GitHub Copilot in VS Code** through the bundled MCP server (`.opencode/mcp/openstate-mcp.mjs`; registration in the README); there the agent calls `openstate_capsule` itself.
 
 ### Which OS?
 Linux x86_64 (glibc 2.17 or newer), macOS (Intel and Apple Silicon), Windows x86_64 — via per-platform release bundles. Other platforms are refused by the installer with a clear message.

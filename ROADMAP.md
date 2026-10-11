@@ -6,11 +6,11 @@
 
 ## ✅ 0.1.0
 
-What ships is listed in [CHANGELOG.md](CHANGELOG.md): the OpenCode extension (14 state tools, 22 structural tools, resume capsule, sidebar status and toasts), installed per repository or globally, on Linux x86_64, macOS (Intel and Apple Silicon) and Windows x86_64.
+What ships is listed in [CHANGELOG.md](CHANGELOG.md): the OpenCode extension (14 state tools, 22 structural tools, resume capsule, sidebar status and toasts) and the MCP server for other hosts, installed per repository or globally, on Linux x86_64, macOS (Intel and Apple Silicon) and Windows x86_64.
 
 ## ⬜ Planned
 
-- ⬜ **Other coding environments** — Claude Code, Kiro and GitHub Copilot in VS Code, through the MCP server and session hooks.
+- ⬜ **Session hooks for other hosts** — Claude Code, Kiro and GitHub Copilot in VS Code already work through the bundled MCP server; hooks would put the capsule into their context automatically, as OpenCode does.
 - ⬜ **`--purge`** — uninstall that also deletes the `.openstate/` state (today uninstall keeps it, and `--purge` refuses).
 
 ## 💡 Proposals (not yet scoped)
