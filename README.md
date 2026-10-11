@@ -4,7 +4,7 @@
 
 # openstate
 
-> **A continuously maintained, retractable project-state model for coding agents in OpenCode.**
+> **OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](PUBLIC-LICENSE)
 [![Rust](https://img.shields.io/badge/rust-stable-brightgreen.svg)](https://rustup.rs/)
@@ -30,6 +30,8 @@
 ## Table of Contents
 
 - [What Is openstate?](#what-is-openstate)
+  - [Three problems it addresses](#three-problems-it-addresses)
+  - [Who it is for](#who-it-is-for)
 - [🔧 Architecture](#architecture)
 - [📦 Install](#install)
 - [🚀 Quick Start](#quick-start)
@@ -42,7 +44,29 @@
 
 ## What Is openstate?
 
-openstate is an **OpenCode extension** — a single-binary local state engine that gives coding agents in OpenCode a continuously maintained, provenance-backed model of project state. It runs locally and keeps its state in your repository. Other coding environments are on the roadmap.
+OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction.
+
+It is an **OpenCode extension**: a local engine plus a plugin, with its state kept in your repository. Other coding environments are on the roadmap.
+
+### Three problems it addresses
+
+| Problem | What OpenState records | Where the agent sees it |
+|---|---|---|
+| The agent re-runs a command that already failed in an earlier session. | Each failed command. | `failed_attempts` in the capsule; `openstate_report`; `openstate_report_timeline` shows which session it failed in. |
+| After a compaction or a restart, the agent re-reads files to work out what it was doing. | The objective, recent decisions, the files being worked on, uncommitted changes, and whether a test has passed since the last edit. | The capsule, added to the context at the start of the session and after each compaction. |
+| The agent retries an approach that was already rejected. | Decisions: messages that give a reason ("because ..."), recorded with that reason. | `decisions` in the capsule; `openstate_why` shows where a decision came from. |
+
+### Who it is for
+
+Developers running long coding-agent sessions in OpenCode who want each new session, and each session after a compaction, to start from what was decided, done, failed and blocked.
+
+### Who it is not for
+
+- **A knowledge base or documentation search.** It records what happens in sessions, not your documents.
+- **Semantic or vector search over code.** Use the structural tools or your editor.
+- **A hosted or team service.** Everything stays on one machine, in one repository.
+- **A transcript store.** It keeps the current state, not the conversation.
+
 
 **🔧 The engine is proprietary** (distributed under a commercial EULA). The surface components — documentation, skill, installer, plugin bundle — are MIT-licensed. Commercial licensing for embedding the engine in other products is available.
 

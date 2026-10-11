@@ -5,7 +5,7 @@
 ## General
 
 ### What is openstate?
-An **OpenCode extension**: a local-first session-state engine that gives coding agents in OpenCode a continuously maintained, provenance-backed model of project state. It turns the event stream (messages, tool calls, file edits, todos, git) into live, retractable facts with full provenance. Support for additional coding environments is planned.
+OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction. It is an **OpenCode extension**; support for other coding environments is planned.
 
 ### Who is this for?
 Developers running long coding-agent sessions in OpenCode who want each new session, and each session after a compaction, to start from a record of what was decided, done, failed and blocked. Other editors/environments are on the roadmap.

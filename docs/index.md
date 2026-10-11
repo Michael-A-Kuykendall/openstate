@@ -1,7 +1,7 @@
 ---
 layout: default
 title: openstate
-description: A continuously maintained, retractable project-state model for coding agents in OpenCode
+description: OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction.
 ---
 
 <div align="center">
@@ -10,7 +10,7 @@ description: A continuously maintained, retractable project-state model for codi
 
 # openstate
 
-> **A continuously maintained, retractable project-state model for coding agents in OpenCode.**
+> **OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](PUBLIC-LICENSE)
 [![Rust](https://img.shields.io/badge/rust-stable-brightgreen.svg)](https://rustup.rs/)
@@ -22,34 +22,24 @@ description: A continuously maintained, retractable project-state model for codi
 
 ---
 
-## The Problem
+## Three problems it addresses
 
-Standard AI coding session:
-```
-600k tokens → compact / end → summarize → hope the important parts survived
-```
+| Problem | What OpenState records | Where the agent sees it |
+|---|---|---|
+| The agent re-runs a command that already failed in an earlier session. | Each failed command. | `failed_attempts` in the capsule; `openstate_report`; `openstate_report_timeline` shows which session it failed in. |
+| After a compaction or a restart, the agent re-reads files to work out what it was doing. | The objective, recent decisions, the files being worked on, uncommitted changes, and whether a test has passed since the last edit. | The capsule, added to the context at the start of the session and after each compaction. |
+| The agent retries an approach that was already rejected. | Decisions: messages that give a reason ("because ..."), recorded with that reason. | `decisions` in the capsule; `openstate_why` shows where a decision came from. |
 
-Symptoms everyone knows:
-- Re-running commands that already failed
-- Re-reading the same files
-- Re-trying rejected approaches
-- Losing mid-edit state on crash
-- New session starts with a smoothie of guesswork
+## Who it is for
 
----
+Developers running long coding-agent sessions in OpenCode who want each new session, and each session after a compaction, to start from what was decided, done, failed and blocked.
 
-## The Solution
+## Who it is not for
 
-Events (messages, tool calls, file edits, todos, git, …) flow continuously into a local engine.  
-The engine maintains **current project truth** — not a transcript.
-
-Next session receives a **resume capsule** of a few hundred tokens (structured continuation contract) instead of a lossy summary.
-
-### Key Properties
-- Facts are replaced or closed when a later event supersedes them
-- Provenance: `openstate_why` shows where a fact came from
-- Deliberate persistence: on checkpoint, on close, and when the engine's input ends
-- Per-repo, local-only
+- **A knowledge base or documentation search.** It records what happens in sessions, not your documents.
+- **Semantic or vector search over code.** Use the structural tools or your editor.
+- **A hosted or team service.** Everything stays on one machine, in one repository.
+- **A transcript store.** It keeps the current state, not the conversation.
 
 ---
 
@@ -73,10 +63,10 @@ Measured on the maintainer's own projects, August to October 2026:
 Captures the live event stream from OpenCode.
 
 ### 2. Local Rust State Engine
-Turns observations into live, retractable project facts with full provenance.
+Turns those events into project facts and replaces a fact when a later event supersedes it.
 
 ### 3. Resume Capsule
-Structured continuation contract injected automatically: a few hundred tokens (median about 500, at most about 1,600 across 21 real project stores).
+The resume contract, added to the agent's context at the start of every session and after each compaction.
 
 ---
 

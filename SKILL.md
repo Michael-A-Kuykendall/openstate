@@ -1,6 +1,6 @@
 ---
 name: openstate
-description: Use openstate for persistent session memory, project state tracking (objectives, decisions, blockers), provenance queries ("why did we decide X"), and generating resume capsules for context handoff between sessions. Trigger when starting work in this repo, at session end, or when the user asks about project state or past decisions.
+description: OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction. Use openstate for persistent session memory, project state tracking (objectives, decisions, blockers), provenance queries ("why did we decide X"), and generating resume capsules for context handoff between sessions. Trigger when starting work in this repo, at session end, or when the user asks about project state or past decisions.
 ---
 
 # openstate
