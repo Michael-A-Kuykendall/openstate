@@ -26,7 +26,7 @@ State is written when the agent calls `openstate_checkpoint`, when OpenCode clos
 
 ## Checking it yourself
 
-- **No network calls.** The engine is closed source, so check it from outside: run OpenCode under `strace -f -e trace=network` (Linux) or with a firewall that logs outbound connections, and you will see none from `openstate-engine`. The plugin and installer are readable JavaScript and bash.
+- **No network calls.** The engine is closed source, so check it from outside: run OpenCode under `strace -f -e trace=network` (Linux) or with a firewall that logs outbound connections: `openstate-engine` opens no connection. The one socket call you will see is a local `socketpair` it uses to notice termination signals. The plugin and installer are readable JavaScript and bash.
 - **Not in git.** `.openstate/` contains a `.gitignore` of `*`; `git status` never lists it.
 - **What it stored.** `openstate_export` writes everything to a JSON file you can read.
 

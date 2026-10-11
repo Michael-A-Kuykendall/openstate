@@ -12,8 +12,7 @@ description: OpenState keeps a running record of what is true in a project (deci
 
 > **OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction.**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](PUBLIC-LICENSE)
-[![Rust](https://img.shields.io/badge/rust-stable-brightgreen.svg)](https://rustup.rs/)
+[![License: commercial engine, MIT surface](https://img.shields.io/badge/license-commercial%20engine%2C%20MIT%20surface-blue)](LICENSE)
 [![OpenCode](https://img.shields.io/badge/OpenCode-compatible-blue)](https://opencode.ai)
 
 [![💝 Sponsor](https://img.shields.io/badge/💝_Sponsor-ea4aaa?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sponsors/Michael-A-Kuykendall)
