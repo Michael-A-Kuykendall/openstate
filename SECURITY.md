@@ -25,7 +25,6 @@ Instead, please report security issues privately using one of these methods:
 
 2. **Direct Email**
    - Send details to: michaelallenkuykendall@gmail.com
-   - Use PGP encryption if possible (key available on request)
    - Include "SECURITY" in the subject line
 
 ### 📋 What to Include
@@ -35,6 +34,6 @@ Please provide the following information in your report:
 - **Description**: Clear description of the vulnerability
 - **Impact**: What could an attacker accomplish?
 - **Reproduction**: Step-by-step instructions to reproduce the issue
-- **Environment**: OS, Rust version, openstate version
+- **Environment**: OS, OpenCode version, openstate version
 
 We aim to acknowledge reports within 48 hours and provide a remediation timeline within 7 days.

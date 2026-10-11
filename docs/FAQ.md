@@ -8,7 +8,7 @@
 An **OpenCode extension**: a local-first session-state engine that gives coding agents in OpenCode a continuously maintained, provenance-backed model of project state. It turns the event stream (messages, tool calls, file edits, todos, git) into live, retractable facts with full provenance. Support for additional coding environments is planned.
 
 ### Who is this for?
-Coding agents in OpenCode — and the developers who want their AI to have perfect context across sessions, crashes, and compactions. Other editors/environments are on the roadmap.
+Developers running long coding-agent sessions in OpenCode who want each new session, and each session after a compaction, to start from a record of what was decided, done, failed and blocked. Other editors/environments are on the roadmap.
 
 ### Is it open source?
 **Engine binary**: Proprietary (commercial EULA) — protects the core invention.  
@@ -16,7 +16,7 @@ Coding agents in OpenCode — and the developers who want their AI to have perfe
 **Commercial licensing**: Available for embedding — contact `michaelallenkuykendall@gmail.com`.
 
 ### Why not fully open source?
-The fact-derivation engine (the "how") is the differentiated IP. The surface (what you install, the skill, the docs) is MIT. This lets us ship a real product today while protecting the invention for future commercialization.
+The fact-derivation engine (the "how") is the differentiated IP. The surface (what you install, the skill, the docs) is MIT. This lets us sell the product while protecting the invention.
 
 ---
 
@@ -38,7 +38,7 @@ Per-repo, into `.opencode/`:
 **No.** The installer downloads a prebuilt binary + plugin bundle. No compiler or Node toolchain required on the target machine.
 
 ### Per-repo or global?
-**Per-repo only.** Nothing is written outside `.opencode/` in the repo where you run the installer. No global pollution.
+Per repository by default: the installer writes `.opencode/` and one marked block in `AGENTS.md`, and state goes to `.openstate/`. `--global` installs once under your OpenCode config directory instead.
 
 ### How do I verify?
 ```bash
@@ -88,15 +88,10 @@ A structured JSON contract injected at session start, a few hundred tokens (medi
 `.openstate/state.jsonl` in your repo. **Never leaves your machine.** No telemetry, no cloud, no external calls except GitHub Releases for binary download.
 
 ### Can I inspect the state?
-Yes. It's JSON Lines — query with DuckDB, `jq`, or the built-in tools:
-```bash
-duckdb -c "SELECT * FROM read_json_auto('.openstate/state.jsonl')"
-openstate_state
-openstate_why <fact_id>
-```
+Yes, through the tools: `openstate_state`, `openstate_report`, `openstate_why <fact_id>`, and `openstate_export` for a full dump. The file format itself is internal and may change between versions.
 
 ### What about secrets?
-The engine never reads secret files. It tracks git state, file edits, and tool calls — not file contents. Your secrets stay in your files.
+The engine sees what the agent sees: your messages, the commands it runs with their exit codes and the first 4,000 characters of tool output, file paths, and git status. What it keeps stays in `.openstate/` in your repository and is never sent anywhere. Treat `.openstate/` like shell history: keep it out of version control.
 
 ---
 
@@ -114,14 +109,10 @@ When a later event contradicts or completes something (a fix lands, a decision i
 No — the binary is proprietary (EULA). The surface (docs, skill, installer, plugin) is MIT. Commercial embedding licenses available.
 
 ### How does crash recovery work?
-- **Explicit checkpoint** (human/AI decision)
-- **Dispose flush** (app close)
-- **stdin-EOF last resort** (catastrophic kill)
-
-No automatic/idle flushing — only human/AI-confirmed state persists.
+State is written to disk at three points: an explicit `openstate_checkpoint`, OpenCode closing, and the engine's input ending. There is no timed background flush, so a hard kill loses what happened since the last write; what was written survives.
 
 ### What's the binary size?
-728KB (Linux x86_64). Hardened: strip + LTO + panic=abort + opt-level=z.
+Under 1 MB on every platform. Built stripped, with LTO, `panic=abort` and `opt-level=z`.
 
 ---
 
@@ -135,7 +126,7 @@ Future: VS Code, Cursor, Claude Code, Zed — any editor with a plugin API.
 Linux x86_64 (glibc 2.17 or newer), macOS (Intel and Apple Silicon), Windows x86_64 — via per-platform release bundles. Other platforms are refused by the installer with a clear message.
 
 ### OpenCode version?
-Requires OpenCode with plugin API support. Tested on current stable.
+Requires OpenCode with plugin API support.
 
 ---
 
@@ -165,10 +156,10 @@ Run `openstate_doctor` — checks PID, uptime, fact counts, journal health.
 Run your test command (`cargo test`, `npm test`, etc.). The capsule tracks generations.
 
 ### "Engine unavailable" after install
-Restart OpenCode. The plugin spawns the engine on first tool call.
+Restart OpenCode. The plugin starts the engine when OpenCode loads it.
 
 ### Install fails on Windows
-Ensure you're in a native shell (PowerShell/WSL), not Git Bash. The installer detects platform.
+The installer is a bash script: run it from Git Bash (installs the Windows bundle) or from WSL (installs the Linux bundle for OpenCode running inside WSL).
 
 ### How do I reset?
 ```bash
@@ -182,7 +173,7 @@ openstate_reset
 
 ### Can I contribute code?
 **Maintainer-only PRs.** Apply via email: `michaelallenkuykendall@gmail.com`.  
-Non-maintainers: issues, discussions, testing welcome.
+Non-maintainers: issues and testing welcome.
 
 ### DCO required?
 Yes — all commits must be signed off (`git commit -s`).

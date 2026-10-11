@@ -7,7 +7,6 @@
 > **A continuously maintained, retractable project-state model for coding agents in OpenCode.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](PUBLIC-LICENSE)
-[![Security](https://img.shields.io/badge/Security-Audited-green)](SECURITY.md)
 [![Rust](https://img.shields.io/badge/rust-stable-brightgreen.svg)](https://rustup.rs/)
 [![OpenCode](https://img.shields.io/badge/OpenCode-compatible-blue)](https://opencode.ai)
 
@@ -24,7 +23,7 @@
 - **$100/month**: Corporate backer 🏢 - Logo placement + monthly office hours
 - **$500/month**: Infrastructure partner 🚀 - Direct support + roadmap input
 
-[**🎯 Become a Sponsor**](https://github.com/sponsors/Michael-A-Kuykendall) | See our amazing [sponsors](SPONSORS.md) 🙏
+[**🎯 Become a Sponsor**](https://github.com/sponsors/Michael-A-Kuykendall)
 
 ---
 
@@ -33,7 +32,7 @@
 - [What Is openstate?](#what-is-openstate)
 - [🔧 Architecture](#architecture)
 - [📦 Install](#install)
-- [🚀 Quick Start (30 seconds)](#quick-start-30-seconds)
+- [🚀 Quick Start](#quick-start)
 - [🛠 AI Tools](#ai-tools)
 - [📖 Documentation Hub](#documentation-hub)
 - [🏛️ License & Philosophy](#license--philosophy)
@@ -43,7 +42,7 @@
 
 ## What Is openstate?
 
-openstate is an **OpenCode extension** — a single-binary local state engine that gives coding agents in OpenCode a continuously maintained, provenance-backed model of project state. Point your OpenCode session at openstate and it just works — locally, privately, and free. Other coding environments are on the roadmap.
+openstate is an **OpenCode extension** — a single-binary local state engine that gives coding agents in OpenCode a continuously maintained, provenance-backed model of project state. It runs locally and keeps its state in your repository. Other coding environments are on the roadmap.
 
 **🔧 The engine is proprietary** (distributed under a commercial EULA). The surface components — documentation, skill, installer, plugin bundle — are MIT-licensed. Commercial licensing for embedding the engine in other products is available.
 
@@ -57,7 +56,7 @@ Captures events: `message.updated`, `tool.execute.before/after`, `file.edited`, 
 
 ### 2. Local Rust State Engine
 
-Converts observations into live project facts with continuous derivation, automatic retraction on contradictory evidence, and full provenance chains.
+Turns those events into project facts (objectives, decisions, completed and failed commands, blockers) and replaces or closes a fact when a later event supersedes it. `openstate_why` shows where any fact came from.
 
 ### 3. Resume Capsule
 
@@ -74,10 +73,7 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
 # 2. Target a specific repo
 curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | OPENSTATE_CONFIG_DIR=/path/to/repo/.opencode bash
 
-# 3. gh CLI (works for private repos)
-gh api repos/Michael-A-Kuykendall/openstate/contents/install.sh --jq .content | base64 -d | bash
-
-# 4. Clone once, install anywhere
+# 3. Clone once, install anywhere
 git clone --depth 1 https://github.com/Michael-A-Kuykendall/openstate.git /tmp/os
 /tmp/os/install.sh
 OPENSTATE_CONFIG_DIR=/path/to/other/.opencode /tmp/os/install.sh
@@ -87,11 +83,11 @@ Downloads the prebuilt engine binary + plugin bundle from GitHub Releases, verif
 
 Verify an existing install: `./install.sh --check`
 
-State lives per-project in `.openstate/state.jsonl`. Query it directly with DuckDB: `SELECT * FROM read_json_auto('.openstate/state.jsonl')`.
+State lives per-project in `.openstate/state.jsonl`. Read it through the tools (`openstate_state`, `openstate_export`), not the file: its format is internal and may change.
 
 ---
 
-## Quick Start (30 seconds)
+## Quick Start
 
 ```bash
 # In any repo
@@ -158,7 +154,6 @@ Plus 22 structural tools (AST and text search, bounded reads, references, declar
 | [NOTICE](NOTICE) | Attribution & commercial licensing |
 | [SPONSORS.md](SPONSORS.md) | Sponsor tiers & recognition |
 | [SKILL.md](SKILL.md) | AI usage skill |
-| [docs/STATE-FORMAT.md](docs/STATE-FORMAT.md) | State format reference |
 | [docs/FAQ.md](docs/FAQ.md) | Frequently asked questions |
 
 ---
@@ -172,18 +167,14 @@ Plus 22 structural tools (AST and text search, bounded reads, references, declar
 ### Philosophy
 
 - **Per-repo install** — `install.sh` targets `.opencode/` (not global), so openstate only activates in repos that opt in.
-- **Semantic fact lifecycle** — facts enter on a real extension event and exit only when a *paired* event proves them invalid.
-- **Crash recovery** — in-progress work persists across process death: persistence is **deliberate** (explicit `checkpoint`, guaranteed dispose-flush on app close, stdin-EOF last resort).
+- **Deliberate persistence** — state is written on `openstate_checkpoint`, when OpenCode closes, and when the engine's input ends. What a checkpoint wrote survives the engine being killed.
 - **Provenance** — `openstate_why` shows where any fact came from.
-- **Compact/prune** — dead records are collected at session boundaries and on demand; the store stays bounded.
-- **Invisible infrastructure** — minimal surface area, zero-config, drop-in.
 
 ---
 
 ## Community & Support
 
-- **GitHub Discussions** — questions, ideas, feedback
-- **GitHub Issues** — bugs, feature requests (non-maintainers welcome)
+- **GitHub Issues** — questions, bugs, feature requests
 - **Security** — see [SECURITY.md](SECURITY.md) for private disclosure
 - **Sponsors** — [GitHub Sponsors](https://github.com/sponsors/Michael-A-Kuykendall) / [SPONSORS.md](SPONSORS.md)
 
@@ -193,7 +184,7 @@ This project follows the [Contributor Covenant](CODE_OF_CONDUCT.md). By particip
 
 ### Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) — **maintainer-only PRs**, DCO sign-off required. Non-maintainers contribute via issues and discussions.
+See [CONTRIBUTING.md](CONTRIBUTING.md) — **maintainer-only PRs**, DCO sign-off required. Non-maintainers contribute via issues.
 
 ### Governance
 
@@ -202,14 +193,6 @@ See [GOVERNANCE.md](GOVERNANCE.md) — lead maintainer authority, roadmap owners
 ### Security
 
 See [SECURITY.md](SECURITY.md) — private disclosure via GitHub Security Advisories or `michaelallenkuykendall@gmail.com`.
-
----
-
-## Sponsors
-
-These amazing people make openstate possible 🙏
-
-*Want to see your name/logo here?* [Become a sponsor](https://github.com/sponsors/Michael-A-Kuykendall)!
 
 ---
 

@@ -2,7 +2,7 @@
 
 openstate is maintained by its original author.
 
-The core project is open for issues, discussion, and feedback. Major architectural or licensing decisions are made to preserve:
+The project is open for issues and feedback. Major architectural or licensing decisions are made to preserve:
 - integrity of the session-state engine
 - long-term sustainability of the project
 - safety for users embedding openstate in their AI workflows
@@ -10,8 +10,8 @@ The core project is open for issues, discussion, and feedback. Major architectur
 ## Decision Making
 
 - **Lead Maintainer**: Michael A. Kuykendall — final authority on architecture, licensing, and project direction
-- **Contributions**: Welcomed via issues and discussions; code contributions require maintainer approval (see CONTRIBUTING.md)
-- **Roadmap**: Set by the lead maintainer to preserve project vision; community input considered via issues/discussions
+- **Contributions**: Welcomed via issues; code contributions require maintainer approval (see CONTRIBUTING.md)
+- **Roadmap**: Set by the lead maintainer to preserve project vision; community input considered via issues
 
 ## License
 

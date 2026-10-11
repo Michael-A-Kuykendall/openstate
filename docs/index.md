@@ -13,7 +13,6 @@ description: A continuously maintained, retractable project-state model for codi
 > **A continuously maintained, retractable project-state model for coding agents in OpenCode.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](PUBLIC-LICENSE)
-[![Security](https://img.shields.io/badge/Security-Audited-green)](SECURITY.md)
 [![Rust](https://img.shields.io/badge/rust-stable-brightgreen.svg)](https://rustup.rs/)
 [![OpenCode](https://img.shields.io/badge/OpenCode-compatible-blue)](https://opencode.ai)
 
@@ -47,10 +46,10 @@ The engine maintains **current project truth** — not a transcript.
 Next session receives a **resume capsule** of a few hundred tokens (structured continuation contract) instead of a lossy summary.
 
 ### Key Properties
-- Continuously derived facts with automatic retraction
-- Full provenance (`openstate_why`)
-- Deliberate, crash-safe persistence
-- Per-repo, zero-config, local-only
+- Facts are replaced or closed when a later event supersedes them
+- Provenance: `openstate_why` shows where a fact came from
+- Deliberate persistence: on checkpoint, on close, and when the engine's input ends
+- Per-repo, local-only
 
 ---
 
@@ -81,20 +80,20 @@ Structured continuation contract injected automatically: a few hundred tokens (m
 
 ---
 
-## Install (30 Seconds)
+## Install
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash
 ```
 
-- Prebuilt binary (728KB, hardened)
+- Prebuilt engine binary, under 1 MB
 - Checksum verified, smoke-tested before install
-- Per-repo `.opencode/` — zero global pollution
+- Installs into the repository's `.opencode/` (or once for all repositories with `--global`)
 - Restart OpenCode → 36 AI tools (14 state + 22 structural) + TUI sidebar + skill
 
 ---
 
-## AI Tools (13)
+## State tools (14)
 
 | Tool | Purpose |
 |------|---------|
@@ -111,6 +110,7 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
 | `openstate_sessions` | List prior sessions |
 | `openstate_doctor` | Engine health check |
 | `openstate_restart` | Restart engine sidecar |
+| `openstate_toast` | Completion toasts on/off |
 
 ---
 
@@ -121,7 +121,6 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
 - **Surface MIT** — docs, skill, installer, plugin
 - **Commercial licensing available** — `michaelallenkuykendall@gmail.com`
 - **State, not story** — current truth, not transcript
-- **Fail-closed, degrade-graceful** — crash recovery is a design goal
 
 ---
 
@@ -136,9 +135,3 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
 - [License](LICENSE) / [Public License](PUBLIC-LICENSE)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 
----
-
-## Sponsors
-
-These amazing people make openstate possible 🙏  
-*Want to see your name/logo here?* [Become a sponsor](https://github.com/sponsors/Michael-A-Kuykendall)!
