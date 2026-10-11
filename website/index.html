@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>OpenState — A continuously maintained, retractable project-state model for coding agents</title>
-<meta name="description" content="OpenState gives AI coding agents a continuously maintained, provenance-backed model of project state. Local, private, and licensed through Stripe and Keygen." />
+<title>OpenState — project state for coding agents in OpenCode</title>
+<meta name="description" content="OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -18,13 +18,12 @@
       <img class="brand-logo" src="logo-header.jpg" alt="OpenState logo" />
     </a>
     <nav class="nav">
-      <a href="#problem">Problem</a>
-      <a href="#solution">Solution</a>
-      <a href="#proof">Proof</a>
+      <a href="#problems">Problems</a>
+      <a href="#audience">Who it is for</a>
       <a href="#how">How</a>
+      <a href="#numbers">Numbers</a>
       <a href="#tools">Tools</a>
       <a href="#install">Install</a>
-      <a href="#principles">Principles</a>
       <a href="pricing.html">Pricing</a>
       <a href="license.html">License</a>
     </nav>
@@ -34,173 +33,142 @@
 <section class="hero" id="top">
   <div class="shell hero-grid">
     <div class="hero-text">
-      <p class="eyebrow">OpenState &mdash; 01 / State Model</p>
-      <h1>A continuously maintained,<br /><em>retractable</em> project-state<br />model for coding agents.</h1>
-      <p class="hero-lede">Events stream into a local engine.<br />The engine maintains <strong>current project truth</strong> &mdash; not a transcript.<br />The next session receives a structured continuation contract instead of a lossy summary.</p>
+      <p class="eyebrow">OpenState &mdash; for coding agents in OpenCode</p>
+      <h1>The project&rsquo;s <em>state</em>, not a summary of the chat.</h1>
+      <p class="hero-lede">OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#install">Install</a>
         <a class="btn btn-ghost" href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">View on GitHub</a>
-        <a class="btn btn-link" href="pricing.html">Pricing &rarr;</a>
+        <a class="btn btn-link" href="pricing.html">$49 per developer, once &rarr;</a>
       </div>
-      <p class="hero-tags">Local &nbsp;/&nbsp; Private &nbsp;/&nbsp; Licensed &nbsp;/&nbsp; OpenCode-compatible</p>
+      <p class="hero-tags">OpenCode extension &nbsp;/&nbsp; Local &nbsp;/&nbsp; No network calls &nbsp;/&nbsp; Linux, macOS, Windows</p>
     </div>
     <div class="hero-mark">
       <img class="hero-logo" src="logo-md.jpg" alt="OpenState logotype rendered on a cube" />
-      <p class="hero-caption"><em>The battery is for the AI. Humans ask the AI.</em></p>
     </div>
   </div>
 </section>
 
-<section class="band alt" id="problem">
+<section class="band alt" id="problems">
   <div class="shell">
-    <p class="eyebrow">Problem &mdash; The forgetful agent</p>
-    <h2>Every session ends the same way:</h2>
-    <div class="flow">
-      <span>600k tokens</span><span class="arrow">&rarr;</span><span>compact / end</span><span class="arrow">&rarr;</span><span>summarize</span><span class="arrow">&rarr;</span><span class="signal">hope it survived</span>
-    </div>
-    <p class="lede">What that actually costs:</p>
-    <ul class="tick-list">
-      <li>Re-running commands that already failed</li>
-      <li>Re-reading the same files</li>
-      <li>Re-trying approaches you already rejected</li>
-      <li>Losing mid-edit state the moment something crashes</li>
-      <li>Every new session starting with a smoothie of guesswork</li>
-    </ul>
-    <p class="punch">The agent forgets. You pay for it.</p>
-  </div>
-</section>
-
-<section class="band" id="solution">
-  <div class="shell">
-    <p class="eyebrow">Solution &mdash; State, not story</p>
-    <h2>The engine does not summarize what happened.<br />It maintains what is <em>true right now</em>.</h2>
-    <div class="cols">
-      <div class="col">
-        <h3>Events flow in</h3>
-        <p>Messages, tool calls, file edits, todos, git &mdash; everything streams into a local engine while you work.</p>
-      </div>
-      <div class="col">
-        <h3>Facts retract</h3>
-        <p>Derived facts auto-retract the moment contradicting evidence arrives. Always current. Never stale.</p>
-      </div>
-      <div class="col">
-        <h3>Provenance, always</h3>
-        <p>Every fact records where it came from. Ask <code>openstate_why</code> and you get the rule behind a derived fact or the session that recorded it.</p>
-      </div>
-      <div class="col">
-        <h3>A real continuation contract</h3>
-        <p>The next session receives a 1,000&ndash;5,000-token resume capsule of exact state &mdash; not a summary that hoped for the best.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="band alt" id="proof">
-  <div class="shell">
-    <p class="eyebrow">Proof &mdash; Real numbers, real sessions</p>
-    <h2>Eight projects. Thirty-four sessions. Zero context lost.</h2>
-    <table class="metric-table">
+    <p class="eyebrow">Three problems it addresses</p>
+    <h2>Long agent sessions lose what they learned.</h2>
+    <table class="tool-table problem-table">
       <tbody>
-        <tr><td>Facts tracked</td><td class="num"><strong>60,732</strong></td></tr>
-        <tr><td>Self-corrections</td><td class="num"><strong>30,007</strong></td></tr>
-        <tr><td>Commands executed</td><td class="num"><strong>16,457</strong></td></tr>
-        <tr><td>Items completed</td><td class="num"><strong>10,346</strong></td></tr>
-        <tr><td>Decisions recorded</td><td class="num"><strong>499</strong></td></tr>
-        <tr><td>Failure patterns caught</td><td class="num"><strong>173</strong></td></tr>
-        <tr><td>Crashes &rarr; work lost</td><td class="num"><strong>14 &rarr; 0</strong></td></tr>
-        <tr><td>Resume capsules</td><td class="num"><strong>30</strong></td></tr>
+        <tr><td><strong>Problem</strong></td><td><strong>What OpenState records</strong></td><td><strong>Where the agent sees it</strong></td></tr>
+        <tr><td>The agent re-runs a command that already failed in an earlier session.</td><td>Each failed command.</td><td><code>failed_attempts</code> in the capsule; <code>openstate_report</code>; <code>openstate_report_timeline</code> shows which session it failed in.</td></tr>
+        <tr><td>After a compaction or a restart, the agent re-reads files to work out what it was doing.</td><td>The objective, recent decisions, the files being worked on, uncommitted changes, and whether a test has passed since the last edit.</td><td>The capsule, added to the context at the start of the session and after each compaction.</td></tr>
+        <tr><td>The agent retries an approach that was already rejected.</td><td>Decisions: messages that give a reason (&ldquo;because &hellip;&rdquo;), recorded with that reason.</td><td><code>decisions</code> in the capsule; <code>openstate_why</code> shows where a decision came from.</td></tr>
       </tbody>
     </table>
-    <p class="punch">Self-correction is not error.<br />It is truth-convergence velocity.</p>
-    <p class="lede">Every number is queried verbatim from the engine's own state files. Nothing fabricated. Nothing summarized into a pretty lie.</p>
-    <div class="chart-grid">
-      <figure>
-        <a href="charts/velocity-comparison.png" class="lightbox" aria-label="Open velocity comparison chart full size"><img src="charts/velocity-comparison.png" alt="Velocity comparison chart" loading="lazy" /><span class="zoom">&#x26F6; view full size</span></a>
-        <figcaption>Before / after throughput &mdash; less re-work, same model.</figcaption>
-      </figure>
-      <figure>
-        <a href="charts/correction-velocity.png" class="lightbox" aria-label="Open correction velocity chart full size"><img src="charts/correction-velocity.png" alt="Correction velocity chart" loading="lazy" /><span class="zoom">&#x26F6; view full size</span></a>
-        <figcaption>Self-correction as truth-convergence velocity.</figcaption>
-      </figure>
-      <figure>
-        <a href="charts/tool-usage.png" class="lightbox" aria-label="Open tool usage chart full size"><img src="charts/tool-usage.png" alt="Tool usage distribution chart" loading="lazy" /><span class="zoom">&#x26F6; view full size</span></a>
-        <figcaption>Which tools burn the most turns.</figcaption>
-      </figure>
-      <figure>
-        <a href="charts/tag-distribution.png" class="lightbox" aria-label="Open tag distribution chart full size"><img src="charts/tag-distribution.png" alt="Tag distribution chart" loading="lazy" /><span class="zoom">&#x26F6; view full size</span></a>
-        <figcaption>What the engine tracks, at a glance.</figcaption>
-      </figure>
-      <figure>
-        <a href="charts/repo-comparison.png" class="lightbox" aria-label="Open repo comparison chart full size"><img src="charts/repo-comparison.png" alt="Repo comparison chart" loading="lazy" /><span class="zoom">&#x26F6; view full size</span></a>
-        <figcaption>The same effect in every repo.</figcaption>
-      </figure>
+  </div>
+</section>
+
+<section class="band" id="audience">
+  <div class="shell">
+    <p class="eyebrow">Who it is for</p>
+    <h2>Developers running long coding-agent sessions in OpenCode.</h2>
+    <p class="lede">For people who want each new session, and each session after a compaction, to start from what was decided, done, failed and blocked.</p>
+    <h3>Who it is not for</h3>
+    <ul class="tick-list">
+      <li><strong>A knowledge base or documentation search.</strong> It records what happens in sessions, not your documents.</li>
+      <li><strong>Semantic or vector search over code.</strong> Use the structural tools or your editor.</li>
+      <li><strong>A hosted or team service.</strong> Everything stays on one machine, in one repository.</li>
+      <li><strong>A transcript store.</strong> It keeps the current state, not the conversation.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="band alt" id="how">
+  <div class="shell">
+    <p class="eyebrow">How it works</p>
+    <h2>Three parts, all on your machine.</h2>
+    <div class="cols">
+      <div class="col">
+        <h3>Plugin</h3>
+        <p>An OpenCode plugin passes the session&rsquo;s events (messages, tool calls, file edits, git status) to a local engine.</p>
+      </div>
+      <div class="col">
+        <h3>Engine</h3>
+        <p>A small Rust binary turns those events into project facts, replaces a fact when a later event supersedes it, and keeps them in <code>.openstate/</code> in your repository.</p>
+      </div>
+      <div class="col">
+        <h3>Capsule</h3>
+        <p>A compact resume contract, added to the agent&rsquo;s context at the start of every session and after each compaction. <code>openstate_why</code> shows where any fact came from.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="band" id="how">
+<section class="band" id="numbers">
   <div class="shell">
-    <p class="eyebrow">How it works &mdash; Three layers</p>
-    <div class="steps">
-      <div class="step">
-        <span class="step-num">01</span>
-        <h3>Observer</h3>
-        <p>A tiny OpenCode plugin captures the live event stream: messages, tools, files, todos, git, session lifecycle.</p>
-      </div>
-      <div class="step">
-        <span class="step-num">02</span>
-        <h3>State Engine</h3>
-        <p>A distilled Rust binary turns observations into live, retractable project facts with full provenance.</p>
-      </div>
-      <div class="step">
-        <span class="step-num">03</span>
-        <h3>Resume Capsule</h3>
-        <p>A structured continuation contract injected automatically &mdash; 1,000&ndash;5,000 tokens of exact state.</p>
-      </div>
-    </div>
+    <p class="eyebrow">Numbers</p>
+    <h2>Measured on the maintainer&rsquo;s own projects, August to October 2026.</h2>
+    <table class="tool-table">
+      <tbody>
+        <tr><td>OpenState tool uses in OpenCode</td><td>35,579</td></tr>
+        <tr><td>Sessions that used it</td><td>243</td></tr>
+        <tr><td>Projects</td><td>20</td></tr>
+        <tr><td>Records held in project stores now</td><td>82,586</td></tr>
+        <tr><td>Resume capsule size</td><td>median about 500, at most about 1,600 tokens</td></tr>
+      </tbody>
+    </table>
   </div>
 </section>
 
 <section class="band alt" id="tools">
   <div class="shell">
-    <p class="eyebrow">The AI's toolkit &mdash; 14 state tools, plus 22 structural tools</p>
-    <h2>They are just there.</h2>
-    <table class="tool-table">
-      <tbody>
-        <tr><td><code>openstate_state</code></td><td>Full project state: objective, decisions, in-progress, blockers, next actions</td></tr>
-        <tr><td><code>openstate_capsule</code></td><td>Start-of-session resume contract</td></tr>
-        <tr><td><code>openstate_report</code></td><td>Black-box &ldquo;what&rsquo;s broken / stuck&rdquo; readout</td></tr>
-        <tr><td><code>openstate_report_timeline</code></td><td>Chronological session &rarr; facts map</td></tr>
-        <tr><td><code>openstate_why</code></td><td>Rule chain for a derived fact; for a recorded fact, the session it came from</td></tr>
-        <tr><td><code>openstate_checkpoint</code></td><td>Force-flush state to disk</td></tr>
-        <tr><td><code>openstate_close</code></td><td>Retract a false positive</td></tr>
-        <tr><td><code>openstate_assess</code></td><td>Absorb a current or prior session</td></tr>
-        <tr><td><code>openstate_sessions</code></td><td>List prior sessions for recovery</td></tr>
-        <tr><td><code>openstate_doctor</code></td><td>Engine health check + auto-fix</td></tr>
-        <tr><td><code>openstate_restart</code></td><td>Restart the engine sidecar</td></tr>
-        <tr><td><code>openstate_export</code></td><td>Full state dump as JSON</td></tr>
-        <tr><td><code>openstate_reset</code></td><td>Deliberate full wipe</td></tr>
-        <tr><td><code>openstate_toast</code></td><td>Toggle completion toasts</td></tr>
-      </tbody>
-    </table>
-    <p class="lede">Two human surfaces ride alongside: a sidebar ticker (<code>● openstate / battery ready</code>) that animates while a command runs, and completion toasts that confirm what finished &mdash; coalesced for bursts, toggleable via <code>openstate_toast</code>.</p>
+    <p class="eyebrow">The AI&rsquo;s toolkit &mdash; 14 state tools, plus 22 structural tools</p>
+    <h2>State tools</h2>
+    <div class="toolgroup">
+      <h3 class="toolgroup-head">Read the state</h3>
+      <table class="tool-table">
+        <tbody>
+          <tr><td><code>openstate_state</code></td><td>Full project state: objective, decisions, in-progress, blockers, next actions</td></tr>
+          <tr><td><code>openstate_capsule</code></td><td>Start-of-session resume contract</td></tr>
+          <tr><td><code>openstate_report</code></td><td>Black-box &ldquo;what&rsquo;s broken / stuck&rdquo; readout</td></tr>
+          <tr><td><code>openstate_report_timeline</code></td><td>Chronological session &rarr; facts map</td></tr>
+          <tr><td><code>openstate_why</code></td><td>Where a fact came from: the rule chain, or the session that recorded it</td></tr>
+        </tbody>
+      </table>
+      <h4 class="toolgroup-head">Recover sessions</h4>
+      <table class="tool-table">
+        <tbody>
+          <tr><td><code>openstate_assess</code></td><td>Absorb a current or prior session</td></tr>
+          <tr><td><code>openstate_sessions</code></td><td>List prior sessions for recovery</td></tr>
+          <tr><td><code>openstate_checkpoint</code></td><td>Force-flush state to disk</td></tr>
+          <tr><td><code>openstate_export</code></td><td>Full state dump as JSON</td></tr>
+        </tbody>
+      </table>
+      <h4 class="toolgroup-head">Tend the engine</h4>
+      <table class="tool-table">
+        <tbody>
+          <tr><td><code>openstate_doctor</code></td><td>Engine health check; fixes a lost execute bit and stale locks</td></tr>
+          <tr><td><code>openstate_restart</code></td><td>Restart the engine sidecar</td></tr>
+          <tr><td><code>openstate_close</code></td><td>Retract a false positive</td></tr>
+          <tr><td><code>openstate_reset</code></td><td>Deliberate full wipe</td></tr>
+          <tr><td><code>openstate_toast</code></td><td>Toggle completion toasts</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lede">Two human surfaces ride alongside: an always-on sidebar status line (<code>● openstate / battery ready</code>) that flips to the running command while it works, and completion toasts that confirm what finished &mdash; coalesced for bursts, toggleable via <code>openstate_toast</code>.</p>
   </div>
 </section>
 
 <section class="band" id="install">
   <div class="shell">
-    <p class="eyebrow">Install &mdash; Thirty seconds</p>
-    <pre class="code-block"><span># one line, per-repo, verified</span>
+    <p class="eyebrow">Install</p>
+    <pre class="code-block"><span># per repository; add --global to install once for all of them</span>
 curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash
 <span class="cmt"># verify an existing install</span>
 ./install.sh --check</pre>
+    <p class="payoff">Restart OpenCode and the agent has 36 tools, the capsule in its context, a sidebar status line, completion toasts, and a skill that tells it when to use them.</p>
     <ul class="tick-list">
-      <li>Installs into <code>.opencode/</code> &mdash; nothing global, nothing shared</li>
-      <li>Prebuilt, hardened binary &mdash; no toolchain required</li>
-      <li>Checksum verified, engine smoke-tested before install</li>
-      <li>Restart OpenCode. Done. 36 tools + sidebar + toasts + skill.</li>
+      <li>Installs into the repository&rsquo;s <code>.opencode/</code>, or once for all repositories with <code>--global</code></li>
+      <li>Prebuilt engine under 1 MB; no compiler needed. The installer uses Node.js to update JSON config</li>
+      <li>Checksum verified and engine smoke-tested before anything is written</li>
     </ul>
-    <p class="lede"><a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">Read the README</a> &nbsp;&middot;&nbsp; <a href="https://github.com/Michael-A-Kuykendall/openstate/releases" target="_blank" rel="noopener">Releases</a> &nbsp;&middot;&nbsp; <a href="https://github.com/Michael-A-Kuykendall/openstate/discussions" target="_blank" rel="noopener">Discussions</a></p>
+    <p class="lede"><a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">Read the README</a> &nbsp;&middot;&nbsp; <a href="https://github.com/Michael-A-Kuykendall/openstate/releases" target="_blank" rel="noopener">Releases</a> &nbsp;&middot;&nbsp; <a href="https://github.com/Michael-A-Kuykendall/openstate/issues" target="_blank" rel="noopener">Issues</a></p>
   </div>
 </section>
 
@@ -210,23 +178,23 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
     <div class="principles">
       <div class="principle">
         <span class="p-num">01</span>
-        <h3>Automatic, or it does not exist</h3>
-        <p>Events flow in. Nothing to babysit. Nothing to export.</p>
+        <h3>State, not story</h3>
+        <p>A record of what is true now, compiled from events, not a summary written by a model.</p>
       </div>
       <div class="principle">
         <span class="p-num">02</span>
-        <h3>State, not story</h3>
-        <p>Deterministic current truth. Never a silver-tongued summary.</p>
+        <h3>Local only</h3>
+        <p>No network calls, no telemetry. State lives in your repository.</p>
       </div>
       <div class="principle">
         <span class="p-num">03</span>
-        <h3>Fail-closed, degrade graceful</h3>
-        <p>Crash recovery is a design goal, not a patch.</p>
+        <h3>Deliberate persistence</h3>
+        <p>State is written on checkpoint, when OpenCode closes, and when the engine&rsquo;s input ends.</p>
       </div>
       <div class="principle">
         <span class="p-num">04</span>
-        <h3>One license, on your machine</h3>
-        <p>Stripe checkout issues a Keygen license. The engine stays local. The surface stays MIT.</p>
+        <h3>Sold once</h3>
+        <p>$49 per developer through Stripe, 30-day refund. The docs, skill, installer and plugin are MIT.</p>
       </div>
     </div>
     <p class="lede">Commercial embedding licenses available &mdash; <a href="mailto:michaelallenkuykendall@gmail.com">michaelallenkuykendall@gmail.com</a></p>
@@ -236,50 +204,10 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
 <footer class="site-footer">
   <div class="shell footer-inner">
     <span class="footer-brand">OpenState</span>
-    <span class="footer-tag">A continuously maintained, retractable project-state model &mdash; 2026</span>
-    <span class="footer-links"><a href="pricing.html">Pricing</a> &middot; <a href="license.html">License</a> &middot; <a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">GitHub</a></span>
+    <span class="footer-tag">Local software, sold once</span>
+    <span class="footer-links"><a href="pricing.html">Pricing</a> &middot; <a href="license.html">License</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="refund.html">Refunds</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">GitHub</a></span>
   </div>
 </footer>
 
-<div class="lightbox-modal" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
-  <button class="lightbox-close" type="button" aria-label="Close">&times;</button>
-  <figure>
-    <img src="" alt="" />
-    <figcaption></figcaption>
-  </figure>
-</div>
-
-<script>
-(function () {
-  var modal = document.getElementById("lightbox");
-  var img = modal.querySelector("img");
-  var cap = modal.querySelector("figcaption");
-  var close = modal.querySelector(".lightbox-close");
-  function open(e) {
-    e.preventDefault();
-    img.src = this.href;
-    img.alt = this.querySelector("img")?.alt || "chart";
-    var fig = this.closest("figure");
-    cap.textContent = fig?.querySelector("figcaption")?.textContent || "";
-    modal.setAttribute("aria-hidden", "false");
-    document.body.classList.add("no-scroll");
-  }
-  function closeModal() {
-    modal.setAttribute("aria-hidden", "true");
-    img.src = "";
-    document.body.classList.remove("no-scroll");
-  }
-  document.querySelectorAll("a.lightbox").forEach(function (a) {
-    a.addEventListener("click", open);
-  });
-  close.addEventListener("click", closeModal);
-  modal.addEventListener("click", function (e) {
-    if (e.target === modal) closeModal();
-  });
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && modal.getAttribute("aria-hidden") === "false") closeModal();
-  });
-})();
-</script>
 </body>
 </html>
