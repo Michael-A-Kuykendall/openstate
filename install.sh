@@ -243,8 +243,11 @@ validate_state_path() {
     # directory path from the file's first line and hands the engine the
     # resolved path. Only reject it when the recorded target is unusable —
     # that is the corruption shape that stalls every run.
+    # s9bf.25: first line, trimmed at the ends (spaces inside the path are
+    # kept), relative to the repository: the same rule as resolveStateDir.
     local pointer
-    pointer="$(head -n 1 "$state_dir" 2>/dev/null | tr -d '[:space:]')"
+    pointer="$(head -n 1 "$state_dir" 2>/dev/null | tr -d '\r' | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')"
+    case "$pointer" in /*|[A-Za-z]:[\\/]*) ;; ?*) pointer="$repo_root/$pointer" ;; esac
     if [ -n "$pointer" ] && [ -d "$pointer" ]; then
       return 0
     fi
@@ -697,8 +700,11 @@ sha256_for "$ENGINE_DEST" > "${MANIFEST_FILE}.tmp" \
 # the engine's atomic writes block in D-state. Move state to native Linux
 # FS and symlink from the repo so writes never cross the bridge.
 STATE_DIR="$OPENCODE_DIR/../.openstate"
-if grep -qiE "microsoft|wsl" /proc/version 2>/dev/null; then
-  REPO_ROOT="$(dirname "$OPENCODE_DIR")"
+# s9bf.25: only for a repository on a Windows mount, as described above; a
+# repository on the Linux FS keeps its own .openstate/ (and a test install in
+# a temp dir never writes into ~/.openstate).
+REPO_ROOT="$(cd "$(dirname "$OPENCODE_DIR")" && pwd -P)"
+if grep -qiE "microsoft|wsl" /proc/version 2>/dev/null && case "$REPO_ROOT" in /mnt/[a-zA-Z]/*) true ;; *) false ;; esac; then
   REPO_NAME="$(basename "$REPO_ROOT")"
   LINUX_STATE="$HOME/.openstate/$REPO_NAME"
   if [ -d "$STATE_DIR" ] && [ ! -L "$STATE_DIR" ]; then
