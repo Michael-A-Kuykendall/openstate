@@ -185,7 +185,7 @@ The capsule is an orientation surface: its non-directive content is capped at 1,
 
 ## Checkpoint discipline
 
-State is never auto-flushed by idle or compaction. Call `openstate_checkpoint` when: the user confirms something is done, a decision is locked in, a blocker is recorded, or you're about to hand off. On app close or a crash, the engine flushes automatically as a last resort — but don't rely on that; checkpoint explicitly.
+State is never auto-flushed by idle or compaction. Call `openstate_checkpoint` when: the user confirms something is done, a decision is locked in, a blocker is recorded, or you're about to hand off. When OpenCode closes, or exits and ends the engine's input, the engine writes state as a last resort — but don't rely on that; checkpoint explicitly.
 
 ---
 
@@ -223,6 +223,4 @@ between the mode marker and the actual config.
 
 ## Reading signals correctly
 
-- A `recurring_failure` is the feature working (root-cause aggregation), not a bug report.
-- `git.diff` events are `git diff --stat` only (files + line counts) — use the commit hash to pull a full diff on demand.
-- Decision/Objective facts store full text (capped 500 chars) only when a reasoning marker is present ("because", "since", "so that", "in order to", "due to"); reasoning-free chatter is skipped. User directives are never filtered this way.
+- A message with a reasoning marker ("because", "since", "so that", "in order to", "due to") becomes a decision, carrying its reasoning clause (up to 280 characters). Other user messages become directives; the rest become objectives.

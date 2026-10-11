@@ -35,7 +35,7 @@ Per-repo, into `.opencode/`:
 - `structural-tools-profile.json` (structural tools mode) and `package.json` (TUI dependency)
 
 ### Does it need Rust/Node to install?
-**No.** The installer downloads a prebuilt binary + plugin bundle. No compiler or Node toolchain required on the target machine.
+No Rust: the installer downloads a prebuilt binary and plugin bundle. It does need Node.js, which it uses to update `.opencode/package.json` and other JSON config.
 
 ### Per-repo or global?
 Per repository by default: the installer writes `.opencode/` and one marked block in `AGENTS.md`, and state goes to `.openstate/`. `--global` installs once under your OpenCode config directory instead.
@@ -120,7 +120,7 @@ Under 1 MB on every platform. Built stripped, with LTO, `panic=abort` and `opt-l
 
 ### Which editors?
 Currently: **OpenCode** (plugin + skill).  
-Future: VS Code, Cursor, Claude Code, Zed — any editor with a plugin API.
+Planned: Claude Code, Kiro and GitHub Copilot in VS Code (see the roadmap).
 
 ### Which OS?
 Linux x86_64 (glibc 2.17 or newer), macOS (Intel and Apple Silicon), Windows x86_64 — via per-platform release bundles. Other platforms are refused by the installer with a clear message.

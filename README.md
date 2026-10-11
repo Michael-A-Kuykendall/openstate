@@ -79,7 +79,7 @@ git clone --depth 1 https://github.com/Michael-A-Kuykendall/openstate.git /tmp/o
 OPENSTATE_CONFIG_DIR=/path/to/other/.opencode /tmp/os/install.sh
 ```
 
-Downloads the prebuilt engine binary + plugin bundle from GitHub Releases, verifies sha256, smoke-tests the engine, and installs the complete bundle into **this repo's** `.opencode/` directory. No compiler or Node toolchain required at install time. openstate is **per-repo**: it only activates in repos that run `install.sh`. Restart OpenCode, done.
+Downloads the prebuilt engine binary + plugin bundle from GitHub Releases, verifies sha256, smoke-tests the engine, and installs the complete bundle into **this repo's** `.opencode/` directory. No compiler is needed; the installer does need Node.js to update the JSON config files. By default openstate is **per-repo**: it only activates in repos that run `install.sh` (`--global` installs it once for every repository). Restart OpenCode, done.
 
 Verify an existing install: `./install.sh --check`
 
@@ -166,7 +166,7 @@ Plus 22 structural tools (AST and text search, bounded reads, references, declar
 
 ### Philosophy
 
-- **Per-repo install** — `install.sh` targets `.opencode/` (not global), so openstate only activates in repos that opt in.
+- **Per-repo by default** — `install.sh` targets the repository's `.opencode/`; `--global` is opt-in.
 - **Deliberate persistence** — state is written on `openstate_checkpoint`, when OpenCode closes, and when the engine's input ends. What a checkpoint wrote survives the engine being killed.
 - **Provenance** — `openstate_why` shows where any fact came from.
 
