@@ -70,7 +70,7 @@ Per repository by default: the installer writes `.opencode/` and one marked bloc
 The skill tells the AI when to use each.
 
 ### What's the "session start ritual"?
-1. `openstate_capsule` — the resume contract (light; `openstate_state` and `openstate_report` are for full detail)
+1. Read the capsule OpenState already put in the context (the resume contract; `openstate_state` and `openstate_report` are for full detail)
 2. Announce to user: "openstate loaded · objective: X · validation stale · branch: main"
 3. `openstate_report` only if something looks broken or stuck
 

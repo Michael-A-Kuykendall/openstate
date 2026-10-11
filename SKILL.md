@@ -35,7 +35,7 @@ OpenState tools are the sanctioned surface for this repo. They are bounded (~8 K
 ## Which procedure do you need?
 
 **A — Continue this session** (default: no specific prior session was named)
-1. `openstate_capsule` once (the frontier views are the resume answer and are light). Avoid `openstate_state`/`openstate_report` unless you need the full fact detail — both compile the whole store and are the single biggest transcript cost.
+1. Read the capsule already in your context (the system part marked `[OPENSTATE-CAPSULE]`, added at the start of the session and after each compaction). Call `openstate_capsule` only if it is missing or you need a fresher one. Avoid `openstate_state`/`openstate_report` unless you need the full fact detail — both compile the whole store and are the single biggest transcript cost.
 2. Announce in one line: objective, in_progress count, validation status, git branch.
 3. If something looks broken/stuck (per the capsule), run `openstate_report`.
 
