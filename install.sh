@@ -84,6 +84,16 @@ say()  { printf '\033[1m%s\033[0m\n' "$*"; }
 ok()   { printf '  \033[32m✓\033[0m %s\n' "$*"; }
 fail() { printf '  \033[31m✗\033[0m %s\n' "$*" >&2; exit 1; }
 
+# openstate-s9bf.27: every mode edits JSON config with node, and the MCP server
+# runs on it. Refuse before anything is downloaded or written.
+if ! command -v node >/dev/null 2>&1; then
+  fail "Node.js 18 or newer is required (the installer uses it to update JSON config, and the MCP server runs on it). Install Node.js, then run this again. Nothing was changed."
+fi
+NODE_MAJOR="$(node -p 'process.versions.node.split(".")[0]' 2>/dev/null || echo 0)"
+if [ "${NODE_MAJOR:-0}" -lt 18 ] 2>/dev/null; then
+  fail "Node.js 18 or newer is required; found $(node --version 2>/dev/null || echo 'an unknown version'). Upgrade Node.js, then run this again. Nothing was changed."
+fi
+
 # version_cmp A B: prints "<" ">" or "=" depending on how A compares to B.
 # Handles leading "v" and dotted numeric versions; unknown/non-numeric sorts
 # below any numeric version so a legacy install reads as "upgradable".
