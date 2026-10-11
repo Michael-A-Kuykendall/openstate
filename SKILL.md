@@ -76,7 +76,7 @@ Outside of A/B — call `openstate_reset` only when the user explicitly wants to
 
 The same 22 structural tools are exposed by the OpenCode plugin and MCP server. Code edits use `openstate_ast_search` first, then preview, then apply. `query_kind=text` provides literal text search for prose and document files, including Markdown, and returns exact spans; text writes still use an exact unique anchor. AST search, symbol navigation, and every symbol preview accept optional `target_directory`; text and create previews accept it too. It is an operation root, not a permission grant: it must be inside the current repository/workspace or an explicitly configured `OPENSTATE_ALLOWED_DIRECTORIES` root, and `scope_path` plus `dest_scope_path` remain relative to it. Applies use only the returned `preview_id` and revalidate the stored root. Omit `target_directory` for normal in-repository work.
 
-Symbol tools take `language` (default `rust`): rust, python, typescript, tsx, javascript, go, c, cpp, java, bash, csharp, kotlin, lua, php, ruby, scala, solidity, swift. `openstate_diagnostics` (cargo) and `openstate_find_implementations` (impl blocks) are Rust only.
+Every symbol tool names its symbol with `target_name` (`target_identifier` and, for `openstate_read_symbol`, `symbol` are older names that still work). Symbol tools take `language` (default `rust`): rust, python, typescript, tsx, javascript, go, c, cpp, java, bash, csharp, kotlin, lua, php, ruby, scala, solidity, swift. `openstate_diagnostics` (cargo) and `openstate_find_implementations` (impl blocks) are Rust only.
 
 | Tool | Purpose |
 |------|---------|
