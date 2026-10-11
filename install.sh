@@ -9,6 +9,7 @@
 #   .opencode/skills/openstate/SKILL.md         AI usage skill
 #   .opencode/bin/openstate-engine              the state engine binary
 #   .opencode/bin/ast-grep                      structural search/edit backend
+#   .opencode/mcp/openstate-mcp.mjs              MCP server for other hosts (Claude Code, Muse, Kiro, Copilot)
 #   .opencode/structural-tools-profile.json     structural tools profile (enforce/shadow/off)
 #   .opencode/package.json (+ deps)             @opentui/solid for the TUI plugin JSX
 #
@@ -172,6 +173,7 @@ AST_GREP_NAME="ast-grep"; [ "$OS" = "windows" ] && AST_GREP_NAME="ast-grep.exe"
 OPENCODE_DIR="$CONFIG_DIR"
 PLUGIN_DIR="$OPENCODE_DIR/plugins"
 SKILL_DIR="$OPENCODE_DIR/skills/openstate"
+MCP_DIR="$OPENCODE_DIR/mcp"
 BIN_DIR="$OPENCODE_DIR/bin"
 VERSION_FILE="$OPENCODE_DIR/VERSION"          # installed bundle tag
 MANIFEST_FILE="$OPENCODE_DIR/BUNDLE.sha256"   # integrity: engine hash at install
@@ -365,6 +367,7 @@ if [ "${1:-}" = "--uninstall" ] || [ "${1:-}" = "uninstall" ]; then
   rm -rf "$PLUGIN_DIR/openstate"
   rm -f "$BIN_DIR/$ENGINE_NAME" "$BIN_DIR/$AST_GREP_NAME"
   rm -rf "$SKILL_DIR"
+  rm -f "$MCP_DIR/openstate-mcp.mjs"; rmdir "$MCP_DIR" 2>/dev/null || true
   rm -f "$PROFILE_FILE" "$VERSION_FILE" "$MANIFEST_FILE"
   # Remove empty dirs we created (plugins/bin/skills + the skills parent) only
   # if now empty.
@@ -392,6 +395,7 @@ if [ "${1:-}" = "--check" ]; then
   [ -x "$BIN_DIR/$ENGINE_NAME" ]             || MISSING="$MISSING openstate-engine"
   [ -x "$BIN_DIR/$AST_GREP_NAME" ]           || MISSING="$MISSING $AST_GREP_NAME"
   [ -f "$SKILL_DIR/SKILL.md" ]               || MISSING="$MISSING SKILL.md"
+  [ -f "$MCP_DIR/openstate-mcp.mjs" ]         || MISSING="$MISSING mcp/openstate-mcp.mjs"
   [ -f "$PROFILE_FILE" ]                    || MISSING="$MISSING structural-tools-profile.json"
   [ -n "$MISSING" ] && fail "incomplete install in $OPENCODE_DIR, missing:$MISSING"
 
@@ -616,7 +620,7 @@ fi
 validate_state_path "$(dirname "$OPENCODE_DIR")"
 
 say "installing to $OPENCODE_DIR"
-mkdir -p "$PLUGIN_DIR" "$SKILL_DIR" "$BIN_DIR"
+mkdir -p "$PLUGIN_DIR" "$SKILL_DIR" "$BIN_DIR" "$MCP_DIR"
 if [ "$INSTALL_SCOPE" = "repo" ]; then
   printf '{"version":1,"scope":"repo"}\n' > "$SCOPE_FILE"
 else
@@ -642,6 +646,7 @@ cp "$TMPDIR/x/plugins/openstate/tui.js"    "$PLUGIN_DIR/openstate/tui.js"
 cp "$TMPDIR/x/bin/$AST_GREP_NAME"         "$BIN_DIR/$AST_GREP_NAME"
 chmod +x "$BIN_DIR/$AST_GREP_NAME"
 cp "$TMPDIR/x/skills/openstate/SKILL.md" "$SKILL_DIR/SKILL.md"
+cp "$TMPDIR/x/mcp/openstate-mcp.mjs"      "$MCP_DIR/openstate-mcp.mjs"
 cp "$TMPDIR/x/structural-tools-profile.json" "$PROFILE_FILE"
 # Guarantee the skill landed with VALID front matter before we call it done.
 skill_is_valid "$SKILL_DIR/SKILL.md" \
@@ -825,6 +830,7 @@ ok "sidebar plugin: .opencode/plugins/openstate/tui.js (auto-discovered)"
 ok "skill:          .opencode/skills/openstate/SKILL.md"
 ok "engine:         .opencode/bin/$ENGINE_NAME"
 ok "ast-grep:       .opencode/bin/$AST_GREP_NAME"
+ok "MCP server:     .opencode/mcp/openstate-mcp.mjs (for other hosts; see README)"
 ok "profile:        $STRUCTURAL_MODE"
 ok "package.json:   .opencode/package.json (deps installed)"
 
