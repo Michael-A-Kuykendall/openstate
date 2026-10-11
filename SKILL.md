@@ -28,7 +28,7 @@ OpenState tools are the sanctioned surface for this repo. They are bounded (~8 K
 
 ## THE RULE — read this before calling anything
 
-**`openstate_state`, `openstate_capsule`, `openstate_report`, and `openstate_why` always compile the ENTIRE current store — every session ever recorded to it, not one session.** There is no per-session filter on these reads. This is the single fact that determines which procedure below you need.
+**`openstate_state`, `openstate_capsule`, `openstate_report`, and `openstate_why` compile the ENTIRE current store — every session ever recorded to it, not one session.** The one exception: in the capsule and report, user directives and in-progress work from OTHER sessions are left out, so another session's unfinished task never becomes yours. Decisions, failures and completed work from every session always show. This is the single fact that determines which procedure below you need.
 
 ---
 
@@ -148,7 +148,7 @@ Text-edit refusals carry evidence: `ambiguous_anchor` lists every match `offset`
 
 `current_task` and the first `user_priorities` entry use one ordering: highest score, then latest timestamp, then the most recently recorded directive. Report and capsule compute the cursor the same way and return identical output for an unchanged store.
 
-Fact counts differ on purpose and add up: `openstate_doctor` reports `live_facts` (every fact in the store) and `closed_audit` (close bookkeeping records); `openstate_state` reports `total` = `live_facts` - `closed_audit`; `openstate_report` reports `total_live` (facts in the requesting session's scope) and `scoped_out` (other sessions' facts), with `total_live` + `scoped_out` = state `total`.
+Fact counts differ on purpose and add up: `openstate_doctor` reports `live_facts` (every fact in the store) and `closed_audit` (close bookkeeping records); `openstate_state` reports `total` = `live_facts` - `closed_audit`; `openstate_report` reports `total_live` (facts it shows) and `scoped_out` (other sessions' directives and in-progress work it leaves out), with `total_live` + `scoped_out` = state `total`.
 
 The capsule is an orientation surface: its non-directive content is capped at 1,500 serialized bytes, retaining the newest selected objective and decision as bounded entries. User directives are never shortened; the report and timeline remain the pulled diagnostic surfaces for complete detail.
 
