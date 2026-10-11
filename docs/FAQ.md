@@ -75,7 +75,7 @@ The skill tells the AI when to use each.
 3. `openstate_report` only if something looks broken or stuck
 
 ### What is a capsule?
-A 1,000–5,000 token structured JSON contract injected at session start. Contains:
+A structured JSON contract injected at session start, a few hundred tokens (median about 500, at most about 1,600 across 21 real project stores). Contains:
 - **Resume cursor**: current task, active files, last action, blocker, next action
 - **Validation**: test status, edits since green, stale/failed/current
 - **Change frontier**: modified/added/deleted files, uncommitted status

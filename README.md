@@ -61,7 +61,7 @@ Converts observations into live project facts with continuous derivation, automa
 
 ### 3. Resume Capsule
 
-A structured continuation contract injected automatically on new sessions and compaction — 1,000–5,000 tokens carrying the exact state needed to resume work.
+A structured continuation contract injected automatically on new sessions and compaction — a few hundred tokens (median about 500, at most about 1,600 across 21 real project stores), carrying the state needed to resume work.
 
 ---
 

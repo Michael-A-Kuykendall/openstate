@@ -44,7 +44,7 @@ Symptoms everyone knows:
 Events (messages, tool calls, file edits, todos, git, …) flow continuously into a local engine.  
 The engine maintains **current project truth** — not a transcript.
 
-Next session receives a **1,000–5,000-token resume capsule** (structured continuation contract) instead of a lossy summary.
+Next session receives a **resume capsule** of a few hundred tokens (structured continuation contract) instead of a lossy summary.
 
 ### Key Properties
 - Continuously derived facts with automatic retraction
@@ -56,15 +56,15 @@ Next session receives a **1,000–5,000-token resume capsule** (structured conti
 
 ## The Numbers
 
+Measured on the maintainer's own projects, August to October 2026:
+
 | Metric | Value |
 |--------|-------|
-| **Facts tracked** | **60,732** |
-| **Self-corrections** | **30,007** |
-| **Commands tracked** | 16,457 |
-| **Work completed** | 10,346 |
-| **Crashes recovered** | **14** → **0 work lost** |
-| **Capsules generated** | 30 |
-| **Assessments run** | 71 |
+| OpenState tool uses in OpenCode | 35,579 |
+| Sessions that used it | 243 |
+| Projects | 20 |
+| Records held in project stores now | 82,586 |
+| Median resume capsule | about 500 tokens |
 
 ---
 
@@ -77,7 +77,7 @@ Captures the live event stream from OpenCode.
 Turns observations into live, retractable project facts with full provenance.
 
 ### 3. Resume Capsule
-Structured continuation contract injected automatically — 1,000–5,000 tokens of exact state.
+Structured continuation contract injected automatically: a few hundred tokens (median about 500, at most about 1,600 across 21 real project stores).
 
 ---
 
