@@ -221,6 +221,7 @@ Plus 22 structural tools (AST and text search, bounded reads, references, declar
 | [SKILL.md](SKILL.md) | AI usage skill |
 | [docs/FAQ.md](docs/FAQ.md) | Frequently asked questions |
 | [docs/TRUST.md](docs/TRUST.md) | What survives a crash, failure modes, uninstall and purge |
+| [docs/VERSIONING.md](docs/VERSIONING.md) | What counts as a breaking change; state compatibility |
 
 ---
 
