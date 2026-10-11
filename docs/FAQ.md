@@ -71,7 +71,7 @@ The skill tells the AI when to use each.
 
 ### What are the structural tools for?
 
-Reading, searching and editing code by definition instead of by whole file. The agent searches for a name with `openstate_ast_search`, reads just that function or type with `openstate_read_symbol`, and changes it through a preview and an apply. A preview writes nothing; an apply writes only what its preview showed, once, and is refused if the file changed underneath it. See [Structural tools](STRUCTURAL-TOOLS.md).
+Reading, searching and editing code by definition instead of by whole file. The agent searches for a name with `openstate_ast_search`, reads just that function or type with `openstate_read_symbol`, and changes it through a preview and an apply. A preview writes nothing; an apply writes only what its preview showed, once, and is refused if the file changed so that the previewed change no longer fits. See [Structural tools](STRUCTURAL-TOOLS.md).
 
 ### Do the structural tools save tokens?
 
