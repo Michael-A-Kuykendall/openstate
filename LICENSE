@@ -1,28 +1,38 @@
-Proprietary — All Rights Reserved
+Proprietary license — OpenState engine
 
 Copyright (c) 2026 Michael A. Kuykendall
 
-This software and its associated documentation files (the "Software") are
-proprietary and confidential. The Software is licensed, not sold, and is
-protected by copyright laws and international copyright treaties.
+The OpenState engine (the openstate-engine binary, the "Engine") is
+proprietary. It is licensed, not sold. These terms are also published at
+https://michael-a-kuykendall.github.io/openstate/terms.html
 
-NO RIGHTS ARE GRANTED to use, copy, modify, merge, publish, distribute,
-sublicense, or create derivative works of the Software except as expressly
-authorized in writing by the copyright holder.
+1. Grant. If you have bought an OpenState license, you (one named developer)
+   may install and use the Engine on any number of machines and repositories
+   you work on, for personal or commercial work, for every 0.x release. The
+   license is personal: it does not transfer to another person. A team buys
+   one license per developer.
 
-The engine binary (openstate-engine) is distributed under a separate
-End-User License Agreement (EULA). Commercial licensing for embedding the
-engine in other products is available — contact
-michaelallenkuykendall@gmail.com for terms.
+2. Restrictions. You may not redistribute, sublicense, sell or rent the
+   Engine, embed it in another product or hosted service, or reverse engineer
+   it except where applicable law allows this despite this restriction. A
+   commercial license for embedding is available from
+   michaelallenkuykendall@gmail.com.
 
-The surface components distributed in the public repository — documentation,
-skill definition (SKILL.md), installer script (install.sh), and plugin
-bundle — are licensed under the MIT License (see PUBLIC-LICENSE).
+3. Honor system. The Engine does not check for a license and makes no network
+   calls. Using it without a license is not permitted by these terms.
 
-THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+4. Refund. Within 30 days of purchase you may ask for a full refund, with no
+   reason required (see https://michael-a-kuykendall.github.io/openstate/refund.html).
+   Your license ends when the refund is issued.
+
+5. Public components. The documentation, skill (SKILL.md), installer
+   (install.sh) and plugin bundle are licensed under the MIT License (see
+   PUBLIC-LICENSE), not under these terms.
+
+THE ENGINE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+OUT OF OR IN CONNECTION WITH THE ENGINE OR THE USE OR OTHER DEALINGS IN THE
+ENGINE.

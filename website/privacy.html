@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Privacy — OpenState</title>
+<meta name="description" content="OpenState privacy: the software collects nothing; buying it shares your name and email with Stripe and Keygen." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Commissioner:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="logo-header.jpg" alt="OpenState logo" />
+    </a>
+    <nav class="nav">
+      <a href="index.html#install">Install</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="license.html">License</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="shell">
+    <p class="eyebrow">Privacy</p>
+    <h1>The software collects nothing.</h1>
+    <p class="hero-lede">OpenState runs on your machine and sends nothing anywhere. The only personal data involved is what buying it takes.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="shell">
+    <h2>The software</h2>
+    <ul class="tick-list">
+      <li>The engine and plugin make no network calls and send no telemetry.</li>
+      <li>What OpenState records stays in <code>.openstate/</code> inside your repository. It can include your messages, the commands the agent runs and file paths, so treat it like shell history.</li>
+      <li>The installer downloads the release from GitHub; GitHub sees that request.</li>
+    </ul>
+    <h2>Buying it</h2>
+    <ul class="tick-list">
+      <li>Stripe processes the payment. Card details go to Stripe and are never seen by the seller.</li>
+      <li>Stripe shares your name and email with the seller. Keygen stores your license with that email.</li>
+      <li>A small Cloudflare worker connects Stripe to Keygen. It keeps the id of each Stripe event it handles for one day, so a payment is never turned into two licenses, and stores nothing else.</li>
+      <li>Your email is used only to issue your license, handle refunds and answer support. It is not sold or used for marketing.</li>
+    </ul>
+    <h2>This website</h2>
+    <p class="lede">The site is hosted on GitHub Pages and loads fonts from Google Fonts, so GitHub and Google see your visit. It sets no cookies and runs no analytics.</p>
+    <h2>Deleting your data</h2>
+    <p class="lede">Email michaelallenkuykendall@gmail.com to have your Keygen record deleted. Stripe keeps payment records as the law requires.</p>
+    <p><a class="btn btn-primary" href="pricing.html">Pricing</a> <a class="btn btn-ghost" href="terms.html">Terms</a></p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <span class="footer-brand">OpenState</span>
+    <span class="footer-tag">Local software, sold once</span>
+    <span class="footer-links"><a href="index.html">Home</a> &middot; <a href="pricing.html">Pricing</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="refund.html">Refunds</a> &middot; <a href="privacy.html">Privacy</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
