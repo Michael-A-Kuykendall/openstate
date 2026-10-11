@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OpenState Code Tools</title>
+<meta name="description" content="OpenState's structural tools let a coding agent search for a definition, read just that definition, and change it through a preview checked before anything is written." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="logo-header.jpg" alt="OpenState logo" />
+    </a>
+    <nav class="nav">
+      <a href="index.html">State</a>
+      <a href="structural-tools.html" aria-current="page">Code tools</a>
+      <a href="#proof">Results</a>
+      <a href="#guarantees">Guarantees</a>
+      <a href="#weaknesses">Weaknesses</a>
+      <a href="index.html#install">Install</a>
+      <a href="pricing.html">Pricing</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="shell">
+    <p class="eyebrow">OpenState code tools &mdash; 22 tools, 18 languages, in every install</p>
+    <h1>Read the <em>function</em>, not the file.</h1>
+    <p class="hero-lede">A coding agent with only a file reader works in whole files: it reads the file to change one function, reads it again when the line numbers move, and edits text it matched by eye. OpenState&rsquo;s structural tools let it search for a definition, read just that definition, and change it through a preview it can check before anything is written.</p>
+    <div class="flow"><span>openstate_ast_search</span><span class="arrow">&rarr;</span><span>openstate_read_symbol</span><span class="arrow">&rarr;</span><span class="signal">preview</span><span class="arrow">&rarr;</span><span class="signal">apply</span></div>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="index.html#install">Install</a>
+      <a class="btn btn-ghost" href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/STRUCTURAL-TOOLS.md" target="_blank" rel="noopener">Read the reference</a>
+      <a class="btn btn-link" href="pricing.html">$49 per developer, once &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="proof">
+  <div class="shell">
+    <p class="eyebrow">Early results from the maintainer&rsquo;s projects</p>
+    <h2>A definition is a small part of its file.</h2>
+    <ul class="metrics">
+      <li><span class="metric-num">97%</span><span class="metric-label">less data reading one function from a 63 KB file, in one measured case</span></li>
+      <li><span class="metric-num">1.3 KB</span><span class="metric-label">a definition read, against about 8.6 KB for an average file read</span></li>
+      <li><span class="metric-num">22</span><span class="metric-label">tools: search, read, navigate, and preview/apply edits</span></li>
+      <li><span class="metric-num">18</span><span class="metric-label">languages with symbol support; text tools work in any file</span></li>
+    </ul>
+    <p class="lede">These are bytes returned per read in the maintainer&rsquo;s sessions, not a measured saving on your token bill: how small a definition is next to its file depends on the code, and a careful agent can also read a range of lines. A measurement across matched tasks and hosts is in progress and will be published with its method.</p>
+  </div>
+</section>
+
+<section class="band" id="compare">
+  <div class="shell">
+    <p class="eyebrow">The difference</p>
+    <h2>Units of code instead of files and line numbers.</h2>
+    <table class="tool-table problem-table compare-table">
+      <tbody>
+        <tr><td><strong>The agent needs to</strong></td><td><strong>With a file reader and a text editor</strong></td><td><strong>With OpenState&rsquo;s code tools</strong></td></tr>
+        <tr><td>Find code</td><td>Grep output, or files opened to look</td><td>Each match with its file and line, for a definition, an identifier or literal text</td></tr>
+        <tr><td>Read one function</td><td>The whole file, or a range of lines it has to guess</td><td>That complete function, and nothing else in the file</td></tr>
+        <tr><td>Change it</td><td>Rewrite text it matched by eye</td><td>A preview showing the change, then an apply that writes only that change</td></tr>
+        <tr><td>Cope with a file that changed</td><td>Depends on the editor: some ask for a fresh read, others write over the change</td><td>Refuses a preview that no longer fits; applies a text edit whose anchor is still unique and says so</td></tr>
+        <tr><td>Cope with two matches</td><td>Asks for more surrounding text; the agent has to find the matches itself</td><td>Refuses, and lists every match so the agent can choose</td></tr>
+        <tr><td>Make a one-line edit</td><td>1 call</td><td>3 calls: search, preview, apply</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="band alt" id="how">
+  <div class="shell">
+    <p class="eyebrow">How the agent uses them</p>
+    <h2>Find, read, preview, apply.</h2>
+    <div class="steps">
+      <div class="step"><span class="step-num">01 FIND</span><h3>Search</h3><p><code>openstate_ast_search</code> for the name or the text. The answer is a list of places, not file contents.</p></div>
+      <div class="step"><span class="step-num">02 READ</span><h3>Read one unit</h3><p><code>openstate_read_symbol</code> for a definition, <code>openstate_read_text_region</code> for prose and configuration.</p></div>
+      <div class="step"><span class="step-num">03 PREVIEW</span><h3>See the change</h3><p>The matching preview tool returns the planned change and an identity. It writes nothing.</p></div>
+      <div class="step"><span class="step-num">04 APPLY</span><h3>Write it once</h3><p>The apply tool writes exactly what the preview showed, and refuses a second use of the same identity.</p></div>
+    </div>
+    <p class="lede">The skill and the MCP server&rsquo;s instructions tell the agent this order. In OpenCode you can go further: installing with <code>OPENSTATE_STRUCTURAL_TOOLS=enforce</code> denies the built-in read, grep and edit tools so every read and edit goes through the structural tools.</p>
+  </div>
+</section>
+
+<section class="band" id="guarantees">
+  <div class="shell">
+    <p class="eyebrow">What the write path guarantees</p>
+    <h2>Refusal instead of damage.</h2>
+    <ul class="tick-list">
+      <li><strong>Nothing is written by a preview.</strong> Only an apply writes, and only the change its preview showed.</li>
+      <li><strong>Each preview applies once.</strong> A second apply of the same identity is refused as <code>already_consumed</code>.</li>
+      <li><strong>A stale preview is refused, not forced.</strong> If the file changed so the previewed change no longer fits, the apply is refused as <code>stale_files</code>.</li>
+      <li><strong>An ambiguous target is refused.</strong> When text matches more than once, the refusal lists every match.</li>
+      <li><strong>A replacement must be one definition.</strong> A symbol replacement that does not parse as a single definition of the right kind is refused before anything is written, with the reason.</li>
+      <li><strong>TypeScript and JavaScript exports stay intact.</strong> Replacing an exported function keeps its <code>export</code> keyword, and deleting one removes the keyword with it.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="band alt" id="tools">
+  <div class="shell">
+    <p class="eyebrow">The tools</p>
+    <div class="toolgroup">
+      <h3 class="toolgroup-head">Find and read</h3>
+      <table class="tool-table">
+        <tbody>
+          <tr><td><code>openstate_ast_search</code></td><td>Definitions, identifiers or literal text, each match with file and line</td></tr>
+          <tr><td><code>openstate_read_symbol</code></td><td>One complete definition from one file</td></tr>
+          <tr><td><code>openstate_read_text_region</code></td><td>A bounded region around a unique piece of text</td></tr>
+          <tr><td><code>openstate_symbol_overview</code></td><td>The symbols in a file or directory</td></tr>
+          <tr><td><code>openstate_find_declaration</code></td><td>Where a name is declared</td></tr>
+          <tr><td><code>openstate_find_referencing_symbols</code></td><td>Declarations and references of a name</td></tr>
+          <tr><td><code>openstate_find_implementations</code></td><td>Rust <code>impl</code> blocks for a type or trait</td></tr>
+          <tr><td><code>openstate_diagnostics</code></td><td>The repository&rsquo;s Rust <code>cargo check</code> for one file</td></tr>
+        </tbody>
+      </table>
+      <h3 class="toolgroup-head">Change, each as a preview and an apply</h3>
+      <table class="tool-table">
+        <tbody>
+          <tr><td><code>openstate_edit_symbol</code></td><td>Replace a whole definition, or rename it</td></tr>
+          <tr><td><code>openstate_insert_symbol</code></td><td>Insert a definition before or after another</td></tr>
+          <tr><td><code>openstate_delete_symbol</code></td><td>Delete a definition by its syntax-tree boundary</td></tr>
+          <tr><td><code>openstate_move_symbol</code></td><td>Move a definition to another place or file</td></tr>
+          <tr><td><code>openstate_rename_symbol</code></td><td>Rename an identifier across its matches</td></tr>
+          <tr><td><code>openstate_edit_text</code></td><td>Replace a unique piece of text in any text file</td></tr>
+          <tr><td><code>openstate_create_file</code></td><td>Create a file that does not exist yet</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lede">Symbol tools work in Rust, Python, TypeScript (including TSX), JavaScript, Go, C, C++, Java, C#, Bash, Haskell, Kotlin, Lua, PHP, Ruby, Scala, Solidity and Swift. Built on <a href="https://ast-grep.github.io/" target="_blank" rel="noopener">ast-grep</a>, which the installer bundles. In OpenCode they come through the plugin; in Claude Code, Muse, Kiro, GitHub Copilot and other MCP hosts, through the bundled MCP server.</p>
+  </div>
+</section>
+
+<section class="band" id="weaknesses">
+  <div class="shell">
+    <p class="eyebrow">Known weaknesses</p>
+    <h2>Where they cost more.</h2>
+    <ul class="tick-list">
+      <li><strong>A small edit costs more calls.</strong> Search, preview and apply are three calls where a direct editor uses one. For a one-line change inside a long function, a text edit is cheaper than replacing the whole definition.</li>
+      <li><strong>Searches are the heaviest read.</strong> A search with many matches can return several kilobytes; a language, a path or an exact name narrows it.</li>
+      <li><strong>Matching is by syntax, not by type.</strong> References and renames match names in the syntax tree; they do not resolve types the way a compiler or language server does.</li>
+      <li><strong>No measured token saving yet.</strong> The figures above are bytes per read in the maintainer&rsquo;s sessions.</li>
+    </ul>
+    <p class="lede"><a href="index.html">The other half of OpenState</a>: a running record of the project&rsquo;s decisions, failures and blockers, given to the agent at the start of every session.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <span class="footer-brand">OpenState</span>
+    <span class="footer-tag">Local software, sold once</span>
+    <span class="footer-links"><a href="pricing.html">Pricing</a> &middot; <a href="license.html">License</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="refund.html">Refunds</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">GitHub</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

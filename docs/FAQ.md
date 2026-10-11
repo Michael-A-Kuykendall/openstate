@@ -69,6 +69,18 @@ Per repository by default: the installer writes `.opencode/` (and, only if you t
 
 The skill tells the AI when to use each.
 
+### What are the structural tools for?
+
+Reading, searching and editing code by definition instead of by whole file. The agent searches for a name with `openstate_ast_search`, reads just that function or type with `openstate_read_symbol`, and changes it through a preview and an apply. A preview writes nothing; an apply writes only what its preview showed, once, and is refused if the file changed underneath it. See [Structural tools](STRUCTURAL-TOOLS.md).
+
+### Do the structural tools save tokens?
+
+Per read, they return less: in one measured case, reading a complete function from a 63 KB file returned 97% less data than reading the file. Whether a whole session costs fewer tokens has not been measured yet, and a small edit takes three calls (search, preview, apply) where a direct editor takes one.
+
+### Can the agent still use its own read and edit tools?
+
+Yes, by default. The skill and the MCP server's instructions ask the agent to prefer the structural tools for code, and nothing is disabled. In OpenCode you can opt in to more: installing with `OPENSTATE_STRUCTURAL_TOOLS=enforce` denies the built-in read, grep and edit tools, so reads and edits go through the structural tools; `OPENSTATE_STRUCTURAL_TOOLS=off` undoes it.
+
 ### What's the "session start ritual"?
 1. Read the capsule OpenState already put in the context (the resume contract; `openstate_state` and `openstate_report` are for full detail)
 2. Announce to user: "openstate loaded · objective: X · validation stale · branch: main"

@@ -42,6 +42,12 @@ Developers running long coding-agent sessions in OpenCode who want each new sess
 
 ---
 
+## Reading, searching and editing code
+
+OpenState also ships 22 code tools, built on ast-grep, that let the agent work in definitions instead of whole files: search for a name, read just that function or type, and change it through a preview that is checked before anything is written. In one measured case, reading a complete function from a 63 KB file returned 97% less data than reading the file. That is bytes per read in the maintainer's projects, not a measured token saving; see [Structural tools](STRUCTURAL-TOOLS.md) for the tools, the guarantees of the write path, the 18 supported languages and the known weaknesses.
+
+---
+
 ## The Numbers
 
 Measured on the maintainer's own projects, August to October 2026:
