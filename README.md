@@ -108,6 +108,8 @@ Downloads the prebuilt engine binary + plugin bundle from GitHub Releases, verif
 
 Verify an existing install: `./install.sh --check`
 
+Remove it with `./install.sh --uninstall` (keeps `.openstate/` state) or `./install.sh --purge` (deletes it too). What survives a crash: [docs/TRUST.md](docs/TRUST.md).
+
 State lives per-project in `.openstate/state.jsonl`. Read it through the tools (`openstate_state`, `openstate_export`), not the file: its format is internal and may change.
 
 ---
@@ -194,6 +196,7 @@ Plus 22 structural tools (AST and text search, bounded reads, references, declar
 | [SPONSORS.md](SPONSORS.md) | Sponsor tiers & recognition |
 | [SKILL.md](SKILL.md) | AI usage skill |
 | [docs/FAQ.md](docs/FAQ.md) | Frequently asked questions |
+| [docs/TRUST.md](docs/TRUST.md) | What survives a crash, failure modes, uninstall and purge |
 
 ---
 

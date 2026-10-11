@@ -25,7 +25,7 @@
 #   OPENSTATE_VERSION=v0.1.0 ./install.sh                    # pin a version
 #   ./install.sh --check                                     # verify install
 #   ./install.sh --uninstall                                 # remove openstate (preserves .openstate/ state)
-#   ./install.sh --purge                                     # (planned) uninstall + delete state
+#   ./install.sh --purge                                     # uninstall + delete this repo's .openstate/ state
 #
 # Private repos: set GH_TOKEN (or GITHUB_TOKEN) to authenticate the download.
 set -euo pipefail
@@ -307,7 +307,43 @@ stop_lock_holder_engines() {
 # backup when present. NEVER touches user state in .openstate/ (that requires
 # --purge). Leaves unrelated repo files untouched. Idempotent: exit 0 if
 # nothing is installed.
-if [ "${1:-}" = "--uninstall" ] || [ "${1:-}" = "uninstall" ]; then
+# openstate-s9bf.11: --purge is uninstall plus deleting this repository's
+# state. It follows a symlink or pointer file to the real state directory, and
+# deletes a target only if it holds state.jsonl or is empty (never $HOME or /).
+purge_state() {
+  local link="$1" target=""
+  if [ -L "$link" ]; then
+    target="$(cd "$link" 2>/dev/null && pwd -P)"
+  elif [ -f "$link" ]; then
+    target="$(head -n 1 "$link" | tr -d '\r' | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')"
+    case "$target" in /*|[A-Za-z]:[\\/]*) ;; ?*) target="$(dirname "$link")/$target" ;; esac
+    [ -d "$target" ] && target="$(cd "$target" && pwd -P)" || target=""
+  elif [ -d "$link" ]; then
+    target="$(cd "$link" && pwd -P)"
+  else
+    say "  no .openstate/ state to delete"
+    return 0
+  fi
+  if [ -n "$target" ]; then
+    case "$target" in
+      /|"$HOME"|"$(cd "$HOME" && pwd -P)") fail "refusing to delete $target named by $link; remove the state yourself" ;;
+    esac
+    if [ -e "$target/state.jsonl" ] || [ -z "$(ls -A "$target" 2>/dev/null)" ]; then
+      rm -rf "$target"
+      say "  deleted state: $target"
+    else
+      fail "$target (named by $link) does not look like OpenState state (no state.jsonl); not deleting it"
+    fi
+  fi
+  rm -rf "$link" 2>/dev/null || true
+}
+
+PURGE=0
+if [ "${1:-}" = "--purge" ] || [ "${1:-}" = "purge" ]; then
+  [ "${GLOBAL_MODE:-0}" = 1 ] && fail "--purge deletes one repository's state; run it in that repository without --global"
+  PURGE=1
+fi
+if [ "${1:-}" = "--uninstall" ] || [ "${1:-}" = "uninstall" ] || [ "$PURGE" = 1 ]; then
   say "uninstalling openstate from $OPENCODE_DIR"
 
   # Restore the pre-profile opencode.jsonc if enforce/shadow left a backup.
@@ -391,13 +427,12 @@ if [ "${1:-}" = "--uninstall" ] || [ "${1:-}" = "uninstall" ]; then
 
   say "done — openstate removed from $OPENCODE_DIR"
   say "  removed: plugins, skill, engine, ast-grep, profile, manifest, and marked AGENTS instructions"
-  say "  note: user state in .openstate/ was preserved. To delete it too: $0 --purge"
+  if [ "$PURGE" = 1 ]; then
+    purge_state "$(dirname "$OPENCODE_DIR")/.openstate"
+  else
+    say "  note: user state in .openstate/ was preserved. To delete it too: $0 --purge"
+  fi
   exit 0
-fi
-
-if [ "${1:-}" = "--purge" ] || [ "${1:-}" = "purge" ]; then
-  echo "ERROR: --purge is not implemented yet; it would delete .openstate/ state." >&2
-  exit 1
 fi
 
 # ---------- check mode (verifies an installed bundle; NO network) ----------

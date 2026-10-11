@@ -1,0 +1,34 @@
+# What happens when things go wrong
+
+What OpenState does with your project state, what survives a crash, and how to remove it. Every behavior below is checked by a test in the release exam.
+
+## Where state lives
+
+One directory per repository: `.openstate/` at the repository root (or wherever a symlink or a pointer file there sends it; a pointer file's first line is the path, relative to the repository if it is not absolute). Nothing is written anywhere else, and nothing leaves the machine: the engine and plugin make no network calls.
+
+## When state is written
+
+State is written at three moments: when the agent calls `openstate_checkpoint`, when OpenCode closes, and when the engine's input ends (OpenCode exited). There is no timed background write. Each write goes to a temporary file that is flushed to disk and then renamed over `state.jsonl`, so the file on disk is always either the previous complete state or the new complete state.
+
+**What survives a hard kill:** everything the last write saved. Work recorded after that write and before the kill is lost. If you want something kept now, ask the agent to checkpoint.
+
+## Failure modes
+
+| What happens | What OpenState does |
+|---|---|
+| The engine is killed hard (`kill -9`, power loss) | The last written state loads on the next start; events after it are lost. |
+| A write is interrupted halfway | The leftover `state.jsonl.tmp` is ignored; the last complete `state.jsonl` loads, and the next write replaces the temporary file. |
+| `state.jsonl` is damaged and cannot be read | The engine moves it to `state.jsonl.corrupt-<time>` unchanged, says so, and starts with empty state. It never writes over the damaged file. If it cannot move the file aside, it refuses to start. |
+| Two engines open the same repository | The second one reads the state but runs in memory and refuses to write, with a message naming the first engine's process; the first engine's state is untouched. |
+| The state directory is not writable | The engine reports that it cannot create its lock file there and runs in memory; nothing is written. |
+| The disk is full | The write fails with "No space left on device"; the previous `state.jsonl` stays intact, no partial temporary file or lock file is left behind, and writing works again once space is freed. |
+
+## Removing it
+
+- `./install.sh --uninstall` removes OpenState from the repository (plugin, skill, engine, ast-grep, MCP server, profile, and its block in `AGENTS.md`) and **keeps** `.openstate/`, so reinstalling picks up where you left off.
+- `./install.sh --purge` does the same and also deletes `.openstate/`. When `.openstate` is a symlink or pointer file, it deletes the directory it names, but only if that directory holds `state.jsonl` or is empty.
+- `openstate_reset` clears the recorded state without uninstalling.
+
+## Reporting a security problem
+
+See [SECURITY.md](../SECURITY.md): GitHub Security Advisories on this repository, or email michaelallenkuykendall@gmail.com.

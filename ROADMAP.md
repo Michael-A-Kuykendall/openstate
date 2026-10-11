@@ -11,7 +11,6 @@ What ships is listed in [CHANGELOG.md](CHANGELOG.md): the OpenCode extension (14
 ## ⬜ Planned
 
 - ⬜ **Session hooks for other hosts** — Claude Code, Kiro and GitHub Copilot in VS Code already work through the bundled MCP server; hooks would put the capsule into their context automatically, as OpenCode does.
-- ⬜ **`--purge`** — uninstall that also deletes the `.openstate/` state (today uninstall keeps it, and `--purge` refuses).
 
 ## 💡 Proposals (not yet scoped)
 

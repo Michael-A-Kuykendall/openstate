@@ -23,10 +23,11 @@ The first public release: an OpenCode extension, installed per repository, with 
 - **Frontier views** in capsule and report — resume cursor, validation status (with a hint when nothing has been verified yet), and the git change frontier. Report and capsule are deterministic and agree on the current task.
 - **Sidebar status line and completion toasts** in the OpenCode TUI, with `openstate_toast` to turn toasts off per project.
 - **MCP server** for every other host (Claude Code, Muse, Kiro, GitHub Copilot in VS Code), shipped in the bundle as one file, `mcp/openstate-mcp.mjs`; 34 tools (all but `openstate_restart` and `openstate_toast`).
-- **Installer** — per-repository or `--global`; sha256 verification and an engine smoke test before anything is written; `--check`; `--uninstall` keeps `.openstate/` state and your own config; clear refusal on platforms without a prebuilt bundle.
+- **Installer** — per-repository or `--global`; sha256 verification and an engine smoke test before anything is written; `--check`; `--uninstall` keeps `.openstate/` state and your own config; `--purge` also deletes the state; clear refusal on platforms without a prebuilt bundle.
 
 ### Security
 - The engine and plugin make no network calls; state stays on disk in the repository.
+- A state file that cannot be read is moved aside unchanged, never overwritten; a full disk or an unwritable state directory is reported as such and leaves the previous state intact (`docs/TRUST.md`).
 - Release assets are verified by sha256 before install; the engine binary is stripped.
 
 ### License

@@ -109,7 +109,7 @@ When a later event contradicts or completes something (a fix lands, a decision i
 No — the binary is proprietary (EULA). The surface (docs, skill, installer, plugin) is MIT. Commercial embedding licenses available.
 
 ### How does crash recovery work?
-State is written to disk at three points: an explicit `openstate_checkpoint`, OpenCode closing, and the engine's input ending. There is no timed background flush, so a hard kill loses what happened since the last write; what was written survives.
+State is written to disk at three points: an explicit `openstate_checkpoint`, OpenCode closing, and the engine's input ending. There is no timed background flush, so a hard kill loses what happened since the last write; what was written survives. The full list of failure modes is in [TRUST.md](TRUST.md).
 
 ### What's the binary size?
 Under 1 MB on every platform. Built stripped, with LTO, `panic=abort` and `opt-level=z`.
