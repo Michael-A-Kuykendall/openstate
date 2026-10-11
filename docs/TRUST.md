@@ -8,7 +8,7 @@ One directory per repository: `.openstate/` at the repository root (or wherever 
 
 ## When state is written
 
-State is written at three moments: when the agent calls `openstate_checkpoint`, when OpenCode closes, and when the engine's input ends (OpenCode exited). There is no timed background write. Each write goes to a temporary file that is flushed to disk and then renamed over `state.jsonl`, so the file on disk is always either the previous complete state or the new complete state.
+State is written when the agent calls `openstate_checkpoint`, when OpenCode closes (it ends its plugins with a termination signal, and the engine saves before it exits), and when the engine's input ends. There is no timed background write. On Windows a forced end cannot be caught, so there state is saved by checkpoints and by a clean close of the plugin. Each write goes to a temporary file that is flushed to disk and then renamed over `state.jsonl`, so the file on disk is always either the previous complete state or the new complete state.
 
 **What survives a hard kill:** everything the last write saved. Work recorded after that write and before the kill is lost. If you want something kept now, ask the agent to checkpoint.
 
@@ -16,6 +16,7 @@ State is written at three moments: when the agent calls `openstate_checkpoint`, 
 
 | What happens | What OpenState does |
 |---|---|
+| OpenCode exits, or the engine gets SIGTERM, SIGINT or SIGHUP (Linux, macOS) | The engine saves what it has, releases its lock and exits. |
 | The engine is killed hard (`kill -9`, power loss) | The last written state loads on the next start; events after it are lost. |
 | A write is interrupted halfway | The leftover `state.jsonl.tmp` is ignored; the last complete `state.jsonl` loads, and the next write replaces the temporary file. |
 | `state.jsonl` is damaged and cannot be read | The engine moves it to `state.jsonl.corrupt-<time>` unchanged, says so, and starts with empty state. It never writes over the damaged file. If it cannot move the file aside, it refuses to start. |
