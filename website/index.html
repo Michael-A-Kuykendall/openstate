@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>OpenState — project state for coding agents in OpenCode</title>
+<title>OpenState — persistent project state and safe code operations for coding agents</title>
 <meta name="description" content="OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,7 +43,7 @@
         <a class="btn btn-ghost" href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">View on GitHub</a>
         <a class="btn btn-link" href="pricing.html">$49 per developer, once &rarr;</a>
       </div>
-      <p class="hero-tags">OpenCode extension &nbsp;/&nbsp; Local &nbsp;/&nbsp; No network calls &nbsp;/&nbsp; Linux, macOS, Windows</p>
+      <p class="hero-tags">Coding agents &nbsp;/&nbsp; Local &nbsp;/&nbsp; No runtime network calls &nbsp;/&nbsp; Linux, macOS, Windows</p>
     </div>
     <div class="hero-mark">
       <img class="hero-logo" src="logo-md.jpg" alt="OpenState logotype rendered on a cube" />
@@ -129,40 +129,10 @@
 
 <section class="band" id="tools">
   <div class="shell">
-    <p class="eyebrow">The AI&rsquo;s toolkit &mdash; 14 state tools, plus 22 structural tools</p>
-    <h2>State tools</h2>
-    <div class="toolgroup">
-      <h3 class="toolgroup-head">Read the state</h3>
-      <table class="tool-table">
-        <tbody>
-          <tr><td><code>openstate_state</code></td><td>Full project state: objective, decisions, in-progress, blockers, next actions</td></tr>
-          <tr><td><code>openstate_capsule</code></td><td>Start-of-session resume contract</td></tr>
-          <tr><td><code>openstate_report</code></td><td>Black-box &ldquo;what&rsquo;s broken / stuck&rdquo; readout</td></tr>
-          <tr><td><code>openstate_report_timeline</code></td><td>Chronological session &rarr; facts map</td></tr>
-          <tr><td><code>openstate_why</code></td><td>Where a fact came from: the rule chain, or the session that recorded it</td></tr>
-        </tbody>
-      </table>
-      <h4 class="toolgroup-head">Recover sessions</h4>
-      <table class="tool-table">
-        <tbody>
-          <tr><td><code>openstate_assess</code></td><td>Absorb a current or prior session</td></tr>
-          <tr><td><code>openstate_sessions</code></td><td>List prior sessions for recovery</td></tr>
-          <tr><td><code>openstate_checkpoint</code></td><td>Force-flush state to disk</td></tr>
-          <tr><td><code>openstate_export</code></td><td>Full state dump as JSON</td></tr>
-        </tbody>
-      </table>
-      <h4 class="toolgroup-head">Tend the engine</h4>
-      <table class="tool-table">
-        <tbody>
-          <tr><td><code>openstate_doctor</code></td><td>Engine health check; fixes a lost execute bit and stale locks</td></tr>
-          <tr><td><code>openstate_restart</code></td><td>Restart the engine sidecar</td></tr>
-          <tr><td><code>openstate_close</code></td><td>Retract a false positive</td></tr>
-          <tr><td><code>openstate_reset</code></td><td>Deliberate full wipe</td></tr>
-          <tr><td><code>openstate_toast</code></td><td>Toggle completion toasts</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="lede">Two human surfaces ride alongside: an always-on sidebar status line (<code>● openstate / battery ready</code>) that flips to the running command while it works, and completion toasts that confirm what finished &mdash; coalesced for bursts, toggleable via <code>openstate_toast</code>.</p>
+    <p class="eyebrow">Included in every install</p>
+    <h2>14 state tools and 22 structural tools</h2>
+    <p class="lede">Every install carries the full toolkit: 14 state tools for the record (state, capsule, report, why, assess, checkpoint, and the rest) and 22 structural tools that read, search and edit code by definition instead of whole files.</p>
+    <p class="lede">The complete inventory, every guarantee, and where each tool costs more are on the <a href="structural-tools.html">Code tools reference page</a>.</p>
   </div>
 </section>
 
@@ -223,7 +193,7 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
       <div class="principle">
         <span class="p-num">02</span>
         <h3>Local only</h3>
-        <p>No network calls, no telemetry. State lives in your repository.</p>
+        <p>No runtime network calls, no telemetry. State lives in your repository.</p>
       </div>
       <div class="principle">
         <span class="p-num">03</span>
