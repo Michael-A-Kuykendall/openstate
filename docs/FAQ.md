@@ -5,7 +5,7 @@
 ## General
 
 ### What is openstate?
-OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction. It is an **OpenCode extension**, and other MCP hosts use it through the bundled MCP server.
+OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction. It is native in **OpenCode**, and it reaches other coding agents — Claude Code, Muse, Kiro, GitHub Copilot, Codex and any other MCP host — through the bundled MCP server.
 
 ### Who is this for?
 Developers running long coding-agent sessions in OpenCode who want each new session, and each session after a compaction, to start from a record of what was decided, done, failed and blocked. Other editors/environments are on the roadmap.

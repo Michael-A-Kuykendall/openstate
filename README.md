@@ -37,7 +37,7 @@
 
 OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction.
 
-It is an **OpenCode extension**: a local engine plus a plugin, with its state kept in your repository. Other MCP hosts (Claude Code, Muse, Kiro, GitHub Copilot) use the same engine through the bundled MCP server.
+It is native in **OpenCode** and reaches other coding agents through the bundled MCP server: Claude Code, Muse, Kiro, GitHub Copilot, and any other MCP host such as Codex or Cursor. The full automatic capture-and-injection experience is OpenCode's; other hosts get the same state and structural tools through that server, with session capture left to the agent.
 
 ### Three problems it addresses
 
