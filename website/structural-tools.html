@@ -53,7 +53,7 @@
       <li><span class="metric-num">22</span><span class="metric-label">tools: search, read, navigate, and preview/apply edits</span></li>
       <li><span class="metric-num">18</span><span class="metric-label">languages with symbol support; text tools work in any file</span></li>
     </ul>
-    <p class="lede">These are bytes returned per read in the maintainer&rsquo;s sessions, not a measured saving on your token bill: how small a definition is next to its file depends on the code, and a careful agent can also read a range of lines. A measurement across matched tasks and hosts is in progress and will be published with its method.</p>
+    <p class="lede">These are bytes returned per read in the maintainer&rsquo;s sessions; how small a definition is next to its file depends on the code, and a careful agent can also read a range of lines. Completion cost is measured separately: in the maintainer&rsquo;s OpenCode history, tokens per completed work item in the openstate project fell from about 16M to 10.6M (34%) and per commit from 16.0M to 11.05M (31%) between August and September 2026 while completions rose, and a repo adopting the tools via Claude Code fell from 14.3M to 0.9M per commit while non-adopting repos were flat or worse. That is observed co-movement in the maintainer&rsquo;s projects, not a controlled study.</p>
   </div>
 </section>
 
@@ -146,7 +146,7 @@
       <li><strong>A small edit costs more calls.</strong> Search, preview and apply are three calls where a direct editor uses one. For a one-line change inside a long function, a text edit is cheaper than replacing the whole definition.</li>
       <li><strong>Searches are the heaviest read.</strong> A search with many matches can return several kilobytes; a language, a path or an exact name narrows it.</li>
       <li><strong>Matching is by syntax, not by type.</strong> References and renames match names in the syntax tree; they do not resolve types the way a compiler or language server does.</li>
-      <li><strong>No measured token saving yet.</strong> The figures above are bytes per read in the maintainer&rsquo;s sessions.</li>
+      <li><strong>Completion cost fell with adoption (measured).</strong> In the maintainer&rsquo;s OpenCode history, tokens per completed work item in the openstate repo fell from about 16M to 10.6M (34%) and per commit from 16.0M to 11.05M (31%) between August and September 2026 while completions rose; a repo adopting via Claude Code fell from 14.3M to 0.9M per commit, and non-adopting repos were flat or worse. Observed co-movement in the maintainer&rsquo;s projects, not a controlled study.</li>
     </ul>
     <p class="lede"><a href="index.html">The other half of OpenState</a>: a running record of the project&rsquo;s decisions, failures and blockers, given to the agent at the start of every session.</p>
   </div>

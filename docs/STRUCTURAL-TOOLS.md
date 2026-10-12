@@ -22,7 +22,7 @@ The structural tools work in units of code instead:
 
 ## What it has saved so far
 
-Early results from the maintainer's projects, while a fuller measurement is under way:
+Early results from the maintainer's projects, with the completion-cost measurement (method in release evidence):
 
 - In one measured case, reading a complete function from a 63 KB file returned 97% less data than reading the file.
 - In the maintainer's sessions, a definition read returned about 1.3 KB, against an average of about 8.6 KB for an ordinary file read.
@@ -83,4 +83,4 @@ Symbol tools (read, overview, declaration, references, edit, insert, delete, mov
 - **A small edit costs more calls.** Search, preview and apply are three calls where a direct editor uses one. For a one-line change inside a long function, a text edit is cheaper than replacing the whole definition.
 - **Searches are the heaviest read.** A search with many matches can return several kilobytes; narrow it with a language, a path or an exact name.
 - **Matching is by syntax, not by type.** References and renames match names in the syntax tree; they do not resolve types the way a compiler or language server does.
-- **No measured token saving yet.** The figures above are bytes per read in the maintainer's sessions. A measurement across matched tasks and hosts is in progress and will be published with its method.
+- **Completion cost fell with adoption (measured).** The figures above are bytes per read in the maintainer's sessions. Measured in the maintainer's OpenCode history (2026-06 to 2026-09), tokens per completed work item in the openstate repo fell from about 16M to 10.6M (34%) and per commit from 16.0M to 11.05M (31%) between August and September 2026 while completions rose; an adopting repo (mikedb) fell from 14.3M to 0.9M tokens per commit via the Claude Code MCP, while repos with no adoption were flat or worse. Method and per-repo/month tables are in `docs/evidence/…` on the private side; these are observed co-movements in the maintainer's projects, not a controlled study.

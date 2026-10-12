@@ -65,7 +65,7 @@ Developers running long coding-agent sessions in OpenCode who want each new sess
 
 ## Reading, searching and editing code
 
-OpenState also ships 22 code tools, built on ast-grep, that let the agent work in definitions instead of whole files: search for a name, read just that function or type, and change it through a preview that is checked before anything is written. In one measured case, reading a complete function from a 63 KB file returned 97% less data than reading the file. That is bytes per read in the maintainer's projects, not a measured token saving; see [Structural tools](docs/STRUCTURAL-TOOLS.md) for the tools, the guarantees of the write path, the 18 supported languages and the known weaknesses.
+OpenState also ships 22 code tools, built on ast-grep, that let the agent work in definitions instead of whole files: search for a name, read just that function or type, and change it through a preview that is checked before anything is written. In one measured case, reading a complete function from a 63 KB file returned 97% less data than reading the file. Measured in the maintainer's session history, completion cost fell where the tools were adopted: in the openstate project, tokens per completed work item fell from about 16M to 10.6M (34%) and per commit from 16.0M to 11.05M (31%) between August and September 2026 while completions rose, and a repo that adopted the tools via Claude Code (mikedb) fell from 14.3M to 0.9M tokens per commit while non-adopting repos were flat or worse. These are observed co-movements in the maintainer's repos, not a controlled study; see [Structural tools](docs/STRUCTURAL-TOOLS.md) for the tools, the guarantees of the write path, the 18 supported languages and the known weaknesses.
 
 ---
 
@@ -128,7 +128,7 @@ State lives per-project in `.openstate/state.jsonl`. Read it through the tools (
 - **A failure needs an exit code.** A command whose tool reports no exit code is recorded as completed, not failed (it never counts as a passing test, though). Read-only commands such as `cat`, `ls` or `grep` are not recorded at all.
 - **On hosts other than OpenCode the capsule is on demand**: the agent has to call `openstate_capsule` (the MCP server's instructions tell it to).
 - **One machine, one repository.** There is no sync between machines or people.
-- **No measurement yet shows fewer repeated failures or fewer tokens.** What OpenState guarantees is the record and its delivery to the agent; whether that changes your agent's behavior is for you to judge in your own sessions.
+- **No measurement yet shows fewer repeated failures.** What OpenState guarantees is the record and its delivery to the agent; whether that changes your agent's behavior is for you to judge in your own sessions. (Token *cost per completed work item* is measured and fell with adoption: see the Structural tools bullet above.)
 - **The engine is closed source** (the plugin, installer, skill and documentation are MIT).
 - **Install integrity, not authenticity.** The installer checks each download against the sha256 published with the same GitHub release; releases are not yet signed. Read `install.sh` before you pipe it into bash.
 

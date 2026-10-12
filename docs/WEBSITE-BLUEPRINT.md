@@ -42,7 +42,7 @@ Embed the five charts + the core metrics table from media/README.md.
 Highlight:
 - Self-correction as truth-convergence velocity
 - Zero work lost across 14 real hard crashes
-- Token savings (~20M tokens across the measured sessions)
+- Completion cost per token (measured 2026-10-12: tokens per completed bead/commit fell with adoption — superseded estimate removed; see release evidence)
 - Time savings estimates (methodology stated beside every figure)
 
 Link to the full media kit and sanitized logs.
