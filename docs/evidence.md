@@ -1,16 +1,10 @@
 # Evidence behind the numbers
 
-This page says where the numbers on this site come from: the sources, the method,
-the windows and denominators, and what the numbers do not show. Every figure here
-is reproducible from the cited scripts on the maintainer's own machines. None of
-the data leaves those machines.
+This page says where the numbers on this site come from: the sources, the method, the windows and denominators, and what the numbers do not show. Every figure here is reproducible from the cited scripts on the maintainer's own machines. None of the data leaves those machines.
 
 ## Method and sources
 
-- **Source:** the raw session and tool-call tables of the maintainer's own
-  OpenCode database (`opencode.db`), read only, plus the Claude Code transcript
-  store and MCP-host logs on the same machines. No telemetry and no third-party
-  data.
+- **Source:** the raw session and tool-call tables of the maintainer's own OpenCode database (`opencode.db`), read only, plus the Claude Code transcript store and MCP-host logs on the same machines. No telemetry and no third-party data.
 - **Scripts:** `tools/outcome-stats.mjs` (commits, beads closed and tokens per
   repo per month) and `tools/scan-claude-tools.mjs` (Claude Code and MCP-host
   tool calls). Windows and denominators are printed with every table.
