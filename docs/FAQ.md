@@ -38,7 +38,7 @@ Per-repo, into `.opencode/`:
 No Rust: the installer downloads a prebuilt binary and plugin bundle. It does need Node.js, which it uses to update `.opencode/package.json` and other JSON config.
 
 ### Per-repo or global?
-Per repository by default: the installer writes `.opencode/` (and, only if you turn the structural profile to `enforce`, one marked block in `AGENTS.md`), and state goes to `.openstate/`, which ignores itself in git. `--global` installs once under your OpenCode config directory instead.
+Global by default: the installer writes once under your OpenCode config directory so every repository inherits it (and, only if you turn the structural profile to `enforce`, one marked block in `AGENTS.md`); per-repo state still goes to each repository's `.openstate/`, which ignores itself in git. `--repo` (or `OPENSTATE_CONFIG_DIR`) targets a single repository's `.opencode/` instead.
 
 ### How do I verify?
 ```bash

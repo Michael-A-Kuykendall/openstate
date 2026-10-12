@@ -197,13 +197,13 @@
 <section class="band" id="install">
   <div class="shell">
     <p class="eyebrow">Install</p>
-    <pre class="code-block"><span># per repository; add --global to install once for all of them</span>
+    <pre class="code-block"><span># default: install once for all repositories; --repo targets the current one</span>
 curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash
 <span class="cmt"># verify an existing install</span>
 ./install.sh --check</pre>
     <p class="payoff">Restart OpenCode and the agent has 36 tools, the capsule in its context, a sidebar status line, completion toasts, and a skill that tells it when to use them.</p>
     <ul class="tick-list">
-      <li>Installs into the repository&rsquo;s <code>.opencode/</code>, or once for all repositories with <code>--global</code></li>
+      <li>Installs once for all repositories by default; <code>--repo</code> targets the current repository&rsquo;s <code>.opencode/</code></li>
       <li>Prebuilt engine under 1 MB; no compiler needed. The installer uses Node.js to update JSON config</li>
       <li>Checksum verified and engine smoke-tested before anything is written</li>
     </ul>

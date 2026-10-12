@@ -58,7 +58,7 @@ No human dashboard required. The battery is for the AI; humans ask the AI.
 
 ## 6. Install (30 seconds)
 Exact one-liner + verification command.
-Emphasize: per-repo only, no global install, prebuilt binary, checksum verified, smoke-tested.
+Emphasize: global by default (--repo for a single repo), prebuilt binary, checksum verified, smoke-tested.
 
 ## 7. Philosophy
 - Paid license, sold through Stripe and issued by Keygen
