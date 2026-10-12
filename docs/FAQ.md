@@ -75,7 +75,7 @@ Reading, searching and editing code by definition instead of by whole file. The 
 
 ### Do the structural tools save tokens?
 
-Per read, they return less: in one measured case, reading a complete function from a 63 KB file returned 97% less data than reading the file. A whole-session token total has not been shown to fall; what is measured is completion cost: tokens per completed work item in the openstate repo fell from about 16M to 10.6M (34%) and per commit from 16.0M to 11.05M (31%) between August and September 2026 while completions rose, and a repo adopting the tools via Claude Code fell from 14.3M to 0.9M tokens per commit while non-adopting repos were flat or worse. That is observed co-movement in the maintainer's projects, not a controlled study. A small edit still takes three calls (search, preview, apply) where a direct editor takes one.
+Per read, they return less: in one measured case, reading a complete function from a 63 KB file returned 97% less data than reading the file. A whole-session token total has not been shown to fall; what is measured is completion cost: tokens per completed work item in the openstate repo fell from about 16M to 10.6M (34%) and per commit from 16.0M to 11.05M (31%) between August and September 2026 while completions rose, and a repo adopting the tools via Claude Code fell from 14.3M to 0.9M tokens per commit while non-adopting repos were flat or worse except one that improved in a lighter work phase. That is observed co-movement in the maintainer's projects, not a controlled study. A small edit still takes three calls (search, preview, apply) where a direct editor takes one.
 
 ### Can the agent still use its own read and edit tools?
 
