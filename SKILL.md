@@ -1,13 +1,13 @@
 ---
 name: openstate
-description: OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction. Use openstate for persistent session memory, project state tracking (objectives, decisions, blockers), provenance queries ("why did we decide X"), and generating resume capsules for context handoff between sessions. Trigger when starting work in this repo, at session end, or when the user asks about project state or past decisions.
+description: "OpenState gives coding agents two equal capabilities: structural code search, read and edit with guarded preview-to-apply writes, and a persistent, provenance-backed record of what is true in a project — decisions, finished and failed work, what is blocked — kept local and available across sessions through OpenCode and MCP. Use for project state, prior-session recovery, decisions, blockers and provenance."
 ---
 
 # openstate
 
 A persistent decision log for this repo (`.openstate/state.jsonl`) — records what is *true, done, failed, blocked, and why*, never file contents. Every read is a deterministic compilation of live facts, never an AI-generated summary.
 
-**Code Mode requirement (call this first):** the `openstate_*` tools are exposed ONLY inside the Code Mode runtime (the `execute` tool) — they are never directly callable, and a direct call fails with 'No tool named X is currently available'. Inside Code Mode, find each tool with `search({ query: ... })` and call it by its catalog path (e.g. `tools.openstate_assess(...)`). Load this skill first, in a running OpenCode session (session ID must already exist).
+**Invocation depends on the transport.** In native OpenCode, discover and call `openstate_*` inside Code Mode (`execute` and its `search(...)` catalog). Standard MCP clients call the server's tools directly, without launching an OpenCode agent. Both transports expose 36 operations: 22 structural and 14 state/lifecycle tools. If a client hides tools, inspect its enabled/disabled tool policy and reconnect after changing configuration or installed artifacts. Beads remains the work tracker.
 
 ---
 
@@ -40,12 +40,12 @@ OpenState tools are the sanctioned surface for this repo. They are bounded (~8 K
 3. If something looks broken/stuck (per the capsule), run `openstate_report`.
 
 **B — Review or reassess specific named session(s)** (user says "assess session X", "the last N sessions", "what happened before") — do this INSTEAD of A, not in addition:
-1. `openstate_reset` — clears the store so the next reads reflect ONLY what you replay. It clears the assess journal too, so replaying re-absorbs full history. It is recoverable only for sessions this host can replay: OpenCode sessions still in this repo's history. Facts from `claude:` sessions rebuild only through the Claude Code MCP server's `openstate_assess`; check `openstate_report_timeline` for the stored sessions before resetting a mixed store.
+1. Use `openstate_sessions` to choose an exact source-qualified ID (`opencode:`, `claude:` or supported `codex:` history). Replay sources are shared across transports. OpenCode and Claude transcripts and supported legacy Codex JSONL can be assessed from an MCP client; current paginated/compressed Codex history refuses as `unsupported_history`. Automatic event capture and capsule injection belong to native OpenCode; standalone MCP uses on-demand calls.
 2. `openstate_assess <session_id>` for each named session, or ONE selector call — `newest-N`, `oldest-N`, `range:A-B`, or a title substring — when you want a span. A selector replays every matched session newest-first; an unresolvable selector refuses with `unknown_selector` rather than absorbing nothing.
-3. `openstate_report` / `openstate_capsule` — now reflect only the replayed sessions.
+3. Read `openstate_report` / `openstate_capsule` for project state and `openstate_report_timeline` with `source_session` for selected-session provenance.
 4. `openstate_checkpoint` to persist.
 
-Skipping step 1 in procedure B means step 3 summarizes accumulated history, not the sessions you were asked about — this is the most common failure mode.
+Capsule/report include accumulated project facts. Reset is optional and checks replayability across all represented sources before clearing facts and journal. Missing or unsupported history refuses; never confirm loss merely to isolate a review. Use an isolated scratch replay when a session-only store is required and production reset is unsafe.
 
 Outside of A/B — call `openstate_reset` only when the user explicitly wants to start over, scrub state, or recover from a corrupt store. Confirm intent first in that case.
 
@@ -68,9 +68,9 @@ Outside of A/B — call `openstate_reset` only when the user explicitly wants to
 | `openstate_close` | writes | Close one fact or a session; use `dry_run` first for cascades |
 | `openstate_reset` | writes | Deliberately wipe facts and the assessment journal |
 | `openstate_doctor` | writes | Auto-fix engine permissions and stale locks, then report health |
-| `openstate_restart` | — | Checkpoint and restart the engine sidecar |
+| `openstate_restart` | writes | Checkpoint; restart the native sidecar or report next-call cold start for one-shot MCP |
 | `openstate_export` | read-only | Export the store and capsule to a timestamped JSON file |
-| `openstate_toast` | writes | Enable or disable completion toasts |
+| `openstate_toast` | writes | Persist completion-notification preference; native OpenCode renders the UI |
 
 ### Structural navigation and editing
 

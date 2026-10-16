@@ -8,7 +8,7 @@ description: How OpenState's code tools read, search and edit a repository by de
 
 OpenState ships 22 code tools beside its state tools. They let a coding agent find a definition, read just that definition, and change it through a preview it can check before anything is written. They are built on [ast-grep](https://ast-grep.github.io/), which the installer bundles, so the agent needs no setup and you need no editor running.
 
-They come with every install: in OpenCode through the plugin, and in Claude Code, Muse, Kiro, GitHub Copilot and other MCP hosts through the bundled MCP server.
+They come with every install: native OpenCode exposes them through Code Mode; standard MCP clients call the bundled server directly. Both transports expose 36 operations: 22 structural tools and 14 state/lifecycle tools. Session recovery uses shared source adapters, independent of the calling host. Automatic event capture and capsule injection are native OpenCode capabilities; MCP reads and assessments are on demand. Supported OpenCode, Claude and legacy Codex histories can be replayed; current paginated/compressed Codex history returns `unsupported_history`.
 
 ## Why an agent needs them
 

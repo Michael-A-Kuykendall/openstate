@@ -46,16 +46,16 @@
 <section class="band" id="hosts">
   <div class="shell">
     <p class="eyebrow">Where the tools and the state run</p>
-    <h2>A compatibility matrix, honestly tiered</h2>
+    <h2>Tools, session recovery and automatic capture</h2>
     <table class="tool-table compare-table">
       <tbody>
         <tr><td><strong>Host</strong></td><td><strong>Session capture</strong></td><td><strong>Capsule delivery</strong></td><td><strong>State + structural tools</strong></td></tr>
         <tr><td><strong>OpenCode</strong></td><td>automatic, from the host&rsquo;s events</td><td>given to the agent at the start of every session and after each compaction</td><td>native</td></tr>
-        <tr><td><strong>Claude Code</strong></td><td>replay prior sessions via openstate_assess</td><td>on demand; the MCP instructions tell the agent to call openstate_capsule</td><td>via the bundled MCP server</td></tr>
-        <tr><td><strong>Muse, Codex, Cursor (any MCP host)</strong></td><td>none automatic</td><td>on demand, via openstate_capsule</td><td>via the bundled MCP server</td></tr>
+        <tr><td><strong>Claude Code</strong></td><td>on-demand replay of supported stored sessions</td><td>on demand, via openstate_capsule</td><td>36 tools via MCP</td></tr>
+        <tr><td><strong>Other standard MCP clients</strong></td><td>on-demand replay of supported stored sessions</td><td>on demand, via openstate_capsule</td><td>36 tools via MCP</td></tr>
       </tbody>
     </table>
-    <p class="lede">Every host gets the record and the code tools through the bundled MCP server. What differs is session capture: OpenCode captures and injects automatically, Claude Code can replay its transcripts, and a generic MCP host leaves capture to the agent, which is told to call <code>openstate_capsule</code>.</p>
+    <p class="lede">Both native OpenCode and standard MCP expose 22 structural and 14 state/lifecycle tools. Any MCP caller can recover supported OpenCode, Claude and legacy Codex histories in the same project; current paginated/compressed Codex history returns <code>unsupported_history</code>. Native OpenCode captures events and injects capsules automatically. MCP callers assess and read on demand. Client tool filters may hide operations until configuration is updated and the connection reloaded.</p>
   </div>
 </section>
 
