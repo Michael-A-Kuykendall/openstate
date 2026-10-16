@@ -29,8 +29,8 @@
 <section class="hero" id="top">
   <div class="shell">
     <p class="eyebrow">Privacy</p>
-    <h1>The software collects nothing.</h1>
-    <p class="hero-lede">OpenState runs on your machine and sends nothing anywhere. The only personal data involved is what buying it takes.</p>
+    <h1>Project state stays local.</h1>
+    <p class="hero-lede">The OpenState engine keeps project facts locally and sends no runtime telemetry or project data. Host history access and purchase services have the separate boundaries described below.</p>
   </div>
 </section>
 
@@ -38,15 +38,15 @@
   <div class="shell">
     <h2>The software</h2>
     <ul class="tick-list">
-      <li>The engine and plugin make no runtime network calls and send no telemetry.</li>
-      <li>What OpenState records stays in <code>.openstate/</code> inside your repository. It can include your messages, the commands the agent runs and file paths, so treat it like shell history.</li>
+      <li>The engine sends no runtime telemetry. Host history discovery may contact the configured OpenCode API through its SDK; an API on another machine is not an offline history source.</li>
+      <li>What OpenState records stays local. <code>.openstate/</code> can be a directory, a symlink or a local pointer file. It can include your messages, the commands the agent runs and file paths, so treat it like shell history.</li>
       <li>The installer downloads the release from GitHub; GitHub sees that request.</li>
     </ul>
     <h2>Buying it</h2>
     <ul class="tick-list">
       <li>Stripe processes the payment. Card details go to Stripe and are never seen by the seller.</li>
       <li>Stripe shares your name and email with the seller. Keygen stores your license with that email.</li>
-      <li>A small Cloudflare worker connects Stripe to Keygen. It keeps the id of each Stripe event it handles for one day, so a payment is never turned into two licenses, and stores nothing else.</li>
+      <li>A small Cloudflare worker connects Stripe to Keygen. It retains processed Stripe event ids for seven days to deduplicate webhook retries. This is a bounded retry guard, not a guarantee against every duplicate issuance.</li>
       <li>Your email is used only to issue your license, handle refunds and answer support. It is not sold or used for marketing.</li>
     </ul>
     <h2>This website</h2>
