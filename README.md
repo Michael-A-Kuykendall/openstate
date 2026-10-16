@@ -120,7 +120,7 @@ State lives per-project in `.openstate/state.jsonl`. Read it through the tools (
 |---|---|---|---|---|
 | Compaction summary | A prose summary of the conversation so far | The model, when the context fills up | In the same session, after compaction; a new session starts without it | It is rewritten at each compaction; details the model left out are gone |
 | A notes file (`AGENTS.md`, a memory markdown file) | Whatever someone wrote there | You, or the agent when told to | Every session, in full | Yes, unless someone keeps editing it |
-| Agent memory tools (Serena memories, built-in memory) | Notes the model chose to save | The model, when it decides to | When the agent reads them | Yes; nothing removes a note that stopped being true |
+| Agent memory tools (agent-written notes, built-in memory) | Notes the model chose to save | The model, when it decides to | When the agent reads them | Yes; nothing removes a note that stopped being true |
 | Transcript search and event logs | Everything that was said and run | The host, automatically | When the agent searches | No, but it is history, not current state; the agent has to work out what still holds |
 | Telling the model to remember | Nothing outside the context | — | Until the context is compacted or the session ends | — |
 | **OpenState** | Decisions, failed and completed commands, blockers, the objective, test status since the last edit, changed files | The engine, from the session's events, with no model in the loop | OpenCode: in the capsule at the start of every session and after each compaction. Other hosts: when the agent calls `openstate_capsule` | No: a fact is replaced or closed when a later event supersedes it |
