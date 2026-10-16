@@ -4,7 +4,7 @@ What OpenState does with your project state, what survives a crash, and how to r
 
 ## Where state lives
 
-One directory per repository: `.openstate/` at the repository root (or wherever a symlink or a pointer file there sends it; a pointer file's first line is the path, relative to the repository if it is not absolute). Nothing is written anywhere else, and nothing leaves the machine: the engine and plugin make no network calls.
+One directory per repository: `.openstate/` at the repository root (or wherever a symlink or a pointer file there sends it; a pointer file's first line is the path, relative to the repository if it is not absolute). The engine stores project facts locally and sends no runtime telemetry. Host history discovery may contact the configured OpenCode API through its SDK; this is separate from engine storage. An API configured on another machine is not an offline history source.
 
 ## When state is written
 
@@ -26,7 +26,7 @@ State is written when the agent calls `openstate_checkpoint`, when OpenCode clos
 
 ## Checking it yourself
 
-- **No network calls.** The engine is closed source, so check it from outside: run OpenCode under `strace -f -e trace=network` (Linux) or with a firewall that logs outbound connections: `openstate-engine` opens no connection. The one socket call you will see is a local `socketpair` it uses to notice termination signals. The plugin and installer are readable JavaScript and bash.
+- **Check the engine separately from the host.** On Linux, trace `openstate-engine` with `strace -f -e trace=network` or use a firewall log while exercising it. Host discovery and configured API traffic belong to the adapter; a trace of OpenCode as a whole does not isolate engine behavior. The plugin and installer are readable JavaScript and bash.
 - **Not in git.** `.openstate/` contains a `.gitignore` of `*`; `git status` never lists it.
 - **What it stored.** `openstate_export` writes everything to a JSON file you can read.
 
