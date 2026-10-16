@@ -97,19 +97,23 @@
 <section class="band alt" id="how">
   <div class="shell">
     <p class="eyebrow">How it works</p>
-    <h2>Three parts, all on your machine.</h2>
+    <h2>Code operations and persistent state, connected locally.</h2>
     <div class="cols">
       <div class="col">
-        <h3>Plugin</h3>
-        <p>An OpenCode plugin passes the session&rsquo;s events (messages, tool calls, file edits, git status) to a local engine.</p>
+        <h3>Host adapter</h3>
+        <p>OpenCode uses the native plugin. Other compatible coding agents call the bundled MCP server. The adapter provides tool access and access to supported session histories.</p>
       </div>
       <div class="col">
-        <h3>Engine</h3>
-        <p>A small Rust binary turns those events into project facts, replaces a fact when a later event supersedes it, and keeps them in <code>.openstate/</code> in your repository.</p>
+        <h3>Structural core + ast-grep</h3>
+        <p>The shared structural core and bundled ast-grep provide AST and text search, bounded reads, and guarded preview/apply operations on project files.</p>
       </div>
       <div class="col">
-        <h3>Capsule</h3>
-        <p>A compact resume contract, added to the agent&rsquo;s context at the start of every session and after each compaction. <code>openstate_why</code> shows where any fact came from.</p>
+        <h3>State engine</h3>
+        <p>A small Rust binary turns observed session activity into project facts and updates them when later events supersede earlier information.</p>
+      </div>
+      <div class="col">
+        <h3>Local state and capsule</h3>
+        <p>Project facts stay local through <code>.openstate/</code>, which may be a directory or a local pointer. OpenCode adds the capsule at session start and after compaction; MCP clients request it on demand. <code>openstate_why</code> shows a fact&rsquo;s provenance.</p>
       </div>
     </div>
   </div>
