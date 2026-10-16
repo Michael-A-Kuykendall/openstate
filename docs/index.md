@@ -10,7 +10,7 @@ description: OpenState keeps a running record of what is true in a project (deci
 
 # openstate
 
-> **OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction.**
+> **OpenState gives coding agents two equal capabilities: structural code search, read and edit with guarded preview-to-apply writes, and a persistent, provenance-backed record of what is true in a project — decisions, finished and failed work, what is blocked — kept local and available across sessions through OpenCode and MCP.**
 
 [![License: commercial engine, MIT surface](https://img.shields.io/badge/license-commercial%20engine%2C%20MIT%20surface-blue)](LICENSE)
 [![OpenCode](https://img.shields.io/badge/OpenCode-compatible-blue)](https://opencode.ai)
@@ -26,12 +26,12 @@ description: OpenState keeps a running record of what is true in a project (deci
 | Problem | What OpenState records | Where the agent sees it |
 |---|---|---|
 | The agent re-runs a command that already failed in an earlier session. | Each failed command. | `failed_attempts` in the capsule; `openstate_report`; `openstate_report_timeline` shows which session it failed in. |
-| After a compaction or a restart, the agent re-reads files to work out what it was doing. | The objective, recent decisions, the files being worked on, uncommitted changes, and whether a test has passed since the last edit. | The capsule, added to the context at the start of the session and after each compaction. |
+| After a compaction or a restart, the agent re-reads files to work out what it was doing. | The objective, recent decisions, the files being worked on, uncommitted changes, and whether a test has passed since the last edit. | The capsule, injected automatically in native OpenCode or read on demand through MCP. |
 | The agent retries an approach that was already rejected. | Decisions: messages that give a reason ("because ..."), recorded with that reason. | `decisions` in the capsule; `openstate_why` shows where a decision came from. |
 
 ## Who it is for
 
-Developers running long coding-agent sessions in OpenCode who want each new session, and each session after a compaction, to start from what was decided, done, failed and blocked. Claude Code, Muse, Kiro and GitHub Copilot work too, through the bundled MCP server.
+Developers using coding agents who need structural code search, guarded edits and persistent project state. Native OpenCode supplies automatic event capture and capsule injection; standard MCP clients use the same 36 tools and supported stored-session recovery on demand.
 
 ## Who it is not for
 
@@ -44,7 +44,7 @@ Developers running long coding-agent sessions in OpenCode who want each new sess
 
 ## Reading, searching and editing code
 
-OpenState also ships 22 code tools, built on ast-grep, that let the agent work in definitions instead of whole files: search for a name, read just that function or type, and change it through a preview that is checked before anything is written. In one measured case, reading a complete function from a 63 KB file returned 97% less data than reading the file. Measured in the maintainer's session history, completion cost fell where the tools were adopted: in the openstate project, tokens per completed work item fell from about 16M to 10.6M (34%) and per commit from 16.0M to 11.05M (31%) between August and September 2026 while completions rose, and a repo that adopted the tools via Claude Code fell from 14.3M to 0.9M tokens per commit while non-adopting repos were flat or worse except one that improved in a lighter work phase. These are observed co-movements in the maintainer's repos, not a controlled study; see [Structural tools](STRUCTURAL-TOOLS.md) for the tools, the guarantees of the write path, the 18 supported languages and the known weaknesses.
+OpenState's 22 structural code tools are a core capability. Built on ast-grep, they let the agent work in definitions instead of whole files: search for a name, read just that function or type, and change it through a preview that is checked before anything is written. In one measured case, reading a complete function from a 63 KB file returned 97% less data than reading the file. Measured in the maintainer's session history, completion cost fell where the tools were adopted: in the openstate project, tokens per completed work item fell from about 16M to 10.6M (34%) and per commit from 16.0M to 11.05M (31%) between August and September 2026 while completions rose, and a repo that adopted the tools via Claude Code fell from 14.3M to 0.9M tokens per commit while non-adopting repos were flat or worse except one that improved in a lighter work phase. These are observed co-movements in the maintainer's repos, not a controlled study; see [Structural tools](STRUCTURAL-TOOLS.md) for the tools, the guarantees of the write path, the 18 supported languages and the known weaknesses.
 
 ---
 
@@ -67,11 +67,15 @@ Measured on the maintainer's own projects, August to October 2026:
 ### 1. Observer Plugin (TypeScript)
 Captures the live event stream from OpenCode.
 
-### 2. Local Rust State Engine
+### 2. Structural Code Tools
+
+The shared ast-grep core searches and reads definitions and applies guarded preview-to-apply edits through either transport.
+
+### 3. Local Rust State Engine
 Turns those events into project facts and replaces a fact when a later event supersedes it.
 
-### 3. Resume Capsule
-The resume contract, added to the agent's context at the start of every session and after each compaction.
+### 4. Resume Capsule
+The resume contract, injected automatically in native OpenCode at session start and after compaction, or read on demand through MCP.
 
 ---
 

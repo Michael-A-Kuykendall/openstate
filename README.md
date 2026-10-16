@@ -4,7 +4,7 @@
 
 # openstate
 
-> **OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction.**
+> **OpenState gives coding agents two equal capabilities: structural code search, read and edit with guarded preview-to-apply writes, and a persistent, provenance-backed record of what is true in a project — decisions, finished and failed work, what is blocked — kept local and available across sessions through OpenCode and MCP.**
 
 [![License: commercial engine, MIT surface](https://img.shields.io/badge/license-commercial%20engine%2C%20MIT%20surface-blue)](LICENSE)
 [![OpenCode](https://img.shields.io/badge/OpenCode-compatible-blue)](https://opencode.ai)
@@ -35,21 +35,21 @@
 
 ## What Is openstate?
 
-OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction.
+OpenState gives coding agents two equal capabilities: structural code search, read and edit with guarded preview-to-apply writes, and a persistent, provenance-backed record of what is true in a project — decisions, finished and failed work, what is blocked — kept local and available across sessions through OpenCode and MCP.
 
-It is native in **OpenCode** and reaches other coding agents through the bundled MCP server: Claude Code, Muse, Kiro, GitHub Copilot, and any other MCP host such as Codex or Cursor. The full automatic capture-and-injection experience is OpenCode's; other hosts get the same state and structural tools through that server, with session capture left to the agent.
+It is native in **OpenCode** and reaches other coding agents through the bundled MCP server: Claude Code, Muse, Kiro, GitHub Copilot, and any other MCP host such as Codex or Cursor. Native OpenCode captures events and injects capsules automatically. Any standard MCP caller can assess supported OpenCode, Claude and legacy Codex histories for the project; current paginated/compressed Codex history returns `unsupported_history`. The calling host does not select the transcript source.
 
 ### Three problems it addresses
 
 | Problem | What OpenState records | Where the agent sees it |
 |---|---|---|
 | The agent re-runs a command that already failed in an earlier session. | Each failed command. | `failed_attempts` in the capsule; `openstate_report`; `openstate_report_timeline` shows which session it failed in. |
-| After a compaction or a restart, the agent re-reads files to work out what it was doing. | The objective, recent decisions, the files being worked on, uncommitted changes, and whether a test has passed since the last edit. | The capsule, added to the context at the start of the session and after each compaction. |
+| After a compaction or a restart, the agent re-reads files to work out what it was doing. | The objective, recent decisions, the files being worked on, uncommitted changes, and whether a test has passed since the last edit. | The capsule, injected automatically in native OpenCode or read on demand through MCP. |
 | The agent retries an approach that was already rejected. | Decisions: messages that give a reason ("because ..."), recorded with that reason. | `decisions` in the capsule; `openstate_why` shows where a decision came from. |
 
 ### Who it is for
 
-Developers running long coding-agent sessions in OpenCode who want each new session, and each session after a compaction, to start from what was decided, done, failed and blocked. Claude Code, Muse, Kiro and GitHub Copilot work too, through the bundled MCP server.
+Developers using coding agents who need structural code search, guarded edits and persistent project state. Native OpenCode supplies automatic event capture and capsule injection; standard MCP clients use the same 36 tools and supported stored-session recovery on demand.
 
 ### Who it is not for
 
@@ -65,7 +65,7 @@ Developers running long coding-agent sessions in OpenCode who want each new sess
 
 ## Reading, searching and editing code
 
-OpenState also ships 22 code tools, built on ast-grep, that let the agent work in definitions instead of whole files: search for a name, read just that function or type, and change it through a preview that is checked before anything is written. In one measured case, reading a complete function from a 63 KB file returned 97% less data than reading the file. Measured in the maintainer's session history, completion cost fell where the tools were adopted: in the openstate project, tokens per completed work item fell from about 16M to 10.6M (34%) and per commit from 16.0M to 11.05M (31%) between August and September 2026 while completions rose, and a repo that adopted the tools via Claude Code fell from 14.3M to 0.9M tokens per commit while non-adopting repos were flat or worse except one that improved in a lighter work phase. These are observed co-movements in the maintainer's repos, not a controlled study; see [Structural tools](docs/STRUCTURAL-TOOLS.md) for the tools, the guarantees of the write path, the 18 supported languages and the known weaknesses.
+OpenState's 22 structural code tools are a core capability. Built on ast-grep, they let the agent work in definitions instead of whole files: search for a name, read just that function or type, and change it through a preview that is checked before anything is written. In one measured case, reading a complete function from a 63 KB file returned 97% less data than reading the file. Measured in the maintainer's session history, completion cost fell where the tools were adopted: in the openstate project, tokens per completed work item fell from about 16M to 10.6M (34%) and per commit from 16.0M to 11.05M (31%) between August and September 2026 while completions rose, and a repo that adopted the tools via Claude Code fell from 14.3M to 0.9M tokens per commit while non-adopting repos were flat or worse except one that improved in a lighter work phase. These are observed co-movements in the maintainer's repos, not a controlled study; see [Structural tools](docs/STRUCTURAL-TOOLS.md) for the tools, the guarantees of the write path, the 18 supported languages and the known weaknesses.
 
 ---
 
@@ -75,20 +75,24 @@ OpenState also ships 22 code tools, built on ast-grep, that let the agent work i
 
 Captures events: `message.updated`, `tool.execute.before/after`, `file.edited`, `todo.updated`, `session.idle`, `session.compacted`, etc.
 
-### 2. Local Rust State Engine
+### 2. Structural Code Tools
+
+The shared ast-grep core searches and reads definitions and applies guarded preview-to-apply edits through either transport.
+
+### 3. Local Rust State Engine
 
 Turns those events into project facts (objectives, decisions, completed and failed commands, blockers) and replaces or closes a fact when a later event supersedes it. `openstate_why` shows where any fact came from.
 
-### 3. Resume Capsule
+### 4. Resume Capsule
 
-A structured continuation contract injected automatically on new sessions and compaction — a few hundred tokens (median about 500, at most about 1,600 across 21 real project stores), carrying the state needed to resume work. It rides on every model request of the session and stays the same text until the next compaction, so a prompt cache keeps it; `OPENSTATE_CAPSULE=off` turns it off.
+A structured continuation contract injected automatically in native OpenCode on new sessions and compaction — a few hundred tokens (median about 500, at most about 1,600 across 21 real project stores), carrying the state needed to resume work. It rides on every model request of the session and stays the same text until the next compaction, so a prompt cache keeps it; `OPENSTATE_CAPSULE=off` turns it off.
 
 ---
 
 ## Install
 
 ```bash
-# 1. One-liner (curl|bash — downloads prebuilt bundle, installs into CWD)
+# 1. One-liner (curl|bash — downloads prebuilt bundle, installs globally)
 curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash
 
 # 2. Target a specific repo
@@ -136,7 +140,7 @@ State lives per-project in `.openstate/state.jsonl`. Read it through the tools (
 
 ## Other hosts: the MCP server
 
-The same bundle carries an MCP server, `mcp/openstate-mcp.mjs`, for every host that is not OpenCode. Run `install.sh` in the repository as above (it puts the server at `.opencode/mcp/openstate-mcp.mjs`, beside the engine), then register it with your host. It needs Node.js 18 or newer.
+The same bundle carries an MCP server, `mcp/openstate-mcp.mjs`, for every host that is not OpenCode. Install globally as above or use `install.sh --repo` for `.opencode/mcp/openstate-mcp.mjs` in one project, then register the installed file with your host. It needs Node.js 18 or newer.
 
 | Host | File in the repository | Entry |
 |---|---|---|
@@ -144,7 +148,7 @@ The same bundle carries an MCP server, `mcp/openstate-mcp.mjs`, for every host t
 | Kiro | `.kiro/settings/mcp.json` | `{"mcpServers": {"openstate": {"command": "node", "args": ["/path/to/repo/.opencode/mcp/openstate-mcp.mjs"]}}}` |
 | GitHub Copilot in VS Code | `.vscode/mcp.json` | `{"servers": {"openstate": {"type": "stdio", "command": "node", "args": ["${workspaceFolder}/.opencode/mcp/openstate-mcp.mjs"]}}}` |
 
-Use the absolute path to the installed file (after `--global`, `~/.config/opencode/mcp/openstate-mcp.mjs`). The server offers 34 tools: the 14 state tools except `openstate_restart` and `openstate_toast` (both OpenCode-only), and all 22 structural tools. Each tool takes the repository directory as `repo_dir`. These hosts give OpenState no way to put the capsule into the context by itself, so the server's instructions tell the agent to call `openstate_capsule` at the start of a session and after a compaction.
+Use the absolute path to the installed file (after `--global`, `~/.config/opencode/mcp/openstate-mcp.mjs`). The server offers the same 36 operations as native OpenCode: 14 state/lifecycle and 22 structural tools. For one-shot MCP, `openstate_restart` checkpoints and reports next-call cold start; `openstate_toast` persists the preference, while OpenCode supplies its UI renderer. Each tool takes the project root as `repo_dir`. Use `openstate_sessions`, then `openstate_assess` with an exact source-qualified ID, checkpoint, and read capsule/report or a source-filtered timeline. Repeating assessment skips previously absorbed records. Client allowlists may hide tools; check the effective configuration and reconnect after updating it. These hosts give OpenState no way to put the capsule into the context by itself, so the server's instructions tell the agent to call `openstate_capsule` at the start of a session and after a compaction.
 
 ---
 
