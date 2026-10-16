@@ -5,10 +5,10 @@
 ## General
 
 ### What is openstate?
-OpenState keeps a running record of what is true in a project (decisions, finished and failed work, what is blocked), updates it as later events replace it, and gives it to the coding agent at the start of every session and after every compaction. It is native in **OpenCode**, and it reaches other coding agents — Claude Code, Muse, Kiro, GitHub Copilot, Codex and any other MCP host — through the bundled MCP server.
+OpenState gives coding agents two equal capabilities: structural code search, read and edit with guarded preview-to-apply writes, and a persistent, provenance-backed record of what is true in a project — decisions, finished and failed work, what is blocked — kept local and available across sessions through OpenCode and MCP. It is native in **OpenCode**, and it reaches other coding agents — Claude Code, Muse, Kiro, GitHub Copilot, Codex and any other MCP host — through the bundled MCP server.
 
 ### Who is this for?
-Developers running long coding-agent sessions in OpenCode who want each new session, and each session after a compaction, to start from a record of what was decided, done, failed and blocked. Other editors/environments are on the roadmap.
+Developers using coding agents who need guarded structural code operations and project state across sessions. OpenCode provides native automatic capture and capsule injection. Standard MCP clients, including Claude Code, Codex and Cursor, use the same tools and supported stored-session recovery on demand.
 
 ### Is it open source?
 **Engine binary**: Proprietary (commercial EULA) — protects the core invention.  
@@ -28,10 +28,11 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
 ```
 
 ### What does it install?
-Per-repo, into `.opencode/`:
+The installer writes to the global OpenCode config directory by default; `--repo` or `OPENSTATE_CONFIG_DIR` selects a project's `.opencode/`. The bundle contains:
 - `bin/openstate-engine` (the state engine) and `bin/ast-grep` (structural search backend)
 - `plugins/openstate/index.js` (plugin) and `plugins/openstate/tui.js` (sidebar status line and toasts)
 - `skills/openstate/SKILL.md` (AI usage skill)
+- `mcp/openstate-mcp.mjs` (standard MCP server)
 - `structural-tools-profile.json` (structural tools mode) and `package.json` (TUI dependency)
 
 ### Does it need Rust/Node to install?
@@ -50,7 +51,7 @@ Global by default: the installer writes once under your OpenCode config director
 ## Usage
 
 ### What tools does the AI get?
-36 tools automatically registered: the 14 state tools below, plus 22 structural tools (AST and text search, bounded reads, references, declarations, and preview/apply edits, renames, inserts, moves, deletes and new files; symbol tools in 18 languages).
+Both native OpenCode and the bundled MCP server expose 36 tools: the 14 state/lifecycle tools below, plus 22 structural tools (AST and text search, bounded reads, references, declarations, and preview/apply edits, renames, inserts, moves, deletes and new files; symbol tools in 18 languages). MCP clients need a stdio registration; enabled/disabled tool policies can hide tools until corrected and the connection reloaded.
 
 - `openstate_state` — full project state
 - `openstate_why` — provenance for any fact
@@ -64,8 +65,8 @@ Global by default: the installer writes once under your OpenCode config director
 - `openstate_close` — retract false positives
 - `openstate_sessions` — list prior sessions
 - `openstate_doctor` — engine health
-- `openstate_restart` — restart sidecar
-- `openstate_toast` — completion toasts on/off
+- `openstate_restart` — checkpoint and restart the native sidecar, or report next-call cold start for one-shot MCP
+- `openstate_toast` — persist completion-notification preference; OpenCode renders toasts
 
 The skill tells the AI when to use each.
 
@@ -82,12 +83,12 @@ Per read, they return less: in one measured case, reading a complete function fr
 Yes, by default. The skill and the MCP server's instructions ask the agent to prefer the structural tools for code, and nothing is disabled. In OpenCode you can opt in to more: installing with `OPENSTATE_STRUCTURAL_TOOLS=enforce` denies the built-in read, grep and edit tools, so reads and edits go through the structural tools; `OPENSTATE_STRUCTURAL_TOOLS=off` undoes it.
 
 ### What's the "session start ritual"?
-1. Read the capsule OpenState already put in the context (the resume contract; `openstate_state` and `openstate_report` are for full detail)
+1. In native OpenCode, read the injected capsule. In an MCP client without capsule injection, call `openstate_capsule` for the project root (`openstate_state` and `openstate_report` provide full detail).
 2. Announce to user: "openstate loaded · objective: X · validation stale · branch: main"
 3. `openstate_report` only if something looks broken or stuck
 
 ### What is a capsule?
-A structured JSON contract injected at session start, a few hundred tokens (median about 500, at most about 1,600 across 21 real project stores). Contains:
+A structured JSON contract, injected automatically in native OpenCode and read on demand through MCP. The measured median was about 500 tokens, at most about 1,600 across 21 real project stores. Contains:
 - **Resume cursor**: current task, active files, last action, blocker, next action
 - **Validation**: test status, edits since green, stale/failed/current
 - **Change frontier**: modified/added/deleted files, uncommitted status
@@ -97,7 +98,7 @@ A structured JSON contract injected at session start, a few hundred tokens (medi
 ## Privacy & Data
 
 ### Where does my data live?
-`.openstate/state.jsonl` in your repo. **Never leaves your machine.** No telemetry, no cloud, no external calls except GitHub Releases for binary download.
+Project state stays local in `.openstate/state.jsonl`; `.openstate` can be a directory, symlink or local pointer. The engine sends no runtime telemetry. Host history discovery may contact the configured OpenCode API, while release downloads use GitHub. Choose a local history source when offline access is required.
 
 ### Can I inspect the state?
 Yes, through the tools: `openstate_state`, `openstate_report`, `openstate_why <fact_id>`, and `openstate_export` for a full dump. The file format itself is internal and may change between versions.
@@ -131,7 +132,7 @@ Under 1 MB on every platform. Built stripped, with LTO, `panic=abort` and `opt-l
 ## Compatibility
 
 ### Which editors?
-**OpenCode** through the plugin, with the capsule added to the context automatically. **Claude Code, Muse, Kiro and GitHub Copilot in VS Code** through the bundled MCP server (`.opencode/mcp/openstate-mcp.mjs`; registration in the README); there the agent calls `openstate_capsule` itself.
+**OpenCode** uses its native plugin, with automatic capture and capsule injection. **Claude Code, Codex, Cursor and other standard MCP clients** use the bundled MCP server (`mcp/openstate-mcp.mjs` under the chosen install directory; registration in the README). From any caller, `openstate_sessions` and `openstate_assess` recover supported OpenCode, Claude and legacy Codex histories for the project. Current paginated/compressed Codex history returns `unsupported_history`; MCP support does not imply support for every host's native history format.
 
 ### Which OS?
 Linux x86_64 (glibc 2.17 or newer), macOS (Intel and Apple Silicon), Windows x86_64 — via per-platform release bundles. Other platforms are refused by the installer with a clear message.
@@ -154,7 +155,7 @@ Surface (docs, skill, installer): Yes, MIT.
 Engine binary: No — proprietary, no source access.
 
 ### Is it free?
-**No.** OpenState is sold through Stripe ([pricing](https://michael-a-kuykendall.github.io/openstate/pricing.html)); Keygen issues the license key, shown once after checkout. The documentation, skill, installer and plugin bundle remain MIT-licensed.
+**No.** OpenState is sold through Stripe ([pricing](https://michael-a-kuykendall.github.io/openstate/pricing.html)); Keygen issues the license key after checkout. The documentation, skill, installer and plugin bundle remain MIT-licensed.
 
 ---
 
