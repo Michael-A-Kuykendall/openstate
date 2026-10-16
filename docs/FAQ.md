@@ -88,7 +88,7 @@ Yes, by default. The skill and the MCP server's instructions ask the agent to pr
 3. `openstate_report` only if something looks broken or stuck
 
 ### What is a capsule?
-A structured JSON contract, injected automatically in native OpenCode and read on demand through MCP. The measured median was about 500 tokens, at most about 1,600 across 21 real project stores. Contains:
+A structured JSON contract, injected automatically in native OpenCode and read on demand through MCP. The measured size was a median about 500, at most about 1,600 tokens across 21 real project stores. Contains:
 - **Resume cursor**: current task, active files, last action, blocker, next action
 - **Validation**: test status, edits since green, stale/failed/current
 - **Change frontier**: modified/added/deleted files, uncommitted status
