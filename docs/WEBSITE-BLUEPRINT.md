@@ -1,4 +1,6 @@
-# openstate — GitHub Pages Content Blueprint
+> **Historical archive — not current product guidance or release evidence.** Archived on 16 October 2026. Tool counts, install instructions, capsule and binary sizes, metrics and outcome claims below belong to an earlier document and must not be used for the current release. Current references: [product and installation](../README.md) and [measured evidence](../docs/evidence.md).
+
+# Historical archive: openstate — GitHub Pages Content Blueprint
 # Drop into docs/ or gh-pages. Use the existing logo + generated charts.
 # Theme suggestion: dark, high-contrast, single accent color (#2E86AB or similar).
 

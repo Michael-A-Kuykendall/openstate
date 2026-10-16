@@ -1,4 +1,6 @@
-# openstate — Launch Metrics (One-Page)
+> **Historical archive — not current product guidance or release evidence.** Archived on 16 October 2026. Tool counts, install instructions, capsule and binary sizes, metrics and outcome claims below belong to an earlier document and must not be used for the current release. Current references: [product and installation](../../README.md) and [measured evidence](../../docs/evidence.md).
+
+# Historical archive: openstate — Launch Metrics (One-Page)
 
 > **Source**: 8 repos × 34 sessions × 77 assessments × 30 capsules — Aug 4–14, 2026  
 > **Total facts tracked**: 60,732 (57,214 live + 3,518 closed)

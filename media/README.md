@@ -1,4 +1,6 @@
-# openstate — Launch Media Kit
+> **Historical archive — not current product guidance or release evidence.** Archived on 16 October 2026. Tool counts, install instructions, capsule and binary sizes, metrics and outcome claims below belong to an earlier document and must not be used for the current release. Current references: [product and installation](../README.md) and [measured evidence](../docs/evidence.md).
+
+# Historical archive: openstate — Launch Media Kit
 
 > **Real usage data from 8 projects, 34 sessions, 71 assessments, 30 capsules, 60,732 facts**
 

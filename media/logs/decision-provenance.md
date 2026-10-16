@@ -1,4 +1,6 @@
-# Sanitized Log Drop: Decision Provenance Chains (Sample 50)
+> **Historical archive — not current product guidance or release evidence.** Archived on 16 October 2026. Tool counts, install instructions, capsule and binary sizes, metrics and outcome claims below belong to an earlier document and must not be used for the current release. Current references: [product and installation](../../README.md) and [measured evidence](../../docs/evidence.md).
+
+# Historical archive: Sanitized Log Drop: Decision Provenance Chains (Sample 50)
 
 *50 decision facts with full provenance chains — verbatim from `.openstate/state.jsonl`*
 

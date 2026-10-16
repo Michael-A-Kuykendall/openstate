@@ -1,4 +1,6 @@
-# Article 5: Recurring Failure Detection — 173 Patterns the AI Learned
+> **Historical archive — not current product guidance or release evidence.** Archived on 16 October 2026. Tool counts, install instructions, capsule and binary sizes, metrics and outcome claims below belong to an earlier document and must not be used for the current release. Current references: [product and installation](../../README.md) and [measured evidence](../../docs/evidence.md).
+
+# Historical archive: Article 5: Recurring Failure Detection — 173 Patterns the AI Learned
 
 *by the openstate engine — root-cause clustering that turns flakiness into signal*
 

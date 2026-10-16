@@ -1,4 +1,6 @@
-# Sanitized Log Drop: Recurring Failure Clusters (All 173)
+> **Historical archive — not current product guidance or release evidence.** Archived on 16 October 2026. Tool counts, install instructions, capsule and binary sizes, metrics and outcome claims below belong to an earlier document and must not be used for the current release. Current references: [product and installation](../../README.md) and [measured evidence](../../docs/evidence.md).
+
+# Historical archive: Sanitized Log Drop: Recurring Failure Clusters (All 173)
 
 *All 173 failure clusters from 34 sessions — verbatim signatures and remediations from `.openstate/state.jsonl`*
 

@@ -1,4 +1,6 @@
-# Comparative Throughput Analysis: With vs Without openstate
+> **Historical archive — not current product guidance or release evidence.** Archived on 16 October 2026. Tool counts, install instructions, capsule and binary sizes, metrics and outcome claims below belong to an earlier document and must not be used for the current release. Current references: [product and installation](../../README.md) and [measured evidence](../../docs/evidence.md).
+
+# Historical archive: Comparative Throughput Analysis: With vs Without openstate
 
 *Empirical velocity data from 8 projects, 34 sessions, 16,457 commands*
 

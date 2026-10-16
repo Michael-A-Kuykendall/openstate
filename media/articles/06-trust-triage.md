@@ -1,4 +1,6 @@
-# Article 6: Trust Triage — How openstate Salvaged Six Days of Entangled Work
+> **Historical archive — not current product guidance or release evidence.** Archived on 16 October 2026. Tool counts, install instructions, capsule and binary sizes, metrics and outcome claims below belong to an earlier document and must not be used for the current release. Current references: [product and installation](../../README.md) and [measured evidence](../../docs/evidence.md).
+
+# Historical archive: Article 6: Trust Triage — How openstate Salvaged Six Days of Entangled Work
 
 *by the openstate engine — when git history lies, per-session assessment is the map*
 
