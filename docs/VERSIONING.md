@@ -6,7 +6,7 @@ OpenState follows [Semantic Versioning](https://semver.org/). Before 1.0, a brea
 
 These are what an agent, a host configuration or a script can rely on:
 
-- **Tool names and their arguments**, for the OpenCode plugin (36 tools) and the MCP server (34 tools).
+- **Tool names and their arguments**, for the OpenCode plugin and the MCP server (36 tools each).
 - **The keys of the capsule and of the report** (`openstate_capsule`, `openstate_report`), including nested keys.
 - **The installer's flags** (`--global`, `--check`, `--uninstall`, `--purge`) and where it puts things (`.opencode/`, `.openstate/`).
 - **The `.openstate` layouts** it accepts: a directory, a symlink, or a pointer file.
@@ -31,4 +31,4 @@ Every release has a [CHANGELOG](../CHANGELOG.md) entry with Added, Changed, Fixe
 
 - A test pins every capsule and report key; adding or removing one fails it until the change is made on purpose and recorded here and in the CHANGELOG.
 - A state file written by 0.1.0 is checked in, and every later engine must load it with its facts intact.
-- A test pins the 36 OpenCode tools by name and count; the MCP server's 34 are checked from the shipped bundle.
+- Tests pin the same 36 tools by name and count for OpenCode and generic MCP clients; the shipped MCP bundle is checked separately.

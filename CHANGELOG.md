@@ -22,11 +22,11 @@ The first public release: an OpenCode extension, installed per repository, with 
 - **Capsule in context** — the resume capsule is added to the model's context at the start of every session and again after each compaction, unchanged in between so prompt caching keeps working; `OPENSTATE_CAPSULE=off` turns it off.
 - **Frontier views** in capsule and report — resume cursor, validation status (with a hint when nothing has been verified yet), and the git change frontier. Report and capsule are deterministic and agree on the current task.
 - **Sidebar status line and completion toasts** in the OpenCode TUI, with `openstate_toast` to turn toasts off per project.
-- **MCP server** for every other host (Claude Code, Muse, Kiro, GitHub Copilot in VS Code), shipped in the bundle as one file, `mcp/openstate-mcp.mjs`; 34 tools (all but `openstate_restart` and `openstate_toast`).
+- **MCP server** for every other host (Claude Code, Muse, Kiro, GitHub Copilot in VS Code), shipped in the bundle as one file, `mcp/openstate-mcp.mjs`; 36 tools. Recovery of supported stored sessions works across callers. Restart checkpoints and reports next-call cold start for one-shot MCP; toast persists the preference while OpenCode renders the UI.
 - **Installer** — per-repository or `--global`; sha256 verification and an engine smoke test before anything is written; `--check`; `--uninstall` keeps `.openstate/` state and your own config; `--purge` also deletes the state; clear refusal on platforms without a prebuilt bundle.
 
 ### Security
-- The engine and plugin make no network calls; state stays on disk in the repository.
+- The engine stores project facts locally and sends no runtime telemetry. Host history discovery may contact the configured OpenCode API through its SDK.
 - A state file that cannot be read is moved aside unchanged, never overwritten; a full disk or an unwritable state directory is reported as such and leaves the previous state intact (`docs/TRUST.md`).
 - Release assets are verified by sha256 before install; the engine binary is stripped.
 
