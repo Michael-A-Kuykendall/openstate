@@ -135,7 +135,7 @@ Under 1 MB on every platform. Built stripped, with LTO, `panic=abort` and `opt-l
 **OpenCode** uses its native plugin, with automatic capture and capsule injection. **Claude Code, Codex, Cursor and other standard MCP clients** use the bundled MCP server (`mcp/openstate-mcp.mjs` under the chosen install directory; registration in the README). From any caller, `openstate_sessions` and `openstate_assess` recover supported OpenCode, Claude and legacy Codex histories for the project. Current paginated/compressed Codex history returns `unsupported_history`; MCP support does not imply support for every host's native history format.
 
 ### Which OS?
-Linux x86_64 (glibc 2.17 or newer), macOS (Intel and Apple Silicon), Windows x86_64 — via per-platform release bundles. Other platforms are refused by the installer with a clear message.
+Linux x86_64 (glibc 2.17 or newer) and macOS Intel are runtime-verified per release; Apple Silicon and Windows x86_64 bundles are published but runtime-unverified (no in-house hardware yet) — via per-platform release bundles. Other platforms are refused by the installer with a clear message.
 
 ### OpenCode version?
 Requires OpenCode with plugin API support.
