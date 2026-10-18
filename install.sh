@@ -343,11 +343,17 @@ purge_state() {
 }
 
 PURGE=0
-if [ "${1:-}" = "--purge" ] || [ "${1:-}" = "purge" ]; then
+for arg in "$@"; do
+  [ "$arg" = "--purge" ] || [ "$arg" = "purge" ] && PURGE=1
+done
+if [ "$PURGE" = 1 ]; then
   [ "${GLOBAL_MODE:-0}" = 1 ] && fail "--purge deletes one repository's state; run it in that repository without --global"
-  PURGE=1
 fi
-if [ "${1:-}" = "--uninstall" ] || [ "${1:-}" = "uninstall" ] || [ "$PURGE" = 1 ]; then
+UNINSTALL=0
+for arg in "$@"; do
+  [ "$arg" = "--uninstall" ] || [ "$arg" = "uninstall" ] && UNINSTALL=1
+done
+if [ "$UNINSTALL" = 1 ] || [ "$PURGE" = 1 ]; then
   say "uninstalling openstate from $OPENCODE_DIR"
 
   # Restore the pre-profile opencode.jsonc if enforce/shadow left a backup.
@@ -440,7 +446,11 @@ if [ "${1:-}" = "--uninstall" ] || [ "${1:-}" = "uninstall" ] || [ "$PURGE" = 1 
 fi
 
 # ---------- check mode (verifies an installed bundle; NO network) ----------
-if [ "${1:-}" = "--check" ]; then
+CHECK=0
+for arg in "$@"; do
+  [ "$arg" = "--check" ] && CHECK=1
+done
+if [ "$CHECK" = 1 ]; then
   MISSING=""
   [ -f "$PLUGIN_DIR/openstate/index.js" ]    || MISSING="$MISSING plugins/openstate/index.js"
   [ -f "$PLUGIN_DIR/openstate/tui.js" ]       || MISSING="$MISSING plugins/openstate/tui.js"
