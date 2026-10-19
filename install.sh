@@ -589,7 +589,7 @@ fi
 if [ -z "${OPENSTATE_LOCAL_BUNDLE:-}" ]; then
 if [ -z "$VERSION" ]; then
   say "resolving latest openstate release..."
-  TAG="$(curl -fsSL "${AUTH[@]}" "https://api.github.com/repos/$REPO/releases/latest" \
+  TAG="$(curl -fsSL ${AUTH[@]+"${AUTH[@]}"} "https://api.github.com/repos/$REPO/releases/latest" \
     | sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p')"
   [ -n "$TAG" ] || fail "could not resolve latest release for $REPO"
 else
