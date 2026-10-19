@@ -49,7 +49,7 @@ These four categories are a subset of the structural total. Text preview/apply c
 ## Resilience and reachability
 
 - The separate legacy OpenCode session/part corpus, 16 June through 23 September 2026, contains 21,372 OpenState tool calls including state tools, with 19 calls whose tool status is error: 0.09%. This invocation-level status measure is not a structural-only success rate and does not classify every structured refusal returned inside a successful tool result.
-- OpenCode uses its native plugin. Other standard MCP clients use the bundled MCP server; the measured Claude/MCP-host logs include thousands of OpenState MCP operations across 11 Muse sessions. Calling host and transcript source are separate: the same project can recover supported stored sessions through either transport.
+- OpenCode uses its native plugin. Other standard MCP clients use the bundled MCP server; the Claude/MCP-host logs measured for this report include over a thousand OpenState MCP operations across Muse sessions. Calling host and transcript source are separate: the same project can recover supported stored sessions through either transport.
 
 ## What the numbers do not claim
 
