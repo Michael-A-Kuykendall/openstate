@@ -93,6 +93,13 @@ fi
 say()  { printf '\033[1m%s\033[0m\n' "$*"; }
 ok()   { printf '  \033[32m✓\033[0m %s\n' "$*"; }
 fail() { printf '  \033[31m✗\033[0m %s\n' "$*" >&2; exit 1; }
+# TAG interpolates into single-quoted node -e (sig_verify) and python3 -c
+# (asset-name matches) sinks. Refuse anything but release-tag characters.
+check_tag() {
+  case "$TAG" in
+    ""|*[!A-Za-z0-9._-]* ) fail "refusing suspicious release tag: $TAG" ;;
+  esac
+}
 
 # openstate-s9bf.27: every mode edits JSON config with node, and the MCP server
 # runs on it. Refuse before anything is downloaded or written.
@@ -595,6 +602,7 @@ if [ -z "$VERSION" ]; then
 else
   TAG="$VERSION"
 fi
+check_tag
 fi
 say "openstate installer — $REPO @ ${TAG:-local} ($PLATFORM)"
 
@@ -614,6 +622,7 @@ if [ -n "${OPENSTATE_LOCAL_BUNDLE:-}" ]; then
   # Derive TAG from the filename openstate-<TAG>-<PLATFORM>.tar.gz
   BASE="$(basename "$OPENSTATE_LOCAL_BUNDLE")"
   TAG="$(printf '%s' "$BASE" | sed -E 's/^openstate-([^-]+)-.*/\1/')"
+  check_tag
   cp "$OPENSTATE_LOCAL_BUNDLE" "$TMPDIR/$ASSET"
 else
 case " $OPENSTATE_PUBLISHED_PLATFORMS " in
