@@ -134,7 +134,7 @@ State lives per-project in `.openstate/state.jsonl`. Read it through the tools (
 - **One machine, one repository.** There is no sync between machines or people.
 - **No measurement yet shows fewer repeated failures.** What OpenState guarantees is the record and its delivery to the agent; whether that changes your agent's behavior is for you to judge in your own sessions. (Token *cost per completed work item* is measured and fell with adoption: see the Structural tools bullet above.)
 - **The engine is closed source** (the plugin, installer, skill and documentation are MIT).
-- **Install integrity, not authenticity.** The installer checks each download against the sha256 published with the same GitHub release; releases are not yet signed. Read `install.sh` before you pipe it into bash.
+- **Install authenticity.** The installer checks each download against the sha256 published with the same GitHub release and verifies the Ed25519 signature against the release key embedded in `install.sh`; either check failing aborts the install. Read `install.sh` before you pipe it into bash.
 
 ---
 

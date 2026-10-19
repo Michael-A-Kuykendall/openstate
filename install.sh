@@ -23,6 +23,12 @@
 # a release asset. Node.js 18+ IS required (the installer uses it to update your
 # JSON config and refuses to run without it).
 #
+# Every downloaded asset is verified twice before anything is extracted: the
+# sha256 checksum (integrity) and then the Ed25519 signature in the <asset>.sig
+# sidecar (authenticity) against the release public key embedded below. Either
+# check failing aborts the install. Local-bundle installs skip both checks:
+# the tarball is trusted local input.
+#
 # Usage:
 #   curl -fsSL https://github.com/<owner>/<repo>/raw/main/install.sh | bash
 #   OPENSTATE_CONFIG_DIR=/path/repo/.opencode ./install.sh   # install elsewhere
@@ -158,6 +164,28 @@ sha256_verify_companion() {
   expected="$(awk 'NR==1 {print $1; exit}' "$2")"
   [ -n "$expected" ] || return 1
   sha256_verify "$1" "$expected"
+}
+
+# openstate-s9bf.31: release signing key. This MUST equal
+# tools/release-signing.pub (tools/test-install-checksum.sh checks).
+# Rotation: generate a new key (tools/sign-release.mjs --generate), commit the
+# new public key here and there, and re-sign every supported asset; old
+# signatures stop verifying. Fingerprint (sha256 of the raw key):
+# c584406a1b2c784307cc7202b3d3536e7848f533d8d1aa87ada8e62a2145dc6a
+OPENSTATE_RELEASE_PUBKEY="GCTSRTiehdJTpqXb/x+KVJ+Ih+hLLQknK1d4sdagd8I="
+
+# sig_verify FILE SIGFILE: verify FILE against the base64 Ed25519 SIGFILE.
+# Node 18+ is guaranteed (the installer refuses to run without it).
+sig_verify() {
+  node -e "
+const { createPublicKey, verify } = require('node:crypto');
+const { readFileSync } = require('node:fs');
+const pub = createPublicKey({ key: { kty: 'OKP', crv: 'Ed25519',
+  x: Buffer.from('$OPENSTATE_RELEASE_PUBKEY', 'base64').toString('base64url') }, format: 'jwk' });
+const data = readFileSync('$1');
+const sig = Buffer.from(readFileSync('$2', 'utf8').trim(), 'base64');
+if (sig.length !== 64 || !verify(null, data, pub, sig)) process.exit(1);
+" 2>/dev/null
 }
 
 # --- platform detection ---
@@ -617,7 +645,7 @@ else
 fi
 fi
 
-# --- verify checksum (published alongside the asset) ---
+# --- verify checksum + signature (published alongside the asset) ---
 # Skipped in local-bundle mode: the tarball is trusted local input.
 if [ -z "${OPENSTATE_LOCAL_BUNDLE:-}" ]; then
 if [ ${#AUTH[@]} -gt 0 ]; then
@@ -635,6 +663,20 @@ for a in d.get('assets', []):
   sha256_verify_companion "$TMPDIR/$ASSET" "$TMPDIR/$ASSET.sha256" \
     || fail "checksum mismatch — aborting (possible corruption or tampering)"
   ok "checksum verified"
+  SIG_ASSET_ID="$(printf '%s' "$RELEASE_JSON" | python3 -c "
+import sys, json
+d = json.load(sys.stdin)
+for a in d.get('assets', []):
+    if a['name'] == '$ASSET.sig':
+        print(a['id']); break
+" 2>/dev/null)"
+  [ -n "$SIG_ASSET_ID" ] || fail "signature asset $ASSET.sig not found in release $TAG"
+  curl -fsSL "${AUTH[@]}" -H "Accept: application/octet-stream" \
+    -o "$TMPDIR/$ASSET.sig" \
+    "https://api.github.com/repos/$REPO/releases/assets/$SIG_ASSET_ID"
+  sig_verify "$TMPDIR/$ASSET" "$TMPDIR/$ASSET.sig" \
+    || fail "signature mismatch — aborting (asset is not an authentic openstate release)"
+  ok "signature verified"
 else
   curl -fsSL -o "$TMPDIR/$ASSET.sha256" \
     "https://github.com/$REPO/releases/download/$TAG/$ASSET.sha256" \
@@ -642,6 +684,12 @@ else
   sha256_verify_companion "$TMPDIR/$ASSET" "$TMPDIR/$ASSET.sha256" \
     || fail "checksum mismatch — aborting (possible corruption or tampering)"
   ok "checksum verified"
+  curl -fsSL -o "$TMPDIR/$ASSET.sig" \
+    "https://github.com/$REPO/releases/download/$TAG/$ASSET.sig" \
+    || fail "signature asset missing for $ASSET"
+  sig_verify "$TMPDIR/$ASSET" "$TMPDIR/$ASSET.sig" \
+    || fail "signature mismatch — aborting (asset is not an authentic openstate release)"
+  ok "signature verified"
 fi
 fi
 
