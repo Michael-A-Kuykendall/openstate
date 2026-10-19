@@ -270,7 +270,7 @@
       1
     ],
     [
-      "ls ~/.opencode/bin/ && echo \"---\" && ls ~/.opencode/bin/node_modules/@opentui/ 2>/dev/null || echo \"no @opentui there\"; find /home/micha succeeded",
+      "ls ~/.opencode/bin/ && echo \"---\" && ls ~/.opencode/bin/node_modules/@opentui/ 2>/dev/null || echo \"no @opentui there\"; find ~/ succeeded",
       1
     ],
     [

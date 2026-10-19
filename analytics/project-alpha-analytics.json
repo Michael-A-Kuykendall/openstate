@@ -580,11 +580,11 @@
       2
     ],
     [
-      "recurring: error executing tool read_file: filenotfounderror: [errno 2] no such file or directory: ' mnt c users micha repos project-alpha airframe src main.rs'",
+      "recurring: error executing tool read_file: filenotfounderror: [errno 2] no such file or directory: ' /repo airframe src main.rs'",
       2
     ],
     [
-      "recurring: file not found: mnt c users micha repos project-alpha c: users micha downloads airframe_shimmy_architecture_audit.md",
+      "recurring: file not found: /repo ~ downloads airframe_shimmy_architecture_audit.md",
       2
     ],
     [

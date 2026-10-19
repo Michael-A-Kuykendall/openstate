@@ -222,7 +222,7 @@
       1
     ],
     [
-      "ls -la \"C:\\Users\\micha\\repos\" succeeded",
+      "ls -la \"~/repos\" succeeded",
       1
     ],
     [
@@ -230,7 +230,7 @@
       1
     ],
     [
-      "ls -la \"C:\\Users\\micha\\repos\\project-zeta-cli\"; echo \"=====RELAY=====\"; ls -la \"C:\\Users\\micha\\repos\\project-zeta-relay\"; echo \"=====GATEWARDEN=====\"; ls -l succeeded",
+      "ls -la \"/repo\"; echo \"=====RELAY=====\"; ls -la \"/repo\"; echo \"=====GATEWARDEN=====\"; ls -l succeeded",
       1
     ],
     [
@@ -484,23 +484,23 @@
       3
     ],
     [
-      "recurring: notfound: filesystem.access ( mnt c users micha repos project-zeta c: users micha repos project-zeta)",
+      "recurring: notfound: filesystem.access ( /repo /repo",
       2
     ],
     [
-      "recurring: file not found: mnt c users micha repos project-zeta c: users micha repos project-zeta plans ship_v1_freeze.md",
+      "recurring: file not found: /repo /repo plans ship_v1_freeze.md",
       1
     ],
     [
-      "recurring: file not found: mnt c users micha repos project-zeta c: users micha repos project-zeta src view discovertargetscore.ts",
+      "recurring: file not found: /repo /repo src view discovertargetscore.ts",
       1
     ],
     [
-      "recurring: file not found: mnt c users micha repos project-zeta c: users micha repos project-zeta src test claudefse.test.ts",
+      "recurring: file not found: /repo /repo src test claudefse.test.ts",
       1
     ],
     [
-      "recurring: file not found: mnt c users micha repos project-zeta c: users micha repos project-zeta src fse2 grokdiscover.ts",
+      "recurring: file not found: /repo /repo src fse2 grokdiscover.ts",
       1
     ],
     [

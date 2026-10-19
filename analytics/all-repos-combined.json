@@ -242,7 +242,7 @@
         1
       ],
       [
-        "find /c/Users/micha -maxdepth 4 -name \"workmux*\" -not -path \"*/AppData/*\" 2>/dev/null | head -20 succeeded",
+        "find ~/ -maxdepth 4 -name \"workmux*\" -not -path \"*/AppData/*\" 2>/dev/null | head -20 succeeded",
         1
       ],
       [
@@ -250,7 +250,7 @@
         1
       ],
       [
-        "find /c/Users/micha /c/tools /usr/local -maxdepth 5 \\( -name \"workmux\" -o -name \"workmux.exe\" \\) 2>/dev/null | head; echo \"---PATH check done---\" succeeded",
+        "find ~/ /c/tools /usr/local -maxdepth 5 \\( -name \"workmux\" -o -name \"workmux.exe\" \\) 2>/dev/null | head; echo \"---PATH check done---\" succeeded",
         1
       ],
       [
@@ -262,7 +262,7 @@
         1
       ],
       [
-        "ls /c/Users/micha/bin/workmux 2>&1; echo \"---\"; cat /c/Users/micha/bin/*.sh 2>/dev/null | head -5; ls /c/Users/micha/bin/ | head -30 succeeded",
+        "ls ~/bin/workmux 2>&1; echo \"---\"; cat ~/bin/*.sh 2>/dev/null | head -5; ls ~/bin/ | head -30 succeeded",
         1
       ],
       [
@@ -270,7 +270,7 @@
         1
       ],
       [
-        "chmod +x /c/Users/micha/bin/workmux && which workmux && workmux --version 2>&1 succeeded",
+        "chmod +x ~/bin/workmux && which workmux && workmux --version 2>&1 succeeded",
         1
       ],
       [
@@ -290,7 +290,7 @@
         1
       ],
       [
-        "chmod +x /c/Users/micha/bin/workmux && workmux --version 2>&1; echo \"===HELP===\"; workmux --help 2>&1 | head -30 succeeded",
+        "chmod +x ~/bin/workmux && workmux --version 2>&1; echo \"===HELP===\"; workmux --help 2>&1 | head -30 succeeded",
         1
       ],
       [
@@ -463,7 +463,7 @@
         1
       ],
       [
-        "Found it. Your sessions **are** in the DB \u2014 all 769 of them \u2014 but they're invisible because of path keying:\n\n```\nC:/Users/micha/repos/project-eta          \u2192 1 session (Windows)\n/repo",
+        "Found it. Your sessions **are** in the DB \u2014 all 769 of them \u2014 but they're invisible because of path keying:\n\n```\n/repo          \u2192 1 session (Windows)\n/repo",
         1
       ],
       [
@@ -2116,11 +2116,11 @@
         2
       ],
       [
-        "recurring: error executing tool read_file: filenotfounderror: [errno 2] no such file or directory: ' mnt c users micha repos project-alpha airframe src main.rs'",
+        "recurring: error executing tool read_file: filenotfounderror: [errno 2] no such file or directory: ' /repo airframe src main.rs'",
         2
       ],
       [
-        "recurring: file not found: mnt c users micha repos project-alpha c: users micha downloads airframe_shimmy_architecture_audit.md",
+        "recurring: file not found: /repo ~ downloads airframe_shimmy_architecture_audit.md",
         2
       ],
       [
@@ -2434,7 +2434,7 @@
         1
       ],
       [
-        "ls ~/.opencode/bin/ && echo \"---\" && ls ~/.opencode/bin/node_modules/@opentui/ 2>/dev/null || echo \"no @opentui there\"; find /home/micha succeeded",
+        "ls ~/.opencode/bin/ && echo \"---\" && ls ~/.opencode/bin/node_modules/@opentui/ 2>/dev/null || echo \"no @opentui there\"; find ~/ succeeded",
         1
       ],
       [
@@ -3264,7 +3264,7 @@
         1
       ],
       [
-        "ls -la \"C:\\Users\\micha\\repos\" succeeded",
+        "ls -la \"~/repos\" succeeded",
         1
       ],
       [
@@ -3272,7 +3272,7 @@
         1
       ],
       [
-        "ls -la \"C:\\Users\\micha\\repos\\project-zeta-cli\"; echo \"=====RELAY=====\"; ls -la \"C:\\Users\\micha\\repos\\project-zeta-relay\"; echo \"=====GATEWARDEN=====\"; ls -l succeeded",
+        "ls -la \"/repo\"; echo \"=====RELAY=====\"; ls -la \"/repo\"; echo \"=====GATEWARDEN=====\"; ls -l succeeded",
         1
       ],
       [
@@ -3526,23 +3526,23 @@
         3
       ],
       [
-        "recurring: notfound: filesystem.access ( mnt c users micha repos project-zeta c: users micha repos project-zeta)",
+        "recurring: notfound: filesystem.access ( /repo /repo",
         2
       ],
       [
-        "recurring: file not found: mnt c users micha repos project-zeta c: users micha repos project-zeta plans ship_v1_freeze.md",
+        "recurring: file not found: /repo /repo plans ship_v1_freeze.md",
         1
       ],
       [
-        "recurring: file not found: mnt c users micha repos project-zeta c: users micha repos project-zeta src view discovertargetscore.ts",
+        "recurring: file not found: /repo /repo src view discovertargetscore.ts",
         1
       ],
       [
-        "recurring: file not found: mnt c users micha repos project-zeta c: users micha repos project-zeta src test claudefse.test.ts",
+        "recurring: file not found: /repo /repo src test claudefse.test.ts",
         1
       ],
       [
-        "recurring: file not found: mnt c users micha repos project-zeta c: users micha repos project-zeta src fse2 grokdiscover.ts",
+        "recurring: file not found: /repo /repo src fse2 grokdiscover.ts",
         1
       ],
       [

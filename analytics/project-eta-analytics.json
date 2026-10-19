@@ -213,7 +213,7 @@
       1
     ],
     [
-      "find /c/Users/micha -maxdepth 4 -name \"workmux*\" -not -path \"*/AppData/*\" 2>/dev/null | head -20 succeeded",
+      "find ~/ -maxdepth 4 -name \"workmux*\" -not -path \"*/AppData/*\" 2>/dev/null | head -20 succeeded",
       1
     ],
     [
@@ -221,7 +221,7 @@
       1
     ],
     [
-      "find /c/Users/micha /c/tools /usr/local -maxdepth 5 \\( -name \"workmux\" -o -name \"workmux.exe\" \\) 2>/dev/null | head; echo \"---PATH check done---\" succeeded",
+      "find ~/ /c/tools /usr/local -maxdepth 5 \\( -name \"workmux\" -o -name \"workmux.exe\" \\) 2>/dev/null | head; echo \"---PATH check done---\" succeeded",
       1
     ],
     [
@@ -233,7 +233,7 @@
       1
     ],
     [
-      "ls /c/Users/micha/bin/workmux 2>&1; echo \"---\"; cat /c/Users/micha/bin/*.sh 2>/dev/null | head -5; ls /c/Users/micha/bin/ | head -30 succeeded",
+      "ls ~/bin/workmux 2>&1; echo \"---\"; cat ~/bin/*.sh 2>/dev/null | head -5; ls ~/bin/ | head -30 succeeded",
       1
     ],
     [
@@ -241,7 +241,7 @@
       1
     ],
     [
-      "chmod +x /c/Users/micha/bin/workmux && which workmux && workmux --version 2>&1 succeeded",
+      "chmod +x ~/bin/workmux && which workmux && workmux --version 2>&1 succeeded",
       1
     ],
     [
@@ -261,7 +261,7 @@
       1
     ],
     [
-      "chmod +x /c/Users/micha/bin/workmux && workmux --version 2>&1; echo \"===HELP===\"; workmux --help 2>&1 | head -30 succeeded",
+      "chmod +x ~/bin/workmux && workmux --version 2>&1; echo \"===HELP===\"; workmux --help 2>&1 | head -30 succeeded",
       1
     ],
     [
@@ -434,7 +434,7 @@
       1
     ],
     [
-      "Found it. Your sessions **are** in the DB \u2014 all 769 of them \u2014 but they're invisible because of path keying:\n\n```\nC:/Users/micha/repos/project-eta          \u2192 1 session (Windows)\n/repo",
+      "Found it. Your sessions **are** in the DB \u2014 all 769 of them \u2014 but they're invisible because of path keying:\n\n```\n/repo          \u2192 1 session (Windows)\n/repo",
       1
     ],
     [

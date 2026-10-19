@@ -15,16 +15,33 @@ PROJECT_MAP = {
     'chat-chronicle': 'project-zeta',
     'adama': 'project-eta',
     'auxide-workspace': 'project-theta',
+    'openstate-private': 'project-iota',
 }
 
 PATH_PATTERNS = [
-    (r'/home/michael/repos/[^/]+', '/repo'),
-    (r'/mnt/c/Users/micha/repos/[^/]+', '/repo'),
-    (r'/tmp/opencode/[^/]+', '/tmp/work'),
+    (r"/home/michael/repos/[^\s\"';\/\\]+", '/repo'),
+    (r"/mnt/c/Users/micha/repos/[^\s\"';\/\\]+", '/repo'),
+    (r"/[cC]/Users/micha/repos/[^\s\"';\/\\]+", '/repo'),
+    (r"[cC]:/Users/micha/repos/[^\s\"';\/\\]+", '/repo'),
+    (r"[cC]:\\Users\\micha\\repos\\[^\s\"';\/\\]+", '/repo'),
+    (r"/tmp/opencode/[^\s\"';\/\\]+", '/tmp/work'),
     (r'/home/michael/\.config/opencode', '~/.config/opencode'),
     (r'/mnt/c/Users/micha/\.config/opencode', '~/.config/opencode'),
-    (r'/home/michael/', '~/'),
-    (r'/mnt/c/Users/micha/', '~/'),
+    (r'/home/michael/?', '~/'),
+    (r'/mnt/c/Users/micha/?', '~/'),
+    (r'/[cC]/Users/micha/?', '~/'),
+    (r'[cC]:/Users/micha/?', '~/'),
+    (r'[cC]:\\Users\\micha\\?', '~/'),
+    # Second local username (Linux dev box). AFTER the /home/michael rules:
+    # '/home/micha' is a prefix of '/home/michael' and must not match first.
+    (r"/home/micha/repos/[^\s\"';\/\\]+", '/repo'),
+    (r"/home/micha/?", '~/'),
+    # Tokenized paths (separator-stripped by upstream recurring-failure
+    # keying): 'mnt c users micha ...', 'c: users micha ...'.
+    (r"\bmnt c users micha repos [^\s\"';\/\\]+", '/repo'),
+    (r"\b[cC]: users micha repos [^\s\"';\/\\]+", '/repo'),
+    (r"\bmnt c users micha\b", '~'),
+    (r"\b[cC]: users micha\b", '~'),
 ]
 
 def sanitize_proposition(prop: str) -> str:
@@ -36,8 +53,19 @@ def sanitize_proposition(prop: str) -> str:
         prop = prop.replace(real, fake)
     return prop
 
+def resolve_repo_name(repo: str) -> str:
+    """Fail-closed PROJECT_MAP lookup: an unmapped repo stops the run with
+    exit 2 instead of leaking the raw name into public artifacts."""
+    if repo not in PROJECT_MAP:
+        print(
+            f"sanitize-analytics: unmapped repo '{repo}' — add it to PROJECT_MAP, then re-run",
+            file=sys.stderr,
+        )
+        raise SystemExit(2)
+    return PROJECT_MAP[repo]
+
 def sanitize_repo_name(name: str) -> str:
-    return PROJECT_MAP.get(name, name)
+    return resolve_repo_name(name)
 
 def analyze_file(path: str, repo_name: str, safe_name: str) -> dict:
     tags = Counter()
@@ -149,7 +177,7 @@ def analyze_all(output_dir: str):
         if not os.path.exists(p):
             continue
         repo = Path(p).parent.parent.name
-        safe_name = PROJECT_MAP.get(repo, repo)
+        safe_name = resolve_repo_name(repo)
         
         try:
             data = analyze_file(p, repo, safe_name)
