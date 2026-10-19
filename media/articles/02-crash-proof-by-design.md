@@ -1,145 +1,44 @@
-> **Historical archive — not current product guidance or release evidence.** Archived on 16 October 2026. Tool counts, install instructions, capsule and binary sizes, metrics and outcome claims below belong to an earlier document and must not be used for the current release. Current references: [product and installation](../../README.md) and [measured evidence](../../docs/evidence.md).
+# Starting again after a kill
 
-# Historical archive: Article 2: Crash-Proof by Design — 14 Session Failures, Zero Lost Work
-
-*by the openstate engine — the crash that didn't happen*
-
----
-
-## The crash that wasn't
-
-Session `ses_02c4b135` — 47 minutes into a TLA+ proof session for mikedb. The engine process got SIGKILL'd by the OOM killer. State file mid-write. In the old world: **everything since last checkpoint gone**.
-
-With openstate: **capsule injected on next session start. Exact state recovered. Proof work continued.**
+Processes die. Power fails, laptops shut, the OOM killer picks a victim, a
+session ends mid-edit. The work that survives is the work that reached the
+disk before the end. OpenState draws that line in the open: confirmed state
+is written down, unconfirmed state is not, and the next session reads what
+was written, nothing else.
 
 ---
 
-## The 14 session failures
+## What reaching the disk means
 
-| Session | Duration | Cause | Recovery |
-|---------|----------|-------|----------|
-| ses_02c4b135 | 47 min | OOM kill (TLAPS) | Capsule injected, proof resumed |
-| ses_01a8f4e2 | 23 min | Engine segfault (Rust) | Capsule injected, edit state intact |
-| ses_03f7b9c1 | 12 min | Network partition (MCP) | State persisted, reconnected |
-| ses_00e4d2a8 | 8 min | Power loss (laptop) | Dispose flush on stdin-EOF |
-| ses_01b2c9d4 | 31 min | Kernel panic | Capsule injected |
-| ses_04a5f6e3 | 19 min | OpenCode crash | Dispose flush |
-| ses_02d8e1f4 | 5 min | Manual kill -9 | Capsule injected |
-| ... | ... | ... | ... |
-
-**Total: 14 hard crashes. 0 lines of work lost.**
+A checkpoint writes the current state out. A clean shutdown flushes first and
+then stops. When the end is abrupt, the engine takes the last path left: the
+closing input stream trips an emergency write. Each path ends with the bytes
+on the disk, so a fresh session starts from something real rather than from a
+guess about what the dead session meant.
 
 ---
 
-## Why this doesn't happen by accident
+## What comes back
 
-The persistence model is **deliberate** — not automatic:
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    PERSISTENCE LAYER                        │
-├─────────────────────────────────────────────────────────────┤
-│  1. Explicit CHECKPOINT (human/AI decision)                │
-│     └─ "This state is correct, persist it"                 │
-│                                                             │
-│  2. Dispose flush (app close)                              │
-│     └─ Plugin shutdown → engine.flush() → fsync()          │
-│                                                             │
-│  3. stdin-EOF last resort (catastrophic kill)              │
-│     └─ Engine stdin closes → emergency flush → fsync()     │
-└─────────────────────────────────────────────────────────────┘
-
-NO automatic flush on:
-  ✗ idle timer
-  ✗ session.compacted
-  ✗ periodic timer
-  ✗ fact count threshold
-```
-
-**Why this matters**: Automatic flushing = auto-persisting unconfirmed state. The 14 crashes only lost *unconfirmed* in-memory state — which is exactly the intended tradeoff.
+The next session opens with a resume note: the current task, the files in
+motion, the last check and whether it passed, what changed and what is still
+open. The agent reads it instead of re-reading the transcript, and continues
+from the noted place instead of reconstructing it from memory.
 
 ---
 
-## The capsule: your recovery contract
+## Measured steadiness
 
-When a session starts after a crash, openstate injects a **resume capsule**:
+A separate legacy corpus of 21,372 OpenState tool calls holds 19 calls whose
+tool status is error: 0.09%. That is an invocation-level status count, not a
+claim about refusals returned inside successful results.
 
-```json
-{
-  "resume_cursor": {
-    "current_task": "TLA+ proof: RetractionD1_Proof.tla",
-    "active_files": ["/repo/docs/tla/RetractionD1_Proof.tla"],
-    "last_meaningful_action": "tlapm run failed - 3 obligations unproved",
-    "blocking_reason": "Zenon can't prove symmetry lemma",
-    "next_action": "Refactor symmetry invariant in L4_INDEPENDENT_FAILURES.md"
-  },
-  "validation": {
-    "command": "tlapm prove RetractionD1_Proof.tla",
-    "status": "failed",
-    "edits_since_validation": 3
-  },
-  "change_frontier": {
-    "modified": ["docs/tla/RetractionD1_Proof.tla"],
-    "added": [],
-    "deleted": [],
-    "uncommitted": true
-  }
-}
-```
-
-The AI doesn't guess. It *knows* exactly where it was, what failed, and what's next.
+The tools run locally, without telemetry.
 
 ---
 
-## The dispose flush: graceful shutdown
+## Recovery without drama
 
-```
-# OpenCode shuts down plugin
-async dispose() {
-  await engine.checkpoint();  // Force flush
-  await engine.shutdown();    // Graceful stop
-}
-```
-
-If the AI (or human) closes OpenCode cleanly, state is **guaranteed** on disk. The next session starts with full continuity.
-
----
-
-## The stdin-EOF last resort
-
-```
-# Catastrophic: power loss, kill -9, kernel panic
-# Engine stdin closes → emergency flush triggers
-signal(SIGTERM, emergency_flush);
-signal(SIGINT, emergency_flush);
-// stdin EOF also triggers
-```
-
-Even `kill -9` can't stop the last-resort flush — the OS closes the engine's stdin, which triggers the emergency path.
-
----
-
-## What this means for your workflow
-
-| Scenario | Without openstate | With openstate |
-|----------|-------------------|----------------|
-| Power loss mid-edit | Lose uncommitted work | Capsule recovers exact edit state |
-| AI hallucinates file edit | Waste hours debugging | `corrected` fact retracts it |
-| Session compact loses context | Re-read 600k tokens | 3,000-token capsule injects exact state |
-| OOM kill during proof run | Proof state gone | Capsule recovers exact proof state |
-| Network partition (MCP) | State desync | Local state authoritative |
-
----
-
-## The philosophy: persistence is deliberate
-
-We **reject** timer-driven flush. We **reject** idle auto-save. We **reject** automatic persistence.
-
-Because automatic = "maybe the AI was hallucinating, but we saved it anyway."
-
-Every fact in the battery was **explicitly confirmed** by a human or AI decision. The 14 crashes only touched unconfirmed in-flight state — which is the correct boundary.
-
----
-
-*Data from 14 real session failures across 7 repos (Aug 2026). Project names obfuscated. Recovery verified via capsule injection logs in `.openstate/state.jsonl`.*
-EOF
+Recovery here is not magic. It is the ordinary consequence of writing state
+down while it is known and reading it back at the start. Sources and method:
+[measured evidence](../../docs/evidence.md).
