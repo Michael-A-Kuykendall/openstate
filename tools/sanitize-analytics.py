@@ -5,6 +5,7 @@ Sanitize analytics for public release - pure Python, no DuckDB
 import sys, json, glob, os, re, statistics
 from pathlib import Path
 from collections import Counter, defaultdict
+from datetime import datetime, timezone
 
 PROJECT_MAP = {
     'airframe-workspace': 'project-alpha',
@@ -24,6 +25,10 @@ PATH_PATTERNS = [
     (r"/[cC]/Users/micha/repos/[^\s\"';\/\\]+", '/repo'),
     (r"[cC]:/Users/micha/repos/[^\s\"';\/\\]+", '/repo'),
     (r"[cC]:\\Users\\micha\\repos\\[^\s\"';\/\\]+", '/repo'),
+    # Host-encoded project directories (Claude Code: -home-<user>-repos-<repo>).
+    (r"-home-michael-repos-[^\s\"';\/\\]+", '-repo'),
+    (r"-mnt-c-Users-micha-repos-[^\s\"';\/\\]+", '-repo'),
+    (r"-home-michael\b", '-home'),
     (r"/tmp/opencode/[^\s\"';\/\\]+", '/tmp/work'),
     (r'/home/michael/\.config/opencode', '~/.config/opencode'),
     (r'/mnt/c/Users/micha/\.config/opencode', '~/.config/opencode'),
@@ -67,6 +72,58 @@ def resolve_repo_name(repo: str) -> str:
 def sanitize_repo_name(name: str) -> str:
     return resolve_repo_name(name)
 
+# Engine fact names whose legacy analytics tag differs from the snake-cased name.
+SNAPSHOT_TAGS = {"FailedAttempt": "failed_attempt", "Blocked": "blocker", "HotFile": "file_activity"}
+
+def snake(name: str) -> str:
+    return re.sub(r"(?<!^)(?=[A-Z])", "_", name).lower()
+
+def state_records(f):
+    """Yield state as legacy {fact: {tag, proposition, timestamp, context}, live} records.
+
+    Reads both layouts: legacy JSONL (one record per line) and the engine's
+    single-line snapshot {arena, facts, fact_ids, sessions, ...} (openstate-xfu8),
+    where a fact names its text by arena index and fact_ids lists every fact
+    ever recorded, retracted ones included.
+    """
+    text = f.read()
+    try:
+        snapshot = json.loads(text)
+    except ValueError:
+        snapshot = None
+    if not (isinstance(snapshot, dict) and "arena" in snapshot and "facts" in snapshot):
+        for line in text.splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                yield json.loads(line)
+            except ValueError:
+                continue
+        return
+    arena = [entry.get("text", "") for entry in snapshot["arena"]]
+    live = {json.dumps(fact, sort_keys=True) for fact in snapshot["facts"]}
+    sessions = {fid: sid for fid, sid in snapshot.get("sessions", [])}
+    recorded = snapshot.get("fact_ids") or list(enumerate(snapshot["facts"]))
+    for fid, fact in recorded:
+        (name, fields), = fact.items()
+        node = next((fields[k] for k in ("proposition", "command", "path", "name", "file") if isinstance(fields.get(k), int)), None)
+        prop = arena[node] if node is not None and 0 <= node < len(arena) else ""
+        if name == "Completed":
+            prop += " succeeded"
+        elif name == "FailedAttempt":
+            prop += " failed"
+        ts = fields.get("ts")
+        yield {
+            "fact": {
+                "tag": SNAPSHOT_TAGS.get(name, snake(name)),
+                "proposition": prop,
+                "timestamp": datetime.fromtimestamp(ts, timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ") if isinstance(ts, int) else None,
+                "context": {"source_session": sessions.get(fid)} if fid in sessions else {},
+            },
+            "live": json.dumps(fact, sort_keys=True) in live,
+        }
+
 def analyze_file(path: str, repo_name: str, safe_name: str) -> dict:
     tags = Counter()
     live_closed = Counter()
@@ -87,14 +144,7 @@ def analyze_file(path: str, repo_name: str, safe_name: str) -> dict:
     cmds_per_session = Counter()
     
     with open(path) as f:
-        for line in f:
-            line = line.strip()
-            if not line:
-                continue
-            try:
-                d = json.loads(line)
-            except:
-                continue
+        for d in state_records(f):
             
             fact = d.get('fact', {})
             tag = fact.get('tag')
