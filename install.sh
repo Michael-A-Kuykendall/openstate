@@ -73,6 +73,16 @@ if [ -z "$INSTALL_SCOPE" ]; then
   [ -n "${OPENSTATE_CONFIG_DIR:-}" ] && INSTALL_SCOPE="repo" || INSTALL_SCOPE="global"
 fi
 [ "$INSTALL_SCOPE" = "repo" ] || [ "$INSTALL_SCOPE" = "global" ] || fail "OPENSTATE_INSTALL_SCOPE must be repo or global"
+# openstate-fgst.10: --license KEY (or --license=KEY, or OPENSTATE_LICENSE_KEY)
+# activates a paid license on this machine once the engine is installed. With
+# no key the install is the free tier and makes no license request at all.
+LICENSE_KEY="${OPENSTATE_LICENSE_KEY:-}"
+PREV_ARG=""
+for arg in "$@"; do
+  case "$arg" in --license=*) LICENSE_KEY="${arg#--license=}" ;; esac
+  [ "$PREV_ARG" = "--license" ] && LICENSE_KEY="$arg"
+  PREV_ARG="$arg"
+done
 
 global_config_root() {
   # Linux/macOS XDG; Windows %APPDATA%.
@@ -476,6 +486,7 @@ if [ "$UNINSTALL" = 1 ] || [ "$PURGE" = 1 ]; then
     purge_state "$(dirname "$OPENCODE_DIR")/.openstate"
   else
     say "  note: user state in .openstate/ was preserved. To delete it too: $0 --purge"
+    say "  note: this machine's license file is kept (it belongs to the machine, not the install); free a paid machine slot with: openstate-engine license deactivate"
   fi
   exit 0
 fi
@@ -582,6 +593,8 @@ if [ "$CHECK" = 1 ]; then
   fi
   [ "$INSTALLED" = "unknown" ] && say "  warning: install predates VERSION tracking — reinstall to upgrade"
   ok "complete bundle verified in $OPENCODE_DIR ($INSTALLED)"
+  # openstate-fgst.10: license status (no network for a free machine).
+  ok "license:        $("$BIN_DIR/$ENGINE_NAME" license status 2>/dev/null || echo unavailable)"
   exit 0
 fi
 
@@ -955,6 +968,19 @@ ok "ast-grep:       .opencode/bin/$AST_GREP_NAME"
 ok "MCP server:     .opencode/mcp/openstate-mcp.mjs (for other hosts; see README)"
 ok "profile:        $STRUCTURAL_MODE"
 ok "package.json:   .opencode/package.json (deps installed)"
+
+# ---------- license (openstate-fgst.10) ----------
+if [ -n "$LICENSE_KEY" ]; then
+  say "activating license"
+  if LICENSE_OUT="$("$ENGINE_DEST" license activate "$LICENSE_KEY" 2>&1)"; then
+    ok "license:        $LICENSE_OUT"
+  else
+    say "  warning: license not activated ($LICENSE_OUT); OpenState is installed on the free tier."
+    say "  retry later with: $ENGINE_DEST license activate <key>"
+  fi
+else
+  ok "license:        free tier (30 structural applies per machine); add a key later with: $ENGINE_DEST license activate <key>"
+fi
 
 # ---------- done ----------
 say "done"
