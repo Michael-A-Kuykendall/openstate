@@ -51,25 +51,33 @@
       <tbody>
         <tr><td><strong>Host</strong></td><td><strong>Session capture</strong></td><td><strong>Capsule delivery</strong></td><td><strong>State + structural tools</strong></td></tr>
         <tr><td><strong>OpenCode</strong></td><td>automatic, from the host&rsquo;s events</td><td>given to the agent at the start of every session and after each compaction</td><td>native</td></tr>
-        <tr><td><strong>Claude Code</strong></td><td>on-demand replay of supported stored sessions</td><td>on demand, via openstate_capsule</td><td>36 tools via MCP</td></tr>
-        <tr><td><strong>Other standard MCP clients</strong></td><td>on-demand replay of supported stored sessions</td><td>on demand, via openstate_capsule</td><td>36 tools via MCP</td></tr>
+        <tr><td><strong>Claude Code, Codex, Muse</strong></td><td>on-demand replay of the host&rsquo;s stored sessions</td><td>on demand, via openstate_capsule</td><td>36 tools via MCP</td></tr>
+        <tr><td><strong>Other standard MCP clients</strong> (Kiro, GitHub Copilot, Cursor)</td><td>replay of OpenCode, Claude Code, Codex and Muse sessions stored for the same project</td><td>on demand, via openstate_capsule</td><td>36 tools via MCP</td></tr>
       </tbody>
     </table>
-    <p class="lede">Both native OpenCode and standard MCP expose 22 structural and 14 state/lifecycle tools. Any MCP caller can recover supported OpenCode, Claude and legacy Codex histories in the same project; current paginated/compressed Codex history returns <code>unsupported_history</code>. Native OpenCode captures events and injects capsules automatically. MCP callers assess and read on demand. Client tool filters may hide operations until configuration is updated and the connection reloaded.</p>
+    <p class="lede">Both native OpenCode and standard MCP expose 22 structural and 14 state/lifecycle tools. Any MCP caller can recover OpenCode, Claude Code, Codex and Muse histories stored for the same project, so a session started in one agent can be picked up in another. Native OpenCode captures events and injects capsules automatically. MCP callers assess and read on demand. Client tool filters may hide operations until configuration is updated and the connection reloaded.</p>
   </div>
 </section>
 
 <section class="band alt" id="proof">
   <div class="shell">
-    <p class="eyebrow">Early results from the maintainer&rsquo;s projects</p>
-    <h2>A definition is a small part of its file.</h2>
+    <p class="eyebrow">Measured in the maintainer&rsquo;s projects, August to October 2026</p>
+    <h2>Fewer tokens per commit.</h2>
+    <ul class="metrics">
+      <li><span class="metric-num">&minus;31%</span><span class="metric-label">tokens per commit in the openstate project, 16.0M to 11.05M, August to September 2026, while completions rose</span></li>
+      <li><span class="metric-num">14.3M &rarr; 0.9M</span><span class="metric-label">tokens per commit in a repository that adopted the tools via Claude Code</span></li>
+      <li><span class="metric-num">&minus;96%</span><span class="metric-label">edit calls once the tools were in place: 8,002 in August, 346 in September</span></li>
+      <li><span class="metric-num">99.91%</span><span class="metric-label">of 21,372 OpenState calls succeeded</span></li>
+    </ul>
+    <p class="lede">Tokens per completed work item in the openstate project fell from about 16M to 10.6M (34%) over the same months. Repositories that did not adopt the tools were flat or worse per commit, except one that improved in a much lighter work phase. These figures come from the maintainer&rsquo;s own session history; they show cost moving with adoption, not a controlled study, and whole-session token totals rose as sessions got longer. <a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md">Method and evidence &rarr;</a></p>
+    <h3>Why it costs less: the agent reads the definition, not the file.</h3>
     <ul class="metrics">
       <li><span class="metric-num">97%</span><span class="metric-label">less data reading one function from a 63 KB file, in one measured case</span></li>
       <li><span class="metric-num">1.3 KB</span><span class="metric-label">a definition read, against about 8.6 KB for an average file read</span></li>
-      <li><span class="metric-num">22</span><span class="metric-label">tools: search, read, navigate, and preview/apply edits</span></li>
-      <li><span class="metric-num">18</span><span class="metric-label">languages with symbol support; text tools work in any file</span></li>
+      <li><span class="metric-num">~70%</span><span class="metric-label">fewer bytes per structural search than per classic file read, over 4,542 searches</span></li>
+      <li><span class="metric-num">22</span><span class="metric-label">tools in 18 languages: search, read, navigate, and preview/apply edits</span></li>
     </ul>
-    <p class="lede">These are bytes returned per read in the maintainer&rsquo;s sessions; how small a definition is next to its file depends on the code, and a careful agent can also read a range of lines. Completion cost is measured separately: in the maintainer&rsquo;s OpenCode history, tokens per completed work item in the openstate project fell from about 16M to 10.6M (34%) and per commit from 16.0M to 11.05M (31%) between August and September 2026 while completions rose, and a repo adopting the tools via Claude Code fell from 14.3M to 0.9M per commit while non-adopting repos were flat or worse except one that improved in a lighter work phase. That is observed co-movement in the maintainer&rsquo;s projects, not a controlled study.</p>
+    <p class="lede">Grep-and-read hunting pulls whole files into the context and rereads them when line numbers move; a structural search returns places, and a read returns one complete definition. How much smaller a definition is than its file depends on the code.</p>
   </div>
 </section>
 
@@ -85,7 +93,9 @@
         <tr><td>Change it</td><td>Rewrite text it matched by eye</td><td>A preview showing the change, then an apply that writes only that change</td></tr>
         <tr><td>Cope with a file that changed</td><td>Depends on the editor: some ask for a fresh read, others write over the change</td><td>Refuses a preview that no longer fits; applies a text edit whose anchor is still unique and says so</td></tr>
         <tr><td>Cope with two matches</td><td>Asks for more surrounding text; the agent has to find the matches itself</td><td>Refuses, and lists every match so the agent can choose</td></tr>
-        <tr><td>Make a one-line edit</td><td>1 call</td><td>3 calls: search, preview, apply</td></tr>
+        <tr><td>Rename a function everywhere</td><td>Grep for the name, open each file, edit each match by hand</td><td>One preview listing every change across the files, then one apply</td></tr>
+        <tr><td>Move a function to another file</td><td>Copy it out, paste it in, delete the original, fix the spacing</td><td>One preview and one apply; blank lines stay right at both ends</td></tr>
+        <tr><td>Edit a file with Windows line endings</td><td>Text typed with plain line breaks may not match the file</td><td>Matches with <code>line_endings=normalize</code> and keeps the file&rsquo;s endings</td></tr>
       </tbody>
     </table>
   </div>
@@ -162,7 +172,6 @@
       <li><strong>A small edit costs more calls.</strong> Search, preview and apply are three calls where a direct editor uses one. For a one-line change inside a long function, a text edit is cheaper than replacing the whole definition.</li>
       <li><strong>Searches are the heaviest read.</strong> A search with many matches can return several kilobytes; a language, a path or an exact name narrows it.</li>
       <li><strong>Matching is by syntax, not by type.</strong> References and renames match names in the syntax tree; they do not resolve types the way a compiler or language server does.</li>
-      <li><strong>Completion cost fell with adoption (measured).</strong> In the maintainer&rsquo;s OpenCode history, tokens per completed work item in the openstate repo fell from about 16M to 10.6M (34%) and per commit from 16.0M to 11.05M (31%) between August and September 2026 while completions rose; a repo adopting via Claude Code fell from 14.3M to 0.9M per commit, and non-adopting repos were flat or worse except one that improved in a lighter work phase. Observed co-movement in the maintainer&rsquo;s projects, not a controlled study.</li>
     </ul>
     <p class="lede"><a href="index.html">The other half of OpenState</a>: a running record of the project&rsquo;s decisions, failures and blockers, given to the agent at the start of every session.</p>
   </div>

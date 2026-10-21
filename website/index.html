@@ -59,8 +59,14 @@
     <p class="lede">22 structural tools, built on ast-grep, let coding agents search, read and edit code through guarded operations.</p>
     <p class="lede"><strong>Find and navigate.</strong> Locate definitions and lexical declarations or references with AST and text search.</p>
     <p class="lede"><strong>Read a bounded unit.</strong> Read a complete symbol or an anchored text region; large symbol results are paged.</p>
-    <p class="lede"><strong>Preview, then apply.</strong> Rename, replace, insert, delete, move or create through a preview before writing. Previews are single-use; stale files, ambiguous targets and reused previews are refused.</p>
-    <p class="lede">In one measured case, reading a complete function from a 63 KB file returned 97% less data than reading the file.</p>
+    <p class="lede"><strong>Preview, then apply.</strong> Rename a name across files, replace, insert, delete or move a whole definition, edit a unique piece of text, or create a file, each through a preview before writing. Previews are single-use; stale files, ambiguous targets and reused previews are refused.</p>
+    <ul class="metrics">
+      <li><span class="metric-num">&minus;31%</span><span class="metric-label">tokens per commit in the openstate project after adopting the tools, August to September 2026</span></li>
+      <li><span class="metric-num">14.3M &rarr; 0.9M</span><span class="metric-label">tokens per commit in a repository that adopted them via Claude Code</span></li>
+      <li><span class="metric-num">&minus;96%</span><span class="metric-label">edit calls, 8,002 to 346, as structural edits took over</span></li>
+      <li><span class="metric-num">97%</span><span class="metric-label">less data reading one function from a 63 KB file, in one measured case</span></li>
+    </ul>
+    <p class="lede">Measured on the maintainer&rsquo;s own projects: cost moved with adoption; it is not a controlled study.</p>
     <p class="lede"><a href="structural-tools.html">How the code tools work, what they guarantee, and where they cost more &rarr;</a></p>
   </div>
 </section>
@@ -83,8 +89,8 @@
 <section class="band" id="audience">
   <div class="shell">
     <p class="eyebrow">Who it is for</p>
-    <h2>Developers running long coding-agent sessions in OpenCode.</h2>
-    <p class="lede">For people who want each new session, and each session after a compaction, to start from what was decided, done, failed and blocked. Claude Code, Muse, Kiro and GitHub Copilot work too, through the bundled MCP server.</p>
+    <h2>Developers running long coding-agent sessions.</h2>
+    <p class="lede">For people who want their agent to read and change code by definition instead of hunting through whole files, and want each new session, and each session after a compaction, to start from what was decided, done, failed and blocked. OpenCode runs it natively; Claude Code, Codex, Muse, Kiro, GitHub Copilot and other MCP hosts use the bundled MCP server.</p>
     <h3>Who it is not for</h3>
     <ul class="tick-list">
       <li><strong>A knowledge base or documentation search.</strong> It records what happens in sessions, not your documents.</li>
@@ -132,6 +138,8 @@
         <tr><td>Text edit previews</td><td>8,102</td></tr>
         <tr><td>Text edit applies</td><td>6,694</td></tr>
         <tr><td>Bounded text-region reads</td><td>2,467</td></tr>
+        <tr><td>Edit calls, August &rarr; September</td><td>8,002 &rarr; 346</td></tr>
+        <tr><td>OpenState calls that succeeded</td><td>99.91% of 21,372</td></tr>
         <tr><td>Sessions that used it</td><td>243</td></tr>
         <tr><td>Projects</td><td>20</td></tr>
         <tr><td>Store records (10 October)</td><td>82,586</td></tr>
@@ -170,7 +178,7 @@
     <ul class="tick-list">
       <li><strong>It records only what passes through the host's events</strong>: messages, commands with their exit codes, file edits and git status. It does not see the model's reasoning, file contents, or work you do in your own terminal.</li>
       <li><strong>Decisions are recognised by wording.</strong> A message that gives a reason ("because", "since", "so that", "in order to", "due to") becomes a decision; a decision stated without one is recorded as a directive or objective, and a casual "because" can be recorded as a decision. <code>openstate_close</code> removes false ones.</li>
-      <li><strong>A failure needs an exit code.</strong> A command whose tool reports no exit code is recorded as completed, not failed (it never counts as a passing test, though). Read-only commands such as <code>cat</code>, <code>ls</code> or <code>grep</code> are not recorded at all.</li>
+      <li><strong>A result needs an exit code.</strong> A command whose host reports no exit code is recorded as neither passed nor failed. Read-only commands such as <code>cat</code>, <code>ls</code> or <code>grep</code> are not recorded at all.</li>
       <li><strong>On hosts other than OpenCode the capsule is on demand</strong>: the agent has to call <code>openstate_capsule</code> (the MCP server's instructions tell it to).</li>
       <li><strong>One machine, one repository.</strong> There is no sync between machines or people.</li>
       <li><strong>No measurement yet shows fewer repeated failures.</strong> What OpenState guarantees is the record and its delivery to the agent; whether that changes your agent's behavior is for you to judge in your own sessions. Token cost per completed work item is measured and fell with adoption (see the Structural tools page).</li>
