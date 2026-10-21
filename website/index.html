@@ -60,12 +60,14 @@
     <p class="lede"><strong>Find and navigate.</strong> Locate definitions and lexical declarations or references with AST and text search.</p>
     <p class="lede"><strong>Read a bounded unit.</strong> Read a complete symbol or an anchored text region; large symbol results are paged.</p>
     <p class="lede"><strong>Preview, then apply.</strong> Rename a name across files, replace, insert, delete or move a whole definition, edit a unique piece of text, or create a file, each through a preview before writing. Previews are single-use; stale files, ambiguous targets and reused previews are refused.</p>
-    <ul class="metrics">
-      <li><span class="metric-num">&minus;31%</span><span class="metric-label">tokens per commit in the openstate project after adopting the tools, August to September 2026</span></li>
-      <li><span class="metric-num">14.3M &rarr; 0.9M</span><span class="metric-label">tokens per commit in a repository that adopted them via Claude Code</span></li>
-      <li><span class="metric-num">&minus;96%</span><span class="metric-label">edit calls, 8,002 to 346, as structural edits took over</span></li>
-      <li><span class="metric-num">97%</span><span class="metric-label">less data reading one function from a 63 KB file, in one measured case</span></li>
-    </ul>
+    <table class="tool-table">
+      <tbody>
+        <tr><td>&minus;31%</td><td>tokens per commit in the openstate project after adopting the tools, August to September 2026</td></tr>
+        <tr><td>14.3M &rarr; 0.9M</td><td>tokens per commit in a repository that adopted them via Claude Code</td></tr>
+        <tr><td>&minus;96%</td><td>edit calls, 8,002 to 346, as structural edits took over</td></tr>
+        <tr><td>97%</td><td>less data reading one function from a 63 KB file, in one measured case</td></tr>
+      </tbody>
+    </table>
     <p class="lede">Measured on the maintainer&rsquo;s own projects: cost moved with adoption; it is not a controlled study.</p>
     <p class="lede"><a href="structural-tools.html">How the code tools work, what they guarantee, and where they cost more &rarr;</a></p>
   </div>
