@@ -22,6 +22,7 @@ OpenState tools are the sanctioned surface for this repo. They are bounded (~8 K
 - **Price your calls**: the `cost` field on every response is serialized bytes + lines. If a call returns `~6000 B`, the next call should be scoped tighter.
 - **Response envelope**: responses are a prose header line (e.g. `✓ tool · …`) plus a JSON payload; preview/apply responses are bare JSON. Check `ok`/`status` before reading `identity`; when parsing, parse after the first newline.
 - **Identity naming**: the `identity` a preview returns and the `preview_id` its apply accepts are the same value.
+- **Free-tier applies are metered**: without a paid license each successful apply counts toward 30 per machine. When an apply returns `refusal: "license_required"` (limit reached) or `"license_offline"` (free tier needs the network to count), stop applying, tell the user the `message` exactly (it names the plans and `openstate-engine license activate <key>`), and do not retry. Searches, reads, previews and every state tool stay free.
 - **Paging**: truncated responses carry a `continuation` cursor; reads that support it (e.g. `read_symbol`) accept the cursor via the `cursor` arg — pass `next_cursor` back unchanged until it is `null`. Verified 2026-10-04: a 35,311-byte symbol read as 6 pages (5×6,192 B + 4,350 B), cursor format `<digest>.<src-digest>.<byte-offset>`.
 
 ---
