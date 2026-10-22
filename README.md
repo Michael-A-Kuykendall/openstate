@@ -13,10 +13,25 @@
 
 **openstate is commercial software, free to try.** Every machine gets 30 structural applies free; after that, a $10/month or $149 lifetime license from the [pricing page](https://michael-a-kuykendall.github.io/openstate/pricing.html) (Stripe; Keygen issues the key) removes the limit. All sales are final. The engine runs locally and needs no account; its only network calls are license checks (Keygen and the OpenState license worker: license key, hashed machine fingerprint, platform name; never project data).
 
+## Your coding agent edits the function, not the file
+
+| Your agent can | With |
+|---|---|
+| **Find it**: a function, a name or plain text, each hit as a place (file and line), not a wall of file contents | `openstate_ast_search` |
+| **Read just that**: one complete function or type instead of the whole file (97% less data in one measured case) | `openstate_read_symbol`, `openstate_read_text_region` |
+| **Edit text safely**: replace an exact piece of text in any file; if it matches twice, the edit is refused and every match is listed | `openstate_edit_text` |
+| **Rename everywhere**: one preview lists every change across the files, one apply writes them | `openstate_rename_symbol` |
+| **Move, insert, replace, delete** whole definitions at the syntax tree's boundaries | `openstate_move_symbol`, `openstate_insert_symbol`, `openstate_edit_symbol`, `openstate_delete_symbol` |
+| **Follow a name**: where it is declared and every place that uses it | `openstate_find_declaration`, `openstate_find_referencing_symbols` |
+| **Remember the project**: decisions and their reasons, failed commands, what is blocked, test status since the last edit | `openstate_capsule` |
+
+Every change is a preview first, then an apply that writes exactly what the preview showed. All 36 tools are listed on the [Tools page](https://michael-a-kuykendall.github.io/openstate/structural-tools.html).
+
 ---
 
 ## Table of Contents
 
+- [Your coding agent edits the function, not the file](#your-coding-agent-edits-the-function-not-the-file)
 - [What Is openstate?](#what-is-openstate)
   - [Three problems it addresses](#three-problems-it-addresses)
   - [Who it is for](#who-it-is-for)
