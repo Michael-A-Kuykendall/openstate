@@ -21,9 +21,10 @@ https://michael-a-kuykendall.github.io/openstate/terms.html
 3. Honor system. The Engine does not check for a license and makes no network
    calls. Using it without a license is not permitted by these terms.
 
-4. Refund. Within 30 days of purchase you may ask for a full refund, with no
-   reason required (see https://michael-a-kuykendall.github.io/openstate/refund.html).
-   Your license ends when the refund is issued.
+4. No refunds. All sales are final (see
+   https://michael-a-kuykendall.github.io/openstate/refund.html). If you are an
+   EU consumer, you waived the statutory 14-day right of withdrawal by
+   requesting immediate access to the license at checkout.
 
 5. Public components. The documentation, skill (SKILL.md), installer
    (install.sh) and plugin bundle are licensed under the MIT License (see
