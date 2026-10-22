@@ -30,7 +30,7 @@
   <div class="shell">
     <p class="eyebrow">Privacy</p>
     <h1>Project state stays local.</h1>
-    <p class="hero-lede">The OpenState engine keeps project facts locally and sends no runtime telemetry or project data. Host history access and purchase services have the separate boundaries described below.</p>
+    <p class="hero-lede">The OpenState engine keeps project facts locally and sends no telemetry or project data; it contacts the license service only to check your license. Host history access and purchase services have the separate boundaries described below.</p>
   </div>
 </section>
 
@@ -38,7 +38,8 @@
   <div class="shell">
     <h2>The software</h2>
     <ul class="tick-list">
-      <li>The engine sends no runtime telemetry. Host history discovery may contact the configured OpenCode API through its SDK; an API on another machine is not an offline history source.</li>
+      <li>The engine sends no telemetry. Host history discovery may contact the configured OpenCode API through its SDK; an API on another machine is not an offline history source.</li>
+      <li>License checks: the engine contacts Keygen (api.keygen.sh) to verify a license and, on the free tier, to count each structural apply, and the OpenState license worker once per machine to get a free-tier license. It sends the license key, a hashed machine fingerprint and the platform name; never project data, code or file names. A paid license works offline for up to 7 days between checks.
       <li>What OpenState records stays local. <code>.openstate/</code> can be a directory, a symlink or a local pointer file. It can include your messages, the commands the agent runs and file paths, so treat it like shell history.</li>
       <li>The installer downloads the release from GitHub; GitHub sees that request.</li>
     </ul>
@@ -47,7 +48,7 @@
       <li>Stripe processes the payment. Card details go to Stripe and are never seen by the seller.</li>
       <li>Stripe shares your name and email with the seller. Keygen stores your license with that email.</li>
       <li>A small Cloudflare worker connects Stripe to Keygen. It retains processed Stripe event ids for seven days to deduplicate webhook retries. This is a bounded retry guard, not a guarantee against every duplicate issuance.</li>
-      <li>Your email is used only to issue your license, handle refunds and answer support. It is not sold or used for marketing.</li>
+      <li>Your email is used only to issue and manage your license and answer support. It is not sold or used for marketing.</li>
     </ul>
     <h2>This website</h2>
     <p class="lede">The site is hosted on GitHub Pages and loads fonts from Google Fonts, so GitHub and Google see your visit. It sets no cookies and runs no analytics.</p>

@@ -6,11 +6,14 @@ The OpenState engine (the openstate-engine binary, the "Engine") is
 proprietary. It is licensed, not sold. These terms are also published at
 https://michael-a-kuykendall.github.io/openstate/terms.html
 
-1. Grant. If you have bought an OpenState license, you (one named developer)
-   may install and use the Engine on any number of machines and repositories
-   you work on, for personal or commercial work, for every 0.x release. The
-   license is personal: it does not transfer to another person. A team buys
-   one license per developer.
+1. Grant. Anyone may install and use the Engine free of charge; on each
+   machine the first 30 structural applies are free. With a paid license
+   (a monthly subscription, or lifetime), you (one named developer) may use
+   the Engine without that limit on up to 3 machines at a time, for personal
+   or commercial work: every 0.x release for a lifetime license, and while
+   the subscription is paid for a monthly one. The license is personal: it
+   does not transfer to another person. A team buys one license per
+   developer.
 
 2. Restrictions. You may not redistribute, sublicense, sell or rent the
    Engine, embed it in another product or hosted service, or reverse engineer
@@ -18,8 +21,12 @@ https://michael-a-kuykendall.github.io/openstate/terms.html
    commercial license for embedding is available from
    michaelallenkuykendall@gmail.com.
 
-3. Honor system. The Engine does not check for a license and makes no network
-   calls. Using it without a license is not permitted by these terms.
+3. License checks. The Engine checks licenses over the network with Keygen
+   and the OpenState license worker: on the free tier each structural apply
+   is counted, and a paid license is verified and may be used offline for up
+   to 7 days between checks. It sends the license key, a hashed machine
+   fingerprint and the platform name, never project data. Circumventing the
+   check is not permitted by these terms.
 
 4. No refunds. All sales are final (see
    https://michael-a-kuykendall.github.io/openstate/refund.html). If you are an

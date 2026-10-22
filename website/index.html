@@ -173,6 +173,7 @@
       <li><strong>A failure needs an exit code.</strong> A command whose tool reports no exit code is recorded as completed, not failed (it never counts as a passing test, though). Read-only commands such as <code>cat</code>, <code>ls</code> or <code>grep</code> are not recorded at all.</li>
       <li><strong>On hosts other than OpenCode the capsule is on demand</strong>: the agent has to call <code>openstate_capsule</code> (the MCP server's instructions tell it to).</li>
       <li><strong>One machine, one repository.</strong> There is no sync between machines or people.</li>
+      <li><strong>Licensing needs the network.</strong> On the free tier each structural apply is counted with Keygen, so applies need a connection; a paid license works offline for up to 7 days between checks.</li>
       <li><strong>No measurement yet shows fewer repeated failures.</strong> What OpenState guarantees is the record and its delivery to the agent; whether that changes your agent's behavior is for you to judge in your own sessions. Token cost per completed work item is measured and fell with adoption (see the Structural tools page).</li>
       <li><strong>The engine is closed source</strong> (the plugin, installer, skill and documentation are MIT).</li>
     </ul>
@@ -208,7 +209,7 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
       <div class="principle">
         <span class="p-num">02</span>
         <h3>Local only</h3>
-        <p>No runtime network calls, no telemetry. State lives in your repository.</p>
+        <p>No telemetry; the only network call is the license check. State lives in your repository.</p>
       </div>
       <div class="principle">
         <span class="p-num">03</span>

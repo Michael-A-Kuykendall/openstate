@@ -41,10 +41,10 @@
       <li>Stripe sends <code>checkout.session.completed</code> to the worker.</li>
       <li>The worker reads <code>keygen_policy_id</code> from the Stripe product.</li>
       <li>Keygen creates the license and the success page shows the key.</li>
-      <li>The install is still <code>install.sh</code>. The key is the entitlement record, not a second installer.</li>
+      <li>The install is still <code>install.sh</code>; the key unlocks unlimited structural applies on the machines you activate it on.</li>
     </ol>
     <p class="route">POST https://api.keygen.sh/v1/accounts/&lt;account&gt;/licenses</p>
-    <p class="lede">The engine does not check the key at runtime; the key is your record of purchase. The success page displays it after issuance. If you lose it, email michaelallenkuykendall@gmail.com privately from your purchase address for support. Never post a license key or purchase email in a public issue. Host history discovery may contact the configured OpenCode API, as described in the <a href="privacy.html">privacy policy</a>.</p>
+    <p class="lede">Activate the key on each machine with <code>openstate-engine license activate &lt;key&gt;</code> (or <code>install.sh --license &lt;key&gt;</code>); a paid license covers up to 3 machines, and <code>openstate-engine license deactivate</code> frees one. The engine verifies the license with Keygen and works offline for up to 7 days between checks. The success page displays the key after issuance. If you lose it, email michaelallenkuykendall@gmail.com privately from your purchase address for support. Never post a license key or purchase email in a public issue. Host history discovery may contact the configured OpenCode API, as described in the <a href="privacy.html">privacy policy</a>.</p>
     <p><a class="btn btn-primary" href="pricing.html">Back to pricing</a> <a class="btn btn-ghost" href="index.html#install">Install</a></p>
   </div>
 </section>
