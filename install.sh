@@ -234,6 +234,7 @@ PLUGIN_DIR="$OPENCODE_DIR/plugins"
 SKILL_DIR="$OPENCODE_DIR/skills/openstate"
 MCP_DIR="$OPENCODE_DIR/mcp"
 BIN_DIR="$OPENCODE_DIR/bin"
+INSTALLER_COPY="$OPENCODE_DIR/openstate-install.sh"   # openstate-fgst.28.7: offline uninstall
 VERSION_FILE="$OPENCODE_DIR/VERSION"          # installed bundle tag
 MANIFEST_FILE="$OPENCODE_DIR/BUNDLE.sha256"   # integrity: engine hash at install
 PROFILE_FILE="$OPENCODE_DIR/structural-tools-profile.json"
@@ -473,6 +474,8 @@ if [ "$UNINSTALL" = 1 ] || [ "$PURGE" = 1 ]; then
   rm -rf "$SKILL_DIR"
   rm -f "$MCP_DIR/openstate-mcp.mjs"; rmdir "$MCP_DIR" 2>/dev/null || true
   rm -f "$PROFILE_FILE" "$VERSION_FILE" "$MANIFEST_FILE"
+  # Last: this may be the very file running (the license wall's Uninstall).
+  rm -f "$INSTALLER_COPY"
   # Remove empty dirs we created (plugins/bin/skills + the skills parent) only
   # if now empty.
   rmdir "$PLUGIN_DIR" 2>/dev/null || true
@@ -787,6 +790,14 @@ cp "$TMPDIR/x/bin/$AST_GREP_NAME"         "$BIN_DIR/$AST_GREP_NAME"
 chmod +x "$BIN_DIR/$AST_GREP_NAME"
 cp "$TMPDIR/x/skills/openstate/SKILL.md" "$SKILL_DIR/SKILL.md"
 cp "$TMPDIR/x/mcp/openstate-mcp.mjs"      "$MCP_DIR/openstate-mcp.mjs"
+# Keep a copy of the installer next to the install, from the bundle or, for a
+# local run, this file, so Uninstall works offline (openstate-fgst.28.7).
+if [ -f "$TMPDIR/x/install.sh" ]; then
+  cp "$TMPDIR/x/install.sh" "$INSTALLER_COPY"
+elif [ -f "${BASH_SOURCE[0]:-}" ]; then
+  cp "${BASH_SOURCE[0]}" "$INSTALLER_COPY"
+fi
+[ -f "$INSTALLER_COPY" ] && chmod +x "$INSTALLER_COPY"
 cp "$TMPDIR/x/structural-tools-profile.json" "$PROFILE_FILE"
 # Guarantee the skill landed with VALID front matter before we call it done.
 skill_is_valid "$SKILL_DIR/SKILL.md" \
