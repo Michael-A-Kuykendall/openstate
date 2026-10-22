@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Terms — OpenState</title>
-<meta name="description" content="OpenState terms of sale and license: $49 per developer, once, for every 0.x release." />
+<meta name="description" content="OpenState terms: free to try (30 structural applies per machine), then $10/month or $149 lifetime per developer. All sales are final." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Commissioner:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -29,7 +29,7 @@
 <section class="hero" id="top">
   <div class="shell">
     <p class="eyebrow">Terms of sale</p>
-    <h1>One developer, every 0.x release.</h1>
+    <h1>Free to try. One developer per license.</h1>
     <p class="hero-lede">These are the terms you accept when you buy OpenState. The binding text ships as <code>LICENSE</code> in every release bundle.</p>
   </div>
 </section>
@@ -38,9 +38,10 @@
   <div class="shell">
     <h2>What you get</h2>
     <ul class="tick-list">
-      <li>A license for one named developer to install and use the OpenState engine on any number of machines and repositories they work on.</li>
+      <li>Free use: anyone may install and use OpenState; on each machine the first 30 structural applies are free.</li>
+      <li>A paid license is for one named developer, without the apply limit, on up to 3 machines at a time.</li>
       <li>Personal and commercial work are both covered.</li>
-      <li>Every 0.x release. A team buys one license per developer; the license does not transfer to another person.</li>
+      <li>Lifetime ($149): every 0.x release. Monthly ($10/month): while the subscription is paid; a cancelled subscription runs to the end of the paid period. A team buys one license per developer; the license does not transfer to another person.</li>
     </ul>
     <h2>What you may not do</h2>
     <ul class="tick-list">
@@ -49,7 +50,7 @@
       <li>Reverse engineer it, except where the law allows this despite this term.</li>
     </ul>
     <h2>How the license works</h2>
-    <p class="lede">The price is $49 per developer, paid once through Stripe. Keygen issues a license key, displayed on the success page. The engine does not check the key and makes no runtime network calls: the license is on the honor system, and using OpenState without one is not permitted by these terms.</p>
+    <p class="lede">Stripe takes the payment; Keygen issues a license key, shown on the success page. Activate it with <code>openstate-engine license activate &lt;key&gt;</code> or <code>install.sh --license &lt;key&gt;</code>. The engine checks licenses over the network: on the free tier it counts each structural apply with Keygen; a paid license is verified and works offline for up to 7 days between checks. It sends the license key, a hashed machine fingerprint and the platform name, never project data. Circumventing the check is not permitted by these terms.</p>
     <h2>Refunds</h2>
     <p class="lede">All sales are final; there are no refunds. EU consumers waive the statutory 14-day right of withdrawal by requesting immediate access to the license at checkout. See <a href="refund.html">refunds</a>.</p>
     <h2>Open parts</h2>

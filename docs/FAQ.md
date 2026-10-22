@@ -98,7 +98,7 @@ A structured JSON contract, injected automatically in native OpenCode and read o
 ## Privacy & Data
 
 ### Where does my data live?
-Project state stays local in `.openstate/state.jsonl`; `.openstate` can be a directory, symlink or local pointer. The engine sends no runtime telemetry. Host history discovery may contact the configured OpenCode API, while release downloads use GitHub. Choose a local history source when offline access is required.
+Project state stays local in `.openstate/state.jsonl`; `.openstate` can be a directory, symlink or local pointer. The engine sends no telemetry; its only network calls are license checks (Keygen and the OpenState license worker: license key, hashed machine fingerprint, platform name; never project data). Host history discovery may contact the configured OpenCode API, while release downloads use GitHub. Choose a local history source when offline access is required.
 
 ### Can I inspect the state?
 Yes, through the tools: `openstate_state`, `openstate_report`, `openstate_why <fact_id>`, and `openstate_export` for a full dump. The file format itself is internal and may change between versions.
