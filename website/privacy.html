@@ -41,14 +41,14 @@
     <h2>The software</h2>
     <ul class="tick-list">
       <li>The engine sends no telemetry. Host history discovery may contact the configured OpenCode API through its SDK; an API on another machine is not an offline history source.</li>
-      <li>License checks: the engine contacts Keygen (api.keygen.sh) to verify a license and, on the free tier, to count each structural apply, and the OpenState license worker once per machine to get a free-tier license. It sends the license key, a hashed machine fingerprint and the platform name; never project data, code or file names. A paid license works offline for up to 7 days between checks.
+      <li>License checks: the engine contacts Keygen (api.keygen.sh) to verify a license and, on the free tier, to count each structural apply, and the OpenState license worker once per machine to get a free-tier license. It sends the license key, a hashed machine fingerprint and the platform name; never project data, code or file names. A paid license works offline for up to 7 days between checks.</li>
       <li>What OpenState records stays local. <code>.openstate/</code> can be a directory, a symlink or a local pointer file. It can include your messages, the commands the agent runs and file paths, so treat it like shell history.</li>
       <li>The installer downloads the release from GitHub; GitHub sees that request.</li>
     </ul>
     <h2>Buying it</h2>
     <ul class="tick-list">
       <li>Stripe processes the payment. Card details go to Stripe and are never seen by the seller.</li>
-      <li>Stripe shares your name and email with the seller. Keygen stores your license with that email.</li>
+      <li>Stripe shares your name and email with the seller. Keygen stores your license and a buyer account under that email, so you can recover a lost key: Keygen emails you a link to set its password.</li>
       <li>A small Cloudflare worker connects Stripe to Keygen. It retains processed Stripe event ids for seven days to deduplicate webhook retries. This is a bounded retry guard, not a guarantee against every duplicate issuance.</li>
       <li>Your email is used only to issue and manage your license and answer support. It is not sold or used for marketing.</li>
     </ul>
@@ -63,7 +63,7 @@
 <footer class="site-footer">
   <div class="shell footer-inner">
     <span class="footer-brand">OpenState</span>
-    <span class="footer-tag">Local software, sold once</span>
+    <span class="footer-tag">Structural code tools and project state for coding agents</span>
     <span class="footer-links"><a href="index.html">Home</a> &middot; <a href="pricing.html">Pricing</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="refund.html">Refunds</a> &middot; <a href="privacy.html">Privacy</a></span>
   </div>
 </footer>
