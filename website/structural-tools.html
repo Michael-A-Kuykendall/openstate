@@ -20,7 +20,7 @@
     <nav class="nav">
       <a href="index.html">Overview</a>
       <a href="index.html#how">How it works</a>
-      <a href="structural-tools.html" aria-current="page">Code tools</a>
+      <a href="structural-tools.html" aria-current="page">Tools</a>
       <a href="pricing.html">Pricing</a>
       <a href="license.html">License</a>
       <a href="index.html#install">Install</a>
@@ -30,7 +30,7 @@
 
 <section class="hero" id="top">
   <div class="shell">
-    <p class="eyebrow">OpenState code tools &mdash; 22 tools, 18 languages, in every install</p>
+    <p class="eyebrow">Every OpenState tool &mdash; 22 code tools and 14 memory tools, in every install</p>
     <h1>Read the <em>function</em>, not the file.</h1>
     <p class="hero-lede">A coding agent with only a file reader works in whole files: it reads the file to change one function, reads it again when the line numbers move, and edits text it matched by eye. OpenState&rsquo;s structural tools let it search for a definition, read just that definition, and change it through a preview it can check before anything is written.</p>
     <div class="flow"><span>openstate_ast_search</span><span class="arrow">&rarr;</span><span>openstate_read_symbol</span><span class="arrow">&rarr;</span><span class="signal">preview</span><span class="arrow">&rarr;</span><span class="signal">apply</span></div>
@@ -54,7 +54,7 @@
         <tr><td><strong>Other standard MCP clients</strong> (Kiro, GitHub Copilot, Cursor)</td><td>replay of OpenCode, Claude Code, Codex and Muse sessions stored for the same project</td><td>on demand, via openstate_capsule</td><td>36 tools via MCP</td></tr>
       </tbody>
     </table>
-    <p class="lede">Both native OpenCode and standard MCP expose 22 structural and 14 state/lifecycle tools. Any MCP caller can recover OpenCode, Claude Code, Codex and Muse histories stored for the same project, so a session started in one agent can be picked up in another. Native OpenCode captures events and injects capsules automatically. MCP callers assess and read on demand. Client tool filters may hide operations until configuration is updated and the connection reloaded.</p>
+    <p class="lede">Every host gets all 36 tools. A session started in one agent can be picked up in another: any of them can replay the OpenCode, Claude Code, Codex and Muse histories stored for the same project.</p>
   </div>
 </section>
 
@@ -68,7 +68,7 @@
       <li><span class="metric-num">&minus;96%</span><span class="metric-label">edit calls once the tools were in place: 8,002 in August, 346 in September</span></li>
       <li><span class="metric-num">99.91%</span><span class="metric-label">of 21,372 OpenState calls succeeded</span></li>
     </ul>
-    <p class="lede">Tokens per completed work item in the openstate project fell from about 16M to 10.6M (34%) over the same months. Repositories that did not adopt the tools were flat or worse per commit, except one that improved in a much lighter work phase. These figures come from the maintainer&rsquo;s own session history; they show cost moving with adoption, not a controlled study, and whole-session token totals rose as sessions got longer. <a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md">Method and evidence &rarr;</a></p>
+    <p class="lede">Measured on the maintainer&rsquo;s own session history: cost moved with adoption; it is not a controlled study. <a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md">Method and evidence &rarr;</a></p>
     <h3>Why it costs less: the agent reads the definition, not the file.</h3>
     <ul class="metrics">
       <li><span class="metric-num">97%</span><span class="metric-label">less data reading one function from a 63 KB file, in one measured case</span></li>
@@ -76,7 +76,7 @@
       <li><span class="metric-num">~70%</span><span class="metric-label">fewer bytes per structural search than per classic file read, over 4,542 searches</span></li>
       <li><span class="metric-num">22</span><span class="metric-label">tools in 18 languages: search, read, navigate, and preview/apply edits</span></li>
     </ul>
-    <p class="lede">Grep-and-read hunting pulls whole files into the context and rereads them when line numbers move; a structural search returns places, and a read returns one complete definition. How much smaller a definition is than its file depends on the code.</p>
+    
   </div>
 </section>
 
@@ -157,6 +157,25 @@
           <tr><td><code>openstate_rename_symbol</code></td><td>Rename an identifier across its matches</td></tr>
           <tr><td><code>openstate_edit_text</code></td><td>Replace a unique piece of text in any text file</td></tr>
           <tr><td><code>openstate_create_file</code></td><td>Create a file that does not exist yet</td></tr>
+        </tbody>
+      </table>
+      <h3 class="toolgroup-head">Remember the project</h3>
+      <table class="tool-table">
+        <tbody>
+          <tr><td><code>openstate_capsule</code></td><td>The short resume summary: objective, decisions, blockers, next actions</td></tr>
+          <tr><td><code>openstate_state</code></td><td>Everything currently true: decisions, finished, in-progress and failed work, blockers</td></tr>
+          <tr><td><code>openstate_report</code></td><td>What is broken, stuck or unresolved right now</td></tr>
+          <tr><td><code>openstate_report_timeline</code></td><td>The same facts, session by session</td></tr>
+          <tr><td><code>openstate_why</code></td><td>Where a fact came from, and what supports it</td></tr>
+          <tr><td><code>openstate_close</code></td><td>Close a fact that is wrong or done, with a reason</td></tr>
+          <tr><td><code>openstate_sessions</code></td><td>This repository&rsquo;s OpenCode, Claude Code, Codex and Muse sessions</td></tr>
+          <tr><td><code>openstate_assess</code></td><td>Replay one of those sessions into the project&rsquo;s memory</td></tr>
+          <tr><td><code>openstate_checkpoint</code></td><td>Save the state to disk now</td></tr>
+          <tr><td><code>openstate_export</code></td><td>Export the whole state and capsule as one JSON file</td></tr>
+          <tr><td><code>openstate_reset</code></td><td>Clear the state, after checking it can be rebuilt</td></tr>
+          <tr><td><code>openstate_restart</code></td><td>Save, then check the state loads in a fresh engine</td></tr>
+          <tr><td><code>openstate_doctor</code></td><td>Engine health: status, fact counts, last save</td></tr>
+          <tr><td><code>openstate_toast</code></td><td>Turn OpenCode&rsquo;s completion notifications on or off</td></tr>
         </tbody>
       </table>
     </div>
