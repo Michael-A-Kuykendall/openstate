@@ -173,12 +173,15 @@
   <div class="shell">
     <p class="eyebrow">Install</p>
     <h2>One command. Free to start.</h2>
-    <pre class="code-block"><span># installs once for all repositories; --repo targets the current one</span>
+    <pre class="code-block"><span># run inside the repository where you want OpenState</span>
 curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash
+<span class="cmt"># or once for every repository</span>
+curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash -s -- --global
 <span class="cmt"># verify an existing install</span>
 ./install.sh --check</pre>
     <p class="payoff">Restart OpenCode and the agent has 36 tools and the project memory. Other agents connect through the bundled MCP server.</p>
     <ul class="tick-list">
+      <li>Only in the repository you run it in, so your other projects keep their own tools; add <code>--global</code> to put it in every repository</li>
       <li>Linux and macOS; on Windows, run it from Git Bash</li>
       <li>Prebuilt engine under 3 MB, checksum verified and smoke-tested before anything is written</li>
       <li>Free: everything, including 30 structural applies on this machine. Add a license with <code>install.sh --license KEY</code></li>

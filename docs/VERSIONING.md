@@ -8,7 +8,7 @@ These are what an agent, a host configuration or a script can rely on:
 
 - **Tool names and their arguments**, for the OpenCode plugin and the MCP server (36 tools each).
 - **The keys of the capsule and of the report** (`openstate_capsule`, `openstate_report`), including nested keys.
-- **The installer's flags** (`--global`, `--check`, `--uninstall`, `--purge`) and where it puts things (`.opencode/`, `.openstate/`).
+- **The installer's flags** (`--global`, `--repo`, `--check`, `--uninstall`, `--purge`) and its default (per repository) and where it puts things (`.opencode/`, `.openstate/`).
 - **The `.openstate` layouts** it accepts: a directory, a symlink, or a pointer file.
 
 ## What counts as breaking

@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- The installer now installs into the repository you run it in by default, and refuses outside a git repository; `--global` installs once for every repository.
+
 ### Planned
 - Session hooks for Claude Code, Kiro and GitHub Copilot that put the capsule into the context automatically, as OpenCode does.
 

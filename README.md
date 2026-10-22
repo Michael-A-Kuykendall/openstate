@@ -107,19 +107,19 @@ A structured continuation contract injected automatically in native OpenCode on 
 ## Install
 
 ```bash
-# 1. One-liner (curl|bash — downloads prebuilt bundle, installs globally)
+# 1. Into one repository (the default): run it inside that repository
+cd /path/to/your/repo
 curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash
 
-# 2. Target a specific repo
-curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | OPENSTATE_CONFIG_DIR=/path/to/repo/.opencode bash
+# 2. Into every repository at once (opt in)
+curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash -s -- --global
 
-# 3. Clone once, install anywhere
+# 3. Clone once, install into each repository you choose
 git clone --depth 1 https://github.com/Michael-A-Kuykendall/openstate.git /tmp/os
-/tmp/os/install.sh
-OPENSTATE_CONFIG_DIR=/path/to/other/.opencode /tmp/os/install.sh
+cd /path/to/your/repo && /tmp/os/install.sh
 ```
 
-Downloads the prebuilt engine binary + plugin bundle from GitHub Releases, verifies sha256, smoke-tests the engine, and installs the complete bundle once for the current user by default (**global**). No compiler is needed; the installer does need Node.js 18+ to update the JSON config files. By default openstate is **global**: one install is shared by every repository; use `--repo` (or `OPENSTATE_CONFIG_DIR`) to scope it to a single repository's `.opencode/`. Restart OpenCode, done.
+Downloads the prebuilt engine binary + plugin bundle from GitHub Releases, verifies sha256, smoke-tests the engine, and installs the complete bundle **into the repository you run it in** (`<repo>/.opencode/`). Other repositories are untouched, so OpenState is only where you want it and can sit side by side with other tools; run the installer again in each repository you want it in. To install it once for **every** repository instead, add `--global` (it goes into OpenCode's config folder; a repository with its own install still uses its own). Outside a git repository the installer refuses unless you pass `--global`. No compiler is needed; the installer does need Node.js 18+ to update the JSON config files. Restart OpenCode, done.
 
 Verify an existing install: `./install.sh --check`
 
@@ -155,7 +155,7 @@ State lives per-project in `.openstate/state.jsonl`. Read it through the tools (
 
 ## Other hosts: the MCP server
 
-The same bundle carries an MCP server, `mcp/openstate-mcp.mjs`, for every host that is not OpenCode. Install globally as above or use `install.sh --repo` for `.opencode/mcp/openstate-mcp.mjs` in one project, then register the installed file with your host. It needs Node.js 18 or newer.
+The same bundle carries an MCP server, `mcp/openstate-mcp.mjs`, for every host that is not OpenCode. Install it in the project as above (`<project>/.opencode/mcp/openstate-mcp.mjs`), or with `--global` for every project, then register the installed file with your host. It needs Node.js 18 or newer.
 
 | Host | File in the repository | Entry |
 |---|---|---|
@@ -163,7 +163,7 @@ The same bundle carries an MCP server, `mcp/openstate-mcp.mjs`, for every host t
 | Kiro | `.kiro/settings/mcp.json` | `{"mcpServers": {"openstate": {"command": "node", "args": ["/path/to/repo/.opencode/mcp/openstate-mcp.mjs"]}}}` |
 | GitHub Copilot in VS Code | `.vscode/mcp.json` | `{"servers": {"openstate": {"type": "stdio", "command": "node", "args": ["${workspaceFolder}/.opencode/mcp/openstate-mcp.mjs"]}}}` |
 
-Use the absolute path to the installed file (after `--global`, `~/.config/opencode/mcp/openstate-mcp.mjs`). The server offers the same 36 operations as native OpenCode: 14 state/lifecycle and 22 structural tools. For one-shot MCP, `openstate_restart` checkpoints and reports next-call cold start; `openstate_toast` persists the preference, while OpenCode supplies its UI renderer. Each tool takes the project root as `repo_dir`. Use `openstate_sessions`, then `openstate_assess` with an exact source-qualified ID, checkpoint, and read capsule/report or a source-filtered timeline. Repeating assessment skips previously absorbed records. Client allowlists may hide tools; check the effective configuration and reconnect after updating it. These hosts give OpenState no way to put the capsule into the context by itself, so the server's instructions tell the agent to call `openstate_capsule` at the start of a session and after a compaction.
+Use the absolute path to the installed file (`<project>/.opencode/mcp/openstate-mcp.mjs`; after `--global`, `~/.config/opencode/mcp/openstate-mcp.mjs`). The server offers the same 36 operations as native OpenCode: 14 state/lifecycle and 22 structural tools. For one-shot MCP, `openstate_restart` checkpoints and reports next-call cold start; `openstate_toast` persists the preference, while OpenCode supplies its UI renderer. Each tool takes the project root as `repo_dir`. Use `openstate_sessions`, then `openstate_assess` with an exact source-qualified ID, checkpoint, and read capsule/report or a source-filtered timeline. Repeating assessment skips previously absorbed records. Client allowlists may hide tools; check the effective configuration and reconnect after updating it. These hosts give OpenState no way to put the capsule into the context by itself, so the server's instructions tell the agent to call `openstate_capsule` at the start of a session and after a compaction.
 
 ---
 
@@ -248,7 +248,7 @@ Plus 22 structural tools (AST and text search, bounded reads, references, declar
 
 ### Philosophy
 
-- **Global by default** — `install.sh` installs once under your OpenCode config root and every repository inherits it; `--repo` limits it to the current repository's `.opencode/`.
+- **Per repository by default** — `install.sh` installs into the repository you run it in and nowhere else; `--global` installs it once for every repository.
 - **Deliberate persistence** — state is written on `openstate_checkpoint`, when OpenCode closes, and when the engine's input ends. What a checkpoint wrote survives the engine being killed.
 - **Provenance** — `openstate_why` shows where any fact came from.
 

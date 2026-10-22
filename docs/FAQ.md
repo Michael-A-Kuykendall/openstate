@@ -28,7 +28,7 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
 ```
 
 ### What does it install?
-The installer writes to the global OpenCode config directory by default; `--repo` or `OPENSTATE_CONFIG_DIR` selects a project's `.opencode/`. The bundle contains:
+The installer writes to the `.opencode/` of the repository you run it in; `--global` writes once to OpenCode's config folder for every repository, and `OPENSTATE_CONFIG_DIR` names any folder. The bundle contains:
 - `bin/openstate-engine` (the state engine) and `bin/ast-grep` (structural search backend)
 - `plugins/openstate/index.js` (plugin) and `plugins/openstate/tui.js` (sidebar status line and toasts)
 - `skills/openstate/SKILL.md` (AI usage skill)
@@ -39,7 +39,7 @@ The installer writes to the global OpenCode config directory by default; `--repo
 No Rust: the installer downloads a prebuilt binary and plugin bundle. It does need Node.js, which it uses to update `.opencode/package.json` and other JSON config.
 
 ### Per-repo or global?
-Global by default: the installer writes once under your OpenCode config directory so every repository inherits it (and, only if you turn the structural profile to `enforce`, one marked block in `AGENTS.md`); per-repo state still goes to each repository's `.openstate/`, which ignores itself in git. `--repo` (or `OPENSTATE_CONFIG_DIR`) targets a single repository's `.opencode/` instead.
+Per repository by default: the installer writes into the `.opencode/` of the repository you run it in (and, only if you turn the structural profile to `enforce`, one marked block in that repository's `AGENTS.md`), so your other projects are untouched and can keep using other tools. Each repository's state goes to its own `.openstate/`, which ignores itself in git; projects never share state. `--global` installs once into OpenCode's config folder so every repository gets it; a repository with its own install still uses its own.
 
 ### How do I verify?
 ```bash

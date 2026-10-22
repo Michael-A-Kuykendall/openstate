@@ -87,7 +87,7 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
 
 - Prebuilt engine binary, under 3 MB
 - Checksum verified, smoke-tested before install
-- Installs once for all repositories by default (`--repo` targets the current repository's `.opencode/`)
+- Installs into the repository you run it in, and nowhere else; `--global` installs it once for every repository
 - Restart OpenCode → 36 AI tools (14 state + 22 structural) + TUI sidebar + skill
 
 ---
