@@ -18,13 +18,12 @@
       <img class="brand-logo" src="logo-header.jpg" alt="OpenState logo" />
     </a>
     <nav class="nav">
-      <a href="index.html">State</a>
+      <a href="index.html">Overview</a>
+      <a href="index.html#how">How it works</a>
       <a href="structural-tools.html" aria-current="page">Code tools</a>
-      <a href="#proof">Results</a>
-      <a href="#guarantees">Guarantees</a>
-      <a href="#weaknesses">Weaknesses</a>
-      <a href="index.html#install">Install</a>
       <a href="pricing.html">Pricing</a>
+      <a href="license.html">License</a>
+      <a href="index.html#install">Install</a>
     </nav>
   </div>
 </header>
@@ -162,19 +161,6 @@
       </table>
     </div>
     <p class="lede">Symbol tools work in Rust, Python, TypeScript (including TSX), JavaScript, Go, C, C++, Java, C#, Bash, Haskell, Kotlin, Lua, PHP, Ruby, Scala, Solidity and Swift. Built on <a href="https://ast-grep.github.io/" target="_blank" rel="noopener">ast-grep</a>, which the installer bundles. In OpenCode they come through the plugin; in Claude Code, Muse, Kiro, GitHub Copilot and other MCP hosts, through the bundled MCP server.</p>
-  </div>
-</section>
-
-<section class="band" id="weaknesses">
-  <div class="shell">
-    <p class="eyebrow">Known weaknesses</p>
-    <h2>Where they cost more.</h2>
-    <ul class="tick-list">
-      <li><strong>A small edit costs more calls.</strong> Search, preview and apply are three calls where a direct editor uses one. For a one-line change inside a long function, a text edit is cheaper than replacing the whole definition.</li>
-      <li><strong>Searches are the heaviest read.</strong> A search with many matches can return several kilobytes; a language, a path or an exact name narrows it.</li>
-      <li><strong>Matching is by syntax, not by type.</strong> References and renames match names in the syntax tree; they do not resolve types the way a compiler or language server does.</li>
-    </ul>
-    <p class="lede"><a href="index.html">The other half of OpenState</a>: a running record of the project&rsquo;s decisions, failures and blockers, given to the agent at the start of every session.</p>
   </div>
 </section>
 

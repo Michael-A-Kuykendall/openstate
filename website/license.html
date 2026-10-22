@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>License — OpenState</title>
-<meta name="description" content="After Stripe checkout, Keygen issues the OpenState license. The engine and the project state stay on the machine." />
+<meta name="description" content="How an OpenState license works: buy through Stripe, copy your key, activate it on up to 3 machines." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Commissioner:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -18,10 +18,12 @@
       <img class="brand-logo" src="logo-header.jpg" alt="OpenState logo" />
     </a>
     <nav class="nav">
-      <a href="index.html#install">Install</a>
+      <a href="index.html">Overview</a>
+      <a href="index.html#how">How it works</a>
       <a href="structural-tools.html">Code tools</a>
       <a href="pricing.html">Pricing</a>
       <a href="license.html" aria-current="page">License</a>
+      <a href="index.html#install">Install</a>
     </nav>
   </div>
 </header>
@@ -29,23 +31,29 @@
 <section class="hero" id="top">
   <div class="shell">
     <p class="eyebrow">License</p>
-    <h1>Keygen issues the key.</h1>
-    <p class="hero-lede">Stripe confirms the payment. The license worker then creates the Keygen license. OpenState does not add a second account system on top of that.</p>
+    <h1>Buy, copy your key, activate it.</h1>
+    <p class="hero-lede">There is no account to create. You pay through Stripe, the next page shows your license key, and one command turns it on for the machine you are on.</p>
   </div>
 </section>
 
-<section class="band" id="issue">
+<section class="band" id="activate">
   <div class="shell">
-    <h2>What happens after checkout</h2>
+    <h2>After you buy</h2>
     <ol class="tick-list">
-      <li>Stripe sends <code>checkout.session.completed</code> to the worker.</li>
-      <li>The worker reads <code>keygen_policy_id</code> from the Stripe product.</li>
-      <li>Keygen creates the license and the success page shows the key.</li>
-      <li>The install is still <code>install.sh</code>; the key unlocks unlimited structural applies on the machines you activate it on.</li>
+      <li><strong>Pay on Stripe&rsquo;s checkout page</strong>, monthly or lifetime. You confirm there that the purchase is final.</li>
+      <li><strong>Copy the key</strong> from the page Stripe returns you to. Keep it somewhere safe; it is tied to your purchase email.</li>
+      <li><strong>Activate it</strong> on each machine: <code>openstate-engine license activate &lt;key&gt;</code>, or <code>install.sh --license &lt;key&gt;</code> when installing.</li>
     </ol>
-    <p class="route">POST https://api.keygen.sh/v1/accounts/&lt;account&gt;/licenses</p>
-    <p class="lede">Activate the key on each machine with <code>openstate-engine license activate &lt;key&gt;</code> (or <code>install.sh --license &lt;key&gt;</code>); a paid license covers up to 3 machines, and <code>openstate-engine license deactivate</code> frees one. The engine verifies the license with Keygen and works offline for up to 7 days between checks. The success page displays the key after issuance. If you lose it, email michaelallenkuykendall@gmail.com privately from your purchase address for support. Never post a license key or purchase email in a public issue. Host history discovery may contact the configured OpenCode API, as described in the <a href="privacy.html">privacy policy</a>.</p>
-    <p><a class="btn btn-primary" href="pricing.html">Back to pricing</a> <a class="btn btn-ghost" href="index.html#install">Install</a></p>
+    <h2>Machines and offline use</h2>
+    <ul class="tick-list">
+      <li>One license covers you on up to 3 machines. To move it, run <code>openstate-engine license deactivate</code> on the old machine first.</li>
+      <li>The engine checks the license and then works offline for up to 7 days between checks.</li>
+      <li>Monthly licenses renew with each payment; a cancelled subscription keeps working to the end of the paid month. To cancel, email michaelallenkuykendall@gmail.com from your purchase address.</li>
+    </ul>
+    <h2>Lost your key?</h2>
+    <p class="lede">Email michaelallenkuykendall@gmail.com from your purchase address and the key is sent back to you. Never post a license key or purchase email in a public issue.</p>
+    <p class="lede">Licenses are issued by Keygen; payments are handled by Stripe. What the engine sends when it checks a license is in the <a href="privacy.html">privacy policy</a>.</p>
+    <p><a class="btn btn-primary" href="pricing.html">See plans</a> <a class="btn btn-ghost" href="index.html#install">Install</a></p>
   </div>
 </section>
 
