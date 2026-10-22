@@ -13,11 +13,10 @@
 #   .opencode/structural-tools-profile.json     structural tools profile (enforce/shadow/off)
 #   .opencode/package.json (+ deps)             @opentui/solid for the TUI plugin JSX
 #
-# openstate installs GLOBALLY by default: the bundle is placed once under your
-# OpenCode config root (a single repository is used only with --repo or
-# OPENSTATE_CONFIG_DIR). Every repo inherits it; per-repo state stays segregated
-# in each repository's .openstate/ with its own lock, so the shared bundle has
-# no shared mutable state.
+# openstate installs into the git repository you run it in (<repo>/.opencode),
+# and nowhere else. --global installs it once under your OpenCode config root
+# for every repository instead. Either way each repository's state stays in its
+# own .openstate/ with its own lock: projects never share state.
 #
 # No compiler is required — the engine is a prebuilt, hardened binary shipped as
 # a release asset. Node.js 18+ IS required (the installer uses it to update your
