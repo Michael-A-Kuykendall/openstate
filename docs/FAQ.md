@@ -125,7 +125,7 @@ No — the binary is proprietary (EULA). The surface (docs, skill, installer, pl
 State is written to disk at three points: an explicit `openstate_checkpoint`, OpenCode closing, and the engine's input ending. There is no timed background flush, so a hard kill loses what happened since the last write; what was written survives. The full list of failure modes is in [TRUST.md](TRUST.md).
 
 ### What's the binary size?
-Under 1 MB on every platform. Built stripped, with LTO, `panic=abort` and `opt-level=z`.
+Under 3 MB on every platform (2.0 to 3.0 MB; it includes the TLS client for license checks). Built stripped, with LTO, `panic=abort` and `opt-level=z`.
 
 ---
 
