@@ -98,7 +98,7 @@ A structured JSON contract, injected automatically in native OpenCode and read o
 ## Privacy & Data
 
 ### Where does my data live?
-Project state stays local in `.openstate/state.jsonl`; `.openstate` can be a directory, symlink or local pointer. The engine sends no runtime telemetry. Host history discovery may contact the configured OpenCode API, while release downloads use GitHub. Choose a local history source when offline access is required.
+Project state stays local in `.openstate/state.jsonl`; `.openstate` can be a directory, symlink or local pointer. The engine sends no telemetry; its only network calls are license checks (Keygen and the OpenState license worker: license key, hashed machine fingerprint, platform name; never project data). Host history discovery may contact the configured OpenCode API, while release downloads use GitHub. Choose a local history source when offline access is required.
 
 ### Can I inspect the state?
 Yes, through the tools: `openstate_state`, `openstate_report`, `openstate_why <fact_id>`, and `openstate_export` for a full dump. The file format itself is internal and may change between versions.
@@ -125,7 +125,7 @@ No — the binary is proprietary (EULA). The surface (docs, skill, installer, pl
 State is written to disk at three points: an explicit `openstate_checkpoint`, OpenCode closing, and the engine's input ending. There is no timed background flush, so a hard kill loses what happened since the last write; what was written survives. The full list of failure modes is in [TRUST.md](TRUST.md).
 
 ### What's the binary size?
-Under 1 MB on every platform. Built stripped, with LTO, `panic=abort` and `opt-level=z`.
+Under 3 MB on every platform (2.0 to 3.0 MB; it includes the TLS client for license checks). Built stripped, with LTO, `panic=abort` and `opt-level=z`.
 
 ---
 

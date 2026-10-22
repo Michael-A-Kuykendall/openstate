@@ -26,7 +26,7 @@ State is written when the agent calls `openstate_checkpoint`, when OpenCode clos
 
 ## Checking it yourself
 
-- **Check the engine separately from the host.** On Linux, trace `openstate-engine` with `strace -f -e trace=network` or use a firewall log while exercising it. Host discovery and configured API traffic belong to the adapter; a trace of OpenCode as a whole does not isolate engine behavior. The plugin and installer are readable JavaScript and bash.
+- **Check the engine separately from the host.** On Linux, trace `openstate-engine` with `strace -f -e trace=network` or use a firewall log while exercising it. The only connections you should see are license checks: `api.keygen.sh` (license verification and, on the free tier, one count per structural apply) and `openstate-license.michaelallenkuykendall.workers.dev` (once per machine, to get a free-tier license); they carry the license key, a hashed machine fingerprint and the platform name, never project data. Host discovery and configured API traffic belong to the adapter; a trace of OpenCode as a whole does not isolate engine behavior. The plugin and installer are readable JavaScript and bash.
 - **Not in git.** `.openstate/` contains a `.gitignore` of `*`; `git status` never lists it.
 - **What it stored.** `openstate_export` writes everything to a JSON file you can read.
 

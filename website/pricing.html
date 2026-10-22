@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Pricing — OpenState</title>
-<meta name="description" content="OpenState costs $49 per developer, paid once through Stripe, with a 30-day refund." />
+<meta name="description" content="OpenState is free to try (30 structural applies per machine), then $10 a month or $149 once per developer. All sales are final." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Commissioner:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -29,8 +29,8 @@
 <section class="hero" id="top">
   <div class="shell">
     <p class="eyebrow">Pricing</p>
-    <h1>Pay through <em>Stripe</em>.</h1>
-    <p class="hero-lede">$49 per developer, paid once, for every 0.x release. You are buying the bundle: persistent, provenance-backed project state plus refusal-safe structural code operations for coding agents — not a tool list. Checkout is hosted by Stripe. Full refund within 30 days, no reason needed.</p>
+    <h1>Free to try. <em>$10 a month</em> or <em>$149 for life</em>.</h1>
+    <p class="hero-lede">Every machine gets the whole product free, including 30 structural applies. When those are used, a license removes the limit: $10 a month, or $149 once for every 0.x release. Checkout is hosted by Stripe. All sales are final. Try it free first.</p>
   </div>
 </section>
 
@@ -38,27 +38,39 @@
   <div class="shell">
     <div class="offer-grid">
       <article class="offer">
-        <p class="eyebrow">Checkout</p>
-        <h2>Stripe hosts the payment</h2>
-        <p class="lede">The license worker creates a Stripe Checkout Session and redirects the browser to it. After payment, Stripe returns you to the worker's success page, which shows your key.</p>
-        <p class="route">GET /buy?tier=openstate</p>
-        <p><a class="btn btn-primary" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=openstate">Buy OpenState</a></p>
-        <p><a class="btn" href="license.html">How the license is issued</a></p>
+        <p class="eyebrow">Free</p>
+        <h2>Everything, 30 structural applies per machine</h2>
+        <ul class="tick-list">
+          <li>Persistent project state, the capsule and all 14 state tools</li>
+          <li>All 22 structural tools; search, read and previews are never limited</li>
+          <li>30 structural applies (writes) on this machine, then a license is needed to keep applying</li>
+          <li>No key and no account: install and go</li>
+        </ul>
+        <p><a class="btn btn-ghost" href="index.html#install">Install free</a></p>
       </article>
       <article class="offer">
-        <p class="eyebrow">What you are buying</p>
-        <h2>The full bundle, on your machine</h2>
+        <p class="eyebrow">Monthly</p>
+        <h2>$10 a month</h2>
         <ul class="tick-list">
-          <li><strong>Persistent project state with provenance</strong>: objectives, decisions, failures, blockers and test status, rebuilt from the session&rsquo;s own events and delivered to the agent at the start of every session</li>
-          <li><strong>22 refusal-safe structural code tools</strong>: search, read and edit code by definition, every write behind a preview</li>
-          <li><strong>Cross-host</strong>: OpenCode, Claude Code and any MCP host, through the bundled MCP server</li>
-          <li>A Keygen license, issued only after Stripe marks the checkout paid</li>
-          <li>Project state stays in the repository. It is not uploaded to complete the sale</li>
+          <li>Unlimited structural applies for one developer, on up to 3 machines</li>
+          <li>Cancel any time; the license runs to the end of the paid period</li>
         </ul>
-        <p class="lede"><strong>Why $49 once?</strong> Competing memory services run about $10&ndash;19 a month. This is the state-plus-safety plus local multi-agent interoperability bundle, so it is priced as the product, not as the tool list.</p>
-        <p class="lede"><a href="terms.html">Terms of sale</a> &middot; <a href="refund.html">Refunds</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="license.html">How the key is issued</a></p>
+        <p class="route">GET /buy?tier=monthly</p>
+        <p><a class="btn btn-primary" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=monthly">Subscribe for $10 a month</a></p>
+      </article>
+      <article class="offer">
+        <p class="eyebrow">Lifetime</p>
+        <h2>$149 once</h2>
+        <ul class="tick-list">
+          <li>Unlimited structural applies for one developer, on up to 3 machines</li>
+          <li>Every 0.x release, no renewal</li>
+        </ul>
+        <p class="route">GET /buy?tier=lifetime</p>
+        <p><a class="btn btn-primary" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime for $149</a></p>
       </article>
     </div>
+    <p class="lede">Stripe returns you to the license worker&rsquo;s success page, which shows your key and the command to activate it: <code>openstate-engine license activate &lt;key&gt;</code>. Project state stays local; it is not uploaded to complete the sale.</p>
+    <p class="lede"><a href="terms.html">Terms of sale</a> &middot; <a href="refund.html">Refunds</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="license.html">How the key is issued</a></p>
   </div>
 </section>
 

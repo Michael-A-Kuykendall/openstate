@@ -183,6 +183,7 @@
       <li><strong>A result needs an exit code.</strong> A command whose host reports no exit code is recorded as neither passed nor failed. Read-only commands such as <code>cat</code>, <code>ls</code> or <code>grep</code> are not recorded at all.</li>
       <li><strong>On hosts other than OpenCode the capsule is on demand</strong>: the agent has to call <code>openstate_capsule</code> (the MCP server's instructions tell it to).</li>
       <li><strong>One machine, one repository.</strong> There is no sync between machines or people.</li>
+      <li><strong>Licensing needs the network.</strong> On the free tier each structural apply is counted with Keygen, so applies need a connection; a paid license works offline for up to 7 days between checks.</li>
       <li><strong>No measurement yet shows fewer repeated failures.</strong> What OpenState guarantees is the record and its delivery to the agent; whether that changes your agent's behavior is for you to judge in your own sessions. Token cost per completed work item is measured and fell with adoption (see the Structural tools page).</li>
       <li><strong>The engine is closed source</strong> (the plugin, installer, skill and documentation are MIT).</li>
     </ul>
@@ -199,7 +200,7 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
     <p class="payoff">Restart OpenCode and the agent has 36 tools, the capsule in its context, a sidebar status line, completion toasts, and a skill that tells it when to use them.</p>
     <ul class="tick-list">
       <li>Installs once for all repositories by default; <code>--repo</code> targets the current repository&rsquo;s <code>.opencode/</code></li>
-      <li>Prebuilt engine under 1 MB; no compiler needed. The installer uses Node.js to update JSON config</li>
+      <li>Prebuilt engine under 3 MB; no compiler needed. The installer uses Node.js to update JSON config</li>
       <li>Checksum verified and engine smoke-tested before anything is written</li>
     </ul>
     <p class="lede"><a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">Read the README</a> &nbsp;&middot;&nbsp; <a href="https://github.com/Michael-A-Kuykendall/openstate/releases" target="_blank" rel="noopener">Releases</a> &nbsp;&middot;&nbsp; <a href="https://github.com/Michael-A-Kuykendall/openstate/issues" target="_blank" rel="noopener">Issues</a></p>
@@ -218,7 +219,7 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
       <div class="principle">
         <span class="p-num">02</span>
         <h3>Local only</h3>
-        <p>No runtime network calls, no telemetry. State lives in your repository.</p>
+        <p>No telemetry; the only network call is the license check. State lives in your repository.</p>
       </div>
       <div class="principle">
         <span class="p-num">03</span>
@@ -228,7 +229,7 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
       <div class="principle">
         <span class="p-num">04</span>
         <h3>Sold once</h3>
-        <p>$49 per developer through Stripe, 30-day refund. The docs, skill, installer and plugin are MIT.</p>
+        <p>$49 per developer through Stripe; all sales are final. The docs, skill, installer and plugin are MIT.</p>
       </div>
     </div>
     <p class="lede">Commercial embedding licenses available &mdash; <a href="mailto:michaelallenkuykendall@gmail.com">michaelallenkuykendall@gmail.com</a></p>

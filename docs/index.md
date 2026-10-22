@@ -85,7 +85,7 @@ The resume contract, injected automatically in native OpenCode at session start 
 curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash
 ```
 
-- Prebuilt engine binary, under 1 MB
+- Prebuilt engine binary, under 3 MB
 - Checksum verified, smoke-tested before install
 - Installs once for all repositories by default (`--repo` targets the current repository's `.opencode/`)
 - Restart OpenCode → 36 AI tools (14 state + 22 structural) + TUI sidebar + skill
