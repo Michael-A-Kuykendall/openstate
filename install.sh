@@ -30,7 +30,9 @@
 # the tarball is trusted local input.
 #
 # Usage:
-#   curl -fsSL https://github.com/<owner>/<repo>/raw/main/install.sh | bash
+#   cd /path/to/your/repo && curl -fsSL https://github.com/<owner>/<repo>/raw/main/install.sh | bash
+#                                                             # this repository only (the default)
+#   ./install.sh --global                                     # every repository, from OpenCode's config folder
 #   OPENSTATE_CONFIG_DIR=/path/repo/.opencode ./install.sh   # install elsewhere
 #   OPENSTATE_VERSION=v0.1.0 ./install.sh                    # pin a version
 #   ./install.sh --check                                     # verify install
@@ -54,9 +56,12 @@ case "$STRUCTURAL_MODE" in
   off|shadow|enforce) ;;
   *) fail "OPENSTATE_STRUCTURAL_TOOLS must be off, shadow, or enforce" ;;
 esac
-# --global | OPENSTATE_GLOBAL=1 installs the bundle ONCE at the host config
-# root (openstate-dyf.5.8) so every repo inherits it, instead of per-repo
-# .opencode/. OpenCode loads plugins + skills from that root into every
+# Scope (openstate-fgst.33.1): by default OpenState is installed into the git
+# repository you run this in (<repo>/.opencode), so it is only where you want
+# it and other projects keep their own tools. --global | OPENSTATE_GLOBAL=1
+# installs the bundle ONCE at the host config root (openstate-dyf.5.8) so every
+# repo inherits it, instead of per-repo .opencode/; a repository with its own
+# install still uses its own. OpenCode loads plugins + skills from that root into every
 # session; per-repo state stays segregated via resolveStateDir (per-repo
 # state.jsonl, own lock), so the shared bundle has NO shared mutable state.
 GLOBAL_MODE=0
@@ -70,7 +75,7 @@ for arg in "$@"; do
 done
 if [ "$GLOBAL_MODE" -eq 1 ]; then INSTALL_SCOPE="global"; fi
 if [ -z "$INSTALL_SCOPE" ]; then
-  [ -n "${OPENSTATE_CONFIG_DIR:-}" ] && INSTALL_SCOPE="repo" || INSTALL_SCOPE="global"
+  INSTALL_SCOPE="repo"
 fi
 [ "$INSTALL_SCOPE" = "repo" ] || [ "$INSTALL_SCOPE" = "global" ] || fail "OPENSTATE_INSTALL_SCOPE must be repo or global"
 # openstate-fgst.10: --license KEY (or --license=KEY, or OPENSTATE_LICENSE_KEY)
@@ -95,9 +100,18 @@ global_config_root() {
   fi
 }
 
-CONFIG_DIR="${OPENSTATE_CONFIG_DIR:-$(pwd)/.opencode}"
-if [ "$GLOBAL_MODE" -eq 1 ] && [ -z "${OPENSTATE_CONFIG_DIR:-}" ]; then
+if [ -n "${OPENSTATE_CONFIG_DIR:-}" ]; then
+  CONFIG_DIR="$OPENSTATE_CONFIG_DIR"
+elif [ "$GLOBAL_MODE" -eq 1 ]; then
   CONFIG_DIR="$(global_config_root)/opencode"
+else
+  # Per repository (the default): the top of the git repository this runs in.
+  REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || true)"
+  if [ -z "$REPO_ROOT" ]; then
+    printf '  \033[31m✗\033[0m %s\n' "not inside a git repository: run this in the repository where you want OpenState, or pass --global to install it for every repository" >&2
+    exit 1
+  fi
+  CONFIG_DIR="$REPO_ROOT/.opencode"
 fi
 
 say()  { printf '\033[1m%s\033[0m\n' "$*"; }
@@ -1026,6 +1040,8 @@ After restart you will see:
     • CONFIG CHANGES REQUIRE AN OPENCODE RESTART
 
 State lives per-project in .openstate/state.jsonl.
+
+$(if [ "$INSTALL_SCOPE" = "global" ]; then printf 'Installed for EVERY repository (global, %s).\n  • a repository with its own install (install.sh in that repository) uses its own\n  • remove the global install with: install.sh --global --uninstall' "$OPENCODE_DIR"; else printf 'Installed for THIS repository only (%s).\n  • other repositories are untouched; install there too where you want OpenState\n  • to install for every repository instead: install.sh --global' "$OPENCODE_DIR"; fi)
 
 Installed version: ${TAG:-local} (recorded in $VERSION_FILE)
   • re-run this installer to update in place (idempotent, overwrites bundle)
