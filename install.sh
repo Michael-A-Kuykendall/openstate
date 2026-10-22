@@ -715,17 +715,25 @@ else
 fi
 fi
 
+# A path the native engine and Node can open: on Windows (Git Bash) the mixed
+# C:/... form, elsewhere unchanged.
+native_path() {
+  if [ "$OS" = "windows" ] && command -v cygpath >/dev/null 2>&1; then cygpath -m "$1"; else printf '%s' "$1"; fi
+}
+
 # --- smoke test the engine before touching anything ---
 say "smoke-testing engine"
 mkdir -p "$TMPDIR/x"
 tar -xzf "$TMPDIR/$ASSET" -C "$TMPDIR/x"
 [ -x "$TMPDIR/x/bin/$ENGINE_NAME" ] || fail "release asset missing engine binary"
 SMOKE_DIR="$(mktemp -d)"
+# The Windows engine is a native program: hand it C:/... paths, not Git Bash's /c/...
+SMOKE_NATIVE="$(native_path "$SMOKE_DIR")"
 RESPONSE="$(
   printf '%s\n' \
-    '{"type":"observation","event":"file.edited","data":{"path":"smoke.rs"},"repo_root":"'"$SMOKE_DIR"'"}' \
-    '{"type":"query","query":"state","repo_root":"'"$SMOKE_DIR"'"}' \
-  | OPENSTATE_STATE="$SMOKE_DIR/state.jsonl" "$TMPDIR/x/bin/$ENGINE_NAME" 2>/dev/null \
+    '{"type":"observation","event":"file.edited","data":{"path":"smoke.rs"},"repo_root":"'"$SMOKE_NATIVE"'"}' \
+    '{"type":"query","query":"state","repo_root":"'"$SMOKE_NATIVE"'"}' \
+  | OPENSTATE_STATE="$SMOKE_NATIVE/state.jsonl" "$TMPDIR/x/bin/$ENGINE_NAME" 2>/dev/null \
   | tail -1
 )"
 echo "$RESPONSE" | grep -q '"facts"' || fail "engine smoke test failed: $RESPONSE"
