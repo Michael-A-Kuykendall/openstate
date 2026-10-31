@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Evidence — OpenState</title>
+<meta name="description" content="OpenState measurements from the maintainer's own projects, August to October 2026. Not a controlled study." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="logo-header.jpg" alt="OpenState logo" />
+    </a>
+    <nav class="nav">
+      <a class="nav-desk" href="index.html#product">Product</a>
+      <a class="nav-desk" href="index.html#results">Results</a>
+      <a class="nav-desk" href="structural-tools.html">Code tools</a>
+      <a href="technical.html">Docs</a>
+      <a href="pricing.html">Pricing</a>
+      <a class="nav-buy" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=openstate">Buy — $49</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="shell">
+    <p class="eyebrow">Evidence</p>
+    <h1>The maintainer&rsquo;s own projects.</h1>
+    <p class="hero-lede">These figures are observed use and co-movement. They are not a controlled study, and nothing here claims fewer repeated failures.</p>
+  </div>
+</section>
+
+<section class="band" id="numbers">
+  <div class="shell">
+    <p class="eyebrow">Tool use</p>
+    <h2>4 August to 10 October 2026 UTC.</h2>
+    <table class="tool-table">
+      <tbody>
+        <tr><td>OpenState tool uses in OpenCode</td><td>35,579</td></tr>
+        <tr><td>Structural tool uses</td><td>30,782</td></tr>
+        <tr><td>AST searches</td><td>10,420</td></tr>
+        <tr><td>Text edit previews</td><td>8,102</td></tr>
+        <tr><td>Text edit applies</td><td>6,694</td></tr>
+        <tr><td>Bounded text-region reads</td><td>2,467</td></tr>
+        <tr><td>Sessions that used it</td><td>243</td></tr>
+        <tr><td>Projects</td><td>20</td></tr>
+        <tr><td>Store records (10 October)</td><td>82,586</td></tr>
+        <tr><td>Resume capsule size</td><td>median about 500, at most about 1,600 tokens</td></tr>
+      </tbody>
+    </table>
+    <p class="lede">Direct calls count once; a Code Mode program using a tool counts once for that tool. The named structural categories are a subset of the structural total. <a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md" target="_blank" rel="noopener">Method and evidence on GitHub &rarr;</a></p>
+  </div>
+</section>
+
+<section class="band alt" id="reads">
+  <div class="shell">
+    <p class="eyebrow">Reads</p>
+    <h2>A definition is a small part of its file.</h2>
+    <ul class="metrics">
+      <li><span class="metric-num">97%</span><span class="metric-label">less data reading one function from a 63 KB file, in one measured case</span></li>
+      <li><span class="metric-num">1.3 KB</span><span class="metric-label">a definition read, against about 8.6 KB for an average file read</span></li>
+      <li><span class="metric-num">22</span><span class="metric-label">tools: search, read, navigate, and preview/apply edits</span></li>
+      <li><span class="metric-num">18</span><span class="metric-label">languages with symbol support; text tools work in any file</span></li>
+    </ul>
+    <p class="lede">These are bytes returned per read in the maintainer&rsquo;s sessions. How small a definition is next to its file depends on the code, and a careful agent can also read a range of lines.</p>
+  </div>
+</section>
+
+<section class="band" id="tokens">
+  <div class="shell">
+    <p class="eyebrow">Completion cost</p>
+    <h2>Observed co-movement, not a controlled study.</h2>
+    <p class="lede">In the maintainer&rsquo;s OpenCode history, tokens per completed work item in the openstate project fell from about 16M to 10.6M (34%) and per commit from 16.0M to 11.05M (31%) between August and September 2026 while completions rose. A repo adopting the tools via Claude Code fell from 14.3M to 0.9M per commit. Non-adopting repos were flat or worse except one that improved in a lighter work phase.</p>
+    <p class="lede">No measurement yet shows fewer repeated failures. What OpenState guarantees is the record and its delivery to the agent.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <span class="footer-brand">OpenState</span>
+    <span class="footer-tag">Local software, sold once</span>
+    <span class="footer-links"><a href="index.html">Home</a> &middot; <a href="technical.html">Docs</a> &middot; <a href="structural-tools.html">Code tools</a> &middot; <a href="pricing.html">Pricing</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

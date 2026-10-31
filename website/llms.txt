@@ -1,0 +1,23 @@
+# OpenState
+
+Local project state and structural code tools for coding agents. $49 once per developer. The engine stays on the machine.
+
+## Sales
+
+- [index.html](index.html): the short version. What it does, four measured figures, how an edit works, the price.
+- [pricing.html](pricing.html): $49 once, what is included, Stripe checkout.
+- [license.html](license.html): how Stripe and Keygen issue the key. The engine does not check the key at runtime.
+- [terms.html](terms.html), [refund.html](refund.html), [privacy.html](privacy.html): the sale.
+
+## Technical
+
+- [technical.html](technical.html): architecture, what is recorded, comparisons, who it is not for, known weaknesses.
+- [structural-tools.html](structural-tools.html): the 22 structural tools, guarantees, languages, and where a small edit costs more.
+- [evidence.html](evidence.html): the ten measurements from the maintainer's own projects, August to October 2026. Not a controlled study.
+- Method write-up: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md
+- Tool reference: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/STRUCTURAL-TOOLS.md
+- Repository: https://github.com/Michael-A-Kuykendall/openstate
+
+## Not claimed
+
+No customer count. No fewer repeated failures. No hosted team service. The license is on the honor system.

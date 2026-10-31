@@ -18,10 +18,12 @@
       <img class="brand-logo" src="logo-header.jpg" alt="OpenState logo" />
     </a>
     <nav class="nav">
-      <a href="index.html#install">Install</a>
-      <a href="structural-tools.html">Code tools</a>
+      <a class="nav-desk" href="index.html#product">Product</a>
+      <a class="nav-desk" href="index.html#results">Results</a>
+      <a class="nav-desk" href="structural-tools.html">Code tools</a>
+      <a href="technical.html">Docs</a>
       <a href="pricing.html">Pricing</a>
-      <a href="license.html" aria-current="page">License</a>
+      <a class="nav-buy" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=openstate">Buy — $49</a>
     </nav>
   </div>
 </header>
@@ -36,6 +38,9 @@
 
 <section class="band" id="issue">
   <div class="shell">
+    <h2>Stripe hosts the payment</h2>
+    <p class="lede">The license worker creates a Stripe Checkout Session and redirects the browser to it. After payment, Stripe returns you to the worker's success page, which shows your key.</p>
+    <p class="route">GET /buy?tier=openstate</p>
     <h2>What happens after checkout</h2>
     <ol class="tick-list">
       <li>Stripe sends <code>checkout.session.completed</code> to the worker.</li>
