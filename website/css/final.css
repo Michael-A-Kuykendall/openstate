@@ -12,7 +12,7 @@
   --signal: #b7232b;
   --signal-deep: #861d24;
   --rule: #dce1dd;
-  --display: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --display: "Commissioner", "Instrument Sans", system-ui, sans-serif;
   --sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --maxw: 1160px;
 }
@@ -118,8 +118,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #25
 .os-command{padding:14px 0;border-bottom:1px solid #415059;display:grid;grid-template-columns:69px minmax(0,1fr);gap:9px;align-items:start}
 .os-command:last-of-type{border-bottom:0}
 .os-command small{font:700 .69rem/1.7 var(--mono);letter-spacing:.02em;color:#aac8bc}
-.os-command code{font:500 .75rem/1.7 var(--mono);color:#f3f5f4;overflow-wrap:anywhere;white-space:normal}
-.os-command em{font-style:normal;color:#b5c6cc}
+.os-command code{font:500 .75rem/1.7 var(--mono);color:#182128;background-color:#f1f3f0;overflow-wrap:anywhere;white-space:normal}
+.os-command em{font-style:normal;color:#861d24}
 .os-inline-result{font-size:.76rem;color:#a7d9b3;margin:13px 0 0}
 .os-trustbar{border-bottom:1px solid var(--rule);background:#f0f2ee}
 .os-trustlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;padding:0;margin:0;list-style:none}
