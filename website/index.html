@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>OpenState — stop making coding agents rediscover your project</title>
-<meta name="description" content="OpenState carries forward what was decided, failed, changed and blocked across sessions, and gives the agent structural tools to find, read and edit the right code. Free to try, then $10 a month or $129 once for every 0.x release. All sales are final." />
+<title>OpenState — Project memory and precise code editing</title>
+<meta name="description" content="OpenState gives coding agents structural code editing with guarded previews and a local record of decisions, failed commands, and blockers. Install free or buy a 0.x license." />
 <link rel="canonical" href="https://michael-a-kuykendall.github.io/openstate/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="OpenState" />
-<meta property="og:title" content="OpenState — stop making coding agents rediscover your project" />
-<meta property="og:description" content="OpenState carries forward what was decided, failed, changed and blocked across sessions, and gives the agent structural tools to find, read and edit the right code. Free to try, then $10 a month or $129 once for every 0.x release. All sales are final." />
+<meta property="og:title" content="OpenState — Pick up where you left off. Edit only what you meant to." />
+<meta property="og:description" content="Guarded code editing and project memory for coding agents. Runs locally and is free to try." />
 <meta property="og:url" content="https://michael-a-kuykendall.github.io/openstate/" />
 <meta property="og:image" content="https://michael-a-kuykendall.github.io/openstate/logo-md.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -20,313 +20,91 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/final.css" />
+<link rel="alternate" type="application/json" title="Full OpenState product facts" href="product.json" />
+<link rel="alternate" type="text/plain" title="Full OpenState AI reference" href="llms-full.txt" />
 </head>
 <body>
+<a class="os-skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell os-header-inner">
+<a class="os-brand" href="index.html" aria-label="OpenState home"><img class="os-brand-logo" src="logo-header.jpg" alt="" width="66" height="66"><span class="os-wordmark">OpenState</span></a>
+<nav class="os-desktop-nav" aria-label="Main navigation"><a href="index.html#how">How it works</a><a href="structural-tools.html">Tools</a><a href="evidence.html">Results</a><a href="hosts.html">Hosts</a><a href="pricing.html">Pricing</a></nav>
+<a class="btn btn-primary os-header-cta" href="#install">Install free</a>
+<details class="os-mobile-menu"><summary aria-label="Open site menu">Menu</summary><nav class="os-mobile-panel" aria-label="Mobile navigation"><a href="index.html#how">How it works</a><a href="structural-tools.html">Tools</a><a href="evidence.html">Results</a><a href="hosts.html">Hosts</a><a href="pricing.html">Pricing</a><a href="#install">Install free</a><a href="docs/index.html">Documentation</a></nav></details>
+</div></header>
 
-<header class="site-header">
-  <div class="shell header-inner">
-    <a class="brand" href="#top">
-      <img class="brand-logo" src="logo-header.jpg" alt="OpenState logo" />
-    </a>
-    <nav class="nav">
-      <a class="nav-desk" href="#how">How it works</a>
-      <a class="nav-desk" href="structural-tools.html">Tools</a>
-      <a class="nav-desk" href="#results">Proof</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="#install">Install free</a>
-      <a href="docs/index.html">Docs</a>
-    </nav>
-    <a class="nav-buy" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime (0.x) — $129</a>
-  </div>
-</header>
-
-<section class="hero hero-sale" id="top">
-  <div class="shell hero-stage">
-    <img class="hero-cube hero-logo" src="logo-md.jpg" alt="OpenState logotype rendered on a cube" />
-    <div class="hero-copy">
-      <p class="eyebrow">OpenState — local state + structural code tools</p>
-      <h1>Edit the function. Keep the project context.</h1>
-      <p class="hero-lede">Your agent edits the function, not the file — and sessions remember what happened: what was decided, what failed, what changed and what is blocked. OpenCode loads that memory automatically at session start; other hosts pull it on demand over MCP. <a href="hosts.html">Host capability matrix &rarr;</a></p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#install">Install free</a>
-        <a class="btn btn-ghost" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime (every 0.x release) — $129</a>
-        <a class="btn btn-link" href="#how">See how it works &rarr;</a>
-      </div>
-      <p class="hero-tags">OpenCode native · MCP for Claude Code, Codex, Muse, Cursor, Kiro &amp; Copilot · Free to try · $10 a month · $129 once for every 0.x release</p>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="workflow">
-  <div class="shell">
-    <p class="eyebrow">One real workflow: renaming a function</p>
-    <h2>Find. Read. Preview. Apply. Resume.</h2>
-    <ol class="sequence">
-      <li><span class="step-num">01</span><strong>Find</strong><p><code>openstate_ast_search</code> for <code>calculateTotal</code> returns each definition as a place, file and line.</p></li>
-      <li><span class="step-num">02</span><strong>Read</strong><p><code>openstate_read_symbol</code> reads that one function, not the whole file.</p></li>
-      <li><span class="step-num">03</span><strong>Preview</strong><p><code>openstate_rename_symbol_preview</code> lists every edit renaming it to <code>calculateSubtotal</code> would make, and returns an identity. It writes nothing.</p></li>
-      <li><span class="step-num">04</span><strong>Apply — or refused</strong><p><code>openstate_rename_symbol_apply</code> writes exactly that preview, once. If a file changed underneath, the apply is refused instead of forced.</p></li>
-      <li><span class="step-num">05</span><strong>Resume</strong><p>The next session starts with the capsule — <code>openstate_capsule</code>: the objective, the rename decision and its reason, the files in progress, and whether tests have passed since.</p></li>
-    </ol>
-    <p class="lede">Try it after installing: ask your agent to rename one function in your own repository and watch the preview before anything is written. <a href="structural-tools.html">What each tool does &rarr;</a></p>
-  </div>
-</section>
-
-<section class="band" id="product">
-  <div class="shell">
-    <p class="eyebrow">One product, two jobs</p>
-    <div class="jobs">
-      <article>
-        <p class="job-kicker">01 — State</p>
-        <h2>What was decided stays decided.</h2>
-        <p>Decisions, failed commands, blockers, the objective, changed files, and whether a test has passed since the last edit. OpenCode puts that capsule in context at the start of every session and after each compaction. Other hosts call <code>openstate_capsule</code>.</p>
-      </article>
-      <article class="job-shift">
-        <p class="job-kicker">02 — Code</p>
-        <h2>Edit the definition, not the file.</h2>
-        <p>22 structural tools, built on ast-grep, search, read and edit by definition. Every write is a preview first. Stale files, ambiguous targets and a second use of the same preview are refused.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="code-tools">
-  <div class="shell">
-    <p class="eyebrow">What your agent gets</p>
-    <h2>Tools that work on code the way you think about it.</h2>
-    <div class="offer-grid">
-      <article class="offer">
-        <h3>Find it</h3>
-        <p>Search for a function, a name or plain text. Every hit comes back as a place, file and line, not a wall of file contents.</p>
-        <p><code>openstate_ast_search</code></p>
-      </article>
-      <article class="offer">
-        <h3>Read just that</h3>
-        <p>Read one complete function or type instead of the whole file. In one measured case that was 97% less data.</p>
-        <p><code>openstate_read_symbol</code></p>
-      </article>
-      <article class="offer">
-        <h3>Edit text safely</h3>
-        <p>Replace an exact piece of text in any file: code, Markdown, config. If it matches twice, the edit is refused and every match is listed. Windows line endings are handled.</p>
-        <p><code>openstate_edit_text</code></p>
-      </article>
-      <article class="offer">
-        <h3>Follow a name</h3>
-        <p>Jump to where a name is declared and every place that uses it, or list the symbols in a file before opening it.</p>
-        <p><code>openstate_find_referencing_symbols</code></p>
-      </article>
-      <article class="offer">
-        <h3>Rename everywhere</h3>
-        <p>One preview lists every change across your files. One apply writes them.</p>
-        <p><code>openstate_rename_symbol</code></p>
-      </article>
-      <article class="offer">
-        <h3>Move, insert, replace, delete</h3>
-        <p>Whole definitions, cut at the syntax tree&rsquo;s boundaries, with the spacing left right at both ends.</p>
-        <p><code>openstate_move_symbol</code> and more</p>
-      </article>
-      <article class="offer">
-        <h3>Nothing written by surprise</h3>
-        <p>Every change is a preview first, then an apply that writes exactly what the preview showed. A stale or ambiguous edit is refused, not forced.</p>
-      </article>
-      <article class="offer">
-        <h3>Remembers the project</h3>
-        <p>Decisions and their reasons, commands that failed, what is blocked, whether tests passed since the last edit. OpenCode hands it to the agent at the start of every session and after each compaction; other agents ask for it.</p>
-        <p><code>openstate_capsule</code></p>
-      </article>
-      <article class="offer">
-        <h3>Uses less of the context</h3>
-        <p>Reading definitions instead of files keeps each read small. In our own project, tokens per commit fell 31% from August to September with adoption; observed co-movement, not a controlled study.</p>
-      </article>
-    </div>
-    <p class="lede"><a href="structural-tools.html">All 36 tools, what each one does, and what the write path guarantees &rarr;</a></p>
-  </div>
-</section>
-
-<section class="band alt" id="numbers">
-  <div class="shell">
-    <p class="eyebrow">Measured on the maintainer&rsquo;s own projects, August to October 2026</p>
-    <h2>Less reading. Fewer edits. Lower cost.</h2>
-    <ul class="metrics">
-      <li><span class="metric-num">&minus;31%</span><span class="metric-label">tokens per commit in the openstate project after adopting the tools, August to September 2026</span></li>
-      <li><span class="metric-num">14.3M &rarr; 0.9M</span><span class="metric-label">tokens per commit in a repository that adopted them via Claude Code</span></li>
-      <li><span class="metric-num">&minus;96%</span><span class="metric-label">edit calls, 8,002 to 346, as structural edits took over</span></li>
-      <li><span class="metric-num">97%</span><span class="metric-label">less data reading one function from a 63 KB file, in one measured case</span></li>
-    </ul>
-    <p class="lede">Cost moved with adoption on the maintainer&rsquo;s projects; it is not a controlled study. <a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md">Method and evidence &rarr;</a></p>
-  </div>
-</section>
-
-<section class="band ink" id="results">
-  <div class="shell">
-    <p class="eyebrow">Results</p>
-    <h2>Measured on the maintainer&rsquo;s own projects.</h2>
-    <ul class="metrics metrics-hero">
-      <li><span class="metric-num">35,579</span><span class="metric-label">OpenState tool uses</span></li>
-      <li><span class="metric-num">243</span><span class="metric-label">real coding sessions</span></li>
-      <li><span class="metric-num">97% less</span><span class="metric-label">data in one measured function-read case</span></li>
-      <li><span class="metric-num">18</span><span class="metric-label">languages with structural symbol support</span></li>
-    </ul>
-    <p class="lede">Tool-use window: 4 August to 10 October 2026 UTC. Not a controlled study. <a href="evidence.html">Method and evidence &rarr;</a></p>
-  </div>
-</section>
-
-<section class="band" id="problems">
-  <div class="shell">
-    <p class="eyebrow">Three problems it addresses</p>
-    <h2>Long agent sessions lose what they learned.</h2>
-    <table class="tool-table problem-table">
-      <tbody>
-        <tr><td><strong>Without OpenState</strong></td><td><strong>With OpenState</strong></td></tr>
-        <tr><td>The agent re-runs a command that already failed yesterday.</td><td>Failed commands are recorded and shown to it.</td></tr>
-        <tr><td>After a compaction or a restart, it re-reads files to work out what it was doing.</td><td>It gets the objective, recent decisions, the files in progress and the test status.</td></tr>
-        <tr><td>It retries an approach you already rejected.</td><td>Decisions are kept with the reason you gave.</td></tr>
-      </tbody>
-    </table>
-    <p class="lede">The engine records this from the session&rsquo;s events, with no model writing notes. The summary it hands the agent is small: median about 500, at most about 1,600 tokens.</p>
-  </div>
-</section>
-
-<section class="band alt" id="audience">
-  <div class="shell">
-    <p class="eyebrow">Who it is for</p>
-    <h2>Developers who let an agent work for hours.</h2>
-    <p class="lede">If your agent spends its time hunting through whole files, or every new session starts from scratch, this is for you.</p>
-    <h3>Who it is not for</h3>
-    <ul class="tick-list">
-      <li><strong>Documentation or vector search.</strong> It records what happens in sessions, not your documents.</li>
-      <li><strong>Teams sharing one memory.</strong> Everything stays on one machine, in one repository.</li>
-    </ul>
-    <p class="lede"><a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/FAQ.md">Limits and trade-offs &rarr;</a></p>
-
-  </div>
-</section>
-
-<section class="band" id="how">
-  <div class="shell">
-    <p class="eyebrow">How the agent works</p>
-    <h2>Find. Read. Preview. Apply.</h2>
-    <ol class="sequence">
-      <li><span class="step-num">01</span><strong>Find</strong><p><code>openstate_ast_search</code> returns places, not file contents.</p></li>
-      <li><span class="step-num">02</span><strong>Read</strong><p>One definition, or one anchored region. Not the whole file.</p></li>
-      <li><span class="step-num">03</span><strong>Preview</strong><p>The planned change and an identity. It writes nothing.</p></li>
-      <li><span class="step-num">04</span><strong>Apply</strong><p>Writes exactly that change, once. A second use is refused.</p></li>
-    </ol>
-    <p class="lede more-link"><a href="structural-tools.html">The 22 tools, the guarantees, and where they cost more &rarr;</a></p>
-  </div>
-</section>
-
-<section class="band hosts" id="hosts">
-  <div class="shell">
-    <p class="eyebrow">Where it runs</p>
-    <h2>Works where you work.</h2>
-    <p class="lede">OpenCode gets native capture and automatic capsule delivery. Claude Code, Codex, Muse, Cursor, Kiro, GitHub Copilot and other MCP clients get the same 36 tools through the bundled MCP server.</p>
-    <p class="host-strip"><span>OpenCode</span><span>Claude Code</span><span>Codex</span><span>Muse</span><span>Cursor</span><span>Kiro</span><span>GitHub Copilot</span><span>MCP</span></p>
-    <p class="lede"><a href="hosts.html">Full host capability matrix: capture, injection, support grade &rarr;</a></p>
-  </div>
-</section>
-
-<section class="band alt" id="survives">
-  <div class="shell">
-    <p class="eyebrow">What survives the session</p>
-    <h2>State, not the transcript.</h2>
-    <ul class="facts">
-      <li>Objective</li>
-      <li>Decisions</li>
-      <li>Failed attempts</li>
-      <li>Blockers</li>
-      <li>Changed files</li>
-      <li>Test status</li>
-    </ul>
-    <p class="lede">Recorded from the session&rsquo;s events, with no model in the loop. A later event replaces or closes a fact that stopped being true. <a href="technical.html#how">How capture works &rarr;</a></p>
-  </div>
-</section>
-
-<section class="band buy" id="buy">
-  <div class="shell buy-grid">
-    <div>
-      <p class="eyebrow">Buy OpenState</p>
-      <h2>$129 once, every 0.x release.</h2>
-      <p>One developer, on up to 3 machines. Every 0.x release, no renewal — or $10 a month, cancel any time. All sales are final, so try it free first: 30 structural applies on this machine.</p>
-    </div>
-    <div class="buy-action">
-      <a class="btn btn-paper" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime (every 0.x release) — $129</a>
-      <a class="btn btn-paper" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=monthly">Subscribe — $10 a month</a>
-      <p><a href="pricing.html">What you are buying</a> &middot; <a href="refund.html">Refunds</a> &middot; <a href="license.html">How the key is issued</a></p>
-    </div>
-  </div>
-</section>
-
-<section class="band alt" id="install">
-  <div class="shell">
-    <p class="eyebrow">Install</p>
-    <h2>One command. Free to start.</h2>
-    <pre class="code-block"><span># run inside the repository where you want OpenState</span>
-curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash
-<span class="cmt"># or once for every repository</span>
-curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash -s -- --global
-<span class="cmt"># verify an existing install</span>
-./install.sh --check</pre>
-    <p class="payoff">Restart OpenCode and the agent has 36 tools and the project memory. Every other host needs one pasted registration below — OpenState never edits your host settings itself.</p>
-    <ul class="tick-list">
-      <li>Only in the repository you run it in, so your other projects keep their own tools; add <code>--global</code> to put it in every repository</li>
-      <li>You need Node.js 18 or newer, Git, and Bash. Linux and macOS; on Windows, run everything from Git Bash</li>
-      <li>Prebuilt engine under 3 MB, checksum verified and smoke-tested before anything is written</li>
-      <li>Free: everything, including 30 structural applies on this machine. Add a license with <code>install.sh --license KEY</code></li>
-    </ul>
-    <section id="install-hosts">
-      <h3>Register your host: one pasted registration each</h3>
-      <p class="lede">Run these from the repository root after installing. Each one points the host at <code>.opencode/mcp/openstate-mcp.mjs</code>, the MCP server the installer laid down.</p>
-      <h4>Claude Code</h4>
-      <pre class="cmd">claude mcp add -s local openstate -- node "$PWD/.opencode/mcp/openstate-mcp.mjs"</pre>
-      <p class="lede">Approve the <code>openstate</code> server when Claude Code asks; <code>/mcp</code> should list it as connected, with 36 tools.</p>
-      <h4>Codex</h4>
-      <p class="lede">Add this block to <code>~/.codex/config.toml</code>, with the repository path filled in:</p>
-      <pre class="cmd">[mcp_servers.openstate]
-command = "node"
-args = ["/path/to/your/repo/.opencode/mcp/openstate-mcp.mjs"]</pre>
-      <h4>Cursor</h4>
-      <p class="lede">Add this entry to your Cursor MCP config (<code>~/.cursor/mcp.json</code>), with the repository path filled in:</p>
-      <pre class="cmd">{ "mcpServers": { "openstate": {
-  "command": "node",
-  "args": ["/path/to/your/repo/.opencode/mcp/openstate-mcp.mjs"]
-} } }</pre>
-      <h4>Any other MCP host</h4>
-      <p class="lede">Any stdio MCP client takes the same registration. A project <code>.mcp.json</code> at the repository root works for Claude Code; Muse takes the same block as <code>mcp_servers</code> in <code>.muse/mcp.json</code>:</p>
-      <pre class="cmd">{ "mcpServers": { "openstate": {
-  "command": "node",
-  "args": ["/path/to/your/repo/.opencode/mcp/openstate-mcp.mjs"]
-} } }</pre>
-      <p class="lede">Non-OpenCode hosts call <code>openstate_capsule</code> on demand; only OpenCode injects the project memory at session start. <a href="structural-tools.html">All 36 tools &rarr;</a></p>
-    </section>
-    <p class="lede"><a href="pricing.html">Pricing</a> &nbsp;&middot;&nbsp; <a href="license.html">License and billing</a> &nbsp;&middot;&nbsp; <a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">README</a> &nbsp;&middot;&nbsp; <a href="https://github.com/Michael-A-Kuykendall/openstate/issues" target="_blank" rel="noopener">Issues</a></p>
-  </div>
-</section>
-
-<section class="band alt" id="depth">
-  <div class="shell">
-    <p class="eyebrow">The rest of the record</p>
-    <h2>Read the depth when you want it.</h2>
-    <ul class="depth-links">
-      <li><a href="evidence.html">Evidence <span>All ten measurements and the method</span></a></li>
-      <li><a href="structural-tools.html">Code tools <span>22 tools, guarantees, languages</span></a></li>
-      <li><a href="technical.html#limits">Limitations <span>What it does not see, and what is not measured</span></a></li>
-      <li><a href="technical.html#how">Architecture <span>Capture, the capsule, and the comparisons</span></a></li>
-      <li><a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">GitHub <span>README, releases, issues</span></a></li>
-    </ul>
-  </div>
-</section>
-
-<footer class="site-footer">
-  <div class="shell footer-inner">
-    <span class="footer-brand">OpenState</span>
-    <span class="footer-tag">Structural code tools and project state for coding agents</span>
-    <span class="footer-links"><a href="pricing.html">Pricing</a> &middot; <a href="license.html">License</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="refund.html">Refunds</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="evidence.html">Evidence</a> &middot; <a href="technical.html">Docs</a> &middot; <a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">GitHub</a></span>
-  </div>
-</footer>
-
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"OpenState","applicationCategory":"DeveloperApplication","operatingSystem":"Windows, macOS, Linux","url":"https://michael-a-kuykendall.github.io/openstate/","description":"OpenState carries forward what was decided, failed, changed and blocked across sessions, and gives the agent structural tools to find, read and edit the right code. Free to try, then $10 a month or $129 once for every 0.x release. All sales are final.","offers":[{"@type":"Offer","name":"Monthly","price":"10","priceCurrency":"USD","description":"$10 a month for one developer on up to 3 machines. Cancel any time."},{"@type":"Offer","name":"Lifetime (every 0.x release)","price":"129","priceCurrency":"USD","description":"$129 once per developer for every 0.x release, on up to 3 machines. All sales are final."}]}
-</script>
+<main id="main">
+<section class="os-hero" id="top"><div class="shell os-hero-grid">
+<div class="os-hero-copy"><p class="eyebrow">Local tools for coding agents</p>
+<h1>Pick up where you left off. <em>Edit only what you meant to.</em></h1>
+<p class="os-hero-lede">OpenState helps your agent find the right definition, read it without opening the entire file, and preview changes before writing. It also keeps a local record of decisions, failed commands, and blockers—so a new session can continue the work instead of reconstructing it.</p>
+<div class="os-hero-actions"><a class="btn btn-primary" href="#install">Install free</a><a class="btn btn-ghost" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy the 0.x license · $129</a></div>
+<p class="os-hero-note">30 successful structural applies free per machine. Searching, reading and previews remain free. <a href="pricing.html">Compare all three plans</a>.</p>
+</div>
+<aside class="os-example" aria-label="Illustrative structural editing workflow">
+<div class="os-example-head"><div class="os-example-title"><img class="os-example-mark" src="logo-md.jpg" alt="" width="49" height="49"><span>OpenState / code edit example</span></div><span class="os-example-status">local tools</span></div>
+<div class="os-example-body"><p class="os-example-caption">Your agent can target a specific function and inspect the write before it happens.</p>
+<div class="os-command"><small>FIND</small><code>openstate_ast_search <em>calculateTotal</em></code></div>
+<div class="os-command"><small>READ</small><code>openstate_read_symbol <em>src/cart.ts</em></code></div>
+<div class="os-command"><small>PREVIEW</small><code>openstate_edit_symbol_preview <em>show proposed change</em></code></div>
+<div class="os-command"><small>APPLY</small><code>openstate_edit_symbol_apply <em>verify then write</em></code></div>
+<p class="os-inline-result">Stale or ambiguous targets are refused—not forced.</p>
+<p class="os-example-caption">Illustrative sequence, not a simulated product result. These are real tool names.</p></div></aside>
+</div></section>
+<div class="os-trustbar"><div class="shell"><ul class="os-trustlist">
+<li><b>36 tools</b><span>22 code + 14 state/lifecycle</span></li>
+<li><b>18 languages</b><span>Structural code operations</span></li>
+<li><b>Local state</b><span>Project record on your machine</span></li>
+<li><b>MCP</b><span>Tools for multiple agent hosts</span></li>
+</ul></div></div>
+<section class="os-section" id="how"><div class="shell">
+<div class="os-section-head"><p class="eyebrow">What it does</p><h2>Precise code operations. A memory of the work.</h2><p>The two capabilities solve different problems, and both come in the same installation.</p></div>
+<div class="os-feature-grid">
+<article class="os-feature"><h3>Work with definitions, not guessed line numbers.</h3><p>Find a symbol, read its complete definition, preview a rename or edit, and apply it once. Guarded writes refuse stale, missing, or ambiguous targets.</p><ul><li>Symbol search, read, and navigation</li><li>Rename, insert, replace, delete, and move</li><li>Safe text edits in Markdown and configuration</li></ul><a class="os-plain-link" href="structural-tools.html">All 36 tools, with actual names</a></article>
+<article class="os-feature"><h3>Know what the last session already tried.</h3><p>OpenState derives project facts from session events: objectives, decisions, failed commands, blockers, active files and test outcomes. OpenCode restores a short capsule automatically; other hosts request it over MCP.</p><ul><li>Inspect the reason and source of a decision</li><li>Check what failed and what remains blocked</li><li>Carry work across sessions and compactions</li></ul><a class="os-plain-link" href="technical.html">How the local state engine works</a></article>
+</div></div></section>
+<section class="os-section" id="workflow"><div class="shell"><div class="os-section-head"><p class="eyebrow">One normal edit</p><h2>Find. Read. Preview. Apply. Resume.</h2><p>A preview shows the intended write. The separate apply step checks it against the current files.</p></div>
+<ol class="os-step-list">
+<li><span class="os-step-no">01</span><div><strong>Find</strong><p>Locate the definition.</p></div></li>
+<li><span class="os-step-no">02</span><div><strong>Read</strong><p>Retrieve the relevant code.</p></div></li>
+<li><span class="os-step-no">03</span><div><strong>Preview</strong><p>Inspect the proposed change.</p></div></li>
+<li><span class="os-step-no">04</span><div><strong>Apply</strong><p>Write once—or refuse if stale.</p></div></li>
+<li><span class="os-step-no">05</span><div><strong>Resume</strong><p>Use the project record next time.</p></div></li></ol></div></section>
+<section class="os-section" id="results"><div class="shell"><div class="os-section-head"><p class="eyebrow">Evidence, with limitations</p><h2>Smaller reads. Measured changes in completion cost.</h2><p>These are observations from the maintainer's projects, not a controlled experiment. They do not establish guaranteed savings in other projects.</p></div>
+<div class="os-proof-grid"><div class="os-proof"><div class="value">97%</div><p>Less returned data in one measured read of a function compared with reading the entire 63 KB file. This is a byte comparison, not a cost claim.</p></div>
+<div class="os-proof"><div class="value">31%</div><p>Fewer tokens per commit in the OpenState project between August and September 2026 as the tools were adopted. Other factors may have contributed.</p></div></div>
+<a class="os-plain-link" href="evidence.html">Read the data, methodology and caveats</a></div></section>
+<section class="os-section" id="hosts"><div class="shell"><div class="os-section-head"><p class="eyebrow">Know what your host supports</p><h2>OpenCode native. MCP elsewhere.</h2><p>Tool access and automatic context delivery are different capabilities. We describe each separately.</p></div>
+<div class="os-host-grid">
+<div class="os-host"><strong>OpenCode</strong><p>Native plugin, automatic event capture, and capsule injection at session start and compaction.</p></div>
+<div class="os-host"><strong>Claude Code, Codex, Muse</strong><p>Same tools through MCP; assessment of supported stored session histories on demand.</p></div>
+<div class="os-host"><strong>Cursor, Kiro, Copilot and other MCP clients</strong><p>MCP tool access. Do not assume automatic capture or native context injection.</p></div>
+<div class="os-host"><strong>Local by design</strong><p>Project facts stay on your machine. Licensing uses Keygen and the OpenState license worker; project code is not sent for license checks.</p></div></div>
+<a class="os-plain-link" href="hosts.html">Review the detailed host support matrix</a></div></section>
+<section class="os-section os-buy-section" id="pricing"><div class="shell"><div class="os-section-head"><p class="eyebrow">Pricing</p><h2>Every plan has the complete toolkit.</h2><p>The difference is how many structural writes you can make. Choose a subscription or a one-time license if it proves useful.</p></div>
+<div class="os-price-grid">
+<article class="os-price"><p class="os-price-tag">Try it</p><h3 class="os-price-amount">$0</h3><p class="os-price-meta">No account to start</p><ul><li>All 36 tools</li><li>Unlimited searching, reading and previews</li><li>30 structural applies per machine</li></ul><a class="btn btn-paper" href="#install">Install free</a></article>
+<article class="os-price"><p class="os-price-tag">Monthly</p><h3 class="os-price-amount">$10 / mo</h3><p class="os-price-meta">Cancel when you want</p><ul><li>Unlimited structural applies</li><li>One developer, up to three machines</li><li>Access during paid subscription</li></ul><a class="btn btn-paper" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=monthly">Subscribe for $10/month</a></article>
+<article class="os-price featured"><p class="os-price-tag">One-time 0.x license</p><h3 class="os-price-amount">$129</h3><p class="os-price-meta">Every 0.x release; not future major versions</p><ul><li>Unlimited structural applies</li><li>One developer, up to three machines</li><li>No recurring charge for 0.x</li></ul><a class="btn btn-primary" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy once · $129</a></article>
+</div>
+<p class="os-buy-disclaimer">All sales are final. Stripe handles payments and Keygen issues your license. <a href="pricing.html">Full pricing details</a> · <a href="terms.html">Terms</a> · <a href="refund.html">Refund policy</a>.</p>
+</div></section>
+<section class="os-section" id="install"><div class="shell"><div class="os-section-head"><p class="eyebrow">Install</p><h2>Install in the repository where you work.</h2><p>Node.js 18+ is required. Run from a Git repository; the installer installs there by default. Add <code>--global</code> if you deliberately want it in every repository. On Windows, run the script from Git Bash.</p></div>
+<pre class="code-block"><code>curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash</code></pre>
+<p>Restart OpenCode to load the native plugin. Other agents register the bundled local MCP server. For setup, verification and uninstall instructions, see the <a href="docs/index.html">installation documentation</a>.</p>
+<a class="os-plain-link" href="hosts.html">Connect a different coding agent</a>
+</div></section>
+<section class="os-section" id="limitations"><div class="shell"><div class="os-section-head"><p class="eyebrow">The important limitations</p><h2>What the tools do—and what they don't.</h2><p>Clear boundaries matter more than promising that an agent becomes infallible.</p></div>
+<div class="os-faq">
+<details><summary>Does it record everything an agent thinks?</summary><p>No. It processes the session events the host exposes, not hidden reasoning or work you do outside the observed host. You can inspect the recorded facts and their provenance.</p></details>
+<details><summary>Are edits guaranteed to be correct?</summary><p>No. Preview and apply checks guard the target and write operation. The implementation still needs normal tests and review.</p></details>
+<details><summary>Is session recovery automatic in every host?</summary><p>No. OpenCode supplies automatic capture and injection. MCP clients can call the tools and assess supported history on demand; actual availability depends on the host.</p></details>
+<details><summary>Does the $129 license include future major versions?</summary><p>No. The one-time offer covers every 0.x release. It does not promise access to future 1.x or later lines.</p></details>
+</div></div></section>
+<section class="os-section os-final"><div class="shell os-final-grid"><div><p class="eyebrow">See how it handles your project</p><h2>Start free. No account needed.</h2><p>Read and search freely, then evaluate the guarded write path with 30 successful applies.</p></div><a class="btn btn-primary" href="#install">Install free</a></div></section>
+</main>
+<footer class="site-footer"><div class="shell os-footer-inner"><span>OpenState · Local project state and guarded code editing</span>
+<nav class="os-footer-nav" aria-label="Footer navigation">
+<a href="technical.html">Technical</a><a href="docs/index.html">Documentation</a><a href="structural-tools.html">All tools</a><a href="license.html">Licensing</a><a href="terms.html">Terms</a><a href="refund.html">Refunds</a><a href="privacy.html">Privacy</a><a href="https://github.com/Michael-A-Kuykendall/openstate">GitHub</a></nav></div></footer>
 </body>
 </html>

@@ -1,30 +1,50 @@
-# OpenState
+# OpenState — accurate product reference for humans and AI systems
 
-> GENERATED — do not hand-edit. Regenerate with `node tools/build-llms-txt.mjs`.
-> Reference for OpenState 0.1.0 (0.x series). Tool names/counts parsed from src/mcp/src/index.ts; pricing parsed from website/pricing.html.
+> Updated 2026-11-05. This page is an index. All feature, licensing and evidence claims must agree with the displayed website and shipped product. The JSON file is the structured, detailed version.
 
-Local project state and structural code tools for coding agents: 36 tools (22 structural code calls = 8 readers + 7 preview/apply pairs; 14 state and lifecycle tools). Free to try (30 structural applies per machine), then $10 a month or $129 once for every 0.x release. All sales are final. The engine stays on the machine.
+OpenState provides guarded structural code-search, reading and editing, alongside a persistent local record of project decisions, failures and blockers.
 
-## Sales
+## Quick answer
 
-- [index.html](index.html): the short version. What it does, measured figures, how an edit works, the price.
-- [pricing.html](pricing.html): $10 a month or $129 once for every 0.x release, what is included, Stripe checkout.
-- [license.html](license.html): how Stripe and Keygen issue the key, activation, billing.
-- [terms.html](terms.html), [refund.html](refund.html), [privacy.html](privacy.html): the sale.
+- Product: local structural code tools + persistent project facts for coding agents.
+- Main benefit: target and preview exact code edits; keep a session record of decisions, failure outcomes and blockers.
+- 36 tools: 8 read/navigation/diagnostics, 7 preview/apply edit pairs (14 calls), 14 state/lifecycle operations.
+- Pricing: all tools and 30 successful edits free per machine; paid $10/month or $129 once for every 0.x release. All sales final.
+- OpenCode: native automatic capture and capsule injection. Other local MCP clients: same tools, supported history on demand; automatic injection is not universal.
+- Data: project record local; license requests are a network exception. No model accuracy guarantee.
 
-## Technical
+## Official machine-readable references
 
-- [technical.html](technical.html): architecture, what is recorded, comparisons, who it is not for, known weaknesses.
-- [structural-tools.html](structural-tools.html): the 22 structural tools, guarantees, languages.
-- [hosts.html](hosts.html): per-host capability matrix: tool access, capture, injection, support grade.
-- [evidence.html](evidence.html): the ten measurements from the maintainer's own projects, August to October 2026. Not a controlled study.
-- [docs/](docs/): versioned docs hub: getting started, operations, security, limitations, cited evidence.
-- FAQ: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/FAQ.md
-- Method write-up: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md
-- Tool reference: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/STRUCTURAL-TOOLS.md
-- Versioning: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/VERSIONING.md
-- Repository: https://github.com/Michael-A-Kuykendall/openstate
+- [Structured JSON product facts](product.json): 36-tool descriptions; pricing, licensing, compatibility, architecture, data handling, sources, evidence and FAQs.
+- [Expanded readable reference](llms-full.txt): full product definition, accurate claims, limitations and examples.
 
-## Not claimed
+## Human-facing pages
 
-No customer count. No fewer-repeated-failures measurement. No hosted team service. One machine, one repository.
+- [Homepage](index.html): concise benefits and installation/purchase choices.
+- [Tools](structural-tools.html): every real tool name, tool families and edit behavior.
+- [Pricing](pricing.html): exact plan entitlements and checkout.
+- [License](license.html): activation, recovery and billing.
+- [Host matrix](hosts.html): supported integration boundaries.
+- [Evidence](evidence.html): measurements and limitations.
+- [Technical explanation](technical.html): state, capture and structural engine.
+- [Docs hub](docs/): operational and reference information.
+- [Terms](terms.html), [Refunds](refund.html), [Privacy](privacy.html): binding legal/customer terms.
+
+## External source documentation
+
+- [README](https://github.com/Michael-A-Kuykendall/openstate/blob/main/README.md)
+- [FAQ](https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/FAQ.md)
+- [Structural operations](https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/STRUCTURAL-TOOLS.md)
+- [Trust and recovery](https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/TRUST.md)
+- [Evidence methodology](https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md)
+- [Versioning](https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/VERSIONING.md)
+
+## Important caveats
+
+- Cloud-hosted project knowledge management
+- Teamwide synchronized memory
+- Semantic/vector document search
+- Guaranteed correctness of generated code
+- A replacement for tests or code review
+
+Do not describe the one-time 0.x license as covering all future major versions. Do not describe MCP tool access as automatic memory for every host. Do not attribute measured observational cost changes solely to OpenState.

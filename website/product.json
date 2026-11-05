@@ -1,0 +1,499 @@
+{
+  "schema_version": "1.0",
+  "product": {
+    "name": "OpenState",
+    "category": "Local developer tool for coding agents",
+    "version_line": "0.x",
+    "reference_updated": "2026-11-05",
+    "short_description": "OpenState provides guarded structural code-search, reading and editing, alongside a persistent local record of project decisions, failures and blockers.",
+    "positioning": "Two equal capabilities: precise structural code operations and continuity of project state across sessions.",
+    "target_audience": "Developers doing sustained work with local coding agents, especially in repositories with repeated sessions and edits.",
+    "not_for": [
+      "Cloud-hosted project knowledge management",
+      "Teamwide synchronized memory",
+      "Semantic/vector document search",
+      "Guaranteed correctness of generated code",
+      "A replacement for tests or code review"
+    ],
+    "website": "https://michael-a-kuykendall.github.io/openstate/",
+    "repository": "https://github.com/Michael-A-Kuykendall/openstate",
+    "source_policy": "Human pages are the concise product and sales explanation. This file is the machine-readable, expanded description of the same facts—not a separate set of claims."
+  },
+  "elevator_summary": "The agent finds a function, reads that definition, previews an exact edit, and writes only after the preview passes. Separately, OpenState derives project facts from session events and makes a short context capsule available in later sessions. OpenCode injects the capsule natively; other MCP clients request it on demand.",
+  "licensing": {
+    "commercial_engine": true,
+    "public_integration_components_license": "MIT",
+    "per_developer": true,
+    "plans": [
+      {
+        "plan": "free",
+        "price_usd": 0,
+        "payment_type": "none",
+        "entitlement": "All 36 tools; 30 successful structural applies per machine; searches, reads and previews are not metered.",
+        "account_required_to_start": false
+      },
+      {
+        "plan": "monthly",
+        "price_usd": 10,
+        "payment_type": "recurring_monthly",
+        "entitlement": "Unlimited structural applies for one developer, on up to 3 machines while subscription is paid.",
+        "checkout_url": "https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=monthly",
+        "cancelation": "Access continues to the end of paid period."
+      },
+      {
+        "plan": "one_time_0x",
+        "price_usd": 129,
+        "payment_type": "one_time",
+        "entitlement": "Unlimited structural applies for one developer on up to 3 machines for every 0.x release; future 1.x+ not included.",
+        "checkout_url": "https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime"
+      }
+    ],
+    "shared_capabilities": "Same code tools, state tools and engine in free and paid editions; the structural apply count is the paid distinction.",
+    "metering": "A successful structural *_apply is one use, even if it writes several files. Read, search, and preview operations do not consume uses. Refused or failed writes do not count.",
+    "payments": "Stripe handles checkout; Keygen issues and validates licenses through an OpenState Cloudflare worker.",
+    "refund_statement": "All sales are final, subject to applicable law; review the binding terms and refund policy before purchasing.",
+    "update_scope_warning": "The word lifetime in a checkout route denotes the 0.x product-line license, not guaranteed access to every future major version.",
+    "machine_limit_paid": 3,
+    "offline_grace_paid": "Up to 7 days between successful license checks.",
+    "monthly_to_one_time": "Supported through the licensing worker; charges the full one-time price, preserves the key, and cancels the monthly subscription. Unused month is not credited.",
+    "terms_url": "https://michael-a-kuykendall.github.io/openstate/terms.html",
+    "refund_url": "https://michael-a-kuykendall.github.io/openstate/refund.html",
+    "license_url": "https://michael-a-kuykendall.github.io/openstate/license.html"
+  },
+  "capabilities": {
+    "count_total": 36,
+    "structural_count": 22,
+    "structural_readers": [
+      {
+        "name": "openstate_ast_search",
+        "behavior": "Locate symbols, identifiers or literal text; returns file/line locations rather than complete file contents.",
+        "mutates_files": false,
+        "requires_paid_license": false
+      },
+      {
+        "name": "openstate_read_symbol",
+        "behavior": "Read a complete AST definition, with bounded or paginated output.",
+        "mutates_files": false,
+        "requires_paid_license": false
+      },
+      {
+        "name": "openstate_read_text_region",
+        "behavior": "Read a bounded region around a unique literal text anchor.",
+        "mutates_files": false,
+        "requires_paid_license": false
+      },
+      {
+        "name": "openstate_symbol_overview",
+        "behavior": "List definitions and their locations within a file or scope.",
+        "mutates_files": false,
+        "requires_paid_license": false
+      },
+      {
+        "name": "openstate_find_declaration",
+        "behavior": "Find lexical declaration locations.",
+        "mutates_files": false,
+        "requires_paid_license": false
+      },
+      {
+        "name": "openstate_find_referencing_symbols",
+        "behavior": "Find declaration and lexical AST references; not type-resolved semantic analysis.",
+        "mutates_files": false,
+        "requires_paid_license": false
+      },
+      {
+        "name": "openstate_find_implementations",
+        "behavior": "Find Rust impl blocks for a type or trait.",
+        "mutates_files": false,
+        "requires_paid_license": false
+      },
+      {
+        "name": "openstate_diagnostics",
+        "behavior": "Run a bounded Rust cargo check at the declared workspace or crate.",
+        "mutates_files": false,
+        "requires_paid_license": false
+      }
+    ],
+    "structural_edits": [
+      {
+        "family": "edit_symbol",
+        "behavior": "Replace a complete definition or rename a named symbol.",
+        "preview": {
+          "name": "openstate_edit_symbol_preview",
+          "writes": false,
+          "metered": false
+        },
+        "apply": {
+          "name": "openstate_edit_symbol_apply",
+          "writes": true,
+          "metered": true
+        },
+        "safety": "An apply uses the preview identity and checks target applicability; stale, ambiguous, unauthorized, missing or consumed previews are refused as appropriate."
+      },
+      {
+        "family": "insert_symbol",
+        "behavior": "Insert a definition relative to another definition.",
+        "preview": {
+          "name": "openstate_insert_symbol_preview",
+          "writes": false,
+          "metered": false
+        },
+        "apply": {
+          "name": "openstate_insert_symbol_apply",
+          "writes": true,
+          "metered": true
+        },
+        "safety": "An apply uses the preview identity and checks target applicability; stale, ambiguous, unauthorized, missing or consumed previews are refused as appropriate."
+      },
+      {
+        "family": "delete_symbol",
+        "behavior": "Delete a definition using AST boundaries.",
+        "preview": {
+          "name": "openstate_delete_symbol_preview",
+          "writes": false,
+          "metered": false
+        },
+        "apply": {
+          "name": "openstate_delete_symbol_apply",
+          "writes": true,
+          "metered": true
+        },
+        "safety": "An apply uses the preview identity and checks target applicability; stale, ambiguous, unauthorized, missing or consumed previews are refused as appropriate."
+      },
+      {
+        "family": "move_symbol",
+        "behavior": "Move a definition between locations or files.",
+        "preview": {
+          "name": "openstate_move_symbol_preview",
+          "writes": false,
+          "metered": false
+        },
+        "apply": {
+          "name": "openstate_move_symbol_apply",
+          "writes": true,
+          "metered": true
+        },
+        "safety": "An apply uses the preview identity and checks target applicability; stale, ambiguous, unauthorized, missing or consumed previews are refused as appropriate."
+      },
+      {
+        "family": "rename_symbol",
+        "behavior": "Rename identifiers across matched files and scopes.",
+        "preview": {
+          "name": "openstate_rename_symbol_preview",
+          "writes": false,
+          "metered": false
+        },
+        "apply": {
+          "name": "openstate_rename_symbol_apply",
+          "writes": true,
+          "metered": true
+        },
+        "safety": "An apply uses the preview identity and checks target applicability; stale, ambiguous, unauthorized, missing or consumed previews are refused as appropriate."
+      },
+      {
+        "family": "edit_text",
+        "behavior": "Replace a unique text anchor in a text file, including config and Markdown.",
+        "preview": {
+          "name": "openstate_edit_text_preview",
+          "writes": false,
+          "metered": false
+        },
+        "apply": {
+          "name": "openstate_edit_text_apply",
+          "writes": true,
+          "metered": true
+        },
+        "safety": "An apply uses the preview identity and checks target applicability; stale, ambiguous, unauthorized, missing or consumed previews are refused as appropriate."
+      },
+      {
+        "family": "create_file",
+        "behavior": "Create a new file that does not yet exist.",
+        "preview": {
+          "name": "openstate_create_file_preview",
+          "writes": false,
+          "metered": false
+        },
+        "apply": {
+          "name": "openstate_create_file_apply",
+          "writes": true,
+          "metered": true
+        },
+        "safety": "An apply uses the preview identity and checks target applicability; stale, ambiguous, unauthorized, missing or consumed previews are refused as appropriate."
+      }
+    ],
+    "state_and_lifecycle_count": 14,
+    "state_and_lifecycle_tools": [
+      {
+        "name": "openstate_capsule",
+        "behavior": "Read the compact resume summary of project objectives, decisions, failed attempts and blockers."
+      },
+      {
+        "name": "openstate_state",
+        "behavior": "Read the project's currently recorded facts."
+      },
+      {
+        "name": "openstate_report",
+        "behavior": "Read current blocked, failed and unresolved work."
+      },
+      {
+        "name": "openstate_report_timeline",
+        "behavior": "Read the corresponding facts by session in timeline order."
+      },
+      {
+        "name": "openstate_why",
+        "behavior": "Inspect the evidence and provenance for a fact."
+      },
+      {
+        "name": "openstate_close",
+        "behavior": "Close or correct a recorded fact with a reason."
+      },
+      {
+        "name": "openstate_sessions",
+        "behavior": "Discover supported stored agent sessions for this repository."
+      },
+      {
+        "name": "openstate_assess",
+        "behavior": "Replay/assess a supported stored session into project state, avoiding duplicate observations."
+      },
+      {
+        "name": "openstate_checkpoint",
+        "behavior": "Persist the project's current state."
+      },
+      {
+        "name": "openstate_export",
+        "behavior": "Export the local state and capsule as JSON."
+      },
+      {
+        "name": "openstate_reset",
+        "behavior": "Reset state subject to rebuild safety checks."
+      },
+      {
+        "name": "openstate_restart",
+        "behavior": "Checkpoint and test fresh-engine state loading."
+      },
+      {
+        "name": "openstate_doctor",
+        "behavior": "Inspect engine and state health."
+      },
+      {
+        "name": "openstate_toast",
+        "behavior": "Control native OpenCode completion notifications."
+      }
+    ],
+    "supported_languages": [
+      "Rust",
+      "Python",
+      "TypeScript",
+      "TSX",
+      "JavaScript",
+      "Go",
+      "C",
+      "C++",
+      "Java",
+      "C#",
+      "Bash",
+      "Haskell",
+      "Kotlin",
+      "Lua",
+      "PHP",
+      "Ruby",
+      "Scala",
+      "Solidity",
+      "Swift"
+    ],
+    "language_count_marketing": 18,
+    "supported_language_note": "The published claim is 18 language families; TSX is included with TypeScript. Exact operations depend on language grammar and tool, and Rust diagnostics apply only to Rust.",
+    "structural_engine": "ast-grep-backed lexical AST navigation/editing plus a Rust commit boundary for validated writes.",
+    "write_contract": [
+      "Searches, readers and previews do not write project files.",
+      "Apply is an explicit, separate operation and uses the returned preview identity.",
+      "A consumed preview cannot be applied a second time.",
+      "Edits refuse stale source or ambiguous targeting as appropriate.",
+      "The engine checks the write contract before committing files; refusal is preferable to overwriting incompatible state.",
+      "Syntactic guardrails do not prove semantic correctness; tests and review remain necessary."
+    ],
+    "session_state": [
+      "Records objectives, reason-bearing decisions and directives, attempted commands and observed outcomes, active work, blockers, relevant paths and available test state.",
+      "Captures only events accessible to the host or replay adapter; it does not observe model reasoning, external shell activity or every hidden host event.",
+      "Facts are retractable or superseded as subsequent observations change what is known; inspect provenance using openstate_why.",
+      "State is local and repository-scoped; no built-in multi-machine or team synchronization.",
+      "The capsule is a compact continuation summary, not a full transcript or general document-search index."
+    ]
+  },
+  "hosts": {
+    "general_rule": "36-tool local stdio MCP contract does not imply automatic capture or injection in every host.",
+    "native": {
+      "host": "OpenCode",
+      "tools": "native plugin",
+      "capture": "automatic from host events",
+      "capsule": "automatically at session start and after compaction"
+    },
+    "mcp_stored_history": [
+      {
+        "host": "Claude Code",
+        "tools": "MCP",
+        "capture": "stored-session assessment on demand; native OpenCode behavior not assumed"
+      },
+      {
+        "host": "Codex",
+        "tools": "MCP",
+        "capture": "stored-session assessment on demand for supported history formats; runtime format support may vary"
+      },
+      {
+        "host": "Muse",
+        "tools": "MCP",
+        "capture": "stored-session assessment on demand for supported history formats"
+      }
+    ],
+    "other_mcp_clients": [
+      "Cursor",
+      "Kiro",
+      "GitHub Copilot",
+      "other standard local MCP clients"
+    ],
+    "other_mcp_limit": "Structural tool access may work; no universal promise of automatic memory ingestion or native sidebar, notifications and capsule injection.",
+    "validation_status": "Protocol interoperability and real-host end-to-end installation are distinct checks. See the host matrix for each supported or unverified combination.",
+    "host_matrix_url": "https://michael-a-kuykendall.github.io/openstate/hosts.html"
+  },
+  "architecture": {
+    "distribution": "One local installation includes engine executable, structural tool dependencies, OpenCode plugin, skills and a bundled MCP stdio server.",
+    "runtime": "Local Rust engine with local state storage; TypeScript/JavaScript host adapters and structural tools.",
+    "persistence": ".openstate/state.jsonl within the repository, or a supported symlink/pointer arrangement when filesystem constraints require it.",
+    "model_interaction": "No language model is required to infer stored state facts; the engine derives facts from observed events. The coding agent itself remains external.",
+    "data_flow": "Host events or stored-session replay -> adapter -> local state engine -> fact store -> reports/capsule. Structural tool preview -> apply -> Rust commit boundary -> project files.",
+    "authentication": "A paid license is validated by the licensing layer; trial applies are counted by the trial license service.",
+    "installer": "Installer verifies platform assets and release checksums/signatures; local executable smoke checks are part of the intended release process."
+  },
+  "privacy_security": {
+    "local_project_data": true,
+    "telemetry": "No analytics telemetry sent by the engine.",
+    "network_exceptions": [
+      "Installer downloads distribution artifacts from GitHub.",
+      "Paid and trial licensing calls to Keygen and the OpenState license worker, including a license key or trial identity, a hashed machine fingerprint and platform name.",
+      "Configured host history access may contact a configured OpenCode API endpoint rather than only filesystem history."
+    ],
+    "data_recorded_locally": "Project state can include user messages, command lines and paths; treat .openstate as sensitive shell history.",
+    "project_content_sent_to_license": "None; project source, filenames and local state are not needed for licensing.",
+    "license_key_protection": "Local license file outside project repository; paid machine limit and offline validation documented.",
+    "limitations": [
+      "Closed-source engine, despite MIT licensing of some public integration surfaces",
+      "No assertion that every host or platform is runtime-verified",
+      "A model can still choose a wrong code change even when the edit operation is safe"
+    ],
+    "privacy_url": "https://michael-a-kuykendall.github.io/openstate/privacy.html",
+    "trust_url": "https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/TRUST.md"
+  },
+  "installation": {
+    "default_scope": "Current Git repository only",
+    "global_option": "--global",
+    "windows_shell": "Git Bash; WSL installs Linux tooling for WSL",
+    "node_requirement": "Node.js 18+ for bundled integrations; some advanced history parsing can require a newer version.",
+    "snippet": "curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash",
+    "verification": "Use installer --check; native OpenCode requires restart after installation.",
+    "mcp_setup": "Register the locally bundled MCP entry point with the target host; tool availability depends on host tool permissions and registration.",
+    "licensing_activation": "openstate-engine license activate <key> or install.sh --license KEY",
+    "uninstall": "--uninstall retains project state; --purge explicitly deletes project state.",
+    "docs_url": "https://michael-a-kuykendall.github.io/openstate/docs/"
+  },
+  "evidence": {
+    "kind": "Maintainer self-observation, not a randomized or controlled trial",
+    "examples": [
+      {
+        "measurement": "Definition read payload",
+        "value": "97% less data returned",
+        "scope": "One complete function versus whole 63 KB file",
+        "type": "bytes per read",
+        "caveat": "Not a token or dollar savings figure."
+      },
+      {
+        "measurement": "Tokens per commit",
+        "value": "31% lower",
+        "scope": "OpenState project, Aug–Sep 2026 adoption comparison",
+        "type": "observed association",
+        "caveat": "Work mix changed and causality is not established."
+      },
+      {
+        "measurement": "Tokens per completed work item",
+        "value": "34% lower",
+        "scope": "Maintainer's adopting repository, Aug–Sep 2026",
+        "type": "observed association",
+        "caveat": "No causal attribution."
+      },
+      {
+        "measurement": "Legacy invocation status",
+        "value": "19 errors in 21,372 calls (0.09%)",
+        "scope": "Separate legacy corpus June 16–Sep 23, 2026",
+        "type": "tool status rate",
+        "caveat": "Not equivalent to structural edit correctness; structured refusals may be successful tool-status responses."
+      }
+    ],
+    "explicitly_not_claimed": [
+      "Fewer repeated failures across sessions",
+      "Lower aggregate session token use",
+      "Guaranteed dollar savings",
+      "Zero bugs",
+      "Large independent customer cohort"
+    ],
+    "evidence_url": "https://michael-a-kuykendall.github.io/openstate/evidence.html",
+    "methods_url": "https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md"
+  },
+  "resources": {
+    "human_homepage": "https://michael-a-kuykendall.github.io/openstate/",
+    "human_tool_catalog": "https://michael-a-kuykendall.github.io/openstate/structural-tools.html",
+    "host_matrix": "https://michael-a-kuykendall.github.io/openstate/hosts.html",
+    "technical_documentation": "https://michael-a-kuykendall.github.io/openstate/technical.html",
+    "pricing": "https://michael-a-kuykendall.github.io/openstate/pricing.html",
+    "installation_documentation": "https://michael-a-kuykendall.github.io/openstate/docs/",
+    "evidence": "https://michael-a-kuykendall.github.io/openstate/evidence.html",
+    "human_legal": {
+      "terms": "https://michael-a-kuykendall.github.io/openstate/terms.html",
+      "refund": "https://michael-a-kuykendall.github.io/openstate/refund.html",
+      "privacy": "https://michael-a-kuykendall.github.io/openstate/privacy.html",
+      "licensing": "https://michael-a-kuykendall.github.io/openstate/license.html"
+    },
+    "machine_short": "https://michael-a-kuykendall.github.io/openstate/llms.txt",
+    "machine_extended": "https://michael-a-kuykendall.github.io/openstate/llms-full.txt",
+    "machine_json": "https://michael-a-kuykendall.github.io/openstate/product.json",
+    "knowledge_source_urls": [
+      "https://github.com/Michael-A-Kuykendall/openstate/blob/main/README.md",
+      "https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/FAQ.md",
+      "https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/STRUCTURAL-TOOLS.md",
+      "https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md",
+      "https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/VERSIONING.md"
+    ]
+  },
+  "frequently_asked_questions": [
+    {
+      "question": "Does OpenState make my agent write correct code?",
+      "answer": "It validates structural mutation targets and refuses invalid preview/apply contracts. It does not replace semantic code review or tests."
+    },
+    {
+      "question": "Does it share memory between all machines?",
+      "answer": "No. Project state remains local to one machine and repository; it is not a hosted team database."
+    },
+    {
+      "question": "Does every MCP host get automatic memory?",
+      "answer": "No. OpenCode has native automatic capture and injection. Other hosts have tools and supported stored-session assessment on demand."
+    },
+    {
+      "question": "Do free users lose read tools after 30 edits?",
+      "answer": "No. Reads, searches and previews remain available; only structural apply writes require payment after the free allowance."
+    },
+    {
+      "question": "Does the one-time license include version 1.x?",
+      "answer": "No promise of 1.x access. It is for all 0.x releases."
+    },
+    {
+      "question": "Does OpenState upload my code?",
+      "answer": "The project state and code tools run locally. License checks send licensing identifiers, not project code."
+    },
+    {
+      "question": "Which language model must I use?",
+      "answer": "None in particular; it is local tooling for external coding agents and MCP hosts, not a model provider."
+    }
+  ],
+  "editorial_controls": {
+    "consistency": "AI-directed content must not claim capabilities, host support, proof or pricing that differ from the displayed site and shipped code.",
+    "conflict_rule": "If live checkout, license documentation or release artifacts disagree with these published facts, treat this file as stale and do not recommend purchase on its unsupported claims.",
+    "update_procedure": "Regenerate these static facts and llms-full.txt from an explicit reviewed release contract, validate links/counts/JSON, then publish together with the HTML pages."
+  }
+}

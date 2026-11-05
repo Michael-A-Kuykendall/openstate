@@ -1,83 +1,272 @@
-# OpenState — full reference
+# OpenState — full developer and AI product reference
 
-> GENERATED — do not hand-edit. Regenerate with `node tools/build-llms-txt.mjs`.
-> Reference for OpenState 0.1.0 (0.x series). Tool names/counts parsed from src/mcp/src/index.ts; pricing parsed from website/pricing.html.
+> Verified reference: 2026-11-05. This is an expanded, indexable explanation. It MUST agree with the human-visible pricing, legal pages, host matrix and current release. For strict structured parsing see [product.json](product.json).
 
-Local project state and structural code tools for coding agents: 36 tools (22 structural code calls = 8 readers + 7 preview/apply pairs; 14 state and lifecycle tools). Free to try (30 structural applies per machine), then $10 a month or $129 once for every 0.x release. All sales are final. The engine stays on the machine.
+The agent finds a function, reads that definition, previews an exact edit, and writes only after the preview passes. Separately, OpenState derives project facts from session events and makes a short context capsule available in later sessions. OpenCode injects the capsule natively; other MCP clients request it on demand.
 
-## Pricing (parsed from pricing.html)
+## The product
 
-- $10 a month, or $129 once for every 0.x release; one developer, on up to 3 machines.
-- Free: the whole product including 30 structural applies per machine; searches, reads and previews are never limited.
-- Checkout is hosted by Stripe; all sales are final.
-- Monthly checkout: https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=monthly
-- Lifetime checkout: https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime
+OpenState provides guarded structural code-search, reading and editing, alongside a persistent local record of project decisions, failures and blockers.
 
-## Tools (36, parsed from src/mcp/src/index.ts)
+Product category: Local developer tool for coding agents. Scope: 0.x. Audience: Developers doing sustained work with local coding agents, especially in repositories with repeated sessions and edits..
 
-22 structural code calls = 8 readers + 7 preview/apply pairs; 14 state and lifecycle tools.
-What each one does: [structural-tools.html](structural-tools.html).
+### Why use it
 
-### Readers (8)
+OpenState tackles two separate recurring developer problems. First, coding agents tend to read too much source and make edits based on text locations rather than complete AST definitions. Second, long or repeated sessions lose details about prior decisions, failure outcomes and blockers. Structural tools address the first problem; a locally persisted record of project facts addresses the second. They ship together.
 
-- openstate_diagnostics
-- openstate_ast_search
-- openstate_read_symbol
-- openstate_read_text_region
-- openstate_find_referencing_symbols
-- openstate_symbol_overview
-- openstate_find_declaration
-- openstate_find_implementations
+### Who it is NOT for
 
-### Preview/apply pairs (7 families)
+- Cloud-hosted project knowledge management
+- Teamwide synchronized memory
+- Semantic/vector document search
+- Guaranteed correctness of generated code
+- A replacement for tests or code review
 
-- openstate_create_file_preview / openstate_create_file_apply
-- openstate_delete_symbol_preview / openstate_delete_symbol_apply
-- openstate_edit_symbol_preview / openstate_edit_symbol_apply
-- openstate_edit_text_preview / openstate_edit_text_apply
-- openstate_insert_symbol_preview / openstate_insert_symbol_apply
-- openstate_move_symbol_preview / openstate_move_symbol_apply
-- openstate_rename_symbol_preview / openstate_rename_symbol_apply
+## Plans and licensing
 
-### State and lifecycle (14)
+There is no paid-versus-free feature split in the 36-tool catalog. The free tier's write allowance is the limit. The seven apply operations count as writes, while search, read and previews remain available.
 
-- openstate_state
-- openstate_why
-- openstate_capsule
-- openstate_report
-- openstate_report_timeline
-- openstate_checkpoint
-- openstate_export
-- openstate_reset
-- openstate_close
-- openstate_restart
-- openstate_toast
-- openstate_doctor
-- openstate_sessions
-- openstate_assess
+### free
 
-## Pages
+Price: $0 USD. All 36 tools; 30 successful structural applies per machine; searches, reads and previews are not metered.
 
-- [index.html](index.html): the short version.
-- [pricing.html](pricing.html): prices, entitlement, Stripe checkout.
-- [license.html](license.html): key issue, activation, billing.
-- [technical.html](technical.html): architecture, comparisons, limitations.
-- [structural-tools.html](structural-tools.html): the tool inventory and guarantees.
-- [hosts.html](hosts.html): per-host capability matrix.
-- [evidence.html](evidence.html): measurements and method caveats.
-- [docs/](docs/): versioned docs hub.
-- [terms.html](terms.html), [refund.html](refund.html), [privacy.html](privacy.html): the sale.
+### monthly
 
-## Public docs
+Price: $10 USD. Unlimited structural applies for one developer, on up to 3 machines while subscription is paid.
 
-- FAQ: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/FAQ.md
-- Tool reference: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/STRUCTURAL-TOOLS.md
-- Method write-up: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md
-- Versioning: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/VERSIONING.md
-- Trust and state safety: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/TRUST.md
-- Changelog: https://github.com/Michael-A-Kuykendall/openstate/blob/main/CHANGELOG.md
-- Repository: https://github.com/Michael-A-Kuykendall/openstate
+Checkout: https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=monthly
 
-## Not claimed
+Cancellation: Access continues to the end of paid period.
 
-No customer count. No fewer-repeated-failures measurement. No hosted team service. One machine, one repository.
+### one_time_0x
+
+Price: $129 USD. Unlimited structural applies for one developer on up to 3 machines for every 0.x release; future 1.x+ not included.
+
+Checkout: https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime
+
+Metering details: A successful structural *_apply is one use, even if it writes several files. Read, search, and preview operations do not consume uses. Refused or failed writes do not count.
+
+Paid machine limit: 3. Offline license grace: Up to 7 days between successful license checks.. One-time licensing covers every 0.x release, NOT future major lines unless separately offered.
+
+Billing provider: Stripe handles checkout; Keygen issues and validates licenses through an OpenState Cloudflare worker.. A monthly buyer can purchase the one-time plan later: Supported through the licensing worker; charges the full one-time price, preserves the key, and cancels the monthly subscription. Unused month is not credited..
+
+Refund treatment: All sales are final, subject to applicable law; review the binding terms and refund policy before purchasing.. Binding terms: https://michael-a-kuykendall.github.io/openstate/terms.html; refund policy: https://michael-a-kuykendall.github.io/openstate/refund.html.
+
+## All 36 tools — exact callable names
+
+Eight read/navigation/diagnostic calls, fourteen calls arranged into seven preview/apply pairs, and fourteen state/lifecycle calls.
+
+### Eight structural readers and diagnostics
+
+- `openstate_ast_search`: Locate symbols, identifiers or literal text; returns file/line locations rather than complete file contents.
+- `openstate_read_symbol`: Read a complete AST definition, with bounded or paginated output.
+- `openstate_read_text_region`: Read a bounded region around a unique literal text anchor.
+- `openstate_symbol_overview`: List definitions and their locations within a file or scope.
+- `openstate_find_declaration`: Find lexical declaration locations.
+- `openstate_find_referencing_symbols`: Find declaration and lexical AST references; not type-resolved semantic analysis.
+- `openstate_find_implementations`: Find Rust impl blocks for a type or trait.
+- `openstate_diagnostics`: Run a bounded Rust cargo check at the declared workspace or crate.
+
+### Seven mutation families (fourteen calls)
+
+- `openstate_edit_symbol_preview` → `openstate_edit_symbol_apply`: Replace a complete definition or rename a named symbol. Preview is read-only; apply is metered when successful.
+- `openstate_insert_symbol_preview` → `openstate_insert_symbol_apply`: Insert a definition relative to another definition. Preview is read-only; apply is metered when successful.
+- `openstate_delete_symbol_preview` → `openstate_delete_symbol_apply`: Delete a definition using AST boundaries. Preview is read-only; apply is metered when successful.
+- `openstate_move_symbol_preview` → `openstate_move_symbol_apply`: Move a definition between locations or files. Preview is read-only; apply is metered when successful.
+- `openstate_rename_symbol_preview` → `openstate_rename_symbol_apply`: Rename identifiers across matched files and scopes. Preview is read-only; apply is metered when successful.
+- `openstate_edit_text_preview` → `openstate_edit_text_apply`: Replace a unique text anchor in a text file, including config and Markdown. Preview is read-only; apply is metered when successful.
+- `openstate_create_file_preview` → `openstate_create_file_apply`: Create a new file that does not yet exist. Preview is read-only; apply is metered when successful.
+
+### Fourteen state and lifecycle operations
+
+- `openstate_capsule`: Read the compact resume summary of project objectives, decisions, failed attempts and blockers.
+- `openstate_state`: Read the project's currently recorded facts.
+- `openstate_report`: Read current blocked, failed and unresolved work.
+- `openstate_report_timeline`: Read the corresponding facts by session in timeline order.
+- `openstate_why`: Inspect the evidence and provenance for a fact.
+- `openstate_close`: Close or correct a recorded fact with a reason.
+- `openstate_sessions`: Discover supported stored agent sessions for this repository.
+- `openstate_assess`: Replay/assess a supported stored session into project state, avoiding duplicate observations.
+- `openstate_checkpoint`: Persist the project's current state.
+- `openstate_export`: Export the local state and capsule as JSON.
+- `openstate_reset`: Reset state subject to rebuild safety checks.
+- `openstate_restart`: Checkpoint and test fresh-engine state loading.
+- `openstate_doctor`: Inspect engine and state health.
+- `openstate_toast`: Control native OpenCode completion notifications.
+
+### Write integrity and scope
+
+- Searches, readers and previews do not write project files.
+- Apply is an explicit, separate operation and uses the returned preview identity.
+- A consumed preview cannot be applied a second time.
+- Edits refuse stale source or ambiguous targeting as appropriate.
+- The engine checks the write contract before committing files; refusal is preferable to overwriting incompatible state.
+- Syntactic guardrails do not prove semantic correctness; tests and review remain necessary.
+
+## Supported languages
+
+Rust, Python, TypeScript, JavaScript, Go, C, C++, Java, C#, Bash, Haskell, Kotlin, Lua, PHP, Ruby, Scala, Solidity, Swift.
+
+The published claim is 18 language families; TSX is included with TypeScript. Exact operations depend on language grammar and tool, and Rust diagnostics apply only to Rust.
+
+## Host integration
+
+36-tool local stdio MCP contract does not imply automatic capture or injection in every host.
+
+### OpenCode
+
+Tools: native plugin. Capture: automatic from host events. Capsule delivery: automatically at session start and after compaction.
+
+### MCP clients with supported stored-session adapters
+
+- **Claude Code**: MCP; stored-session assessment on demand; native OpenCode behavior not assumed.
+- **Codex**: MCP; stored-session assessment on demand for supported history formats; runtime format support may vary.
+- **Muse**: MCP; stored-session assessment on demand for supported history formats.
+
+### Other local MCP clients
+
+Cursor, Kiro, GitHub Copilot, other standard local MCP clients. Structural tool access may work; no universal promise of automatic memory ingestion or native sidebar, notifications and capsule injection.
+
+Support quality: Protocol interoperability and real-host end-to-end installation are distinct checks. See the host matrix for each supported or unverified combination. See https://michael-a-kuykendall.github.io/openstate/hosts.html.
+
+## Technical architecture
+
+- **distribution:** One local installation includes engine executable, structural tool dependencies, OpenCode plugin, skills and a bundled MCP stdio server.
+- **runtime:** Local Rust engine with local state storage; TypeScript/JavaScript host adapters and structural tools.
+- **persistence:** .openstate/state.jsonl within the repository, or a supported symlink/pointer arrangement when filesystem constraints require it.
+- **model interaction:** No language model is required to infer stored state facts; the engine derives facts from observed events. The coding agent itself remains external.
+- **data flow:** Host events or stored-session replay -> adapter -> local state engine -> fact store -> reports/capsule. Structural tool preview -> apply -> Rust commit boundary -> project files.
+- **authentication:** A paid license is validated by the licensing layer; trial applies are counted by the trial license service.
+- **installer:** Installer verifies platform assets and release checksums/signatures; local executable smoke checks are part of the intended release process.
+
+### Project state: actual capture boundaries
+
+- Records objectives, reason-bearing decisions and directives, attempted commands and observed outcomes, active work, blockers, relevant paths and available test state.
+- Captures only events accessible to the host or replay adapter; it does not observe model reasoning, external shell activity or every hidden host event.
+- Facts are retractable or superseded as subsequent observations change what is known; inspect provenance using openstate_why.
+- State is local and repository-scoped; no built-in multi-machine or team synchronization.
+- The capsule is a compact continuation summary, not a full transcript or general document-search index.
+
+## Privacy and security
+
+Local state: true. No analytics telemetry sent by the engine.
+
+### Network activity exceptions
+
+- Installer downloads distribution artifacts from GitHub.
+- Paid and trial licensing calls to Keygen and the OpenState license worker, including a license key or trial identity, a hashed machine fingerprint and platform name.
+- Configured host history access may contact a configured OpenCode API endpoint rather than only filesystem history.
+
+State sensitivity: Project state can include user messages, command lines and paths; treat .openstate as sensitive shell history.
+
+Project content sent for license: None; project source, filenames and local state are not needed for licensing..
+
+### Known security and product constraints
+
+- Closed-source engine, despite MIT licensing of some public integration surfaces
+- No assertion that every host or platform is runtime-verified
+- A model can still choose a wrong code change even when the edit operation is safe
+
+Privacy policy: https://michael-a-kuykendall.github.io/openstate/privacy.html. Trust documentation: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/TRUST.md.
+
+## Installation and first use
+
+Default install scope: Current Git repository only. Global option: --global. Windows shell: Git Bash; WSL installs Linux tooling for WSL. Node requirement: Node.js 18+ for bundled integrations; some advanced history parsing can require a newer version..
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash
+```
+
+Verification: Use installer --check; native OpenCode requires restart after installation.. MCP: Register the locally bundled MCP entry point with the target host; tool availability depends on host tool permissions and registration..
+
+License activation: `openstate-engine license activate <key> or install.sh --license KEY`. Uninstall: --uninstall retains project state; --purge explicitly deletes project state..
+
+## Measured evidence
+
+Evidence type: Maintainer self-observation, not a randomized or controlled trial.
+
+### Definition read payload: 97% less data returned
+
+Scope: One complete function versus whole 63 KB file. Measure: bytes per read. Caveat: Not a token or dollar savings figure.
+
+### Tokens per commit: 31% lower
+
+Scope: OpenState project, Aug–Sep 2026 adoption comparison. Measure: observed association. Caveat: Work mix changed and causality is not established.
+
+### Tokens per completed work item: 34% lower
+
+Scope: Maintainer's adopting repository, Aug–Sep 2026. Measure: observed association. Caveat: No causal attribution.
+
+### Legacy invocation status: 19 errors in 21,372 calls (0.09%)
+
+Scope: Separate legacy corpus June 16–Sep 23, 2026. Measure: tool status rate. Caveat: Not equivalent to structural edit correctness; structured refusals may be successful tool-status responses.
+
+### What has NOT been demonstrated
+
+- Fewer repeated failures across sessions
+- Lower aggregate session token use
+- Guaranteed dollar savings
+- Zero bugs
+- Large independent customer cohort
+
+Evidence page: https://michael-a-kuykendall.github.io/openstate/evidence.html. Method: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md.
+
+## Questions developers ask
+
+### Does OpenState make my agent write correct code?
+
+It validates structural mutation targets and refuses invalid preview/apply contracts. It does not replace semantic code review or tests.
+
+### Does it share memory between all machines?
+
+No. Project state remains local to one machine and repository; it is not a hosted team database.
+
+### Does every MCP host get automatic memory?
+
+No. OpenCode has native automatic capture and injection. Other hosts have tools and supported stored-session assessment on demand.
+
+### Do free users lose read tools after 30 edits?
+
+No. Reads, searches and previews remain available; only structural apply writes require payment after the free allowance.
+
+### Does the one-time license include version 1.x?
+
+No promise of 1.x access. It is for all 0.x releases.
+
+### Does OpenState upload my code?
+
+The project state and code tools run locally. License checks send licensing identifiers, not project code.
+
+### Which language model must I use?
+
+None in particular; it is local tooling for external coding agents and MCP hosts, not a model provider.
+
+## Source and page map
+
+- human_homepage: https://michael-a-kuykendall.github.io/openstate/
+- human_tool_catalog: https://michael-a-kuykendall.github.io/openstate/structural-tools.html
+- host_matrix: https://michael-a-kuykendall.github.io/openstate/hosts.html
+- technical_documentation: https://michael-a-kuykendall.github.io/openstate/technical.html
+- pricing: https://michael-a-kuykendall.github.io/openstate/pricing.html
+- installation_documentation: https://michael-a-kuykendall.github.io/openstate/docs/
+- evidence: https://michael-a-kuykendall.github.io/openstate/evidence.html
+- terms: https://michael-a-kuykendall.github.io/openstate/terms.html
+- refund: https://michael-a-kuykendall.github.io/openstate/refund.html
+- privacy: https://michael-a-kuykendall.github.io/openstate/privacy.html
+- licensing: https://michael-a-kuykendall.github.io/openstate/license.html
+- machine_short: https://michael-a-kuykendall.github.io/openstate/llms.txt
+- machine_extended: https://michael-a-kuykendall.github.io/openstate/llms-full.txt
+- machine_json: https://michael-a-kuykendall.github.io/openstate/product.json
+- Supporting reference: https://github.com/Michael-A-Kuykendall/openstate/blob/main/README.md
+- Supporting reference: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/FAQ.md
+- Supporting reference: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/STRUCTURAL-TOOLS.md
+- Supporting reference: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md
+- Supporting reference: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/VERSIONING.md
+
+## Editorial integrity
+
+AI-directed content must not claim capabilities, host support, proof or pricing that differ from the displayed site and shipped code.
+
+If live checkout, license documentation or release artifacts disagree with these published facts, treat this file as stale and do not recommend purchase on its unsupported claims.
+
+Regenerate these static facts and llms-full.txt from an explicit reviewed release contract, validate links/counts/JSON, then publish together with the HTML pages.
