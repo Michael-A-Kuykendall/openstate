@@ -18,12 +18,12 @@
       <img class="brand-logo" src="logo-header.jpg" alt="OpenState logo" />
     </a>
     <nav class="nav">
-      <a class="nav-desk" href="index.html#product">Product</a>
-      <a class="nav-desk" href="index.html#results">Results</a>
-      <a class="nav-desk" href="structural-tools.html">Code tools</a>
-      <a href="technical.html">Docs</a>
+      <a class="nav-desk" href="index.html#how">How it works</a>
+      <a class="nav-desk" href="structural-tools.html">Tools</a>
+      <a class="nav-desk" href="index.html#results">Proof</a>
       <a href="pricing.html" aria-current="page">Pricing</a>
-      <a href="license.html">License</a>
+      <a href="index.html#install">Install free</a>
+      <a href="docs/index.html">Docs</a>
     </nav>
     <a class="nav-buy" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime (0.x) — $129</a>
   </div>
@@ -71,6 +71,26 @@
         <p><a class="btn btn-primary" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime (every 0.x release) for $129</a></p>
       </article>
     </div>
+    <h2 id="entitlements">Plan entitlements, side by side</h2>
+    <table class="tool-table">
+      <thead>
+        <tr><th>Entitlement</th><th>Free</th><th>Monthly — $10 a month</th><th>One-time — $129 once</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Structural applies (writes)</td><td>30 per machine</td><td>Unlimited</td><td>Unlimited</td></tr>
+        <tr><td>Search, read and previews</td><td>Unlimited</td><td>Unlimited</td><td>Unlimited</td></tr>
+        <tr><td>Project state and the capsule</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+        <tr><td>Machines per developer</td><td>This machine</td><td>Up to 3</td><td>Up to 3</td></tr>
+        <tr><td>Releases covered</td><td>Current</td><td>While subscribed</td><td>Every 0.x release, no renewal</td></tr>
+        <tr><td>Offline use between license checks</td><td>—</td><td>Up to 7 days</td><td>Up to 7 days</td></tr>
+      </tbody>
+    </table>
+    <h2>Machines and offline use</h2>
+    <ul class="tick-list">
+      <li>One license covers one named developer on up to 3 machines. To move it to a new machine, run <code>openstate-engine license deactivate</code> on the old one first; if the old machine is gone, remove it from your licenses page.</li>
+      <li>The engine checks the license and then works offline for up to 7 days between checks.</li>
+      <li>A cancelled monthly subscription keeps working to the end of the paid period. Monthly can switch to the $129 one-time plan later at full price, keeping the same key.</li>
+    </ul>
     <p class="lede">Stripe returns you to the license worker&rsquo;s success page, which shows your key and the command to activate it: <code>openstate-engine license activate &lt;key&gt;</code>. Project state stays local; it is not uploaded to complete the sale.</p>
     <p class="lede"><a href="terms.html">Terms of sale</a> &middot; <a href="refund.html">Refunds</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="license.html">How the key is issued</a></p>
     <p class="lede">Commercial embedding licenses — <a href="mailto:michaelallenkuykendall@gmail.com">michaelallenkuykendall@gmail.com</a></p>

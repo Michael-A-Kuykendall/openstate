@@ -192,6 +192,13 @@ h3 { font-size: 1.35rem; font-weight: 600; margin-bottom: 10px; }
 }
 .code-block span { color: var(--ink-faint); }
 
+/* Per-host registration commands: same safe wrapping as .code-block. */
+.cmd {
+  font-family: var(--mono); font-size: 0.85rem; line-height: 1.7;
+  background: var(--ink); color: var(--paper); padding: 18px 22px; border-radius: 6px;
+  margin: 10px 0 22px; overflow-x: auto; white-space: pre;
+}
+
 /* ---- principles ---- */
 .principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; margin-bottom: 34px; }
 .principle { border-top: 3px solid var(--ink); padding-top: 14px; }
@@ -263,6 +270,7 @@ body.no-scroll { overflow: hidden; }
   .tool-table td { padding: 8px 2px; white-space: normal; }
   .tool-table td:first-child { padding-right: 2px; border-bottom: none; }
   .code-block { white-space: pre-wrap; word-break: break-word; font-size: 0.82rem; padding: 20px 22px; }
+  .cmd { white-space: pre-wrap; word-break: break-word; font-size: 0.78rem; padding: 16px 18px; }
   .demo-grid { display: grid; grid-template-columns: 1fr; gap: 28px; align-items: start; }
   .demo-frame { margin: 0 0 40px; }
   .metrics { grid-template-columns: 1fr 1fr; gap: 0 26px; }
