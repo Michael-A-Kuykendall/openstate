@@ -16,29 +16,19 @@
 <meta name="twitter:title" content="OpenState Code Tools" />
 <meta name="twitter:description" content="OpenState's structural tools let a coding agent search for a definition, read just that definition, and change it through a preview checked before anything is written." />
 <meta name="twitter:image" content="https://michael-a-kuykendall.github.io/openstate/logo-md.jpg" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/style.css" />
+<link rel="alternate" type="application/json" title="OpenState detailed product facts" href="product.json" />
+<link rel="alternate" type="text/plain" title="OpenState machine-readable reference" href="llms-full.txt" />
 </head>
 <body>
+<a class="os-skip" href="#main">Skip to content</a>
 
-<header class="site-header">
-  <div class="shell header-inner">
-    <a class="brand" href="index.html">
-      <img class="brand-logo" src="logo-header.jpg" alt="OpenState logo" />
-    </a>
-    <nav class="nav">
-      <a class="nav-desk" href="index.html#product">Product</a>
-      <a class="nav-desk" href="index.html#results">Results</a>
-      <a class="nav-desk" href="structural-tools.html" aria-current="page">Code tools</a>
-      <a href="technical.html">Docs</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="license.html">License</a>
-    </nav>
-    <a class="nav-buy" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime (0.x) — $129</a>
-  </div>
-</header>
+<header class="site-header"><div class="shell os-header">
+<a class="os-brand" href="index.html" aria-label="OpenState home"><img src="logo-header.jpg" alt="" width="36" height="36"/><span>OpenState</span></a>
+<nav class="os-desktop-nav" aria-label="Main navigation"><a href="index.html#workflow">How it works</a><a href="structural-tools.html" aria-current="page">Tools</a><a href="evidence.html">Results</a><a href="hosts.html">Hosts</a><a href="pricing.html">Pricing</a><a href="docs/index.html">Docs</a><a class="os-header-install" href="index.html#install">Install free</a><a class="os-header-buy" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy once · $129</a></nav>
+<a class="os-mobile-install" href="index.html#install">Install free</a>
+<details class="os-mobile-nav"><summary aria-label="Open navigation menu">Menu</summary><nav aria-label="Mobile navigation"><a href="index.html#workflow">How it works</a><a href="structural-tools.html">Tools</a><a href="evidence.html">Results</a><a href="hosts.html">Hosts</a><a href="pricing.html">Pricing</a><a href="docs/index.html">Docs</a><a href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy once · $129</a></nav></details>
+</div></header><div id="main"></div>
 
 <section class="hero" id="top">
   <div class="shell">
@@ -58,12 +48,12 @@
   <div class="shell">
     <p class="eyebrow">Where the tools and the state run</p>
     <h2>Tools, session recovery and automatic capture</h2>
-    <table class="tool-table compare-table">
+    <table class="os-responsive-table tool-table compare-table">
       <tbody>
         <tr><td><strong>Host</strong></td><td><strong>Session capture</strong></td><td><strong>Capsule delivery</strong></td><td><strong>State + structural tools</strong></td></tr>
-        <tr><td><strong>OpenCode</strong></td><td>automatic, from the host&rsquo;s events</td><td>given to the agent at the start of every session and after each compaction</td><td>native</td></tr>
-        <tr><td><strong>Claude Code, Codex, Muse</strong></td><td>on-demand replay of the host&rsquo;s stored sessions</td><td>on demand, via openstate_capsule</td><td>36 tools via MCP</td></tr>
-        <tr><td><strong>Other standard MCP clients</strong> (Kiro, GitHub Copilot, Cursor)</td><td>replay of OpenCode, Claude Code, Codex and Muse sessions stored for the same project</td><td>on demand, via openstate_capsule</td><td>36 tools via MCP</td></tr>
+        <tr><td data-label="Host"><strong>OpenCode</strong></td><td data-label="Session capture">automatic, from the host&rsquo;s events</td><td data-label="Capsule delivery">given to the agent at the start of every session and after each compaction</td><td data-label="State + structural tools">native</td></tr>
+        <tr><td data-label="Host"><strong>Claude Code, Codex, Muse</strong></td><td data-label="Session capture">on-demand replay of the host&rsquo;s stored sessions</td><td data-label="Capsule delivery">on demand, via openstate_capsule</td><td data-label="State + structural tools">36 tools via MCP</td></tr>
+        <tr><td data-label="Host"><strong>Other standard MCP clients</strong> (Kiro, GitHub Copilot, Cursor)</td><td data-label="Session capture">replay of OpenCode, Claude Code, Codex and Muse sessions stored for the same project</td><td data-label="Capsule delivery">on demand, via openstate_capsule</td><td data-label="State + structural tools">36 tools via MCP</td></tr>
       </tbody>
     </table>
     <p class="lede">Every host gets all 36 tools. A session started in one agent can be picked up in another: any of them can replay the OpenCode, Claude Code, Codex and Muse histories stored for the same project.</p>
@@ -97,17 +87,17 @@
   <div class="shell">
     <p class="eyebrow">The difference</p>
     <h2>Units of code instead of files and line numbers.</h2>
-    <table class="tool-table problem-table compare-table">
+    <table class="os-responsive-table tool-table problem-table compare-table">
       <tbody>
         <tr><td><strong>The agent needs to</strong></td><td><strong>With a file reader and a text editor</strong></td><td><strong>With OpenState&rsquo;s code tools</strong></td></tr>
-        <tr><td>Find code</td><td>Grep output, or files opened to look</td><td>Each match with its file and line, for a definition, an identifier or literal text</td></tr>
-        <tr><td>Read one function</td><td>The whole file, or a range of lines it has to guess</td><td>That complete function, and nothing else in the file</td></tr>
-        <tr><td>Change it</td><td>Rewrite text it matched by eye</td><td>A preview showing the change, then an apply that writes only that change</td></tr>
-        <tr><td>Cope with a file that changed</td><td>Depends on the editor: some ask for a fresh read, others write over the change</td><td>Refuses a preview that no longer fits; applies a text edit whose anchor is still unique and says so</td></tr>
-        <tr><td>Cope with two matches</td><td>Asks for more surrounding text; the agent has to find the matches itself</td><td>Refuses, and lists every match so the agent can choose</td></tr>
-        <tr><td>Rename a function everywhere</td><td>Grep for the name, open each file, edit each match by hand</td><td>One preview listing every change across the files, then one apply</td></tr>
-        <tr><td>Move a function to another file</td><td>Copy it out, paste it in, delete the original, fix the spacing</td><td>One preview and one apply; blank lines stay right at both ends</td></tr>
-        <tr><td>Edit a file with Windows line endings</td><td>Text typed with plain line breaks may not match the file</td><td>Matches with <code>line_endings=normalize</code> and keeps the file&rsquo;s endings</td></tr>
+        <tr><td data-label="The agent needs to">Find code</td><td data-label="With a file reader and a text editor">Grep output, or files opened to look</td><td data-label="With OpenState s code tools">Each match with its file and line, for a definition, an identifier or literal text</td></tr>
+        <tr><td data-label="The agent needs to">Read one function</td><td data-label="With a file reader and a text editor">The whole file, or a range of lines it has to guess</td><td data-label="With OpenState s code tools">That complete function, and nothing else in the file</td></tr>
+        <tr><td data-label="The agent needs to">Change it</td><td data-label="With a file reader and a text editor">Rewrite text it matched by eye</td><td data-label="With OpenState s code tools">A preview showing the change, then an apply that writes only that change</td></tr>
+        <tr><td data-label="The agent needs to">Cope with a file that changed</td><td data-label="With a file reader and a text editor">Depends on the editor: some ask for a fresh read, others write over the change</td><td data-label="With OpenState s code tools">Refuses a preview that no longer fits; applies a text edit whose anchor is still unique and says so</td></tr>
+        <tr><td data-label="The agent needs to">Cope with two matches</td><td data-label="With a file reader and a text editor">Asks for more surrounding text; the agent has to find the matches itself</td><td data-label="With OpenState s code tools">Refuses, and lists every match so the agent can choose</td></tr>
+        <tr><td data-label="The agent needs to">Rename a function everywhere</td><td data-label="With a file reader and a text editor">Grep for the name, open each file, edit each match by hand</td><td data-label="With OpenState s code tools">One preview listing every change across the files, then one apply</td></tr>
+        <tr><td data-label="The agent needs to">Move a function to another file</td><td data-label="With a file reader and a text editor">Copy it out, paste it in, delete the original, fix the spacing</td><td data-label="With OpenState s code tools">One preview and one apply; blank lines stay right at both ends</td></tr>
+        <tr><td data-label="The agent needs to">Edit a file with Windows line endings</td><td data-label="With a file reader and a text editor">Text typed with plain line breaks may not match the file</td><td data-label="With OpenState s code tools">Matches with <code>line_endings=normalize</code> and keeps the file&rsquo;s endings</td></tr>
       </tbody>
     </table>
   </div>

@@ -581,3 +581,16 @@ table{max-width:100%}
  .site-footer,.footer-inner{gap:12px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+
+
+/* Accessible single-column table rendering on mobile. The cell labels come
+   from the original table headers and are placed on actual td elements. */
+@media(max-width:730px){
+ .os-responsive-table{display:block;width:100%;overflow:visible;border:0;margin:20px 0}
+ .os-responsive-table thead{display:none}
+ .os-responsive-table tbody,.os-responsive-table tr{display:block;width:100%}
+ .os-responsive-table tbody tr{padding:8px 0 14px;border-bottom:1px solid var(--rule)}
+ .os-responsive-table tbody tr:first-child:has(strong){display:none}
+ .os-responsive-table td{display:grid;grid-template-columns:minmax(0,110px) minmax(0,1fr);align-items:start;gap:11px;border:0;padding:7px 0;white-space:normal!important;overflow-wrap:anywhere}
+ .os-responsive-table td::before{content:attr(data-label);font-weight:700;color:#54616b;font-size:.73rem}
+}

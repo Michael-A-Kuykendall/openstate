@@ -1,83 +1,179 @@
-# OpenState — full reference
+# OpenState — comprehensive product reference
 
-> GENERATED — do not hand-edit. Regenerate with `node tools/build-llms-txt.mjs`.
-> Reference for OpenState 0.1.0 (0.x series). Tool names/counts parsed from src/mcp/src/index.ts; pricing parsed from website/pricing.html.
+Reference scope: 2026-11-05 review branch. Human overview and machine descriptions have different lengths, not different promises.
 
-Local project state and structural code tools for coding agents: 36 tools (22 structural code calls = 8 readers + 7 preview/apply pairs; 14 state and lifecycle tools). Free to try (30 structural applies per machine), then $10 a month or $129 once for every 0.x release. All sales are final. The engine stays on the machine.
+## What it is
+Structural code search/read/edit tools plus persistent, provenance-backed project state.
+Audience: Software developers using coding agents, especially on multi-session repositories.
+Scope: Local on developer machines; no hosted project-state service.
+License: Proprietary Rust engine, with separately MIT-licensed public integration surfaces.
 
-## Pricing (parsed from pricing.html)
+## What changes for a user
+Structural search returns matching code locations, symbol reads return only selected definitions, and mutations are divided into a non-writing preview and a separately authorized, single-use apply. A stale or ambiguous edit is refused rather than silently forced. Project-state tools retain a local derived record of objectives, decisions, command outcomes, blockers and recent work. Supported facts can be traced to source events.
 
-- $10 a month, or $129 once for every 0.x release; one developer, on up to 3 machines.
-- Free: the whole product including 30 structural applies per machine; searches, reads and previews are never limited.
-- Checkout is hosted by Stripe; all sales are final.
-- Monthly checkout: https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=monthly
-- Lifetime checkout: https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime
+## Exact capabilities and their boundaries
+- structural_code_tools: 22 operations: 8 discovery/reader tools and 7 editing families each split into preview and apply. Source-aware guards refuse stale previews; edit identities are single-use. Some operations are lexical/AST based, not type-resolved.
+- persistent_project_state: 14 tools inspect, trace, export and maintain locally derived session state: decisions, failed or completed commands, active files, objectives and blockers. The capsule condenses current facts for continuation.
 
-## Tools (36, parsed from src/mcp/src/index.ts)
+## Host support (do not confuse MCP tool calls with automatic history capture)
+- OpenCode: native plugin and local MCP surface; automatic capture=true; automatic capsule injection=true; stored session replay=supported source adapter. Primary integration; automatic behavior requires a correctly installed and enabled native plugin.
+- Claude Code: local stdio MCP; automatic capture=false; automatic capsule injection=false; stored session replay=on demand, when stored transcripts are supported and accessible. Not equivalent to native OpenCode automatic observation.
+- Codex: local stdio MCP; automatic capture=false; automatic capsule injection=false; stored session replay=on demand, format and runtime dependent. Some paginated history paths need Node.js 22.15+; host-level smoke test required.
+- Muse Code: local stdio MCP; automatic capture=false; automatic capsule injection=false; stored session replay=on demand, when supported saved sessions exist. Host-level conformance evidence must be checked per release.
+- Cursor, Kiro, GitHub Copilot, other MCP clients: local MCP when registration and host tool approvals permit; automatic capture=false; automatic capsule injection=false; stored session replay=can assess a supported source stored for the same project; their own history formats are not promised. MCP-compatible is not the same as fully host-tested.
 
-22 structural code calls = 8 readers + 7 preview/apply pairs; 14 state and lifecycle tools.
-What each one does: [structural-tools.html](structural-tools.html).
+## Installation
+Prerequisites: Git repository for default scoped install; Node.js 18 or newer; bash; Git Bash for native Windows installation
+Command: curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash
+Default scope: Current Git repository .opencode directory. Optional global scope: --global.
+Release/platform caveat: Linux x86_64 and macOS Intel have historical runtime evidence; Windows x86_64 and macOS arm64 builds were marked runtime-unverified in the cited 0.1.0 release policy; reverify per exact candidate.
+State directory: .openstate/ in the repository; may resolve to a native Linux path for WSL mounted filesystems
 
-### Readers (8)
+## License and purchase details
+Free: all tools, 30 successful structural applies per machine; search, read, preview and project state tools remain available.
+Monthly: $10 per developer per month, unlimited successful applies, up to three machines while subscribed.
+One-time: $129 for every 0.x release, unlimited successful applies, up to three machines; does not promise later major releases.
+Checkout: https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=monthly or https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime. Stripe collects payment, Keygen issues licenses.
+All-sale-final wording appears on the candidate site; applicable laws and live terms govern.
 
-- openstate_diagnostics
-- openstate_ast_search
-- openstate_read_symbol
-- openstate_read_text_region
-- openstate_find_referencing_symbols
-- openstate_symbol_overview
-- openstate_find_declaration
-- openstate_find_implementations
+## Data handling
+- State, session-derived facts, project messages and command paths may be stored locally; treat like development/shell history.
+- GitHub for installer release downloads; Keygen and OpenState license worker for license checks/free apply counting; other host history APIs can be contacted if configured.
+- License key, machine fingerprint hash, platform name; no project source files sent as part of license checks.
 
-### Preview/apply pairs (7 families)
+## Evidence and limits
+- A particular function read returned 97% less data than the complete 63 KB file. Context: single-case bytes returned, not a general token/cost guarantee. Source: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md
+- Observed tokens per commit fell 31% in an adopting repository from August to September 2026. Context: maintainer-owned observational before/after, confounded work mix; not controlled study. Source: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md
+- NOT CLAIMED: No measured general reduction in repeated agent failures.
+- NOT CLAIMED: No promise that the agent always follows a capsule or never repeats mistakes.
+- NOT CLAIMED: No promise of universal cross-host automatic transcript capture.
+- NOT CLAIMED: No true semantic/type-resolved rename guarantee: lexical AST matching has limitations.
+- NOT CLAIMED: No controlled causal claim that installing OpenState lowers API bills.
+- NOT CLAIMED: AI crawlers are not guaranteed to ingest llms.txt or this JSON reference.
 
-- openstate_create_file_preview / openstate_create_file_apply
-- openstate_delete_symbol_preview / openstate_delete_symbol_apply
-- openstate_edit_symbol_preview / openstate_edit_symbol_apply
-- openstate_edit_text_preview / openstate_edit_text_apply
-- openstate_insert_symbol_preview / openstate_insert_symbol_apply
-- openstate_move_symbol_preview / openstate_move_symbol_apply
-- openstate_rename_symbol_preview / openstate_rename_symbol_apply
+## All 36 callable tools
+Structural operations (22): eight readers/discovery tools, fourteen preview/apply calls across seven edit families.
+### openstate_diagnostics
+Run the repository-declared Rust cargo check for one file. A Cargo.toml at the repo root is the workspace. When the root has none, the nearest Cargo.toml above the file is that standalone crate. Execution is bounded; status is success, error, timeout, or unavailable.
 
-### State and lifecycle (14)
+### openstate_ast_search
+Call FIRST to locate code or text: use query_kind=text for literal Markdown/prose search, otherwise search for a definition or identifier. Hits are always in matches. match_count is the total; when truncated is true, matches is a bounded sample and matches_shown is its length. There is no entries list. A text result also returns query, scope_resolved, files_scanned, files_skipped_binary, and scan_complete, including when match_count is 0. Every code edit in this repo starts here: openstate_ast_search -> preview -> apply.
 
-- openstate_state
-- openstate_why
-- openstate_capsule
-- openstate_report
-- openstate_report_timeline
-- openstate_checkpoint
-- openstate_export
-- openstate_reset
-- openstate_close
-- openstate_restart
-- openstate_toast
-- openstate_doctor
-- openstate_sessions
-- openstate_assess
+### openstate_read_symbol
+Read one complete AST symbol body from one exact source file. This is the reader after symbol discovery; it is bounded and never a raw file dump. A body over the payload is paged: pass next_cursor back unchanged until it is null.
 
-## Pages
+### openstate_read_text_region
+Read a bounded source region around one unique literal anchor. The window is 3 lines before the anchor and the lines argument after it (default 4, maximum 400), cut to the payload limit; a cut sets cut_at_line and the last returned line is the next anchor. lines and occurrence accept a number or a numeric string. Pass lines 200 to read a whole file. Use for prose, configuration, and text-fallback formats. This is not a byte-offset reader and it does not read a git revision.
 
-- [index.html](index.html): the short version.
-- [pricing.html](pricing.html): prices, entitlement, Stripe checkout.
-- [license.html](license.html): key issue, activation, billing.
-- [technical.html](technical.html): architecture, comparisons, limitations.
-- [structural-tools.html](structural-tools.html): the tool inventory and guarantees.
-- [hosts.html](hosts.html): per-host capability matrix.
-- [evidence.html](evidence.html): measurements and method caveats.
-- [docs/](docs/): versioned docs hub.
-- [terms.html](terms.html), [refund.html](refund.html), [privacy.html](privacy.html): the sale.
+### openstate_find_referencing_symbols
+Find symbol declarations and lexical AST token references across repository scope, in any language with a symbol profile. Rust includes receiver.method() and field names (field_identifier). This is not type-resolved semantic analysis.
 
-## Public docs
+### openstate_symbol_overview
+List symbols in repository scope using ast-grep, in any language with a symbol profile. Returns stable identities, file/range, kind, visibility, and declaration context.
 
-- FAQ: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/FAQ.md
-- Tool reference: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/STRUCTURAL-TOOLS.md
-- Method write-up: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md
-- Versioning: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/VERSIONING.md
-- Trust and state safety: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/TRUST.md
-- Changelog: https://github.com/Michael-A-Kuykendall/openstate/blob/main/CHANGELOG.md
-- Repository: https://github.com/Michael-A-Kuykendall/openstate
+### openstate_find_declaration
+Find a symbol declaration by name using ast-grep, in any language with a symbol profile. Refuses unsupported languages and no-match queries deterministically.
 
-## Not claimed
+### openstate_find_implementations
+Find Rust impl blocks for a type or trait using ast-grep. This is lexical AST navigation, not type-resolved analysis.
 
-No customer count. No fewer-repeated-failures measurement. No hosted team service. One machine, one repository.
+### openstate_rename_symbol_preview
+Second step of the edit chain (after openstate_ast_search): get a durable rename preview ID for an identifier. Returns match_count and an identity to pass to openstate_rename_symbol_apply. Always preview before applying; do not provide ast-grep syntax.
+
+### openstate_rename_symbol_apply
+Final step: apply a rename from a preview identity (from openstate_rename_symbol_preview). Single-use: a second apply of the same identity returns already_consumed — run a new preview. Refuses stale files, wrong session, missing preview.
+
+### openstate_delete_symbol_preview
+Edit-chain step 2 (after openstate_ast_search): get a durable delete preview for a named function or type by its AST boundary. Returns an identity for openstate_delete_symbol_apply. Single-use.
+
+### openstate_delete_symbol_apply
+Final step: delete a symbol from a preview identity (openstate_delete_symbol_preview). Single-use; refuses missing/stale/ambiguous/cross-session previews.
+
+### openstate_move_symbol_preview
+Edit-chain step 2 (after openstate_ast_search): get a durable move preview. Moves a named function or type from one scope/file to a destination anchor (before/after). Returns identity + source/dest spans for openstate_move_symbol_apply. Single-use.
+
+### openstate_move_symbol_apply
+Final step: move a symbol from a preview identity (openstate_move_symbol_preview). Single-use; refuses stale (source or dest), missing, or cross-session previews. Writes both files.
+
+### openstate_edit_symbol_preview
+Edit-chain step 2 (after openstate_ast_search): get a durable symbol-edit preview. mode=rename renames the symbol (identifier tokens); mode=replace replaces the WHOLE definition/body with the provided new definition. Returns identity + span for openstate_edit_symbol_apply. Single-use. This is the primary edit tool for code — find the symbol, then replace it in one operation.
+
+### openstate_edit_symbol_apply
+Final step: apply a symbol edit from a preview identity (openstate_edit_symbol_preview). Single-use; refuses stale/missing/cross-session previews. Prefers structural (never splits a brace); mode=rename uses identifier rewrite, mode=replace swaps the whole definition span.
+
+### openstate_insert_symbol_preview
+Edit-chain step 2 (after openstate_ast_search): get a durable insertion preview. Locates a named function, returns its AST boundary + an identity for openstate_insert_symbol_apply. The snippet must be one function in the target language; a preview ID is single-use. Never provide ast-grep syntax.
+
+### openstate_insert_symbol_apply
+Final step: apply an insertion from a preview identity (openstate_insert_symbol_preview). Single-use; run a fresh preview to re-insert. Rejects missing, stale, ambiguous, or cross-session previews.
+
+### openstate_edit_text_preview
+Edit-chain step 2 (after locating the text): get a durable preview that replaces an anchor string in ANY text file (Markdown/JSONC/TOML/config). Returns an identity + planned before/after for openstate_edit_text_apply. Single-use. The anchor must appear once, or pass occurrence (1-based) to choose one match — the same index read_text_region uses. That choice is stored on the preview and checked again on apply. Ambiguous refusals list each match with its occurrence, offset, context, and line-ending flags, and no_match carries the nearest candidate so you never need shell probes.
+
+### openstate_edit_text_apply
+Final step: apply an anchor replacement from a preview identity (openstate_edit_text_preview). Single-use; refuses missing/stale/ambiguous-now/cross-session previews.
+
+### openstate_create_file_preview
+Create a new file primitive: preview a durable create for a repository-relative path that does not yet exist. Returns an identity for openstate_create_file_apply. Single-use; refuses existing targets. Prefer this over shell redirection when the write tool is disabled.
+
+### openstate_create_file_apply
+Final step: create the file from an openstate_create_file_preview identity. Single-use; refuses missing/stale/cross-session previews and existing targets.
+
+Project state and lifecycle operations (14):
+### openstate_capsule
+Read a compact current-project resume summary: objective, decisions, blockers, recent work and next actions.
+
+### openstate_state
+Inspect the currently retained project facts, including active, completed and failed work.
+
+### openstate_report
+Inspect failures, blockers and unresolved work.
+
+### openstate_report_timeline
+Read project facts and outcomes arranged by source session.
+
+### openstate_why
+Trace a fact back to its supporting source and provenance.
+
+### openstate_close
+Close or correct a retained fact, with a reason.
+
+### openstate_sessions
+List supported host sessions discovered for the current project.
+
+### openstate_assess
+Replay an identified supported saved session into project state, with idempotent record handling.
+
+### openstate_checkpoint
+Persist the current state to disk.
+
+### openstate_export
+Export state and capsule in JSON form.
+
+### openstate_reset
+Clear state only after recoverability checks; potentially destructive.
+
+### openstate_restart
+Checkpoint and verify state can reload in a fresh engine.
+
+### openstate_doctor
+Report local engine and store health.
+
+### openstate_toast
+Control OpenCode completion toast preference.
+
+## Site map
+- overview: https://michael-a-kuykendall.github.io/openstate/
+- tool_reference: https://michael-a-kuykendall.github.io/openstate/structural-tools.html
+- host_matrix: https://michael-a-kuykendall.github.io/openstate/hosts.html
+- technical: https://michael-a-kuykendall.github.io/openstate/technical.html
+- pricing: https://michael-a-kuykendall.github.io/openstate/pricing.html
+- license: https://michael-a-kuykendall.github.io/openstate/license.html
+- privacy: https://michael-a-kuykendall.github.io/openstate/privacy.html
+- evidence: https://michael-a-kuykendall.github.io/openstate/evidence.html
+- documentation: https://michael-a-kuykendall.github.io/openstate/docs/
+
+## Product JSON
+https://michael-a-kuykendall.github.io/openstate/product.json
+
+More detailed technical or legal requirements must be verified against the released implementation, the signed bundle and current checkout settings. This reference is not a substitute for that verification.

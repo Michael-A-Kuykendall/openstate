@@ -16,29 +16,19 @@
 <meta name="twitter:title" content="Technical details — OpenState" />
 <meta name="twitter:description" content="How OpenState captures project state, what the capsule contains, how it compares, who it is not for, and the known weaknesses." />
 <meta name="twitter:image" content="https://michael-a-kuykendall.github.io/openstate/logo-md.jpg" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/style.css" />
+<link rel="alternate" type="application/json" title="OpenState detailed product facts" href="product.json" />
+<link rel="alternate" type="text/plain" title="OpenState machine-readable reference" href="llms-full.txt" />
 </head>
 <body>
+<a class="os-skip" href="#main">Skip to content</a>
 
-<header class="site-header">
-  <div class="shell header-inner">
-    <a class="brand" href="index.html">
-      <img class="brand-logo" src="logo-header.jpg" alt="OpenState logo" />
-    </a>
-    <nav class="nav">
-      <a class="nav-desk" href="index.html#product">Product</a>
-      <a class="nav-desk" href="index.html#results">Results</a>
-      <a class="nav-desk" href="structural-tools.html">Code tools</a>
-      <a href="technical.html" aria-current="page">Docs</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="license.html">License</a>
-    </nav>
-    <a class="nav-buy" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime (0.x) — $129</a>
-  </div>
-</header>
+<header class="site-header"><div class="shell os-header">
+<a class="os-brand" href="index.html" aria-label="OpenState home"><img src="logo-header.jpg" alt="" width="36" height="36"/><span>OpenState</span></a>
+<nav class="os-desktop-nav" aria-label="Main navigation"><a href="index.html#workflow">How it works</a><a href="structural-tools.html">Tools</a><a href="evidence.html">Results</a><a href="hosts.html">Hosts</a><a href="pricing.html">Pricing</a><a href="docs/index.html">Docs</a><a class="os-header-install" href="index.html#install">Install free</a><a class="os-header-buy" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy once · $129</a></nav>
+<a class="os-mobile-install" href="index.html#install">Install free</a>
+<details class="os-mobile-nav"><summary aria-label="Open navigation menu">Menu</summary><nav aria-label="Mobile navigation"><a href="index.html#workflow">How it works</a><a href="structural-tools.html">Tools</a><a href="evidence.html">Results</a><a href="hosts.html">Hosts</a><a href="pricing.html">Pricing</a><a href="docs/index.html">Docs</a><a href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy once · $129</a></nav></details>
+</div></header><div id="main"></div>
 
 <section class="hero" id="top">
   <div class="shell">
@@ -108,15 +98,15 @@
   <div class="shell">
     <p class="eyebrow">How it compares</p>
     <h2>Recorded from events, not written by the model.</h2>
-    <table class="tool-table problem-table compare-table">
+    <table class="os-responsive-table tool-table problem-table compare-table">
       <tbody>
         <tr><td><strong>Approach</strong></td><td><strong>What is kept</strong></td><td><strong>Who writes it</strong></td><td><strong>When the agent sees it</strong></td><td><strong>Goes stale?</strong></td></tr>
-        <tr><td>Compaction summary</td><td>A prose summary of the conversation so far</td><td>The model, when the context fills up</td><td>In the same session, after compaction; a new session starts without it</td><td>It is rewritten at each compaction; details the model left out are gone</td></tr>
-        <tr><td>A notes file (<code>AGENTS.md</code>, a memory markdown file)</td><td>Whatever someone wrote there</td><td>You, or the agent when told to</td><td>Every session, in full</td><td>Yes, unless someone keeps editing it</td></tr>
-        <tr><td>Agent memory tools (agent-written notes, built-in memory)</td><td>Notes the model chose to save</td><td>The model, when it decides to</td><td>When the agent reads them</td><td>Yes, unless the agent revisits them</td></tr>
-        <tr><td>Transcript search and event logs</td><td>Everything that was said and run</td><td>The host, automatically</td><td>When the agent searches</td><td>No, but it is history, not current state; the agent has to work out what still holds</td></tr>
-        <tr><td>Telling the model to remember</td><td>Nothing outside the context</td><td>&mdash;</td><td>Until the context is compacted or the session ends</td><td>&mdash;</td></tr>
-        <tr><td><strong>OpenState</strong></td><td>Decisions, failed and completed commands, blockers, the objective, test status since the last edit, changed files</td><td>The engine, from the session's events, with no model in the loop</td><td>OpenCode: in the capsule at the start of every session and after each compaction. Other hosts: when the agent calls <code>openstate_capsule</code></td><td>No: a fact is replaced or closed when a later event supersedes it</td></tr>
+        <tr><td data-label="Approach">Compaction summary</td><td data-label="What is kept">A prose summary of the conversation so far</td><td data-label="Who writes it">The model, when the context fills up</td><td data-label="When the agent sees it">In the same session, after compaction; a new session starts without it</td><td data-label="Goes stale?">It is rewritten at each compaction; details the model left out are gone</td></tr>
+        <tr><td data-label="Approach">A notes file (<code>AGENTS.md</code>, a memory markdown file)</td><td data-label="What is kept">Whatever someone wrote there</td><td data-label="Who writes it">You, or the agent when told to</td><td data-label="When the agent sees it">Every session, in full</td><td data-label="Goes stale?">Yes, unless someone keeps editing it</td></tr>
+        <tr><td data-label="Approach">Agent memory tools (agent-written notes, built-in memory)</td><td data-label="What is kept">Notes the model chose to save</td><td data-label="Who writes it">The model, when it decides to</td><td data-label="When the agent sees it">When the agent reads them</td><td data-label="Goes stale?">Yes, unless the agent revisits them</td></tr>
+        <tr><td data-label="Approach">Transcript search and event logs</td><td data-label="What is kept">Everything that was said and run</td><td data-label="Who writes it">The host, automatically</td><td data-label="When the agent sees it">When the agent searches</td><td data-label="Goes stale?">No, but it is history, not current state; the agent has to work out what still holds</td></tr>
+        <tr><td data-label="Approach">Telling the model to remember</td><td data-label="What is kept">Nothing outside the context</td><td data-label="Who writes it">&mdash;</td><td data-label="When the agent sees it">Until the context is compacted or the session ends</td><td data-label="Goes stale?">&mdash;</td></tr>
+        <tr><td data-label="Approach"><strong>OpenState</strong></td><td data-label="What is kept">Decisions, failed and completed commands, blockers, the objective, test status since the last edit, changed files</td><td data-label="Who writes it">The engine, from the session's events, with no model in the loop</td><td data-label="When the agent sees it">OpenCode: in the capsule at the start of every session and after each compaction. Other hosts: when the agent calls <code>openstate_capsule</code></td><td data-label="Goes stale?">No: a fact is replaced or closed when a later event supersedes it</td></tr>
       </tbody>
     </table>
   </div>

@@ -1,30 +1,16 @@
 # OpenState
 
-> GENERATED — do not hand-edit. Regenerate with `node tools/build-llms-txt.mjs`.
-> Reference for OpenState 0.1.0 (0.x series). Tool names/counts parsed from src/mcp/src/index.ts; pricing parsed from website/pricing.html.
+OpenState is local tooling for coding agents: guarded structural code operations and persistent project state. Its human homepage is intentionally concise. This site also publishes a detailed JSON reference for code assistants, research and AI search.
 
-Local project state and structural code tools for coding agents: 36 tools (22 structural code calls = 8 readers + 7 preview/apply pairs; 14 state and lifecycle tools). Free to try (30 structural applies per machine), then $10 a month or $129 once for every 0.x release. All sales are final. The engine stays on the machine.
+- Website: https://michael-a-kuykendall.github.io/openstate/
+- Structured product facts and all 36 tools: https://michael-a-kuykendall.github.io/openstate/product.json
+- Extended reference: https://michael-a-kuykendall.github.io/openstate/llms-full.txt
+- Tool reference: https://michael-a-kuykendall.github.io/openstate/structural-tools.html
+- Host support and limitations: https://michael-a-kuykendall.github.io/openstate/hosts.html
+- How the state works: https://michael-a-kuykendall.github.io/openstate/technical.html
+- Evidence and caveats: https://michael-a-kuykendall.github.io/openstate/evidence.html
+- Pricing and limits: https://michael-a-kuykendall.github.io/openstate/pricing.html
+- Privacy: https://michael-a-kuykendall.github.io/openstate/privacy.html
+- Install and documentation: https://michael-a-kuykendall.github.io/openstate/docs/
 
-## Sales
-
-- [index.html](index.html): the short version. What it does, measured figures, how an edit works, the price.
-- [pricing.html](pricing.html): $10 a month or $129 once for every 0.x release, what is included, Stripe checkout.
-- [license.html](license.html): how Stripe and Keygen issue the key, activation, billing.
-- [terms.html](terms.html), [refund.html](refund.html), [privacy.html](privacy.html): the sale.
-
-## Technical
-
-- [technical.html](technical.html): architecture, what is recorded, comparisons, who it is not for, known weaknesses.
-- [structural-tools.html](structural-tools.html): the 22 structural tools, guarantees, languages.
-- [hosts.html](hosts.html): per-host capability matrix: tool access, capture, injection, support grade.
-- [evidence.html](evidence.html): the ten measurements from the maintainer's own projects, August to October 2026. Not a controlled study.
-- [docs/](docs/): versioned docs hub: getting started, operations, security, limitations, cited evidence.
-- FAQ: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/FAQ.md
-- Method write-up: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md
-- Tool reference: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/STRUCTURAL-TOOLS.md
-- Versioning: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/VERSIONING.md
-- Repository: https://github.com/Michael-A-Kuykendall/openstate
-
-## Not claimed
-
-No customer count. No fewer-repeated-failures measurement. No hosted team service. One machine, one repository.
+Caution: this is descriptive information, not a guarantee of compatibility or current checkout availability. Confirm purchase details and platform support at the published pages.

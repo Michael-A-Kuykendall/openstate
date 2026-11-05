@@ -1,0 +1,347 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "document_type": "OpenState product reference for AI tools and search agents",
+  "reference_status": "Review-branch documentation; verify deployment and checkout against the actual published release before public promotion.",
+  "source_revision": {
+    "public_site_base": "5acb5735d9a67ffc37f727a485170c2265032f63",
+    "tool_definitions": "openstate-private/src/structural-core/src/tool-descriptions.ts",
+    "review_date": "2026-11-05"
+  },
+  "product": {
+    "name": "OpenState",
+    "category": "local coding-agent tooling",
+    "short_description": "Structural code search/read/edit tools plus persistent, provenance-backed project state.",
+    "intended_audience": "Software developers using coding agents, especially on multi-session repositories.",
+    "deployment": "Local on developer machines; no hosted project-state service.",
+    "website": "https://michael-a-kuykendall.github.io/openstate/",
+    "source_distribution": "https://github.com/Michael-A-Kuykendall/openstate",
+    "license_model": "Proprietary Rust engine, with separately MIT-licensed public integration surfaces.",
+    "not_for": [
+      "Hosted team memory or cross-machine synchronization",
+      "Vector/document semantic search",
+      "Unqualified type-aware semantic refactoring",
+      "Perfect capture of every event or model reasoning"
+    ]
+  },
+  "what_it_does": [
+    {
+      "capability": "structural_code_tools",
+      "details": "22 operations: 8 discovery/reader tools and 7 editing families each split into preview and apply. Source-aware guards refuse stale previews; edit identities are single-use. Some operations are lexical/AST based, not type-resolved.",
+      "supported_languages": 18,
+      "implementation": "ast-grep based structural core; Rust engine authorizes and commits writes."
+    },
+    {
+      "capability": "persistent_project_state",
+      "details": "14 tools inspect, trace, export and maintain locally derived session state: decisions, failed or completed commands, active files, objectives and blockers. The capsule condenses current facts for continuation.",
+      "capture_scope": "Only supported observed events and accessible saved-host sessions, not every external terminal command or model internal reasoning."
+    }
+  ],
+  "hosts": [
+    {
+      "host": "OpenCode",
+      "tools": "native plugin and local MCP surface",
+      "automatic_capture": true,
+      "automatic_capsule_injection": true,
+      "stored_session_replay": "supported source adapter",
+      "notes": "Primary integration; automatic behavior requires a correctly installed and enabled native plugin."
+    },
+    {
+      "host": "Claude Code",
+      "tools": "local stdio MCP",
+      "automatic_capture": false,
+      "automatic_capsule_injection": false,
+      "stored_session_replay": "on demand, when stored transcripts are supported and accessible",
+      "notes": "Not equivalent to native OpenCode automatic observation."
+    },
+    {
+      "host": "Codex",
+      "tools": "local stdio MCP",
+      "automatic_capture": false,
+      "automatic_capsule_injection": false,
+      "stored_session_replay": "on demand, format and runtime dependent",
+      "notes": "Some paginated history paths need Node.js 22.15+; host-level smoke test required."
+    },
+    {
+      "host": "Muse Code",
+      "tools": "local stdio MCP",
+      "automatic_capture": false,
+      "automatic_capsule_injection": false,
+      "stored_session_replay": "on demand, when supported saved sessions exist",
+      "notes": "Host-level conformance evidence must be checked per release."
+    },
+    {
+      "host": "Cursor, Kiro, GitHub Copilot, other MCP clients",
+      "tools": "local MCP when registration and host tool approvals permit",
+      "automatic_capture": false,
+      "automatic_capsule_injection": false,
+      "stored_session_replay": "can assess a supported source stored for the same project; their own history formats are not promised",
+      "notes": "MCP-compatible is not the same as fully host-tested."
+    }
+  ],
+  "installation": {
+    "prerequisites": [
+      "Git repository for default scoped install",
+      "Node.js 18 or newer",
+      "bash; Git Bash for native Windows installation"
+    ],
+    "command": "curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash",
+    "default_scope": "Current Git repository .opencode directory",
+    "global_option": "--global",
+    "verification": "install.sh --check, plus release asset checksums/signatures and clean-host smoke before public release",
+    "data_directory": ".openstate/ in the repository; may resolve to a native Linux path for WSL mounted filesystems",
+    "runtime_platform_evidence": "Linux x86_64 and macOS Intel have historical runtime evidence; Windows x86_64 and macOS arm64 builds were marked runtime-unverified in the cited 0.1.0 release policy; reverify per exact candidate."
+  },
+  "pricing": {
+    "currency": "USD",
+    "free": {
+      "price": 0,
+      "structural_applies_per_machine": 30,
+      "read_search_preview_state_tools": "no apply cap"
+    },
+    "monthly": {
+      "amount": 10,
+      "unit": "per developer per month",
+      "machine_limit": 3,
+      "structural_applies": "unlimited while paid"
+    },
+    "one_time": {
+      "amount": 129,
+      "unit": "one-time developer license",
+      "machine_limit": 3,
+      "structural_applies": "unlimited",
+      "release_scope": "Every OpenState 0.x release, not unpromised future major versions"
+    },
+    "checkout": {
+      "provider": "Stripe",
+      "license_provider": "Keygen",
+      "monthly": "https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=monthly",
+      "one_time": "https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime"
+    },
+    "sale_terms": "The candidate website states all sales are final. See the live terms and applicable consumer law; do not equate one-time 0.x with all future releases.",
+    "pricing_caution": "Candidate site pricing needs to be reconciled with production Stripe/Keygen configuration before publishing."
+  },
+  "privacy": {
+    "stored_locally": "State, session-derived facts, project messages and command paths may be stored locally; treat like development/shell history.",
+    "outbound_service_calls": "GitHub for installer release downloads; Keygen and OpenState license worker for license checks/free apply counting; other host history APIs can be contacted if configured.",
+    "license_fields": "License key, machine fingerprint hash, platform name; no project source files sent as part of license checks.",
+    "telemetry_claim": "No separate product telemetry is asserted, but license and installer network requests still occur."
+  },
+  "evidence": [
+    {
+      "claim": "A particular function read returned 97% less data than the complete 63 KB file",
+      "measurement_type": "single-case bytes returned, not a general token/cost guarantee",
+      "source": "https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md"
+    },
+    {
+      "claim": "Observed tokens per commit fell 31% in an adopting repository from August to September 2026",
+      "measurement_type": "maintainer-owned observational before/after, confounded work mix; not controlled study",
+      "source": "https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md"
+    }
+  ],
+  "tool_count": {
+    "structural": 22,
+    "state": 14,
+    "total": 36
+  },
+  "tools": [
+    {
+      "name": "openstate_diagnostics",
+      "category": "structural_read",
+      "description": "Run the repository-declared Rust cargo check for one file. A Cargo.toml at the repo root is the workspace. When the root has none, the nearest Cargo.toml above the file is that standalone crate. Execution is bounded; status is success, error, timeout, or unavailable."
+    },
+    {
+      "name": "openstate_ast_search",
+      "category": "structural_read",
+      "description": "Call FIRST to locate code or text: use query_kind=text for literal Markdown/prose search, otherwise search for a definition or identifier. Hits are always in matches. match_count is the total; when truncated is true, matches is a bounded sample and matches_shown is its length. There is no entries list. A text result also returns query, scope_resolved, files_scanned, files_skipped_binary, and scan_complete, including when match_count is 0. Every code edit in this repo starts here: openstate_ast_search -> preview -> apply."
+    },
+    {
+      "name": "openstate_read_symbol",
+      "category": "structural_read",
+      "description": "Read one complete AST symbol body from one exact source file. This is the reader after symbol discovery; it is bounded and never a raw file dump. A body over the payload is paged: pass next_cursor back unchanged until it is null."
+    },
+    {
+      "name": "openstate_read_text_region",
+      "category": "structural_read",
+      "description": "Read a bounded source region around one unique literal anchor. The window is 3 lines before the anchor and the lines argument after it (default 4, maximum 400), cut to the payload limit; a cut sets cut_at_line and the last returned line is the next anchor. lines and occurrence accept a number or a numeric string. Pass lines 200 to read a whole file. Use for prose, configuration, and text-fallback formats. This is not a byte-offset reader and it does not read a git revision."
+    },
+    {
+      "name": "openstate_find_referencing_symbols",
+      "category": "structural_read",
+      "description": "Find symbol declarations and lexical AST token references across repository scope, in any language with a symbol profile. Rust includes receiver.method() and field names (field_identifier). This is not type-resolved semantic analysis."
+    },
+    {
+      "name": "openstate_symbol_overview",
+      "category": "structural_read",
+      "description": "List symbols in repository scope using ast-grep, in any language with a symbol profile. Returns stable identities, file/range, kind, visibility, and declaration context."
+    },
+    {
+      "name": "openstate_find_declaration",
+      "category": "structural_read",
+      "description": "Find a symbol declaration by name using ast-grep, in any language with a symbol profile. Refuses unsupported languages and no-match queries deterministically."
+    },
+    {
+      "name": "openstate_find_implementations",
+      "category": "structural_read",
+      "description": "Find Rust impl blocks for a type or trait using ast-grep. This is lexical AST navigation, not type-resolved analysis."
+    },
+    {
+      "name": "openstate_rename_symbol_preview",
+      "category": "structural_preview",
+      "description": "Second step of the edit chain (after openstate_ast_search): get a durable rename preview ID for an identifier. Returns match_count and an identity to pass to openstate_rename_symbol_apply. Always preview before applying; do not provide ast-grep syntax."
+    },
+    {
+      "name": "openstate_rename_symbol_apply",
+      "category": "structural_apply",
+      "description": "Final step: apply a rename from a preview identity (from openstate_rename_symbol_preview). Single-use: a second apply of the same identity returns already_consumed — run a new preview. Refuses stale files, wrong session, missing preview."
+    },
+    {
+      "name": "openstate_delete_symbol_preview",
+      "category": "structural_preview",
+      "description": "Edit-chain step 2 (after openstate_ast_search): get a durable delete preview for a named function or type by its AST boundary. Returns an identity for openstate_delete_symbol_apply. Single-use."
+    },
+    {
+      "name": "openstate_delete_symbol_apply",
+      "category": "structural_apply",
+      "description": "Final step: delete a symbol from a preview identity (openstate_delete_symbol_preview). Single-use; refuses missing/stale/ambiguous/cross-session previews."
+    },
+    {
+      "name": "openstate_move_symbol_preview",
+      "category": "structural_preview",
+      "description": "Edit-chain step 2 (after openstate_ast_search): get a durable move preview. Moves a named function or type from one scope/file to a destination anchor (before/after). Returns identity + source/dest spans for openstate_move_symbol_apply. Single-use."
+    },
+    {
+      "name": "openstate_move_symbol_apply",
+      "category": "structural_apply",
+      "description": "Final step: move a symbol from a preview identity (openstate_move_symbol_preview). Single-use; refuses stale (source or dest), missing, or cross-session previews. Writes both files."
+    },
+    {
+      "name": "openstate_edit_symbol_preview",
+      "category": "structural_preview",
+      "description": "Edit-chain step 2 (after openstate_ast_search): get a durable symbol-edit preview. mode=rename renames the symbol (identifier tokens); mode=replace replaces the WHOLE definition/body with the provided new definition. Returns identity + span for openstate_edit_symbol_apply. Single-use. This is the primary edit tool for code — find the symbol, then replace it in one operation."
+    },
+    {
+      "name": "openstate_edit_symbol_apply",
+      "category": "structural_apply",
+      "description": "Final step: apply a symbol edit from a preview identity (openstate_edit_symbol_preview). Single-use; refuses stale/missing/cross-session previews. Prefers structural (never splits a brace); mode=rename uses identifier rewrite, mode=replace swaps the whole definition span."
+    },
+    {
+      "name": "openstate_insert_symbol_preview",
+      "category": "structural_preview",
+      "description": "Edit-chain step 2 (after openstate_ast_search): get a durable insertion preview. Locates a named function, returns its AST boundary + an identity for openstate_insert_symbol_apply. The snippet must be one function in the target language; a preview ID is single-use. Never provide ast-grep syntax."
+    },
+    {
+      "name": "openstate_insert_symbol_apply",
+      "category": "structural_apply",
+      "description": "Final step: apply an insertion from a preview identity (openstate_insert_symbol_preview). Single-use; run a fresh preview to re-insert. Rejects missing, stale, ambiguous, or cross-session previews."
+    },
+    {
+      "name": "openstate_edit_text_preview",
+      "category": "structural_preview",
+      "description": "Edit-chain step 2 (after locating the text): get a durable preview that replaces an anchor string in ANY text file (Markdown/JSONC/TOML/config). Returns an identity + planned before/after for openstate_edit_text_apply. Single-use. The anchor must appear once, or pass occurrence (1-based) to choose one match — the same index read_text_region uses. That choice is stored on the preview and checked again on apply. Ambiguous refusals list each match with its occurrence, offset, context, and line-ending flags, and no_match carries the nearest candidate so you never need shell probes."
+    },
+    {
+      "name": "openstate_edit_text_apply",
+      "category": "structural_apply",
+      "description": "Final step: apply an anchor replacement from a preview identity (openstate_edit_text_preview). Single-use; refuses missing/stale/ambiguous-now/cross-session previews."
+    },
+    {
+      "name": "openstate_create_file_preview",
+      "category": "structural_preview",
+      "description": "Create a new file primitive: preview a durable create for a repository-relative path that does not yet exist. Returns an identity for openstate_create_file_apply. Single-use; refuses existing targets. Prefer this over shell redirection when the write tool is disabled."
+    },
+    {
+      "name": "openstate_create_file_apply",
+      "category": "structural_apply",
+      "description": "Final step: create the file from an openstate_create_file_preview identity. Single-use; refuses missing/stale/cross-session previews and existing targets."
+    },
+    {
+      "name": "openstate_capsule",
+      "category": "project_state",
+      "description": "Read a compact current-project resume summary: objective, decisions, blockers, recent work and next actions."
+    },
+    {
+      "name": "openstate_state",
+      "category": "project_state",
+      "description": "Inspect the currently retained project facts, including active, completed and failed work."
+    },
+    {
+      "name": "openstate_report",
+      "category": "project_state",
+      "description": "Inspect failures, blockers and unresolved work."
+    },
+    {
+      "name": "openstate_report_timeline",
+      "category": "project_state",
+      "description": "Read project facts and outcomes arranged by source session."
+    },
+    {
+      "name": "openstate_why",
+      "category": "project_state",
+      "description": "Trace a fact back to its supporting source and provenance."
+    },
+    {
+      "name": "openstate_close",
+      "category": "project_state",
+      "description": "Close or correct a retained fact, with a reason."
+    },
+    {
+      "name": "openstate_sessions",
+      "category": "project_state",
+      "description": "List supported host sessions discovered for the current project."
+    },
+    {
+      "name": "openstate_assess",
+      "category": "project_state",
+      "description": "Replay an identified supported saved session into project state, with idempotent record handling."
+    },
+    {
+      "name": "openstate_checkpoint",
+      "category": "project_state",
+      "description": "Persist the current state to disk."
+    },
+    {
+      "name": "openstate_export",
+      "category": "project_state",
+      "description": "Export state and capsule in JSON form."
+    },
+    {
+      "name": "openstate_reset",
+      "category": "project_state",
+      "description": "Clear state only after recoverability checks; potentially destructive."
+    },
+    {
+      "name": "openstate_restart",
+      "category": "project_state",
+      "description": "Checkpoint and verify state can reload in a fresh engine."
+    },
+    {
+      "name": "openstate_doctor",
+      "category": "project_state",
+      "description": "Report local engine and store health."
+    },
+    {
+      "name": "openstate_toast",
+      "category": "project_state",
+      "description": "Control OpenCode completion toast preference."
+    }
+  ],
+  "human_pages": {
+    "overview": "https://michael-a-kuykendall.github.io/openstate/",
+    "tool_reference": "https://michael-a-kuykendall.github.io/openstate/structural-tools.html",
+    "host_matrix": "https://michael-a-kuykendall.github.io/openstate/hosts.html",
+    "technical": "https://michael-a-kuykendall.github.io/openstate/technical.html",
+    "pricing": "https://michael-a-kuykendall.github.io/openstate/pricing.html",
+    "license": "https://michael-a-kuykendall.github.io/openstate/license.html",
+    "privacy": "https://michael-a-kuykendall.github.io/openstate/privacy.html",
+    "evidence": "https://michael-a-kuykendall.github.io/openstate/evidence.html",
+    "documentation": "https://michael-a-kuykendall.github.io/openstate/docs/"
+  },
+  "limitations_and_no_claims": [
+    "No measured general reduction in repeated agent failures.",
+    "No promise that the agent always follows a capsule or never repeats mistakes.",
+    "No promise of universal cross-host automatic transcript capture.",
+    "No true semantic/type-resolved rename guarantee: lexical AST matching has limitations.",
+    "No controlled causal claim that installing OpenState lowers API bills.",
+    "AI crawlers are not guaranteed to ingest llms.txt or this JSON reference."
+  ]
+}
