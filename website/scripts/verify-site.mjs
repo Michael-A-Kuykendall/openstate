@@ -27,15 +27,15 @@ assert(short.includes("product.json"),"llms.txt missing JSON link");
 for(const page of pages) {
  const source = html[page];
  const prefix = page.includes("/") ? "../" : "";
- assert((source.match(/<h1\\b/g)||[]).length===1,page+": expected one h1");
+ assert((source.match(/<h1\b/g)||[]).length===1,page+": expected one h1");
  assert(source.includes('name="viewport"'),page+": no viewport");
  assert(source.includes('class="os-mobile-nav"'),page+": mobile navigation missing");
  assert(source.includes('class="os-skip"'),page+": skip navigation missing");
  assert(source.includes('id="main"'),page+": main landmark missing");
  assert(source.includes('href="'+prefix+'product.json"'),page+": product reference not linked");
  assert(!source.includes("fonts.googleapis.com"),page+": external fonts present");
- assert(!/\\$149|\\$49(?![0-9])/.test(source),page+": older price visible");
- const links = [...source.matchAll(/\\bhref="([^"]+)"/g)].map(m=>m[1]);
+ assert(!/\$149|\$49(?![0-9])/.test(source),page+": older price visible");
+ const links = [...source.matchAll(/\bhref="([^"]+)"/g)].map(m=>m[1]);
  for(const link of links) {
    if(/^(https?:|mailto:|tel:|data:)/.test(link))continue;
    if(link[0]==="#") {
@@ -60,5 +60,5 @@ const privacy=html["privacy.html"];
 assert(!privacy.includes("loads fonts from Google Fonts"),"privacy describes obsolete Google Fonts request");
 const css=readFileSync(join(root,"css/style.css"),"utf8");
 assert(css.includes("@media(max-width:620px)"),"small-screen responsive rules missing");
-if(broken.length){console.error("FAIL site contract ("+broken.length+"):\\n"+broken.map(s=>" - "+s).join("\\n"));process.exit(1);}
+if(broken.length){console.error("FAIL site contract ("+broken.length+"):\n"+broken.map(s=>" - "+s).join("\n"));process.exit(1);}
 console.log("PASS site contract: "+pages.length+" pages, 36 documented tools, link and pricing checks.");
