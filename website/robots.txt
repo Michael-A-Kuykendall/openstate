@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://michael-a-kuykendall.github.io/openstate/sitemap.xml
