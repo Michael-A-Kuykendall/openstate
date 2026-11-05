@@ -18,12 +18,12 @@
       <img class="brand-logo" src="logo-header.jpg" alt="OpenState logo" />
     </a>
     <nav class="nav">
-      <a class="nav-desk" href="#product">Product</a>
-      <a class="nav-desk" href="#results">Results</a>
-      <a class="nav-desk" href="structural-tools.html">Code tools</a>
-      <a href="technical.html">Docs</a>
+      <a class="nav-desk" href="#how">How it works</a>
+      <a class="nav-desk" href="structural-tools.html">Tools</a>
+      <a class="nav-desk" href="#results">Proof</a>
       <a href="pricing.html">Pricing</a>
-      <a href="license.html">License</a>
+      <a href="#install">Install free</a>
+      <a href="docs/index.html">Docs</a>
     </nav>
     <a class="nav-buy" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime (0.x) — $129</a>
   </div>
@@ -34,15 +34,30 @@
     <img class="hero-cube hero-logo" src="logo-md.jpg" alt="OpenState logotype rendered on a cube" />
     <div class="hero-copy">
       <p class="eyebrow">OpenState — local state + structural code tools</p>
-      <h1>Stop making coding agents <em>rediscover</em> your project.</h1>
-      <p class="hero-lede">OpenState carries forward what was decided, failed, changed and blocked across sessions—and gives the agent structural tools to find, read and edit the right code without whole-file churn.</p>
+      <h1>Edit the function. Keep the project context.</h1>
+      <p class="hero-lede">Your agent edits the function, not the file — and every session remembers what happened: what was decided, what failed, what changed and what is blocked.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime (every 0.x release) — $129</a>
-        <a class="btn btn-ghost" href="#how">See how it works</a>
-        <a class="btn btn-link" href="pricing.html">Free for 30 structural applies per machine, then $10 a month or $129 once for every 0.x release &rarr;</a>
+        <a class="btn btn-primary" href="#install">Install free</a>
+        <a class="btn btn-ghost" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime (every 0.x release) — $129</a>
+        <a class="btn btn-link" href="#how">See how it works &rarr;</a>
       </div>
       <p class="hero-tags">OpenCode native · MCP for Claude Code, Muse, Kiro &amp; Copilot · Free to try · $10 a month · $129 once for every 0.x release</p>
     </div>
+  </div>
+</section>
+
+<section class="band" id="workflow">
+  <div class="shell">
+    <p class="eyebrow">One real workflow: renaming a function</p>
+    <h2>Find. Read. Preview. Apply. Resume.</h2>
+    <ol class="sequence">
+      <li><span class="step-num">01</span><strong>Find</strong><p><code>openstate_ast_search</code> for <code>calculateTotal</code> returns each definition as a place, file and line.</p></li>
+      <li><span class="step-num">02</span><strong>Read</strong><p><code>openstate_read_symbol</code> reads that one function, not the whole file.</p></li>
+      <li><span class="step-num">03</span><strong>Preview</strong><p><code>openstate_rename_symbol_preview</code> lists every edit renaming it to <code>calculateSubtotal</code> would make, and returns an identity. It writes nothing.</p></li>
+      <li><span class="step-num">04</span><strong>Apply — or refused</strong><p><code>openstate_rename_symbol_apply</code> writes exactly that preview, once. If a file changed underneath, or the name matches twice, the apply is refused instead of forced.</p></li>
+      <li><span class="step-num">05</span><strong>Resume</strong><p>The next session starts with the capsule — <code>openstate_capsule</code>: the objective, the rename decision and its reason, the files in progress, and whether tests have passed since.</p></li>
+    </ol>
+    <p class="lede">Try it after installing: ask your agent to rename one function in your own repository and watch the preview before anything is written. <a href="structural-tools.html">What each tool does &rarr;</a></p>
   </div>
 </section>
 
@@ -240,13 +255,38 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
 curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main/install.sh | bash -s -- --global
 <span class="cmt"># verify an existing install</span>
 ./install.sh --check</pre>
-    <p class="payoff">Restart OpenCode and the agent has 36 tools and the project memory. Other agents connect through the bundled MCP server.</p>
+    <p class="payoff">Restart OpenCode and the agent has 36 tools and the project memory. Every other host needs one pasted registration below — OpenState never edits your host settings itself.</p>
     <ul class="tick-list">
       <li>Only in the repository you run it in, so your other projects keep their own tools; add <code>--global</code> to put it in every repository</li>
-      <li>Linux and macOS; on Windows, run it from Git Bash</li>
+      <li>You need Node.js 18 or newer, Git, and Bash. Linux and macOS; on Windows, run everything from Git Bash</li>
       <li>Prebuilt engine under 3 MB, checksum verified and smoke-tested before anything is written</li>
       <li>Free: everything, including 30 structural applies on this machine. Add a license with <code>install.sh --license KEY</code></li>
     </ul>
+    <section id="install-hosts">
+      <h3>Register your host: one pasted registration each</h3>
+      <p class="lede">Run these from the repository root after installing. Each one points the host at <code>.opencode/mcp/openstate-mcp.mjs</code>, the MCP server the installer laid down.</p>
+      <h4>Claude Code</h4>
+      <pre class="cmd">claude mcp add -s local openstate -- node "$PWD/.opencode/mcp/openstate-mcp.mjs"</pre>
+      <p class="lede">Approve the <code>openstate</code> server when Claude Code asks; <code>/mcp</code> should list it as connected, with 36 tools.</p>
+      <h4>Codex</h4>
+      <p class="lede">Add this block to <code>~/.codex/config.toml</code>, with the repository path filled in:</p>
+      <pre class="cmd">[mcp_servers.openstate]
+command = "node"
+args = ["/path/to/your/repo/.opencode/mcp/openstate-mcp.mjs"]</pre>
+      <h4>Cursor</h4>
+      <p class="lede">Add this entry to your Cursor MCP config (<code>~/.cursor/mcp.json</code>), with the repository path filled in:</p>
+      <pre class="cmd">{ "mcpServers": { "openstate": {
+  "command": "node",
+  "args": ["/path/to/your/repo/.opencode/mcp/openstate-mcp.mjs"]
+} } }</pre>
+      <h4>Any other MCP host</h4>
+      <p class="lede">Any stdio MCP client takes the same registration. A project <code>.mcp.json</code> at the repository root works for Claude Code and Muse alike:</p>
+      <pre class="cmd">{ "mcpServers": { "openstate": {
+  "command": "node",
+  "args": ["/path/to/your/repo/.opencode/mcp/openstate-mcp.mjs"]
+} } }</pre>
+      <p class="lede">Non-OpenCode hosts call <code>openstate_capsule</code> on demand; only OpenCode injects the project memory at session start. <a href="structural-tools.html">All 36 tools &rarr;</a></p>
+    </section>
     <p class="lede"><a href="pricing.html">Pricing</a> &nbsp;&middot;&nbsp; <a href="license.html">License and billing</a> &nbsp;&middot;&nbsp; <a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">README</a> &nbsp;&middot;&nbsp; <a href="https://github.com/Michael-A-Kuykendall/openstate/issues" target="_blank" rel="noopener">Issues</a></p>
   </div>
 </section>
