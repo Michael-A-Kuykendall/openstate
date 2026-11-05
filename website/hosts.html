@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Host Capability Matrix — OpenState</title>
+<meta name="description" content="Which hosts capture and restore project memory automatically: OpenCode natively, every other host on demand through the bundled MCP server." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="logo-header.jpg" alt="OpenState logo" />
+    </a>
+    <nav class="nav">
+      <a class="nav-desk" href="index.html#product">Product</a>
+      <a class="nav-desk" href="index.html#results">Results</a>
+      <a class="nav-desk" href="structural-tools.html">Code tools</a>
+      <a href="technical.html">Docs</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="license.html">License</a>
+    </nav>
+    <a class="nav-buy" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime (0.x) — $129</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="shell">
+    <p class="eyebrow">Where it runs</p>
+    <h1>Which host remembers, and how.</h1>
+    <p class="hero-lede">OpenCode captures and injects automatically. Other hosts use the same 36 tools through the bundled MCP server and request the capsule on demand. Every row below names its smoke evidence.</p>
+  </div>
+</section>
+
+<section class="band" id="matrix">
+  <div class="shell">
+    <p class="eyebrow">Host capability matrix</p>
+    <h2>Five hosts, six columns, one gate.</h2>
+    <table class="tool-table compare-table">
+      <tbody>
+        <tr><td><strong>Host</strong></td><td><strong>Tool access</strong></td><td><strong>Automatic capture</strong></td><td><strong>Replay format</strong></td><td><strong>Automatic injection</strong></td><td><strong>Support grade</strong></td><td><strong>Smoke evidence</strong></td></tr>
+        <tr><td><strong>OpenCode</strong></td><td>Native plugin + MCP (opencode.json)</td><td>Yes — automatic, from the host&rsquo;s events</td><td>Capsule text; past sessions import from host stores</td><td>Yes — session start + after compaction</td><td>Native</td><td><a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/tools/test-host-conformance.mjs">Gate receipt: opencode</a></td></tr>
+        <tr><td><strong>Claude Code</strong></td><td>MCP registration (.mcp.json)</td><td>On-demand replay of the host&rsquo;s stored sessions</td><td>Capsule text; host sessions import on demand</td><td>On demand, via openstate_capsule</td><td>MCP + session replay</td><td><a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/tools/test-host-conformance.mjs">Gate receipt: claude</a></td></tr>
+        <tr><td><strong>Codex</strong></td><td>MCP registration (.codex/config.toml)</td><td>On-demand replay of the host&rsquo;s stored sessions</td><td>Capsule text; host sessions import on demand</td><td>On demand, via openstate_capsule</td><td>MCP + session replay</td><td><a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/tools/test-host-conformance.mjs">Gate receipt: codex</a></td></tr>
+        <tr><td><strong>Cursor</strong></td><td>MCP registration (.cursor/mcp.json)</td><td>Replay of sessions stored by supported hosts</td><td>Capsule text via openstate_capsule</td><td>On demand, via openstate_capsule</td><td>MCP standard client</td><td><a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/tools/test-host-conformance.mjs">Gate receipt: cursor</a></td></tr>
+        <tr><td><strong>MCP-generic</strong> (Muse, Kiro, VS Code, any stdio client)</td><td>MCP registration (project .mcp.json or vendor config)</td><td>Replay of sessions stored by supported hosts</td><td>Capsule text via openstate_capsule</td><td>On demand, via openstate_capsule</td><td>MCP standard client</td><td><a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/tools/test-host-conformance.mjs">Gate receipt: owned rendering</a></td></tr>
+      </tbody>
+    </table>
+    <p class="lede">Each host earns its receipt from <code>tools/test-host-conformance.mjs</code>: the gate verifies the owned registration rendering against goldens for all nine hosts, then — where the host binary is installed — runs the live gate (handshake, exact 36-tool list, state and structural calls, preview and apply refusals, restart) for a runtime receipt. Without the binary the receipt is schema-only: rendering verified, live checks not run.</p>
+    <p class="lede">Non-OpenCode hosts call <code>openstate_capsule</code> on demand; only OpenCode injects the project memory at session start. <a href="index.html#install-hosts">Per-host registration &rarr;</a> <a href="structural-tools.html">All 36 tools &rarr;</a></p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <span class="footer-brand">OpenState</span>
+    <span class="footer-tag">Structural code tools and project state for coding agents</span>
+    <span class="footer-links"><a href="pricing.html">Pricing</a> &middot; <a href="license.html">License</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="refund.html">Refunds</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">GitHub</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
