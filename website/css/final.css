@@ -76,7 +76,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #25
 .band.buy h2{color:#fff;margin-bottom:20px}
 .band.buy .eyebrow{color:#f4a8aa}
 .offer-grid,.rank-cards,.chart-grid,.principles,.cols,.jobs,.punches,.sequence,.facts,.includes,.buy-grid,.demo-grid{display:grid;grid-template-columns:1fr;gap:19px}
-.offer{border:0;border-top:2px solid var(--rule);background:transparent;padding:18px 0 8px;min-width:0}
+.offer{border:0;border-top:2px solid var(--rule);background:transparent;padding:18px 0 8px;min-width:0;display:flex;flex-direction:column}
+.offer>p:last-child{margin-top:auto;padding-top:16px}
 .offer h2{font-size:1.35rem}
 .offer p{font-size:.92rem}
 .jobs h2,.punches h2,.sequence strong{font-size:clamp(1.45rem,2.8vw,2rem);line-height:1.19;max-width:none}
@@ -95,6 +96,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #25
 .tool-table{width:100%;max-width:100%;font-size:.9rem}
 .tool-table td{overflow-wrap:anywhere}
 .tool-table td:first-child{white-space:normal}
+#entitlements + .tool-table th{text-align:left}
 .code-block,.cmd{max-width:100%;overflow-x:auto;font-size:.82rem}
 .route{max-width:100%;overflow-wrap:anywhere}
 .site-footer{background:#f4f5f2}
