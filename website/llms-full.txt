@@ -1,0 +1,83 @@
+# OpenState — full reference
+
+> GENERATED — do not hand-edit. Regenerate with `node tools/build-llms-txt.mjs`.
+> Reference for OpenState 0.1.0 (0.x series). Tool names/counts parsed from src/mcp/src/index.ts; pricing parsed from website/pricing.html.
+
+Local project state and structural code tools for coding agents: 36 tools (22 structural code calls = 8 readers + 7 preview/apply pairs; 14 state and lifecycle tools). Free to try (30 structural applies per machine), then $10 a month or $129 once for every 0.x release. All sales are final. The engine stays on the machine.
+
+## Pricing (parsed from pricing.html)
+
+- $10 a month, or $129 once for every 0.x release; one developer, on up to 3 machines.
+- Free: the whole product including 30 structural applies per machine; searches, reads and previews are never limited.
+- Checkout is hosted by Stripe; all sales are final.
+- Monthly checkout: https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=monthly
+- Lifetime checkout: https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime
+
+## Tools (36, parsed from src/mcp/src/index.ts)
+
+22 structural code calls = 8 readers + 7 preview/apply pairs; 14 state and lifecycle tools.
+What each one does: [structural-tools.html](structural-tools.html).
+
+### Readers (8)
+
+- openstate_diagnostics
+- openstate_ast_search
+- openstate_read_symbol
+- openstate_read_text_region
+- openstate_find_referencing_symbols
+- openstate_symbol_overview
+- openstate_find_declaration
+- openstate_find_implementations
+
+### Preview/apply pairs (7 families)
+
+- openstate_create_file_preview / openstate_create_file_apply
+- openstate_delete_symbol_preview / openstate_delete_symbol_apply
+- openstate_edit_symbol_preview / openstate_edit_symbol_apply
+- openstate_edit_text_preview / openstate_edit_text_apply
+- openstate_insert_symbol_preview / openstate_insert_symbol_apply
+- openstate_move_symbol_preview / openstate_move_symbol_apply
+- openstate_rename_symbol_preview / openstate_rename_symbol_apply
+
+### State and lifecycle (14)
+
+- openstate_state
+- openstate_why
+- openstate_capsule
+- openstate_report
+- openstate_report_timeline
+- openstate_checkpoint
+- openstate_export
+- openstate_reset
+- openstate_close
+- openstate_restart
+- openstate_toast
+- openstate_doctor
+- openstate_sessions
+- openstate_assess
+
+## Pages
+
+- [index.html](index.html): the short version.
+- [pricing.html](pricing.html): prices, entitlement, Stripe checkout.
+- [license.html](license.html): key issue, activation, billing.
+- [technical.html](technical.html): architecture, comparisons, limitations.
+- [structural-tools.html](structural-tools.html): the tool inventory and guarantees.
+- [hosts.html](hosts.html): per-host capability matrix.
+- [evidence.html](evidence.html): measurements and method caveats.
+- [docs/](docs/): versioned docs hub.
+- [terms.html](terms.html), [refund.html](refund.html), [privacy.html](privacy.html): the sale.
+
+## Public docs
+
+- FAQ: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/FAQ.md
+- Tool reference: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/STRUCTURAL-TOOLS.md
+- Method write-up: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md
+- Versioning: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/VERSIONING.md
+- Trust and state safety: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/TRUST.md
+- Changelog: https://github.com/Michael-A-Kuykendall/openstate/blob/main/CHANGELOG.md
+- Repository: https://github.com/Michael-A-Kuykendall/openstate
+
+## Not claimed
+
+No customer count. No fewer-repeated-failures measurement. No hosted team service. One machine, one repository.

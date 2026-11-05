@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Docs — OpenState</title>
+<meta name="description" content="Docs for OpenState 0.x: getting started, operations, host support, security and privacy, limitations, and cited evidence. An index of the product docs and site pages." />
+<link rel="canonical" href="https://michael-a-kuykendall.github.io/openstate/docs/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="OpenState" />
+<meta property="og:title" content="Docs — OpenState" />
+<meta property="og:description" content="Docs for OpenState 0.x: getting started, operations, host support, security and privacy, limitations, and cited evidence." />
+<meta property="og:url" content="https://michael-a-kuykendall.github.io/openstate/docs/" />
+<meta property="og:image" content="https://michael-a-kuykendall.github.io/openstate/logo-md.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Docs — OpenState" />
+<meta name="twitter:description" content="Docs for OpenState 0.x: getting started, operations, host support, security and privacy, limitations, and cited evidence." />
+<meta name="twitter:image" content="https://michael-a-kuykendall.github.io/openstate/logo-md.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="../index.html">
+      <img class="brand-logo" src="../logo-header.jpg" alt="OpenState logo" />
+    </a>
+    <a class="nav-buy" href="../index.html">Back to OpenState home</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="shell">
+    <p class="eyebrow">Docs &middot; 0.x series</p>
+    <h1>Docs for OpenState 0.x.</h1>
+    <p class="hero-lede">An index of the product documentation and site pages, plus the few rows that exist nowhere else. Every install question starts here; every claim ends at the evidence page or the repository.</p>
+    <p class="lede">These pages describe the 0.x series. Exact changes per release are in the <a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/CHANGELOG.md" target="_blank" rel="noopener">changelog</a>; what the version promises are in <a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/VERSIONING.md" target="_blank" rel="noopener">versioning</a>.</p>
+  </div>
+</section>
+
+<section class="band" id="start">
+  <div class="shell">
+    <p class="eyebrow">Getting started</p>
+    <h2>Install, activate, verify.</h2>
+    <ul class="depth-links">
+      <li><a href="../index.html#install">Install free <span>One command, per repository or global; free tier included</span></a></li>
+      <li><a href="../license.html">Activate a license <span><code>install.sh --license KEY</code>, billing, what the key removes</span></a></li>
+      <li><a href="../index.html#install">Connect a non-OpenCode host <span>Per-host MCP registration commands on the home page</span></a></li>
+      <li><a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">Installer flags <span><code>--global</code>, <code>--check</code>, <code>--uninstall</code>, <code>--purge</code> in the README</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="band alt" id="operations">
+  <div class="shell">
+    <p class="eyebrow">Operations index</p>
+    <h2>How it runs day to day.</h2>
+    <ul class="depth-links">
+      <li><a href="../technical.html#how">Architecture <span>Host adapter, structural core, state engine, the capsule</span></a></li>
+      <li><a href="../structural-tools.html">Code tools <span>All 36 tools, what each one does, the write-path guarantees</span></a></li>
+      <li><a href="../technical.html#record">The record <span>What is kept, where the agent sees it, provenance</span></a></li>
+      <li><a href="../hosts.html">Host support <span>Per-host capability matrix: capture, injection, support grade</span></a></li>
+      <li><a href="../license.html#billing">License and billing <span>Activation, machines, cancel, transfer</span></a></li>
+      <li><a href="../pricing.html">Pricing <span>$10 a month or $129 once for every 0.x release; Stripe checkout</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="band" id="hosts">
+  <div class="shell">
+    <p class="eyebrow">Hosts</p>
+    <h2>Where it runs, and what each host gets.</h2>
+    <ul class="depth-links">
+      <li><a href="../hosts.html">Host capability matrix <span>Tool access, automatic capture, replay format, automatic injection, support grade, smoke evidence</span></a></li>
+      <li><a href="../index.html#hosts">Hosts overview <span>The short version on the home page</span></a></li>
+    </ul>
+    <p class="lede">OpenCode captures and injects automatically. Other hosts use the same tools through the bundled MCP server and request the capsule on demand.</p>
+  </div>
+</section>
+
+<section class="band alt" id="faq">
+  <div class="shell">
+    <p class="eyebrow">Questions</p>
+    <h2>Frequently asked.</h2>
+    <ul class="depth-links">
+      <li><a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/FAQ.md" target="_blank" rel="noopener">FAQ <span>Install, licensing, hosts, what it records, what it is not</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="band" id="security">
+  <div class="shell">
+    <p class="eyebrow">Security and privacy</p>
+    <h2>What leaves the machine, and what does not.</h2>
+    <ul class="depth-links">
+      <li><a href="../privacy.html">Privacy <span>No engine telemetry; what license checks send; bounded retention</span></a></li>
+      <li><a href="../terms.html">Terms of sale <span>License checks, who the license covers, final sale</span></a></li>
+      <li><a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/TRUST.md" target="_blank" rel="noopener">Trust and state safety <span>How state files are protected and recovered</span></a></li>
+      <li><a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/SECURITY.md" target="_blank" rel="noopener">Security policy <span>How to report a vulnerability</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="band alt" id="limits">
+  <div class="shell">
+    <p class="eyebrow">Limitations</p>
+    <h2>What it does not see, and what is not measured.</h2>
+    <ul class="depth-links">
+      <li><a href="../technical.html#limits">Known weaknesses <span>Events-only capture, decision wording, exit codes, one machine</span></a></li>
+      <li><a href="../structural-tools.html#guarantees">Write-path guarantees <span>Refusal instead of damage: stale, ambiguous, consumed</span></a></li>
+      <li><a href="../technical.html#compare">How it compares <span>Notes files, memory tools, transcripts, and the record</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="band" id="evidence">
+  <div class="shell">
+    <p class="eyebrow">Cited evidence</p>
+    <h2>Measured on the maintainer&rsquo;s own projects.</h2>
+    <ul class="depth-links">
+      <li><a href="../evidence.html">Evidence <span>All ten measurements, August to October 2026</span></a></li>
+      <li><a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md" target="_blank" rel="noopener">Method write-up <span>How the figures were produced; not a controlled study</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="band alt" id="machine">
+  <div class="shell">
+    <p class="eyebrow">Machine references</p>
+    <h2>For agents and search.</h2>
+    <ul class="depth-links">
+      <li><a href="../llms.txt">llms.txt <span>Short reference: summary, page index, what is not claimed</span></a></li>
+      <li><a href="../llms-full.txt">llms-full.txt <span>Full reference: pricing, all 36 tool names, page and doc map</span></a></li>
+    </ul>
+    <p class="lede">Both files are generated from the site pages and the tool registry by <code>tools/build-llms-txt.mjs</code>; they are never hand-edited.</p>
+  </div>
+</section>
+
+<section class="band" id="versions">
+  <div class="shell">
+    <p class="eyebrow">Versions</p>
+    <h2>The 0.x series.</h2>
+    <ul class="depth-links">
+      <li><a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog <span>Added, changed, fixed, and removed per release</span></a></li>
+      <li><a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/VERSIONING.md" target="_blank" rel="noopener">Versioning <span>What counts as breaking; every later release reads state from 0.1.0 on</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <span class="footer-brand">OpenState</span>
+    <span class="footer-tag">Docs for the 0.x series</span>
+    <span class="footer-links"><a href="../index.html">Home</a> &middot; <a href="../pricing.html">Pricing</a> &middot; <a href="../license.html">License</a> &middot; <a href="../technical.html">Technical</a> &middot; <a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">GitHub</a></span>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"TechArticle","headline":"Docs — OpenState","description":"Docs for OpenState 0.x: getting started, operations, host support, security and privacy, limitations, and cited evidence.","url":"https://michael-a-kuykendall.github.io/openstate/docs/","version":"0.x","about":{"@type":"SoftwareApplication","name":"OpenState","applicationCategory":"DeveloperApplication","operatingSystem":"Windows, macOS, Linux"}}
+</script>
+</body>
+</html>
