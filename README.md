@@ -11,7 +11,7 @@
 
 [![💝 Sponsor this project](https://img.shields.io/badge/💝_Sponsor_this_project-ea4aaa?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sponsors/Michael-A-Kuykendall)
 
-**openstate is commercial software, free to try.** Every machine gets 30 structural applies free; after that, a $10/month or $149 lifetime license from the [pricing page](https://michael-a-kuykendall.github.io/openstate/pricing.html) (Stripe; Keygen issues the key) removes the limit. All sales are final. The engine runs locally and needs no account; its only network calls are license checks (Keygen and the OpenState license worker: license key, hashed machine fingerprint, platform name; never project data).
+**openstate is commercial software, free to try.** Every machine gets 30 structural applies free; after that, a $10/month or $129 lifetime license from the [pricing page](https://michael-a-kuykendall.github.io/openstate/pricing.html) (Stripe; Keygen issues the key) removes the limit. All sales are final. The engine runs locally and needs no account; its only network calls are license checks (Keygen and the OpenState license worker: license key, hashed machine fingerprint, platform name; never project data).
 
 ## Your coding agent edits the function, not the file
 
