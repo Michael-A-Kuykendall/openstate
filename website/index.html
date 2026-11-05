@@ -52,7 +52,7 @@
         <a class="btn btn-ghost" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime (every 0.x release) — $129</a>
         <a class="btn btn-link" href="#how">See how it works &rarr;</a>
       </div>
-      <p class="hero-tags">OpenCode native · MCP for Claude Code, Muse, Kiro &amp; Copilot · Free to try · $10 a month · $129 once for every 0.x release</p>
+      <p class="hero-tags">OpenCode native · MCP for Claude Code, Codex, Muse, Cursor, Kiro &amp; Copilot · Free to try · $10 a month · $129 once for every 0.x release</p>
     </div>
   </div>
 </section>
@@ -65,7 +65,7 @@
       <li><span class="step-num">01</span><strong>Find</strong><p><code>openstate_ast_search</code> for <code>calculateTotal</code> returns each definition as a place, file and line.</p></li>
       <li><span class="step-num">02</span><strong>Read</strong><p><code>openstate_read_symbol</code> reads that one function, not the whole file.</p></li>
       <li><span class="step-num">03</span><strong>Preview</strong><p><code>openstate_rename_symbol_preview</code> lists every edit renaming it to <code>calculateSubtotal</code> would make, and returns an identity. It writes nothing.</p></li>
-      <li><span class="step-num">04</span><strong>Apply — or refused</strong><p><code>openstate_rename_symbol_apply</code> writes exactly that preview, once. If a file changed underneath, or the name matches twice, the apply is refused instead of forced.</p></li>
+      <li><span class="step-num">04</span><strong>Apply — or refused</strong><p><code>openstate_rename_symbol_apply</code> writes exactly that preview, once. If a file changed underneath, the apply is refused instead of forced.</p></li>
       <li><span class="step-num">05</span><strong>Resume</strong><p>The next session starts with the capsule — <code>openstate_capsule</code>: the objective, the rename decision and its reason, the files in progress, and whether tests have passed since.</p></li>
     </ol>
     <p class="lede">Try it after installing: ask your agent to rename one function in your own repository and watch the preview before anything is written. <a href="structural-tools.html">What each tool does &rarr;</a></p>
@@ -136,7 +136,7 @@
       </article>
       <article class="offer">
         <h3>Uses less of the context</h3>
-        <p>Reading definitions instead of files keeps each read small. In our own project, tokens per commit fell 31% after the switch.</p>
+        <p>Reading definitions instead of files keeps each read small. In our own project, tokens per commit fell 31% from August to September with adoption; observed co-movement, not a controlled study.</p>
       </article>
     </div>
     <p class="lede"><a href="structural-tools.html">All 36 tools, what each one does, and what the write path guarantees &rarr;</a></p>
@@ -220,8 +220,8 @@
   <div class="shell">
     <p class="eyebrow">Where it runs</p>
     <h2>Works where you work.</h2>
-    <p class="lede">OpenCode gets native capture and automatic capsule delivery. Claude Code, Muse, Kiro, GitHub Copilot and other MCP clients get the same 36 tools through the bundled MCP server.</p>
-    <p class="host-strip"><span>OpenCode</span><span>Claude Code</span><span>Muse</span><span>Kiro</span><span>GitHub Copilot</span><span>MCP</span></p>
+    <p class="lede">OpenCode gets native capture and automatic capsule delivery. Claude Code, Codex, Muse, Cursor, Kiro, GitHub Copilot and other MCP clients get the same 36 tools through the bundled MCP server.</p>
+    <p class="host-strip"><span>OpenCode</span><span>Claude Code</span><span>Codex</span><span>Muse</span><span>Cursor</span><span>Kiro</span><span>GitHub Copilot</span><span>MCP</span></p>
     <p class="lede"><a href="hosts.html">Full host capability matrix: capture, injection, support grade &rarr;</a></p>
   </div>
 </section>
@@ -292,7 +292,7 @@ args = ["/path/to/your/repo/.opencode/mcp/openstate-mcp.mjs"]</pre>
   "args": ["/path/to/your/repo/.opencode/mcp/openstate-mcp.mjs"]
 } } }</pre>
       <h4>Any other MCP host</h4>
-      <p class="lede">Any stdio MCP client takes the same registration. A project <code>.mcp.json</code> at the repository root works for Claude Code and Muse alike:</p>
+      <p class="lede">Any stdio MCP client takes the same registration. A project <code>.mcp.json</code> at the repository root works for Claude Code; Muse takes the same block as <code>mcp_servers</code> in <code>.muse/mcp.json</code>:</p>
       <pre class="cmd">{ "mcpServers": { "openstate": {
   "command": "node",
   "args": ["/path/to/your/repo/.opencode/mcp/openstate-mcp.mjs"]

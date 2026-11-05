@@ -52,7 +52,7 @@
   <div class="shell">
     <p class="eyebrow">Who it is for</p>
     <h2>Developers running long coding-agent sessions in OpenCode.</h2>
-    <p class="lede">For people who want each new session, and each session after a compaction, to start from what was decided, done, failed and blocked. Claude Code, Muse, Kiro and GitHub Copilot work too, through the bundled MCP server.</p>
+    <p class="lede">For people who want each new session, and each session after a compaction, to start from what was decided, done, failed and blocked. Claude Code, Codex, Muse, Cursor, Kiro and GitHub Copilot work too, through the bundled MCP server.</p>
     <h3>Who it is not for</h3>
     <ul class="tick-list">
       <li><strong>A knowledge base or documentation search.</strong> It records what happens in sessions, not your documents.</li>
@@ -82,7 +82,7 @@
       </div>
       <div class="col">
         <h3>Local state and capsule</h3>
-        <p>Project facts stay local through <code>.openstate/</code>, which may be a directory or a local pointer. OpenCode adds the capsule at session start and after compaction; MCP clients request it on demand. <code>openstate_why</code> shows a fact&rsquo;s provenance.</p>
+        <p>Project facts stay local through <code>.openstate/</code>, which may be a directory, a symlink or a local pointer file. OpenCode adds the capsule at session start and after compaction; MCP clients request it on demand. <code>openstate_why</code> shows a fact&rsquo;s provenance.</p>
       </div>
     </div>
   </div>
@@ -113,7 +113,7 @@
         <tr><td><strong>Approach</strong></td><td><strong>What is kept</strong></td><td><strong>Who writes it</strong></td><td><strong>When the agent sees it</strong></td><td><strong>Goes stale?</strong></td></tr>
         <tr><td>Compaction summary</td><td>A prose summary of the conversation so far</td><td>The model, when the context fills up</td><td>In the same session, after compaction; a new session starts without it</td><td>It is rewritten at each compaction; details the model left out are gone</td></tr>
         <tr><td>A notes file (<code>AGENTS.md</code>, a memory markdown file)</td><td>Whatever someone wrote there</td><td>You, or the agent when told to</td><td>Every session, in full</td><td>Yes, unless someone keeps editing it</td></tr>
-        <tr><td>Agent memory tools (agent-written notes, built-in memory)</td><td>Notes the model chose to save</td><td>The model, when it decides to</td><td>When the agent reads them</td><td>Yes; nothing removes a note that stopped being true</td></tr>
+        <tr><td>Agent memory tools (agent-written notes, built-in memory)</td><td>Notes the model chose to save</td><td>The model, when it decides to</td><td>When the agent reads them</td><td>Yes, unless the agent revisits them</td></tr>
         <tr><td>Transcript search and event logs</td><td>Everything that was said and run</td><td>The host, automatically</td><td>When the agent searches</td><td>No, but it is history, not current state; the agent has to work out what still holds</td></tr>
         <tr><td>Telling the model to remember</td><td>Nothing outside the context</td><td>&mdash;</td><td>Until the context is compacted or the session ends</td><td>&mdash;</td></tr>
         <tr><td><strong>OpenState</strong></td><td>Decisions, failed and completed commands, blockers, the objective, test status since the last edit, changed files</td><td>The engine, from the session's events, with no model in the loop</td><td>OpenCode: in the capsule at the start of every session and after each compaction. Other hosts: when the agent calls <code>openstate_capsule</code></td><td>No: a fact is replaced or closed when a later event supersedes it</td></tr>
@@ -135,7 +135,7 @@
       <li><strong>No measurement yet shows fewer repeated failures.</strong> What OpenState guarantees is the record and its delivery to the agent; whether that changes your agent's behavior is for you to judge in your own sessions. Token cost per completed work item is measured and fell with adoption (see the <a href="evidence.html">evidence page</a>).</li>
       <li><strong>The engine is closed source</strong> (the plugin, installer, skill and documentation are MIT).</li>
     </ul>
-    <p class="lede">The structural tools have their own costs — extra calls for a small edit, syntax matching rather than types — on the <a href="structural-tools.html#weaknesses">code tools page</a>.</p>
+    <p class="lede">The structural tools have their own costs — extra calls for a small edit, syntax matching rather than types — on the <a href="structural-tools.html">code tools page</a>.</p>
   </div>
 </section>
 
@@ -151,7 +151,7 @@
       <div class="principle">
         <span class="p-num">02</span>
         <h3>Local only</h3>
-        <p>No runtime network calls, no telemetry. State lives in your repository.</p>
+        <p>No runtime network calls except license checks, no telemetry. State lives in your repository.</p>
       </div>
       <div class="principle">
         <span class="p-num">03</span>

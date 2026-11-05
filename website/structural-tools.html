@@ -79,7 +79,7 @@
       <li><span class="metric-num">14.3M &rarr; 0.9M</span><span class="metric-label">tokens per commit in a repository that adopted the tools via Claude Code</span></li>
       <li><span class="metric-num">&minus;96%</span><span class="metric-label">edit calls once the tools were in place: 8,002 in August, 346 in September</span></li>
       <li><span class="metric-num">18,859</span><span class="metric-label">structural calls in September 2026, outnumbering classic read, edit and grep combined (9,044 + 346 + 514)</span></li>
-      <li><span class="metric-num">99.91%</span><span class="metric-label">of 21,372 OpenState calls succeeded</span></li>
+      <li><span class="metric-num">99.91%</span><span class="metric-label">of 21,372 OpenState calls in the June-to-September corpus succeeded</span></li>
     </ul>
     <p class="lede">Measured on the maintainer&rsquo;s own session history: cost moved with adoption; it is not a controlled study. <a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md">Method and evidence &rarr;</a></p>
     <h3>Why it costs less: the agent reads the definition, not the file.</h3>
@@ -189,7 +189,7 @@
           <tr><td><code>openstate_report_timeline</code></td><td>The same facts, session by session</td></tr>
           <tr><td><code>openstate_why</code></td><td>Where a fact came from, and what supports it</td></tr>
           <tr><td><code>openstate_close</code></td><td>Close a fact that is wrong or done, with a reason</td></tr>
-          <tr><td><code>openstate_sessions</code></td><td>This repository&rsquo;s OpenCode, Claude Code, Codex and Muse sessions</td></tr>
+          <tr><td><code>openstate_sessions</code></td><td>This repository&rsquo;s OpenCode, Claude Code, supported Codex and Muse sessions</td></tr>
           <tr><td><code>openstate_assess</code></td><td>Replay one of those sessions into the project&rsquo;s memory</td></tr>
           <tr><td><code>openstate_checkpoint</code></td><td>Save the state to disk now</td></tr>
           <tr><td><code>openstate_export</code></td><td>Export the whole state and capsule as one JSON file</td></tr>
@@ -200,7 +200,7 @@
         </tbody>
       </table>
     </div>
-    <p class="lede">Symbol tools work in Rust, Python, TypeScript (including TSX), JavaScript, Go, C, C++, Java, C#, Bash, Haskell, Kotlin, Lua, PHP, Ruby, Scala, Solidity and Swift. Built on <a href="https://ast-grep.github.io/" target="_blank" rel="noopener">ast-grep</a>, which the installer bundles. In OpenCode they come through the plugin; in Claude Code, Muse, Kiro, GitHub Copilot and other MCP hosts, through the bundled MCP server.</p>
+    <p class="lede">Symbol tools work in Rust, Python, TypeScript, TSX, JavaScript, Go, C, C++, Java, C#, Bash, Kotlin, Lua, PHP, Ruby, Scala, Solidity and Swift. Built on <a href="https://ast-grep.github.io/" target="_blank" rel="noopener">ast-grep</a>, which the installer bundles. In OpenCode they come through the plugin; in Claude Code, Codex, Muse, Cursor, Kiro, GitHub Copilot and other MCP hosts, through the bundled MCP server.</p>
   </div>
 </section>
 
