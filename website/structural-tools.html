@@ -31,7 +31,7 @@
 
 <section class="hero" id="top">
   <div class="shell">
-    <p class="eyebrow">Every OpenState tool &mdash; 22 code tools and 14 memory tools, in every install</p>
+    <p class="eyebrow">Every OpenState tool &mdash; 22 structural code calls and 14 state and lifecycle tools, in every install</p>
     <h1>Read the <em>function</em>, not the file.</h1>
     <p class="hero-lede">A coding agent with only a file reader works in whole files: it reads the file to change one function, reads it again when the line numbers move, and edits text it matched by eye. OpenState&rsquo;s structural tools let it search for a definition, read just that definition, and change it through a preview it can check before anything is written.</p>
     <div class="flow"><span>openstate_ast_search</span><span class="arrow">&rarr;</span><span>openstate_read_symbol</span><span class="arrow">&rarr;</span><span class="signal">preview</span><span class="arrow">&rarr;</span><span class="signal">apply</span></div>
@@ -135,7 +135,8 @@
   <div class="shell">
     <p class="eyebrow">The tools</p>
     <div class="toolgroup">
-      <h3 class="toolgroup-head">Find and read</h3>
+      <h3 class="toolgroup-head">22 structural code calls = 8 readers + 7 preview/apply pairs</h3>
+      <p class="lede">Find and read: eight tools that search, read and navigate without writing anything.</p>
       <table class="tool-table">
         <tbody>
           <tr><td><code>openstate_ast_search</code></td><td>Definitions, identifiers or literal text, each match with file and line</td></tr>
@@ -148,20 +149,27 @@
           <tr><td><code>openstate_diagnostics</code></td><td>The repository&rsquo;s Rust <code>cargo check</code> for one file</td></tr>
         </tbody>
       </table>
-      <h3 class="toolgroup-head">Change, each as a preview and an apply</h3>
-      <p class="lede">Searches, reads and previews are always free. Applies are free for the first 30 on each machine; after that they need a <a href="pricing.html">license</a>.</p>
+      <p class="lede">Change, each as a preview and an apply. Searches, reads and previews are always free. Applies are free for the first 30 on each machine; after that they need a <a href="pricing.html">license</a>.</p>
       <table class="tool-table">
         <tbody>
-          <tr><td><code>openstate_edit_symbol</code></td><td>Replace a whole definition, or rename it</td></tr>
-          <tr><td><code>openstate_insert_symbol</code></td><td>Insert a definition before or after another</td></tr>
-          <tr><td><code>openstate_delete_symbol</code></td><td>Delete a definition by its syntax-tree boundary</td></tr>
-          <tr><td><code>openstate_move_symbol</code></td><td>Move a definition to another place or file</td></tr>
-          <tr><td><code>openstate_rename_symbol</code></td><td>Rename an identifier across its matches</td></tr>
-          <tr><td><code>openstate_edit_text</code></td><td>Replace a unique piece of text in any text file</td></tr>
-          <tr><td><code>openstate_create_file</code></td><td>Create a file that does not exist yet</td></tr>
+          <tr><td><code>openstate_edit_symbol_preview</code></td><td>Preview replacing a whole definition</td></tr>
+          <tr><td><code>openstate_edit_symbol_apply</code></td><td>Write a previewed symbol replacement</td></tr>
+          <tr><td><code>openstate_insert_symbol_preview</code></td><td>Preview inserting a definition before or after another</td></tr>
+          <tr><td><code>openstate_insert_symbol_apply</code></td><td>Write a previewed insertion</td></tr>
+          <tr><td><code>openstate_delete_symbol_preview</code></td><td>Preview deleting a definition by its syntax-tree boundary</td></tr>
+          <tr><td><code>openstate_delete_symbol_apply</code></td><td>Write a previewed deletion</td></tr>
+          <tr><td><code>openstate_move_symbol_preview</code></td><td>Preview moving a definition to another place or file</td></tr>
+          <tr><td><code>openstate_move_symbol_apply</code></td><td>Write a previewed move</td></tr>
+          <tr><td><code>openstate_rename_symbol_preview</code></td><td>Preview renaming an identifier across its matches</td></tr>
+          <tr><td><code>openstate_rename_symbol_apply</code></td><td>Write a previewed rename</td></tr>
+          <tr><td><code>openstate_edit_text_preview</code></td><td>Preview replacing a unique piece of text in any text file</td></tr>
+          <tr><td><code>openstate_edit_text_apply</code></td><td>Write a previewed text replacement</td></tr>
+          <tr><td><code>openstate_create_file_preview</code></td><td>Preview creating a file that does not exist yet</td></tr>
+          <tr><td><code>openstate_create_file_apply</code></td><td>Write a previewed file creation</td></tr>
         </tbody>
       </table>
-      <h3 class="toolgroup-head">Remember the project</h3>
+      <h3 class="toolgroup-head">14 state and lifecycle tools</h3>
+      <p class="lede">Session state and replay, completion notifications, and engine maintenance.</p>
       <table class="tool-table">
         <tbody>
           <tr><td><code>openstate_capsule</code></td><td>The short resume summary: objective, decisions, blockers, next actions</td></tr>
