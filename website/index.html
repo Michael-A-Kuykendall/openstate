@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>OpenState — your coding agent edits the function, not the file</title>
-<meta name="description" content="OpenState gives coding agents two equal capabilities: structural code search, read and edit with guarded preview-to-apply writes, and a persistent, provenance-backed record of what is true in a project — decisions, finished and failed work, what is blocked — kept local and available across sessions through OpenCode and MCP." />
+<title>OpenState — stop making coding agents rediscover your project</title>
+<meta name="description" content="OpenState carries forward what was decided, failed, changed and blocked across sessions, and gives the agent structural tools to find, read and edit the right code. Free to try, then $10 a month or $129 once for every 0.x release. All sales are final." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -18,31 +18,48 @@
       <img class="brand-logo" src="logo-header.jpg" alt="OpenState logo" />
     </a>
     <nav class="nav">
-      <a href="index.html" aria-current="page">Overview</a>
-      <a href="index.html#how">How it works</a>
-      <a href="structural-tools.html">Tools</a>
+      <a class="nav-desk" href="#product">Product</a>
+      <a class="nav-desk" href="#results">Results</a>
+      <a class="nav-desk" href="structural-tools.html">Code tools</a>
+      <a href="technical.html">Docs</a>
       <a href="pricing.html">Pricing</a>
       <a href="license.html">License</a>
-      <a href="index.html#install">Install</a>
     </nav>
+    <a class="nav-buy" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime (0.x) — $129</a>
   </div>
 </header>
 
-<section class="hero" id="top">
-  <div class="shell hero-grid">
-    <div class="hero-text">
-      <p class="eyebrow">For Claude Code, OpenCode, Codex, Cursor and other coding agents</p>
-      <h1>Your coding agent edits the <em>function</em>, not the file.</h1>
-      <p class="hero-lede">OpenState gives your agent precise code tools and a memory of the project. It finds a definition, reads just that definition, and changes it through a preview that is checked before anything is written. And every session starts knowing what was decided, what failed and what is blocked.</p>
+<section class="hero hero-sale" id="top">
+  <div class="shell hero-stage">
+    <img class="hero-cube hero-logo" src="logo-md.jpg" alt="OpenState logotype rendered on a cube" />
+    <div class="hero-copy">
+      <p class="eyebrow">OpenState — local state + structural code tools</p>
+      <h1>Stop making coding agents <em>rediscover</em> your project.</h1>
+      <p class="hero-lede">OpenState carries forward what was decided, failed, changed and blocked across sessions—and gives the agent structural tools to find, read and edit the right code without whole-file churn.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#install">Install free</a>
-        <a class="btn btn-ghost" href="structural-tools.html">See every tool</a>
-        <a class="btn btn-link" href="pricing.html">Free for 30 edits per machine, then $10/month or $129 once &rarr;</a>
+        <a class="btn btn-primary" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime (every 0.x release) — $129</a>
+        <a class="btn btn-ghost" href="#how">See how it works</a>
+        <a class="btn btn-link" href="pricing.html">Free for 30 structural applies per machine, then $10 a month or $129 once for every 0.x release &rarr;</a>
       </div>
-      <p class="hero-tags">22 code tools &nbsp;/&nbsp; 18 languages &nbsp;/&nbsp; 14 project-memory tools &nbsp;/&nbsp; runs on your machine</p>
+      <p class="hero-tags">OpenCode native · MCP for Claude Code, Muse, Kiro &amp; Copilot · Free to try · $10 a month · $129 once for every 0.x release</p>
     </div>
-    <div class="hero-mark">
-      <img class="hero-logo" src="logo-md.jpg" alt="OpenState logotype rendered on a cube" />
+  </div>
+</section>
+
+<section class="band" id="product">
+  <div class="shell">
+    <p class="eyebrow">One product, two jobs</p>
+    <div class="jobs">
+      <article>
+        <p class="job-kicker">01 — State</p>
+        <h2>What was decided stays decided.</h2>
+        <p>Decisions, failed commands, blockers, the objective, changed files, and whether a test has passed since the last edit. OpenCode puts that capsule in context at the start of every session and after each compaction. Other hosts call <code>openstate_capsule</code>.</p>
+      </article>
+      <article class="job-shift">
+        <p class="job-kicker">02 — Code</p>
+        <h2>Edit the definition, not the file.</h2>
+        <p>22 structural tools, built on ast-grep, search, read and edit by definition. Every write is a preview first. Stale files, ambiguous targets and a second use of the same preview are refused.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -114,6 +131,20 @@
   </div>
 </section>
 
+<section class="band ink" id="results">
+  <div class="shell">
+    <p class="eyebrow">Results</p>
+    <h2>Measured on the maintainer&rsquo;s own projects.</h2>
+    <ul class="metrics metrics-hero">
+      <li><span class="metric-num">35,579</span><span class="metric-label">OpenState tool uses</span></li>
+      <li><span class="metric-num">243</span><span class="metric-label">real coding sessions</span></li>
+      <li><span class="metric-num">97% less</span><span class="metric-label">data in one measured function-read case</span></li>
+      <li><span class="metric-num">18</span><span class="metric-label">languages with structural symbol support</span></li>
+    </ul>
+    <p class="lede">Tool-use window: 4 August to 10 October 2026 UTC. Not a controlled study. <a href="evidence.html">Method and evidence &rarr;</a></p>
+  </div>
+</section>
+
 <section class="band" id="problems">
   <div class="shell">
     <p class="eyebrow">Three problems it addresses</p>
@@ -141,30 +172,60 @@
       <li><strong>Teams sharing one memory.</strong> Everything stays on one machine, in one repository.</li>
     </ul>
     <p class="lede"><a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/FAQ.md">Limits and trade-offs &rarr;</a></p>
+
   </div>
 </section>
 
 <section class="band" id="how">
   <div class="shell">
-    <p class="eyebrow">How it works</p>
-    <h2>A small engine on your machine.</h2>
-    <div class="cols">
-      <div class="col">
-        <h3>In your agent</h3>
-        <p>OpenCode runs it natively. Claude Code, Codex, Cursor, Kiro, GitHub Copilot and other MCP hosts use the bundled MCP server.</p>
-      </div>
-      <div class="col">
-        <h3>Code tools</h3>
-        <p>Built on ast-grep, bundled with the install. Searches, reads and previews never write; only an apply does.</p>
-      </div>
-      <div class="col">
-        <h3>Project memory</h3>
-        <p>A Rust engine turns session events into project facts and replaces them when they stop being true. <code>openstate_why</code> shows where any fact came from.</p>
-      </div>
-      <div class="col">
-        <h3>Local</h3>
-        <p>State lives in your repository. No telemetry; the only network call is the license check.</p>
-      </div>
+    <p class="eyebrow">How the agent works</p>
+    <h2>Find. Read. Preview. Apply.</h2>
+    <ol class="sequence">
+      <li><span class="step-num">01</span><strong>Find</strong><p><code>openstate_ast_search</code> returns places, not file contents.</p></li>
+      <li><span class="step-num">02</span><strong>Read</strong><p>One definition, or one anchored region. Not the whole file.</p></li>
+      <li><span class="step-num">03</span><strong>Preview</strong><p>The planned change and an identity. It writes nothing.</p></li>
+      <li><span class="step-num">04</span><strong>Apply</strong><p>Writes exactly that change, once. A second use is refused.</p></li>
+    </ol>
+    <p class="lede more-link"><a href="structural-tools.html">The 22 tools, the guarantees, and where they cost more &rarr;</a></p>
+  </div>
+</section>
+
+<section class="band hosts" id="hosts">
+  <div class="shell">
+    <p class="eyebrow">Where it runs</p>
+    <h2>Works where you work.</h2>
+    <p class="lede">OpenCode gets native capture and automatic capsule delivery. Claude Code, Muse, Kiro, GitHub Copilot and other MCP clients get the same 36 tools through the bundled MCP server.</p>
+    <p class="host-strip"><span>OpenCode</span><span>Claude Code</span><span>Muse</span><span>Kiro</span><span>GitHub Copilot</span><span>MCP</span></p>
+  </div>
+</section>
+
+<section class="band alt" id="survives">
+  <div class="shell">
+    <p class="eyebrow">What survives the session</p>
+    <h2>State, not the transcript.</h2>
+    <ul class="facts">
+      <li>Objective</li>
+      <li>Decisions</li>
+      <li>Failed attempts</li>
+      <li>Blockers</li>
+      <li>Changed files</li>
+      <li>Test status</li>
+    </ul>
+    <p class="lede">Recorded from the session&rsquo;s events, with no model in the loop. A later event replaces or closes a fact that stopped being true. <a href="technical.html#how">How capture works &rarr;</a></p>
+  </div>
+</section>
+
+<section class="band buy" id="buy">
+  <div class="shell buy-grid">
+    <div>
+      <p class="eyebrow">Buy OpenState</p>
+      <h2>$129 once, every 0.x release.</h2>
+      <p>One developer, on up to 3 machines. Every 0.x release, no renewal — or $10 a month, cancel any time. All sales are final, so try it free first: 30 structural applies on this machine.</p>
+    </div>
+    <div class="buy-action">
+      <a class="btn btn-paper" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime (every 0.x release) — $129</a>
+      <a class="btn btn-paper" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=monthly">Subscribe — $10 a month</a>
+      <p><a href="pricing.html">What you are buying</a> &middot; <a href="refund.html">Refunds</a> &middot; <a href="license.html">How the key is issued</a></p>
     </div>
   </div>
 </section>
@@ -190,13 +251,30 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
   </div>
 </section>
 
+<section class="band alt" id="depth">
+  <div class="shell">
+    <p class="eyebrow">The rest of the record</p>
+    <h2>Read the depth when you want it.</h2>
+    <ul class="depth-links">
+      <li><a href="evidence.html">Evidence <span>All ten measurements and the method</span></a></li>
+      <li><a href="structural-tools.html">Code tools <span>22 tools, guarantees, languages</span></a></li>
+      <li><a href="technical.html#limits">Limitations <span>What it does not see, and what is not measured</span></a></li>
+      <li><a href="technical.html#how">Architecture <span>Capture, the capsule, and the comparisons</span></a></li>
+      <li><a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">GitHub <span>README, releases, issues</span></a></li>
+    </ul>
+  </div>
+</section>
+
 <footer class="site-footer">
   <div class="shell footer-inner">
     <span class="footer-brand">OpenState</span>
     <span class="footer-tag">Structural code tools and project state for coding agents</span>
-    <span class="footer-links"><a href="pricing.html">Pricing</a> &middot; <a href="license.html">License</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="refund.html">Refunds</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md" target="_blank" rel="noopener">Evidence</a> &middot; <a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">GitHub</a></span>
+    <span class="footer-links"><a href="pricing.html">Pricing</a> &middot; <a href="license.html">License</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="refund.html">Refunds</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="evidence.html">Evidence</a> &middot; <a href="technical.html">Docs</a> &middot; <a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">GitHub</a></span>
   </div>
 </footer>
 
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"OpenState","applicationCategory":"DeveloperApplication","operatingSystem":"Windows, macOS, Linux","description":"Local project state and structural code tools for coding agents. $129 once for every 0.x release, or $10 a month. All sales are final.","offers":{"@type":"Offer","price":"129","priceCurrency":"USD"}}
+</script>
 </body>
 </html>

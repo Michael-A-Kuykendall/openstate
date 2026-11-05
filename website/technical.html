@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Technical details — OpenState</title>
+<meta name="description" content="How OpenState captures project state, what the capsule contains, how it compares, who it is not for, and the known weaknesses." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="logo-header.jpg" alt="OpenState logo" />
+    </a>
+    <nav class="nav">
+      <a class="nav-desk" href="index.html#product">Product</a>
+      <a class="nav-desk" href="index.html#results">Results</a>
+      <a class="nav-desk" href="structural-tools.html">Code tools</a>
+      <a href="technical.html" aria-current="page">Docs</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="license.html">License</a>
+    </nav>
+    <a class="nav-buy" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime (0.x) — $129</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="shell">
+    <p class="eyebrow">Technical details</p>
+    <h1>The record, and what it is not.</h1>
+    <p class="hero-lede">This page is the architecture, the comparison, and the limitations. The sales page is the short version. Nothing here is hidden from it; it is just no longer standing in front of the price.</p>
+  </div>
+</section>
+
+<section class="band" id="audience">
+  <div class="shell">
+    <p class="eyebrow">Who it is for</p>
+    <h2>Developers running long coding-agent sessions in OpenCode.</h2>
+    <p class="lede">For people who want each new session, and each session after a compaction, to start from what was decided, done, failed and blocked. Claude Code, Muse, Kiro and GitHub Copilot work too, through the bundled MCP server.</p>
+    <h3>Who it is not for</h3>
+    <ul class="tick-list">
+      <li><strong>A knowledge base or documentation search.</strong> It records what happens in sessions, not your documents.</li>
+      <li><strong>Semantic or vector search over code.</strong> Use the structural tools or your editor.</li>
+      <li><strong>A hosted or team service.</strong> Everything stays on one machine, in one repository.</li>
+      <li><strong>A transcript store.</strong> It keeps the current state, not the conversation.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="band alt" id="how">
+  <div class="shell">
+    <p class="eyebrow">How it works</p>
+    <h2>Code operations and persistent state, connected locally.</h2>
+    <div class="cols">
+      <div class="col">
+        <h3>Host adapter</h3>
+        <p>OpenCode uses the native plugin. Other compatible coding agents call the bundled MCP server. The adapter provides tool access and access to supported session histories.</p>
+      </div>
+      <div class="col">
+        <h3>Structural core + ast-grep</h3>
+        <p>The shared structural core and bundled ast-grep provide AST and text search, bounded reads, and guarded preview/apply operations on project files.</p>
+      </div>
+      <div class="col">
+        <h3>State engine</h3>
+        <p>A small Rust binary turns observed session activity into project facts and updates them when later events supersede earlier information.</p>
+      </div>
+      <div class="col">
+        <h3>Local state and capsule</h3>
+        <p>Project facts stay local through <code>.openstate/</code>, which may be a directory or a local pointer. OpenCode adds the capsule at session start and after compaction; MCP clients request it on demand. <code>openstate_why</code> shows a fact&rsquo;s provenance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="record">
+  <div class="shell">
+    <p class="eyebrow">Three problems it addresses</p>
+    <h2>Long agent sessions lose what they learned.</h2>
+    <table class="tool-table problem-table">
+      <tbody>
+        <tr><td><strong>Problem</strong></td><td><strong>What OpenState records</strong></td><td><strong>Where the agent sees it</strong></td></tr>
+        <tr><td>The agent re-runs a command that already failed in an earlier session.</td><td>Each failed command.</td><td><code>failed_attempts</code> in the capsule; <code>openstate_report</code>; <code>openstate_report_timeline</code> shows which session it failed in.</td></tr>
+        <tr><td>After a compaction or a restart, the agent re-reads files to work out what it was doing.</td><td>The objective, recent decisions, the files being worked on, uncommitted changes, and whether a test has passed since the last edit.</td><td>The capsule, added to the context at the start of the session and after each compaction.</td></tr>
+        <tr><td>The agent retries an approach that was already rejected.</td><td>Decisions: messages that give a reason (&ldquo;because &hellip;&rdquo;), recorded with that reason.</td><td><code>decisions</code> in the capsule; <code>openstate_why</code> shows where a decision came from.</td></tr>
+      </tbody>
+    </table>
+    <p class="lede">Every install carries 14 state tools for the record (state, capsule, report, why, assess, checkpoint, and the rest) and 22 structural tools. The tool inventory is on the <a href="structural-tools.html">code tools page</a>.</p>
+  </div>
+</section>
+
+<section class="band alt" id="compare">
+  <div class="shell">
+    <p class="eyebrow">How it compares</p>
+    <h2>Recorded from events, not written by the model.</h2>
+    <table class="tool-table problem-table compare-table">
+      <tbody>
+        <tr><td><strong>Approach</strong></td><td><strong>What is kept</strong></td><td><strong>Who writes it</strong></td><td><strong>When the agent sees it</strong></td><td><strong>Goes stale?</strong></td></tr>
+        <tr><td>Compaction summary</td><td>A prose summary of the conversation so far</td><td>The model, when the context fills up</td><td>In the same session, after compaction; a new session starts without it</td><td>It is rewritten at each compaction; details the model left out are gone</td></tr>
+        <tr><td>A notes file (<code>AGENTS.md</code>, a memory markdown file)</td><td>Whatever someone wrote there</td><td>You, or the agent when told to</td><td>Every session, in full</td><td>Yes, unless someone keeps editing it</td></tr>
+        <tr><td>Agent memory tools (agent-written notes, built-in memory)</td><td>Notes the model chose to save</td><td>The model, when it decides to</td><td>When the agent reads them</td><td>Yes; nothing removes a note that stopped being true</td></tr>
+        <tr><td>Transcript search and event logs</td><td>Everything that was said and run</td><td>The host, automatically</td><td>When the agent searches</td><td>No, but it is history, not current state; the agent has to work out what still holds</td></tr>
+        <tr><td>Telling the model to remember</td><td>Nothing outside the context</td><td>&mdash;</td><td>Until the context is compacted or the session ends</td><td>&mdash;</td></tr>
+        <tr><td><strong>OpenState</strong></td><td>Decisions, failed and completed commands, blockers, the objective, test status since the last edit, changed files</td><td>The engine, from the session's events, with no model in the loop</td><td>OpenCode: in the capsule at the start of every session and after each compaction. Other hosts: when the agent calls <code>openstate_capsule</code></td><td>No: a fact is replaced or closed when a later event supersedes it</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="band" id="limits">
+  <div class="shell">
+    <p class="eyebrow">Known weaknesses</p>
+    <h2>What the record does not cover.</h2>
+    <ul class="tick-list">
+      <li><strong>It records only what passes through the host's events</strong>: messages, commands with their exit codes, file edits and git status. It does not see the model's reasoning, file contents, or work you do in your own terminal.</li>
+      <li><strong>Decisions are recognised by wording.</strong> A message that gives a reason ("because", "since", "so that", "in order to", "due to") becomes a decision; a decision stated without one is recorded as a directive or objective, and a casual "because" can be recorded as a decision. <code>openstate_close</code> removes false ones.</li>
+      <li><strong>A failure needs an exit code.</strong> A command whose tool reports no exit code is recorded as completed, not failed (it never counts as a passing test, though). Read-only commands such as <code>cat</code>, <code>ls</code> or <code>grep</code> are not recorded at all.</li>
+      <li><strong>On hosts other than OpenCode the capsule is on demand</strong>: the agent has to call <code>openstate_capsule</code> (the MCP server's instructions tell it to).</li>
+      <li><strong>One machine, one repository.</strong> There is no sync between machines or people.</li>
+      <li><strong>No measurement yet shows fewer repeated failures.</strong> What OpenState guarantees is the record and its delivery to the agent; whether that changes your agent's behavior is for you to judge in your own sessions. Token cost per completed work item is measured and fell with adoption (see the <a href="evidence.html">evidence page</a>).</li>
+      <li><strong>The engine is closed source</strong> (the plugin, installer, skill and documentation are MIT).</li>
+    </ul>
+    <p class="lede">The structural tools have their own costs — extra calls for a small edit, syntax matching rather than types — on the <a href="structural-tools.html#weaknesses">code tools page</a>.</p>
+  </div>
+</section>
+
+<section class="band alt" id="principles">
+  <div class="shell">
+    <p class="eyebrow">Principles</p>
+    <div class="principles">
+      <div class="principle">
+        <span class="p-num">01</span>
+        <h3>State, not story</h3>
+        <p>A record of what is true now, compiled from events, not a summary written by a model.</p>
+      </div>
+      <div class="principle">
+        <span class="p-num">02</span>
+        <h3>Local only</h3>
+        <p>No runtime network calls, no telemetry. State lives in your repository.</p>
+      </div>
+      <div class="principle">
+        <span class="p-num">03</span>
+        <h3>Deliberate persistence</h3>
+        <p>State is written on checkpoint, when OpenCode closes, and when the engine&rsquo;s input ends.</p>
+      </div>
+      <div class="principle">
+        <span class="p-num">04</span>
+        <h3>Sold per developer, tried free</h3>
+        <p>$129 once for every 0.x release, or $10 a month, through Stripe. All sales are final. The docs, skill, installer and plugin are MIT.</p>
+      </div>
+    </div>
+    <p class="lede">Commercial embedding licenses available — <a href="mailto:michaelallenkuykendall@gmail.com">michaelallenkuykendall@gmail.com</a></p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <span class="footer-brand">OpenState</span>
+    <span class="footer-tag">Structural code tools and project state for coding agents</span>
+    <span class="footer-links"><a href="index.html">Home</a> &middot; <a href="evidence.html">Evidence</a> &middot; <a href="structural-tools.html">Code tools</a> &middot; <a href="pricing.html">Pricing</a> &middot; <a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">GitHub</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

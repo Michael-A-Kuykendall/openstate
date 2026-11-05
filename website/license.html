@@ -18,13 +18,14 @@
       <img class="brand-logo" src="logo-header.jpg" alt="OpenState logo" />
     </a>
     <nav class="nav">
-      <a href="index.html">Overview</a>
-      <a href="index.html#how">How it works</a>
-      <a href="structural-tools.html">Tools</a>
+      <a class="nav-desk" href="index.html#product">Product</a>
+      <a class="nav-desk" href="index.html#results">Results</a>
+      <a class="nav-desk" href="structural-tools.html">Code tools</a>
+      <a href="technical.html">Docs</a>
       <a href="pricing.html">Pricing</a>
       <a href="license.html" aria-current="page">License</a>
-      <a href="index.html#install">Install</a>
     </nav>
+    <a class="nav-buy" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime (0.x) — $129</a>
   </div>
 </header>
 
@@ -38,9 +39,12 @@
 
 <section class="band" id="activate">
   <div class="shell">
-    <h2>After you buy</h2>
+    <h2>Stripe hosts the payment</h2>
+    <p class="lede">The license worker creates a Stripe Checkout Session and redirects the browser to it. After payment, Stripe returns you to the worker's success page, which shows your key.</p>
+    <p class="route">GET /buy?tier=monthly|lifetime</p>
+    <h2>What happens after checkout</h2>
     <ol class="tick-list">
-      <li><strong>Pay on Stripe&rsquo;s checkout page</strong>, monthly or lifetime. You confirm there that the purchase is final.</li>
+      <li><strong>Pay on Stripe&rsquo;s checkout page</strong>, monthly or lifetime (every 0.x release). You confirm there that the purchase is final.</li>
       <li><strong>Copy the key</strong> from the page Stripe returns you to. Keep it somewhere safe; it is tied to your purchase email, which can recover it.</li>
       <li><strong>Activate it</strong> on each machine: <code>openstate-engine license activate &lt;key&gt;</code>, or <code>install.sh --license &lt;key&gt;</code> when installing.</li>
     </ol>
@@ -52,7 +56,7 @@
     </ul>
     <h2 id="billing">Cancel or update billing</h2>
     <p class="lede">Open <a href="https://openstate-license.michaelallenkuykendall.workers.dev/portal">billing</a>, paste your license key, and Stripe&rsquo;s billing page lets you cancel, change your card or download invoices. Your key is the login; an email address alone cannot open it.</p>
-    <p class="lede">On monthly and want lifetime? <a href="https://openstate-license.michaelallenkuykendall.workers.dev/upgrade">Switch to lifetime</a> with your key: you pay the lifetime price once, keep the same key, and the subscription stops.</p>
+    <p class="lede">On monthly and want lifetime (every 0.x release)? <a href="https://openstate-license.michaelallenkuykendall.workers.dev/upgrade">Switch to Lifetime (every 0.x release)</a> with your key: you pay $129 once for every 0.x release, keep the same key, and the subscription stops.</p>
     <h2 id="recover">Lost your key?</h2>
     <p class="lede"><a href="https://openstate-license.michaelallenkuykendall.workers.dev/recover">Recover it</a> with your purchase email: Keygen emails you a link to set a password, and <a href="https://openstate-license.michaelallenkuykendall.workers.dev/account">signing in</a> shows your keys. The reply is the same whether or not an email bought a license. Never post a license key or purchase email in a public issue.</p>
     <p class="lede">Licenses are issued by Keygen; payments are handled by Stripe. What the engine sends when it checks a license is in the <a href="privacy.html">privacy policy</a>.</p>

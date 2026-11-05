@@ -4,10 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Pricing — OpenState</title>
-<meta name="description" content="OpenState is free to try (30 structural applies per machine), then $10 a month or $129 once per developer. All sales are final." />
+<meta name="description" content="OpenState is free to try (30 structural applies per machine), then $10 a month or $129 once per developer for every 0.x release. All sales are final." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Commissioner:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -18,20 +18,21 @@
       <img class="brand-logo" src="logo-header.jpg" alt="OpenState logo" />
     </a>
     <nav class="nav">
-      <a href="index.html">Overview</a>
-      <a href="index.html#how">How it works</a>
-      <a href="structural-tools.html">Tools</a>
+      <a class="nav-desk" href="index.html#product">Product</a>
+      <a class="nav-desk" href="index.html#results">Results</a>
+      <a class="nav-desk" href="structural-tools.html">Code tools</a>
+      <a href="technical.html">Docs</a>
       <a href="pricing.html" aria-current="page">Pricing</a>
       <a href="license.html">License</a>
-      <a href="index.html#install">Install</a>
     </nav>
+    <a class="nav-buy" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime (0.x) — $129</a>
   </div>
 </header>
 
-<section class="hero" id="top">
+<section class="hero price-hero" id="top">
   <div class="shell">
     <p class="eyebrow">Pricing</p>
-    <h1>Free to try. <em>$10 a month</em> or <em>$129 for life</em>.</h1>
+    <h1>Free to try. <em>$10 a month</em> or <em>$129 once for every 0.x release</em>.</h1>
     <p class="hero-lede">Every machine gets the whole product free, including 30 structural applies. When those are used, a license removes the limit: $10 a month, or $129 once for every 0.x release. Checkout is hosted by Stripe. All sales are final. Try it free first.</p>
   </div>
 </section>
@@ -56,22 +57,23 @@
         <ul class="tick-list">
           <li>Unlimited structural applies for one developer, on up to 3 machines</li>
           <li>Cancel any time; the license runs to the end of the paid period (<a href="license.html#billing">billing</a>)</li>
-          <li>Switch to lifetime later and keep the same key; the current month is not credited</li>
+          <li>Switch to lifetime (every 0.x release) later at full price and keep the same key; the current month is not credited</li>
         </ul>
         <p><a class="btn btn-primary" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=monthly">Subscribe for $10 a month</a></p>
       </article>
       <article class="offer">
-        <p class="eyebrow">Lifetime</p>
-        <h2>$129 once</h2>
+        <p class="eyebrow">Lifetime &middot; every 0.x release</p>
+        <h2>$129 once, every 0.x release</h2>
         <ul class="tick-list">
           <li>Unlimited structural applies for one developer, on up to 3 machines</li>
           <li>Every 0.x release, no renewal</li>
         </ul>
-        <p><a class="btn btn-primary" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime for $129</a></p>
+        <p><a class="btn btn-primary" href="https://openstate-license.michaelallenkuykendall.workers.dev/buy?tier=lifetime">Buy lifetime (every 0.x release) for $129</a></p>
       </article>
     </div>
     <p class="lede">Stripe returns you to the license worker&rsquo;s success page, which shows your key and the command to activate it: <code>openstate-engine license activate &lt;key&gt;</code>. Project state stays local; it is not uploaded to complete the sale.</p>
     <p class="lede"><a href="terms.html">Terms of sale</a> &middot; <a href="refund.html">Refunds</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="license.html">How the key is issued</a></p>
+    <p class="lede">Commercial embedding licenses — <a href="mailto:michaelallenkuykendall@gmail.com">michaelallenkuykendall@gmail.com</a></p>
   </div>
 </section>
 
@@ -79,7 +81,7 @@
   <div class="shell footer-inner">
     <span class="footer-brand">OpenState</span>
     <span class="footer-tag">Structural code tools and project state for coding agents</span>
-    <span class="footer-links"><a href="index.html">Home</a> &middot; <a href="pricing.html">Pricing</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="refund.html">Refunds</a> &middot; <a href="privacy.html">Privacy</a></span>
+    <span class="footer-links"><a href="index.html">Home</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="refund.html">Refunds</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="license.html">License</a></span>
   </div>
 </footer>
 
