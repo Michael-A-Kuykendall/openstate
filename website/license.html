@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="favicon.ico" />
+<title>License — OpenState</title>
+<meta name="description" content="How an OpenState license works: buy through Stripe, copy your key, activate it on up to 3 machines." />
+<link rel="canonical" href="https://michael-a-kuykendall.github.io/openstate/license.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="OpenState" />
+<meta property="og:title" content="License — OpenState" />
+<meta property="og:description" content="How an OpenState license works: buy through Stripe, copy your key, activate it on up to 3 machines." />
+<meta property="og:url" content="https://michael-a-kuykendall.github.io/openstate/license.html" />
+<meta property="og:image" content="https://michael-a-kuykendall.github.io/openstate/media/social-card.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="OpenState: your coding agent picks up where the last session left off, and changes only the code it meant to." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="License — OpenState" />
+<meta name="twitter:description" content="How an OpenState license works: buy through Stripe, copy your key, activate it on up to 3 machines." />
+<meta name="twitter:image" content="https://michael-a-kuykendall.github.io/openstate/media/social-card.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/final.css" />
+</head>
+<body>
+
+<a class="os-skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell os-header-inner"><a class="os-brand" href="index.html" aria-label="OpenState home"><img class="os-brand-logo" src="logo-md.jpg" alt="" width="66" height="66"><span class="os-wordmark">OpenState</span></a><nav class="os-desktop-nav" aria-label="Main navigation"><a href="index.html#how">How it works</a>
+<a href="structural-tools.html">Tools</a>
+<a href="evidence.html">Results</a>
+<a href="hosts.html">Hosts</a>
+<a href="pricing.html">Pricing</a></nav><a class="btn btn-primary os-header-cta" href="index.html#install">Install free</a><details class="os-mobile-menu"><summary aria-label="Open site menu">Menu</summary><nav class="os-mobile-panel" aria-label="Mobile navigation"><a href="index.html#how">How it works</a>
+<a href="structural-tools.html">Tools</a>
+<a href="evidence.html">Results</a>
+<a href="hosts.html">Hosts</a>
+<a href="pricing.html">Pricing</a><a href="index.html#install">Install free</a><a href="docs/index.html">Documentation</a></nav></details></div></header>
+
+<section id="main" class="hero" id="top">
+  <div class="shell">
+    <p class="eyebrow">License</p>
+    <h1>Buy, copy your key, activate it.</h1>
+    <p class="hero-lede">There is no account to create. You pay through Stripe, the next page shows your license key, and one command turns it on for the machine you are on.</p>
+  </div>
+</section>
+
+<section class="band" id="activate">
+  <div class="shell">
+    <h2>Stripe hosts the payment</h2>
+    <p class="lede">The license worker creates a Stripe Checkout Session and redirects the browser to it. After payment, Stripe returns you to the worker's success page, which shows your key.</p>
+    <p class="route">GET /buy?tier=monthly|lifetime</p>
+    <h2>What happens after checkout</h2>
+    <ol class="tick-list">
+      <li><strong>Pay on Stripe&rsquo;s checkout page</strong>, monthly or lifetime (every 0.x release). You confirm there that the purchase is final.</li>
+      <li><strong>Copy the key</strong> from the page Stripe returns you to. Keep it somewhere safe; it is tied to your purchase email, which can recover it.</li>
+      <li><strong>Activate it</strong> on each machine: <code>openstate-engine license activate &lt;key&gt;</code>, or <code>install.sh --license &lt;key&gt;</code> when installing.</li>
+    </ol>
+    <h2>Machines, transfer and offline use</h2>
+    <ul class="tick-list">
+      <li>One license covers you on up to 3 machines. To transfer it to a new machine, run <code>openstate-engine license deactivate</code> on the old machine first. If the old machine is gone, remove it from <a href="https://openstate-license.michaelallenkuykendall.workers.dev/account">your licenses</a>.</li>
+      <li>The engine checks the license and then works offline for up to 7 days between checks.</li>
+      <li>Monthly licenses renew with each payment; a cancelled subscription keeps working to the end of the paid month.</li>
+    </ul>
+    <h2 id="billing">Cancel or update billing</h2>
+    <p class="lede">Open <a href="https://openstate-license.michaelallenkuykendall.workers.dev/portal">billing</a>, paste your license key, and Stripe&rsquo;s billing page lets you cancel, change your card or download invoices. Your key is the login; an email address alone cannot open it.</p>
+    <p class="lede">On monthly and want lifetime (every 0.x release)? <a href="https://openstate-license.michaelallenkuykendall.workers.dev/upgrade">Switch to Lifetime (every 0.x release)</a> with your key: you pay $129 once for every 0.x release, keep the same key, and the subscription stops.</p>
+    <h2 id="recover">Lost your key?</h2>
+    <p class="lede"><a href="https://openstate-license.michaelallenkuykendall.workers.dev/recover">Recover it</a> with your purchase email: Keygen emails you a link to set a password, and <a href="https://openstate-license.michaelallenkuykendall.workers.dev/account">signing in</a> shows your keys. The reply is the same whether or not an email bought a license. Never post a license key or purchase email in a public issue.</p>
+    <p class="lede">Licenses are issued by Keygen; payments are handled by Stripe. What the engine sends when it checks a license is in the <a href="privacy.html">privacy policy</a>.</p>
+    <p><a class="btn btn-primary" href="pricing.html">See plans</a> <a class="btn btn-ghost" href="https://openstate-license.michaelallenkuykendall.workers.dev/portal">Manage billing</a> <a class="btn btn-ghost" href="https://openstate-license.michaelallenkuykendall.workers.dev/recover">Recover a key</a> <a class="btn btn-ghost" href="index.html#install">Install</a></p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <span class="footer-brand">OpenState</span>
+    <span class="footer-tag">Structural code tools and project state for coding agents</span>
+    <span class="footer-links"><a href="index.html">Home</a> &middot; <a href="pricing.html">Pricing</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="refund.html">Refunds</a> &middot; <a href="privacy.html">Privacy</a></span>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"OpenState","applicationCategory":"DeveloperApplication","operatingSystem":"Windows, macOS, Linux","url":"https://michael-a-kuykendall.github.io/openstate/license.html","description":"How an OpenState license works: buy through Stripe, copy your key, activate it on up to 3 machines.","offers":[{"@type":"Offer","name":"Monthly","price":"10","priceCurrency":"USD","description":"$10 a month for one developer on up to 3 machines. Cancel any time."},{"@type":"Offer","name":"Lifetime (every 0.x release)","price":"129","priceCurrency":"USD","description":"$129 once per developer for every 0.x release, on up to 3 machines. All sales are final."}]}
+</script>
+</body>
+</html>

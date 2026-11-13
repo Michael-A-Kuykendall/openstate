@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="favicon.ico" />
+<title>Privacy — OpenState</title>
+<meta name="description" content="OpenState privacy: the software collects nothing; buying it shares your name and email with Stripe and Keygen." />
+<link rel="canonical" href="https://michael-a-kuykendall.github.io/openstate/privacy.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="OpenState" />
+<meta property="og:title" content="Privacy — OpenState" />
+<meta property="og:description" content="OpenState privacy: the software collects nothing; buying it shares your name and email with Stripe and Keygen." />
+<meta property="og:url" content="https://michael-a-kuykendall.github.io/openstate/privacy.html" />
+<meta property="og:image" content="https://michael-a-kuykendall.github.io/openstate/media/social-card.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="OpenState: your coding agent picks up where the last session left off, and changes only the code it meant to." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Privacy — OpenState" />
+<meta name="twitter:description" content="OpenState privacy: the software collects nothing; buying it shares your name and email with Stripe and Keygen." />
+<meta name="twitter:image" content="https://michael-a-kuykendall.github.io/openstate/media/social-card.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/final.css" />
+</head>
+<body>
+
+<a class="os-skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell os-header-inner"><a class="os-brand" href="index.html" aria-label="OpenState home"><img class="os-brand-logo" src="logo-md.jpg" alt="" width="66" height="66"><span class="os-wordmark">OpenState</span></a><nav class="os-desktop-nav" aria-label="Main navigation"><a href="index.html#how">How it works</a>
+<a href="structural-tools.html">Tools</a>
+<a href="evidence.html">Results</a>
+<a href="hosts.html">Hosts</a>
+<a href="pricing.html">Pricing</a></nav><a class="btn btn-primary os-header-cta" href="index.html#install">Install free</a><details class="os-mobile-menu"><summary aria-label="Open site menu">Menu</summary><nav class="os-mobile-panel" aria-label="Mobile navigation"><a href="index.html#how">How it works</a>
+<a href="structural-tools.html">Tools</a>
+<a href="evidence.html">Results</a>
+<a href="hosts.html">Hosts</a>
+<a href="pricing.html">Pricing</a><a href="index.html#install">Install free</a><a href="docs/index.html">Documentation</a></nav></details></div></header>
+
+<section id="main" class="hero" id="top">
+  <div class="shell">
+    <p class="eyebrow">Privacy</p>
+    <h1>Project state stays local.</h1>
+    <p class="hero-lede">The OpenState engine keeps project facts locally and sends no telemetry or project data; it contacts the license service only to check your license. Host history access and purchase services have the separate boundaries described below.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="shell">
+    <h2>The software</h2>
+    <ul class="tick-list">
+      <li>The engine sends no telemetry. Host history discovery may contact the configured OpenCode API through its SDK; an API on another machine is not an offline history source.</li>
+      <li>License checks: the engine contacts Keygen (api.keygen.sh) to verify a license and, on the free tier, to count each structural apply, and the OpenState license worker once per machine to get a free-tier license. It sends the license key, a hashed machine fingerprint and the platform name; never project data, code or file names. A paid license works offline for up to 7 days between checks.</li>
+      <li>What OpenState records stays local. <code>.openstate/</code> can be a directory, a symlink or a local pointer file. It can include your messages, the commands the agent runs and file paths, so treat it like shell history.</li>
+      <li>The installer downloads the release from GitHub; GitHub sees that request.</li>
+    </ul>
+    <h2>Buying it</h2>
+    <ul class="tick-list">
+      <li>Stripe processes the payment. Card details go to Stripe and are never seen by the seller.</li>
+      <li>Stripe shares your name and email with the seller. Keygen stores your license and a buyer account under that email, so you can recover a lost key: Keygen emails you a link to set its password.</li>
+      <li>A small Cloudflare worker connects Stripe to Keygen. It keeps one small record per processed Stripe event id so webhook retries fulfill exactly once. The retry cache expires after seven days; the per-event fulfillment record is kept after that. This is a bounded retry guard, not a guarantee against every duplicate issuance.</li>
+      <li>Your email is used only to issue and manage your license and answer support. It is not sold or used for marketing.</li>
+    </ul>
+    <h2>This website</h2>
+    <p class="lede">The site is hosted on GitHub Pages and loads fonts from Google Fonts, so GitHub and Google see your visit. It sets no cookies and runs no analytics.</p>
+    <h2>Deleting your data</h2>
+    <p class="lede">Email michaelallenkuykendall@gmail.com to have your Keygen record deleted. Stripe keeps payment records as the law requires.</p>
+    <p><a class="btn btn-primary" href="pricing.html">Pricing</a> <a class="btn btn-ghost" href="terms.html">Terms</a></p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <span class="footer-brand">OpenState</span>
+    <span class="footer-tag">Structural code tools and project state for coding agents</span>
+    <span class="footer-links"><a href="index.html">Home</a> &middot; <a href="pricing.html">Pricing</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="refund.html">Refunds</a> &middot; <a href="privacy.html">Privacy</a></span>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"OpenState","applicationCategory":"DeveloperApplication","operatingSystem":"Windows, macOS, Linux","url":"https://michael-a-kuykendall.github.io/openstate/privacy.html","description":"OpenState privacy: the software collects nothing; buying it shares your name and email with Stripe and Keygen.","offers":[{"@type":"Offer","name":"Monthly","price":"10","priceCurrency":"USD","description":"$10 a month for one developer on up to 3 machines. Cancel any time."},{"@type":"Offer","name":"Lifetime (every 0.x release)","price":"129","priceCurrency":"USD","description":"$129 once per developer for every 0.x release, on up to 3 machines. All sales are final."}]}
+</script>
+</body>
+</html>

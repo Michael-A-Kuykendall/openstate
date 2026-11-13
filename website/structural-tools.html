@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="favicon.ico" />
+<title>OpenState Code Tools</title>
+<meta name="description" content="OpenState's structural tools let a coding agent search for a definition, read just that definition, and change it through a preview checked before anything is written." />
+<link rel="canonical" href="https://michael-a-kuykendall.github.io/openstate/structural-tools.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="OpenState" />
+<meta property="og:title" content="OpenState Code Tools" />
+<meta property="og:description" content="OpenState's structural tools let a coding agent search for a definition, read just that definition, and change it through a preview checked before anything is written." />
+<meta property="og:url" content="https://michael-a-kuykendall.github.io/openstate/structural-tools.html" />
+<meta property="og:image" content="https://michael-a-kuykendall.github.io/openstate/media/social-card.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="OpenState: your coding agent picks up where the last session left off, and changes only the code it meant to." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="OpenState Code Tools" />
+<meta name="twitter:description" content="OpenState's structural tools let a coding agent search for a definition, read just that definition, and change it through a preview checked before anything is written." />
+<meta name="twitter:image" content="https://michael-a-kuykendall.github.io/openstate/media/social-card.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/final.css" />
+</head>
+<body>
+
+<a class="os-skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell os-header-inner"><a class="os-brand" href="index.html" aria-label="OpenState home"><img class="os-brand-logo" src="logo-md.jpg" alt="" width="66" height="66"><span class="os-wordmark">OpenState</span></a><nav class="os-desktop-nav" aria-label="Main navigation"><a href="index.html#how">How it works</a>
+<a href="structural-tools.html" aria-current="page">Tools</a>
+<a href="evidence.html">Results</a>
+<a href="hosts.html">Hosts</a>
+<a href="pricing.html">Pricing</a></nav><a class="btn btn-primary os-header-cta" href="index.html#install">Install free</a><details class="os-mobile-menu"><summary aria-label="Open site menu">Menu</summary><nav class="os-mobile-panel" aria-label="Mobile navigation"><a href="index.html#how">How it works</a>
+<a href="structural-tools.html" aria-current="page">Tools</a>
+<a href="evidence.html">Results</a>
+<a href="hosts.html">Hosts</a>
+<a href="pricing.html">Pricing</a><a href="index.html#install">Install free</a><a href="docs/index.html">Documentation</a></nav></details></div></header>
+
+<section id="main" class="hero" id="top">
+  <div class="shell">
+    <p class="eyebrow">Every OpenState tool &mdash; 22 structural code calls and 14 state and lifecycle tools, in every install</p>
+    <h1>Read the <em>function</em>, not the file.</h1>
+    <p class="hero-lede">A coding agent with only a file reader works in whole files: it reads the file to change one function, reads it again when the line numbers move, and edits text it matched by eye. OpenState&rsquo;s structural tools let it search for a definition, read just that definition, and change it through a preview it can check before anything is written.</p>
+    <div class="flow"><span>openstate_ast_search</span><span class="arrow">&rarr;</span><span>openstate_read_symbol</span><span class="arrow">&rarr;</span><span class="signal">preview</span><span class="arrow">&rarr;</span><span class="signal">apply</span></div>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="index.html#install">Install</a>
+      <a class="btn btn-ghost" href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/STRUCTURAL-TOOLS.md" target="_blank" rel="noopener">Read the reference</a>
+      <a class="btn btn-link" href="pricing.html">Free to start, then $10/month or $129 lifetime (every 0.x release) &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="hosts">
+  <div class="shell">
+    <p class="eyebrow">Where the tools and the state run</p>
+    <h2>Tools, session recovery and automatic capture</h2>
+    <table class="tool-table compare-table">
+      <tbody>
+        <tr><td><strong>Host</strong></td><td><strong>Session capture</strong></td><td><strong>Capsule delivery</strong></td><td><strong>State + structural tools</strong></td></tr>
+        <tr><td><strong>OpenCode</strong></td><td>automatic, from the host&rsquo;s events</td><td>given to the agent at the start of every session and after each compaction</td><td>native</td></tr>
+        <tr><td><strong>Claude Code, Codex, Muse</strong></td><td>on-demand replay of the host&rsquo;s stored sessions</td><td>on demand, via openstate_capsule</td><td>36 tools via MCP</td></tr>
+        <tr><td><strong>Other standard MCP clients</strong> (Kiro, GitHub Copilot, Cursor)</td><td>replay of OpenCode, Claude Code, Codex and Muse sessions stored for the same project</td><td>on demand, via openstate_capsule</td><td>36 tools via MCP</td></tr>
+      </tbody>
+    </table>
+    <p class="lede">Every host gets all 36 tools. A session started in one agent can be picked up in another: any of them can replay the OpenCode, Claude Code, Codex and Muse histories stored for the same project.</p>
+  </div>
+</section>
+
+<section class="band alt" id="proof">
+  <div class="shell">
+    <p class="eyebrow">Measured in the maintainer&rsquo;s projects, August to October 2026</p>
+    <h2>Fewer tokens per commit.</h2>
+    <ul class="metrics">
+      <li><span class="metric-num">&minus;31%</span><span class="metric-label">tokens per commit in the openstate project, 16.0M to 11.05M, August to September 2026, while completions rose</span></li>
+      <li><span class="metric-num">14.3M &rarr; 0.9M</span><span class="metric-label">tokens per commit in a repository that adopted the tools via Claude Code</span></li>
+      <li><span class="metric-num">&minus;96%</span><span class="metric-label">edit calls once the tools were in place: 8,002 in August, 346 in September</span></li>
+      <li><span class="metric-num">18,859</span><span class="metric-label">structural calls in September 2026, outnumbering classic read, edit and grep combined (9,044 + 346 + 514)</span></li>
+      <li><span class="metric-num">99.91%</span><span class="metric-label">of 21,372 OpenState calls in the June-to-September corpus succeeded</span></li>
+    </ul>
+    <p class="lede">Measured on the maintainer&rsquo;s own session history: cost moved with adoption; it is not a controlled study. <a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/evidence.md">Method and evidence &rarr;</a></p>
+    <h3>Why it costs less: the agent reads the definition, not the file.</h3>
+    <ul class="metrics">
+      <li><span class="metric-num">97%</span><span class="metric-label">less data reading one function from a 63 KB file, in one measured case</span></li>
+      <li><span class="metric-num">1.3 KB</span><span class="metric-label">a definition read, against about 8.6 KB for an average file read</span></li>
+      <li><span class="metric-num">~70%</span><span class="metric-label">fewer bytes per structural search than per classic file read, over 4,542 searches</span></li>
+      <li><span class="metric-num">22</span><span class="metric-label">tools in 18 languages: search, read, navigate, and preview/apply edits</span></li>
+    </ul>
+    
+  </div>
+</section>
+
+<section class="band" id="compare">
+  <div class="shell">
+    <p class="eyebrow">The difference</p>
+    <h2>Units of code instead of files and line numbers.</h2>
+    <table class="tool-table problem-table compare-table">
+      <tbody>
+        <tr><td><strong>The agent needs to</strong></td><td><strong>With a file reader and a text editor</strong></td><td><strong>With OpenState&rsquo;s code tools</strong></td></tr>
+        <tr><td>Find code</td><td>Grep output, or files opened to look</td><td>Each match with its file and line, for a definition, an identifier or literal text</td></tr>
+        <tr><td>Read one function</td><td>The whole file, or a range of lines it has to guess</td><td>That complete function, and nothing else in the file</td></tr>
+        <tr><td>Change it</td><td>Rewrite text it matched by eye</td><td>A preview showing the change, then an apply that writes only that change</td></tr>
+        <tr><td>Cope with a file that changed</td><td>Depends on the editor: some ask for a fresh read, others write over the change</td><td>Refuses a preview that no longer fits; applies a text edit whose anchor is still unique and says so</td></tr>
+        <tr><td>Cope with two matches</td><td>Asks for more surrounding text; the agent has to find the matches itself</td><td>Refuses, and lists every match so the agent can choose</td></tr>
+        <tr><td>Rename a function everywhere</td><td>Grep for the name, open each file, edit each match by hand</td><td>One preview listing every change across the files, then one apply</td></tr>
+        <tr><td>Move a function to another file</td><td>Copy it out, paste it in, delete the original, fix the spacing</td><td>One preview and one apply; blank lines stay right at both ends</td></tr>
+        <tr><td>Edit a file with Windows line endings</td><td>Text typed with plain line breaks may not match the file</td><td>Matches with <code>line_endings=normalize</code> and keeps the file&rsquo;s endings</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="band alt" id="how">
+  <div class="shell">
+    <p class="eyebrow">How the agent uses them</p>
+    <h2>Find, read, preview, apply.</h2>
+    <div class="steps">
+      <div class="step"><span class="step-num">01 FIND</span><h3>Search</h3><p><code>openstate_ast_search</code> for the name or the text. The answer is a list of places, not file contents.</p></div>
+      <div class="step"><span class="step-num">02 READ</span><h3>Read one unit</h3><p><code>openstate_read_symbol</code> for a definition, <code>openstate_read_text_region</code> for prose and configuration.</p></div>
+      <div class="step"><span class="step-num">03 PREVIEW</span><h3>See the change</h3><p>The matching preview tool returns the planned change and an identity. It writes nothing.</p></div>
+      <div class="step"><span class="step-num">04 APPLY</span><h3>Write it once</h3><p>The apply tool writes exactly what the preview showed, and refuses a second use of the same identity.</p></div>
+    </div>
+    <p class="lede">The skill and the MCP server&rsquo;s instructions tell the agent this order. In OpenCode you can go further: installing with <code>OPENSTATE_STRUCTURAL_TOOLS=enforce</code> denies the built-in read, grep and edit tools so every read and edit goes through the structural tools.</p>
+  </div>
+</section>
+
+<section class="band" id="guarantees">
+  <div class="shell">
+    <p class="eyebrow">What the write path guarantees</p>
+    <h2>Refusal instead of damage.</h2>
+    <ul class="tick-list">
+      <li><strong>Nothing is written by a preview.</strong> Only an apply writes, and only the change its preview showed.</li>
+      <li><strong>Each preview applies once.</strong> A second apply of the same identity is refused as <code>already_consumed</code>.</li>
+      <li><strong>A stale preview is refused, not forced.</strong> If the file changed so the previewed change no longer fits, the apply is refused as <code>stale_files</code>.</li>
+      <li><strong>An ambiguous target is refused.</strong> When text matches more than once, the refusal lists every match.</li>
+      <li><strong>A replacement must be one definition.</strong> A symbol replacement that does not parse as a single definition of the right kind is refused before anything is written, with the reason.</li>
+      <li><strong>TypeScript and JavaScript exports stay intact.</strong> Replacing an exported function keeps its <code>export</code> keyword, and deleting one removes the keyword with it.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="band alt" id="tools">
+  <div class="shell">
+    <p class="eyebrow">The tools</p>
+    <div class="toolgroup">
+      <h3 class="toolgroup-head">22 structural code calls = 8 readers + 7 preview/apply pairs</h3>
+      <p class="lede">Find and read: eight tools that search, read and navigate without writing anything.</p>
+      <table class="tool-table">
+        <tbody>
+          <tr><td><code>openstate_ast_search</code></td><td>Definitions, identifiers or literal text, each match with file and line</td></tr>
+          <tr><td><code>openstate_read_symbol</code></td><td>One complete definition from one file</td></tr>
+          <tr><td><code>openstate_read_text_region</code></td><td>A bounded region around a unique piece of text</td></tr>
+          <tr><td><code>openstate_symbol_overview</code></td><td>The symbols in a file or directory</td></tr>
+          <tr><td><code>openstate_find_declaration</code></td><td>Where a name is declared</td></tr>
+          <tr><td><code>openstate_find_referencing_symbols</code></td><td>Declarations and references of a name</td></tr>
+          <tr><td><code>openstate_find_implementations</code></td><td>Rust <code>impl</code> blocks for a type or trait</td></tr>
+          <tr><td><code>openstate_diagnostics</code></td><td>The repository&rsquo;s Rust <code>cargo check</code> for one file</td></tr>
+        </tbody>
+      </table>
+      <p class="lede">Change, each as a preview and an apply. Searches, reads and previews are always free. Applies are free for the first 30 on each machine; after that they need a <a href="pricing.html">license</a>.</p>
+      <table class="tool-table">
+        <tbody>
+          <tr><td><code>openstate_edit_symbol_preview</code></td><td>Preview replacing a whole definition</td></tr>
+          <tr><td><code>openstate_edit_symbol_apply</code></td><td>Write a previewed symbol replacement</td></tr>
+          <tr><td><code>openstate_insert_symbol_preview</code></td><td>Preview inserting a definition before or after another</td></tr>
+          <tr><td><code>openstate_insert_symbol_apply</code></td><td>Write a previewed insertion</td></tr>
+          <tr><td><code>openstate_delete_symbol_preview</code></td><td>Preview deleting a definition by its syntax-tree boundary</td></tr>
+          <tr><td><code>openstate_delete_symbol_apply</code></td><td>Write a previewed deletion</td></tr>
+          <tr><td><code>openstate_move_symbol_preview</code></td><td>Preview moving a definition to another place or file</td></tr>
+          <tr><td><code>openstate_move_symbol_apply</code></td><td>Write a previewed move</td></tr>
+          <tr><td><code>openstate_rename_symbol_preview</code></td><td>Preview renaming an identifier across its matches</td></tr>
+          <tr><td><code>openstate_rename_symbol_apply</code></td><td>Write a previewed rename</td></tr>
+          <tr><td><code>openstate_edit_text_preview</code></td><td>Preview replacing a unique piece of text in any text file</td></tr>
+          <tr><td><code>openstate_edit_text_apply</code></td><td>Write a previewed text replacement</td></tr>
+          <tr><td><code>openstate_create_file_preview</code></td><td>Preview creating a file that does not exist yet</td></tr>
+          <tr><td><code>openstate_create_file_apply</code></td><td>Write a previewed file creation</td></tr>
+        </tbody>
+      </table>
+      <h3 class="toolgroup-head">14 state and lifecycle tools</h3>
+      <p class="lede">Session state and replay, completion notifications, and engine maintenance.</p>
+      <table class="tool-table">
+        <tbody>
+          <tr><td><code>openstate_capsule</code></td><td>The short resume summary: objective, decisions, blockers, next actions</td></tr>
+          <tr><td><code>openstate_state</code></td><td>Everything currently true: decisions, finished, in-progress and failed work, blockers</td></tr>
+          <tr><td><code>openstate_report</code></td><td>What is broken, stuck or unresolved right now</td></tr>
+          <tr><td><code>openstate_report_timeline</code></td><td>The same facts, session by session</td></tr>
+          <tr><td><code>openstate_why</code></td><td>Where a fact came from, and what supports it</td></tr>
+          <tr><td><code>openstate_close</code></td><td>Close a fact that is wrong or done, with a reason</td></tr>
+          <tr><td><code>openstate_sessions</code></td><td>This repository&rsquo;s OpenCode, Claude Code, supported Codex and Muse sessions</td></tr>
+          <tr><td><code>openstate_assess</code></td><td>Replay one of those sessions into the project&rsquo;s memory</td></tr>
+          <tr><td><code>openstate_checkpoint</code></td><td>Save the state to disk now</td></tr>
+          <tr><td><code>openstate_export</code></td><td>Export the whole state and capsule as one JSON file</td></tr>
+          <tr><td><code>openstate_reset</code></td><td>Clear the state, after checking it can be rebuilt</td></tr>
+          <tr><td><code>openstate_restart</code></td><td>Save, then check the state loads in a fresh engine</td></tr>
+          <tr><td><code>openstate_doctor</code></td><td>Engine health: status, fact counts, last save</td></tr>
+          <tr><td><code>openstate_toast</code></td><td>Turn OpenCode&rsquo;s completion notifications on or off</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lede">Symbol tools work in Rust, Python, TypeScript, TSX, JavaScript, Go, C, C++, Java, C#, Bash, Kotlin, Lua, PHP, Ruby, Scala, Solidity and Swift. Built on <a href="https://ast-grep.github.io/" target="_blank" rel="noopener">ast-grep</a>, which the installer bundles. In OpenCode they come through the plugin; in Claude Code, Codex, Muse, Cursor, Kiro, GitHub Copilot and other MCP hosts, through the bundled MCP server.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <span class="footer-brand">OpenState</span>
+    <span class="footer-tag">Structural code tools and project state for coding agents</span>
+    <span class="footer-links"><a href="pricing.html">Pricing</a> &middot; <a href="license.html">License</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="refund.html">Refunds</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="https://github.com/Michael-A-Kuykendall/openstate" target="_blank" rel="noopener">GitHub</a></span>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"OpenState","applicationCategory":"DeveloperApplication","operatingSystem":"Windows, macOS, Linux","url":"https://michael-a-kuykendall.github.io/openstate/structural-tools.html","description":"OpenState's structural tools let a coding agent search for a definition, read just that definition, and change it through a preview checked before anything is written.","offers":[{"@type":"Offer","name":"Monthly","price":"10","priceCurrency":"USD","description":"$10 a month for one developer on up to 3 machines. Cancel any time."},{"@type":"Offer","name":"Lifetime (every 0.x release)","price":"129","priceCurrency":"USD","description":"$129 once per developer for every 0.x release, on up to 3 machines. All sales are final."}]}
+</script>
+</body>
+</html>
