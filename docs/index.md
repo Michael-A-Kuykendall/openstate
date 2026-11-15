@@ -118,7 +118,7 @@ curl -fsSL https://raw.githubusercontent.com/Michael-A-Kuykendall/openstate/main
 - **Paid license** — sold through Stripe, issued by Keygen
 - **Engine binary proprietary** — protects the invention
 - **Surface MIT** — docs, skill, installer, plugin
-- **Commercial licensing available** — `michaelallenkuykendall@gmail.com`
+- **Commercial licensing available** — `sales@deltazerolabs.dev`
 - **State, not story** — current truth, not transcript
 
 ---

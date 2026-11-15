@@ -244,7 +244,7 @@ Plus 22 structural tools (AST and text search, bounded reads, references, declar
 
 **Engine binary (openstate-engine):** Proprietary, distributed under a commercial EULA.  
 **Surface components (docs, skill, installer, plugin bundle):** MIT License — see [PUBLIC-LICENSE](PUBLIC-LICENSE).  
-**Commercial licensing** for embedding the engine in other products: contact `michaelallenkuykendall@gmail.com`.
+**Commercial licensing** for embedding the engine in other products: contact `sales@deltazerolabs.dev`.
 
 ### Philosophy
 
@@ -293,4 +293,4 @@ See [SECURITY.md](SECURITY.md) — private disclosure via GitHub Security Adviso
 
 Engine binary: Proprietary EULA (see [LICENSE](LICENSE))  
 Surface components: MIT (see [PUBLIC-LICENSE](PUBLIC-LICENSE))  
-Commercial licensing: `michaelallenkuykendall@gmail.com`
+Commercial licensing: `sales@deltazerolabs.dev`

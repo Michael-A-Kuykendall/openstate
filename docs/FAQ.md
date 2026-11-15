@@ -13,7 +13,7 @@ Developers using coding agents who need guarded structural code operations and p
 ### Is it open source?
 **Engine binary**: Proprietary (commercial EULA) — protects the core invention.  
 **Surface**: MIT licensed — docs, skill, installer, plugin bundle.  
-**Commercial licensing**: Available for embedding — contact `michaelallenkuykendall@gmail.com`.
+**Commercial licensing**: Available for embedding — contact `sales@deltazerolabs.dev`.
 
 ### Why not fully open source?
 The fact-derivation engine (the "how") is the differentiated IP. The surface (what you install, the skill, the docs) is MIT. This lets us sell the product while protecting the invention.
@@ -148,7 +148,7 @@ Requires OpenCode with plugin API support.
 Yes. A purchased license covers personal, commercial and internal use. Separate commercial licenses cover **embedding or redistributing** the engine.
 
 ### Can I embed the engine in my product?
-Yes — commercial licensing available. Contact `michaelallenkuykendall@gmail.com`.
+Yes — commercial licensing available. Contact `sales@deltazerolabs.dev`.
 
 ### Can I fork and modify?
 Surface (docs, skill, installer): Yes, MIT.  

@@ -43,6 +43,8 @@
 - $10 a month: unlimited applies for one developer on up to 3 machines.
 - $129 once: the same for every 0.x release; future major versions are not included.
 - All sales are final. Stripe handles checkout; Keygen issues the license.
+- Save your license key before closing the success page. Store it securely and separately from your Stripe receipt. The license page links to recovery: Keygen emails a password-reset link, then signing in shows your keys.
+- Purchase support and refund reviews: email sales@deltazerolabs.dev from your purchase email. Requests are reviewed under the final-sale policy; approval is not guaranteed. Never post keys or purchase emails publicly.
 
 ## Pages
 

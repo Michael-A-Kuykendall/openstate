@@ -15,4 +15,4 @@ The project is open for issues and feedback. Major architectural or licensing de
 
 ## License
 
-The engine binary is proprietary (see LICENSE). Surface components (docs, skill, installer, plugin bundle) are MIT-licensed (see PUBLIC-LICENSE). Commercial licensing for the engine is available — contact michaelallenkuykendall@gmail.com.
+The engine binary is proprietary (see LICENSE). Surface components (docs, skill, installer, plugin bundle) are MIT-licensed (see PUBLIC-LICENSE). Commercial licensing for the engine is available — contact sales@deltazerolabs.dev.
