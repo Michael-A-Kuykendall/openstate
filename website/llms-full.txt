@@ -100,7 +100,7 @@ No. It is per developer, local to one machine and one repository.
 ## Tools (36, parsed from src/mcp/src/index.ts)
 
 22 structural code calls = 8 readers + 7 preview/apply pairs; 14 state and lifecycle tools.
-What each one does: [structural-tools.html](structural-tools.html).
+What each one does: [structural-tools.html](https://michael-a-kuykendall.github.io/openstate/structural-tools.html).
 
 ### Readers (8)
 
