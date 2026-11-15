@@ -63,7 +63,7 @@
 ## Tools (parsed)
 
 - 36 tools (22 structural code calls = 8 readers + 7 preview/apply pairs; 14 state and lifecycle tools).
-- Tool inventory and guarantees: [structural-tools.html](structural-tools.html).
+- Tool inventory and guarantees: [structural-tools.html](https://michael-a-kuykendall.github.io/openstate/structural-tools.html).
 
 ## Pricing (parsed from pricing.html)
 
