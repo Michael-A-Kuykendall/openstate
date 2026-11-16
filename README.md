@@ -256,8 +256,10 @@ Plus 22 structural tools (AST and text search, bounded reads, references, declar
 
 ## Community & Support
 
-- **GitHub Issues** — questions, bugs, feature requests
-- **Security** — see [SECURITY.md](SECURITY.md) for private disclosure
+- **[GitHub Discussions](https://github.com/Michael-A-Kuykendall/openstate/discussions)** — community hub: questions, setup help, ideas, project examples, and release announcements. Start with the pinned welcome thread.
+- **[GitHub Issues](https://github.com/Michael-A-Kuykendall/openstate/issues)** — reproducible bugs and accepted, scoped work. For general questions, start in Discussions.
+- **Purchases, refunds and lost keys** — use [license recovery](https://openstate-license.michaelallenkuykendall.workers.dev/recover) or email `mkuykendall@deltazerolabs.dev` privately. Never share keys, billing details or purchase emails publicly.
+- **Security** — see [SECURITY.md](SECURITY.md) for private disclosure; never post vulnerabilities publicly.
 - **Sponsors** — [GitHub Sponsors](https://github.com/sponsors/Michael-A-Kuykendall) / [SPONSORS.md](SPONSORS.md)
 
 ### Sponsorship
