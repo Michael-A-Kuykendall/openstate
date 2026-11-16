@@ -335,3 +335,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #25
   #matrix .os-host-capability-card{padding:18px 16px;}
   #matrix .os-host-capability-field{grid-template-columns:minmax(0,1fr);gap:3px;}
 }
+
+/* Pricing: one divider per plan, no duplicate section separator */
+.price-hero{border-bottom:0;padding-bottom:24px}
+#checkout.band{padding-top:20px}
