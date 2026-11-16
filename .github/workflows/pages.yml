@@ -32,3 +32,30 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Verify live site and AI-readable files
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://michael-a-kuykendall.github.io/openstate"
+          for attempt in $(seq 1 18); do
+            if curl --fail --silent --show-error --location --max-time 15 "$base/hosts.html" -o /tmp/hosts.html &&
+               curl --fail --silent --show-error --location --max-time 15 "$base/pricing.html" -o /tmp/pricing.html &&
+               curl --fail --silent --show-error --location --max-time 15 "$base/css/final.css" -o /tmp/final.css &&
+               curl --fail --silent --show-error --location --max-time 15 "$base/llms.txt" -o /tmp/llms.txt &&
+               curl --fail --silent --show-error --location --max-time 15 "$base/llms-full.txt" -o /tmp/llms-full.txt &&
+               curl --fail --silent --show-error --location --max-time 15 "$base/sitemap.xml" -o /tmp/sitemap.xml &&
+               grep -q 'os-host-capability-grid' /tmp/hosts.html &&
+               grep -q 'Responsive host capability cards' /tmp/final.css &&
+               grep -q 'offer-action' /tmp/pricing.html &&
+               grep -q 'OpenState' /tmp/llms.txt &&
+               grep -q 'openstate_capsule' /tmp/llms-full.txt &&
+               grep -q 'hosts.html' /tmp/sitemap.xml; then
+              echo "PASS: live GitHub Pages HTML, CSS, pricing, AI references and sitemap returned expected content"
+              exit 0
+            fi
+            echo "Live Pages not updated yet (attempt $attempt of 18)"
+            sleep 10
+          done
+          echo "::error::Live Pages did not serve the expected site files after deployment"
+          exit 1
