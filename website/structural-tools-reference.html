@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="favicon.ico" />
+<title>Structural Tools — Reference | OpenState</title>
+<meta name="description" content="Complete OpenState structural tools reference: reading and editing code by definition, preview/apply safety, supported languages, measurements, and limitations." />
+<link rel="canonical" href="https://michael-a-kuykendall.github.io/openstate/structural-tools-reference.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="OpenState — Structural Tools Reference" />
+<meta property="og:description" content="Find, read, preview and safely apply code changes. Complete technical reference and limitations." />
+<meta property="og:image" content="https://michael-a-kuykendall.github.io/openstate/media/social-card.png" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/final.css" />
+<style>
+/* Standalone reference document; no SPA behavior and no footer. */
+.reference-page{padding:44px 0 85px}
+.reference-paper{max-width:850px;margin:0 auto}
+.reference-source{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--rule);padding:0 0 18px;margin:0 0 36px}
+.reference-source .eyebrow{margin:0}
+.reference-source a{font-size:.9rem;font-weight:700;color:var(--signal-deep)}
+.reference-paper h1{font-size:clamp(2.2rem,4.5vw,3.1rem);line-height:1.14;max-width:none;margin:0 0 25px}
+.reference-paper h2{font-size:clamp(1.48rem,2.9vw,2rem);max-width:none;line-height:1.25;margin:43px 0 16px;padding-top:12px;border-top:1px solid var(--rule)}
+.reference-paper h3{font-size:1.22rem;margin:25px 0 12px;max-width:none}
+.reference-paper p{line-height:1.76;margin:0 0 19px;max-width:82ch}
+.reference-paper ul,.reference-paper ol{padding-left:1.45rem;margin:0 0 24px}
+.reference-paper li{margin:8px 0;line-height:1.7}
+.reference-paper code{font-size:.84em;overflow-wrap:anywhere}
+.reference-paper a:not(.source-link){color:var(--signal-deep)}
+.reference-table-scroll{max-width:100%;overflow-x:auto;margin:18px 0 30px;border:1px solid var(--rule);border-radius:8px}
+.reference-table-scroll table{border-collapse:collapse;width:100%;min-width:520px;font-size:.92rem}
+.reference-table-scroll th,.reference-table-scroll td{padding:12px 14px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top;overflow-wrap:break-word}
+.reference-table-scroll th{background:var(--paper-deep);white-space:nowrap}
+.reference-table-scroll tr:last-child td{border-bottom:0}
+.reference-table-scroll td:first-child{min-width:185px}
+@media(max-width:600px){.reference-page{padding:25px 0 60px}.reference-paper h2{margin-top:32px}}
+</style>
+</head>
+<body>
+<a class="os-skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell os-header-inner"><a class="os-brand" href="index.html" aria-label="OpenState home"><img class="os-brand-logo" src="logo-md.jpg" alt="" width="66" height="66"><span class="os-wordmark">OpenState</span></a><nav class="os-desktop-nav" aria-label="Main navigation"><a href="index.html#how">How it works</a>
+<a href="structural-tools.html" >Tools</a>
+<a href="evidence.html">Results</a>
+<a href="hosts.html">Hosts</a>
+<a href="pricing.html">Pricing</a></nav><a class="btn btn-primary os-header-cta" href="index.html#install">Install free</a><details class="os-mobile-menu"><summary aria-label="Open site menu">Menu</summary><nav class="os-mobile-panel" aria-label="Mobile navigation"><a href="index.html#how">How it works</a>
+<a href="structural-tools.html" >Tools</a>
+<a href="evidence.html">Results</a>
+<a href="hosts.html">Hosts</a>
+<a href="pricing.html">Pricing</a><a href="index.html#install">Install free</a><a href="docs/index.html">Documentation</a></nav></details></div></header>
+<main class="reference-page" id="main">
+  <div class="shell">
+    <article class="reference-paper">
+      <div class="reference-source"><p class="eyebrow">Technical reference · OpenState 0.1.0</p><a class="source-link" href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/STRUCTURAL-TOOLS.md" target="_blank" rel="noopener noreferrer">Source → GitHub</a></div>
+      <h1 id="structural-tools-read-search-and-edit-code-by-definition">Structural tools: read, search and edit code by definition</h1>
+      <p>OpenState ships 22 code tools beside its state tools. They let a coding agent find a definition, read just that definition, and change it through a preview it can check before anything is written. They are built on <a href="https://ast-grep.github.io/" target="_blank" rel="noopener noreferrer">ast-grep</a>, which the installer bundles, so the agent needs no setup and you need no editor running.</p>
+      <p>They come with every install: native OpenCode exposes them through Code Mode; standard MCP clients call the bundled server directly. Both transports expose 36 operations: 22 structural tools and 14 state/lifecycle tools. Session recovery uses shared source adapters, independent of the calling host. Automatic event capture and capsule injection are native OpenCode capabilities; MCP reads and assessments are on demand. Supported OpenCode, Claude and legacy Codex histories can be replayed; current paginated/compressed Codex history returns <code>unsupported_history</code>.</p>
+      <h2 id="why-an-agent-needs-them">Why an agent needs them</h2>
+      <p>A coding agent with only a file reader and a text editor works in whole files. To change one function it reads the file, often more than once as line numbers move, and then rewrites text it matched by eye. Most of what it read was never needed, and a wrong match can damage code silently.</p>
+      <p>The structural tools work in units of code instead:</p>
+      <ul><li><strong>Read one definition, not one file.</strong> <code>openstate_read_symbol</code> returns one complete function, type or method, and nothing else in the file.</li><li><strong>Search returns locations, not file dumps.</strong> <code>openstate_ast_search</code> finds definitions, identifiers or literal text and returns each match with its file and line, so the agent can read exactly what it needs next.</li><li><strong>Every write is previewed first.</strong> Each edit has a preview step that returns what will change and an identity; the apply step writes only that change, once, and refuses if the file changed in a way that would make the preview wrong.</li></ul>
+      <h2 id="what-it-has-saved-so-far">What it has saved so far</h2>
+      <p>Early results from the maintainer's projects, with the completion-cost measurement (method in release evidence):</p>
+      <ul><li>In one measured case, reading a complete function from a 63 KB file returned 97% less data than reading the file.</li><li>In the maintainer's sessions, a definition read returned about 1.3 KB, against an average of about 8.6 KB for an ordinary file read.</li></ul>
+      <p>These are bytes returned per read, not a measured saving on your token bill: the size of a definition against the size of its file varies with the code, and a careful agent can also read a range of lines. Edits are not cheaper in calls (see the weaknesses below); their value is safety.</p>
+      <h2 id="the-tools">The tools</h2>
+      <h3 id="find-and-read">Find and read</h3>
+      <div class="reference-table-scroll" tabindex="0" aria-label="Scrollable reference table"><table><thead><tr><th scope="col">Tool</th><th scope="col">What it returns</th></tr></thead><tbody><tr><td><code>openstate_ast_search</code></td><td>Matches for a definition, an identifier, or literal text (<code>query_kind=text</code>), each with file and line. The starting point for every read and edit.</td></tr><tr><td><code>openstate_read_symbol</code></td><td>One complete definition (function, method, type) from one file.</td></tr><tr><td><code>openstate_read_text_region</code></td><td>A bounded region around a unique piece of text, for prose, configuration and formats without symbol support. Cuts an oversized window down to fit and lists every match when the text is not unique.</td></tr><tr><td><code>openstate_symbol_overview</code></td><td>The symbols in a file or directory: name, kind, visibility and location.</td></tr><tr><td><code>openstate_find_declaration</code></td><td>Where a name is declared.</td></tr><tr><td><code>openstate_find_referencing_symbols</code></td><td>Declarations and references of a name across the repository.</td></tr><tr><td><code>openstate_find_implementations</code></td><td>Rust <code>impl</code> blocks for a type or trait.</td></tr><tr><td><code>openstate_diagnostics</code></td><td>The repository's Rust <code>cargo check</code> result for one file.</td></tr></tbody></table></div>
+      <h3 id="change-each-as-a-preview-and-an-apply">Change, each as a preview and an apply</h3>
+      <div class="reference-table-scroll" tabindex="0" aria-label="Scrollable reference table"><table><thead><tr><th scope="col">Pair</th><th scope="col">What it changes</th></tr></thead><tbody><tr><td><code>openstate_edit_symbol_preview</code> / <code>_apply</code></td><td>Replaces a whole definition, or renames it.</td></tr><tr><td><code>openstate_insert_symbol_preview</code> / <code>_apply</code></td><td>Inserts a new definition before or after an existing one.</td></tr><tr><td><code>openstate_delete_symbol_preview</code> / <code>_apply</code></td><td>Deletes a definition by its syntax-tree boundary.</td></tr><tr><td><code>openstate_move_symbol_preview</code> / <code>_apply</code></td><td>Moves a definition to another place or file.</td></tr><tr><td><code>openstate_rename_symbol_preview</code> / <code>_apply</code></td><td>Renames an identifier across its matches.</td></tr><tr><td><code>openstate_edit_text_preview</code> / <code>_apply</code></td><td>Replaces a unique piece of text in any text file.</td></tr><tr><td><code>openstate_create_file_preview</code> / <code>_apply</code></td><td>Creates a file that does not exist yet.</td></tr></tbody></table></div>
+      <h2 id="how-the-agent-uses-them">How the agent uses them</h2>
+      <ol><li><strong>Find.</strong> <code>openstate_ast_search</code> for the name or text.</li><li><strong>Read.</strong> <code>openstate_read_symbol</code> for a definition, or <code>openstate_read_text_region</code> for prose and configuration.</li><li><strong>Preview.</strong> The matching <code>_preview</code> tool. It returns the planned change and an identity.</li><li><strong>Apply.</strong> The matching <code>_apply</code> tool with that identity as <code>preview_id</code>.</li></ol>
+      <p>The skill and the MCP server's instructions tell the agent this order. They do not take the agent's own read and edit tools away. In OpenCode you can: installing with <code>OPENSTATE_STRUCTURAL_TOOLS=enforce</code> denies the built-in read, grep and edit tools, so every read and edit goes through the structural tools, and <code>OPENSTATE_STRUCTURAL_TOOLS=shadow</code> only records which tools the agent picks. <code>OPENSTATE_STRUCTURAL_TOOLS=off</code> restores the previous configuration.</p>
+      <h2 id="what-the-write-path-guarantees">What the write path guarantees</h2>
+      <ul><li><strong>Nothing is written by a preview.</strong> Only an apply writes, and only the change its preview showed.</li><li><strong>Each preview applies once.</strong> A second apply of the same identity is refused as <code>already_consumed</code>.</li><li><strong>A stale preview is refused, not forced.</strong> If the file changed so that the previewed change no longer fits, the apply is refused as <code>stale_files</code>. If the file changed elsewhere and the anchor text is still unique, a text edit applies and says it was rebased.</li><li><strong>An ambiguous target is refused.</strong> When text matches more than once, the refusal lists every match so the agent can choose one.</li><li><strong>A replacement must be one definition.</strong> A symbol replacement that does not parse as a single definition of the right kind is refused before anything is written, with the reason.</li><li><strong>TypeScript and JavaScript exports stay intact.</strong> Replacing an exported function keeps its <code>export</code> keyword, and deleting one removes the keyword with it.</li></ul>
+      <h2 id="languages">Languages</h2>
+      <p>Symbol tools (read, overview, declaration, references, edit, insert, delete, move) work in 18 languages: Rust, Python, TypeScript (including TSX), JavaScript, Go, C, C++, Java, C#, Bash, Haskell, Kotlin, Lua, PHP, Ruby, Scala, Solidity and Swift. Text search, text regions and text edits work in any text file. <code>openstate_find_implementations</code> and <code>openstate_diagnostics</code> are Rust only.</p>
+      <h2 id="known-weaknesses">Known weaknesses</h2>
+      <ul><li><strong>A small edit costs more calls.</strong> Search, preview and apply are three calls where a direct editor uses one. For a one-line change inside a long function, a text edit is cheaper than replacing the whole definition.</li><li><strong>Searches are the heaviest read.</strong> A search with many matches can return several kilobytes; narrow it with a language, a path or an exact name.</li><li><strong>Matching is by syntax, not by type.</strong> References and renames match names in the syntax tree; they do not resolve types the way a compiler or language server does.</li><li><strong>Completion cost fell with adoption (measured).</strong> The figures above are bytes per read in the maintainer's sessions. Measured in the maintainer's OpenCode history (2026-06 to 2026-09), tokens per completed work item in the openstate repo fell from about 16M to 10.6M (34%) and per commit from 16.0M to 11.05M (31%) between August and September 2026 while completions rose; an adopting repo fell from 14.3M to 0.9M tokens per commit via the Claude Code MCP, while repos with no adoption were flat or worse except one that improved in a lighter work phase. Method and per-repo/month tables are in <code>docs/evidence/…</code> on the private side; these are observed co-movements in the maintainer's projects, not a controlled study.</li></ul>
+    </article>
+  </div>
+</main>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "dd41bec45a2a4618b711e982d9e0706b"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
