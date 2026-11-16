@@ -16,16 +16,7 @@ We take the security of openstate seriously. If you discover a security vulnerab
 
 **DO NOT** create a public GitHub issue for security vulnerabilities.
 
-Instead, please report security issues privately using one of these methods:
-
-1. **GitHub Security Advisories (Preferred)**
-   - Go to the [Security tab](https://github.com/Michael-A-Kuykendall/openstate/security) of this repository
-   - Click "Report a vulnerability"
-   - Fill out the advisory form with details
-
-2. **Direct Email**
-   - Send details to: michaelallenkuykendall@gmail.com
-   - Include "SECURITY" in the subject line
+Email [michaelallenkuykendall@gmail.com](mailto:michaelallenkuykendall@gmail.com?subject=SECURITY) privately and include "SECURITY" in the subject line. This is the supported vulnerability-reporting route. Do not include credentials, license keys or private customer data.
 
 ### 📋 What to Include
 

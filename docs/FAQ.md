@@ -1,5 +1,7 @@
 # openstate — Frequently Asked Questions
 
+**License, key recovery, cancellation or refunds? Start with the [License and account FAQ](LICENSE-HELP.md).** For bugs and usage questions, see [Get support](../SUPPORT.md).
+
 ---
 
 ## General

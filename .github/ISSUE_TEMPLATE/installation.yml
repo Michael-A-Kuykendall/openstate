@@ -1,0 +1,57 @@
+name: Installation or integration problem
+description: Report a failing install, upgrade or agent connection.
+title: "[Setup] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This report will be public. Share a small synthetic example and redacted errors, not full logs or session transcripts.
+        For keys, billing or refunds use the [license FAQ](https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/LICENSE-HELP.md).
+        Report security vulnerabilities privately using [SECURITY.md](https://github.com/Michael-A-Kuykendall/openstate/blob/main/SECURITY.md).
+  - type: textarea
+    id: context
+    attributes:
+      label: Version and environment
+      description: Operating system and architecture, OpenState version if known, host/agent version, and native OpenCode or MCP connection.
+    validations:
+      required: true
+  - type: dropdown
+    id: method
+    attributes:
+      label: Installation method
+      options:
+        - One-line installer
+        - Local clone and install.sh
+        - MCP configuration
+        - Other or unsure
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Command or setup steps
+      description: Replace keys and private paths with placeholders. Never paste an activation command containing your real key.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result and redacted error
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Before submitting
+      options:
+        - label: "I removed license keys, purchase emails, passwords, tokens, private code and project data from this report."
+          required: true
+        - label: "I searched existing issues and will follow the Code of Conduct."
+          required: true

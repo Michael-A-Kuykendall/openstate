@@ -39,4 +39,4 @@ To apply, email michaelallenkuykendall@gmail.com with your GitHub username, rele
 
 ## Questions?
 
-Open a GitHub issue.
+Ask usage questions in [Q&A Discussions](https://github.com/Michael-A-Kuykendall/openstate/discussions/categories/q-a) and discuss feature ideas in [Ideas](https://github.com/Michael-A-Kuykendall/openstate/discussions/categories/ideas). Use the [issue forms](https://github.com/Michael-A-Kuykendall/openstate/issues/new/choose) for reproducible bugs, installation failures and documentation corrections. See [SUPPORT.md](SUPPORT.md) for private purchase and security routes.

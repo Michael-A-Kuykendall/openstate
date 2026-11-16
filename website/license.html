@@ -33,22 +33,31 @@
 <a href="structural-tools.html">Tools</a>
 <a href="evidence.html">Results</a>
 <a href="hosts.html">Hosts</a>
-<a href="pricing.html">Pricing</a></nav><a class="btn btn-primary os-header-cta" href="index.html#install">Install free</a><details class="os-mobile-menu"><summary aria-label="Open site menu">Menu</summary><nav class="os-mobile-panel" aria-label="Mobile navigation"><a href="index.html#how">How it works</a>
+<a href="pricing.html">Pricing</a><a href="license.html#help">License help</a></nav><a class="btn btn-primary os-header-cta" href="index.html#install">Install free</a><details class="os-mobile-menu"><summary aria-label="Open site menu">Menu</summary><nav class="os-mobile-panel" aria-label="Mobile navigation"><a href="index.html#how">How it works</a>
 <a href="structural-tools.html">Tools</a>
 <a href="evidence.html">Results</a>
 <a href="hosts.html">Hosts</a>
-<a href="pricing.html">Pricing</a><a href="index.html#install">Install free</a><a href="docs/index.html">Documentation</a></nav></details></div></header>
+<a href="pricing.html">Pricing</a><a href="license.html#help">License help</a><a href="index.html#install">Install free</a><a href="docs/index.html">Documentation</a></nav></details></div></header>
 
-<section id="main" class="hero" id="top">
+<section id="main" class="hero">
   <div class="shell">
     <p class="eyebrow">License</p>
-    <h1>Buy, copy your key, activate it.</h1>
-    <p class="hero-lede">There is no account to create. You pay through Stripe, the next page shows your license key, and one command turns it on for the machine you are on.</p>
+    <h1>License help and account FAQ</h1>
+    <p class="hero-lede">Recover a key, manage your machines or billing, and get purchase help. No account is needed to install or activate with your key.</p>
+    <p><a class="btn btn-primary" href="https://openstate-license.michaelallenkuykendall.workers.dev/recover">Recover a key</a> <a class="btn btn-ghost" href="https://openstate-license.michaelallenkuykendall.workers.dev/account">Your keys and machines</a> <a class="btn btn-ghost" href="https://openstate-license.michaelallenkuykendall.workers.dev/portal">Manage billing</a></p>
+    <p class="lede"><a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/LICENSE-HELP.md">Read the full license and account FAQ</a> &middot; <a href="#help">Lifetime, cancellation and refund questions</a> &middot; <a href="mailto:mkuykendall@deltazerolabs.dev">Private purchase support</a></p>
   </div>
 </section>
 
 <section class="band" id="activate">
   <div class="shell">
+    <h2 id="help">Frequently asked questions</h2>
+    <h3>Does lifetime expire?</h3>
+    <p class="lede">The $129 lifetime license has no scheduled subscription expiry and covers every 0.x release. It does not promise coverage of future 1.x or later major versions. The engine still needs a license check at least every 7 days for continued offline use; that verification window is separate from your lifetime entitlement. See the <a href="terms.html">terms</a>.</p>
+    <h3>How do I cancel or request a refund?</h3>
+    <p class="lede"><a href="https://openstate-license.michaelallenkuykendall.workers.dev/portal">Cancel monthly billing</a> with your key to stop future renewals. Access continues until the end of your paid period. A cancellation does not refund previous charges. Refund requests are reviewed individually under the <a href="refund.html">final-sale policy</a>; approval is not guaranteed. Email <a href="mailto:mkuykendall@deltazerolabs.dev">mkuykendall@deltazerolabs.dev</a> from your purchase email with a receipt or order reference and a brief explanation.</p>
+    <h3>What if recovery does not work?</h3>
+    <p class="lede">Check spam and that you used the purchase email. If you cannot access that email account or still cannot recover your key, contact purchase support privately. Never share your key, receipt or purchase email in a public issue. The <a href="https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/LICENSE-HELP.md">full FAQ</a> covers recovery, account sign-in, machine removal and upgrades.</p>
     <h2>Stripe hosts the payment</h2>
     <p class="lede">The license worker creates a Stripe Checkout Session and redirects the browser to it. After payment, Stripe returns you to the worker's success page, which shows your key. <strong>Save your license key before closing that page.</strong> Copy it into your password manager or another secure place. Your Stripe receipt is proof of payment; keep the key separately for activation.</p>
     <p class="route">GET /buy?tier=monthly|lifetime</p>

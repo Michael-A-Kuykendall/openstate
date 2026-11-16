@@ -1,0 +1,47 @@
+name: Bug report
+description: Report reproducible behavior that differs from what OpenState should do.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This report will be public. Share a small synthetic example and redacted errors, not full logs or session transcripts.
+        For keys, billing or refunds use the [license FAQ](https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/LICENSE-HELP.md).
+        Report security vulnerabilities privately using [SECURITY.md](https://github.com/Michael-A-Kuykendall/openstate/blob/main/SECURITY.md).
+  - type: textarea
+    id: context
+    attributes:
+      label: Version and environment
+      description: OpenState version, operating system and architecture, agent/host and version, native OpenCode or MCP connection.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Smallest repeatable steps, tool name and a synthetic example. Include whether this happens in a fresh project.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior and redacted error
+      description: Include only the relevant error text; remove private paths and project details.
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Before submitting
+      options:
+        - label: "I removed license keys, purchase emails, passwords, tokens, private code and project data from this report."
+          required: true
+        - label: "I searched existing issues and will follow the Code of Conduct."
+          required: true
