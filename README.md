@@ -13,6 +13,8 @@
 
 **openstate is commercial software, free to try.** Every machine gets 30 structural applies free; after that, a $10/month or $129 lifetime (every 0.x release) license from the [pricing page](https://michael-a-kuykendall.github.io/openstate/pricing.html) (Stripe; Keygen issues the key) removes the limit. All sales are final. The engine runs locally and needs no account; its only network calls are license checks (Keygen and the OpenState license worker: license key, hashed machine fingerprint, platform name; never project data).
 
+**Need help?** [Recover a license key](https://openstate-license.michaelallenkuykendall.workers.dev/recover) · **[License and account FAQ](docs/LICENSE-HELP.md)** · [Get support or report a problem](SUPPORT.md)
+
 ## Your coding agent edits the function, not the file
 
 | Your agent can | With |

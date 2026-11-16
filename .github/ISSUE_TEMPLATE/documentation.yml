@@ -1,0 +1,41 @@
+name: Documentation correction
+description: Report a broken link, unclear instruction or incorrect public documentation.
+title: "[Docs] "
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This report will be public. Share a small synthetic example and redacted errors, not full logs or session transcripts.
+        For keys, billing or refunds use the [license FAQ](https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/LICENSE-HELP.md).
+        Report security vulnerabilities privately using [SECURITY.md](https://github.com/Michael-A-Kuykendall/openstate/blob/main/SECURITY.md).
+  - type: input
+    id: context
+    attributes:
+      label: Page URL and section
+      description: Link the public documentation page and name the section.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What is wrong or unclear?
+      description: Quote the relevant public sentence or describe the broken link.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected correction or information
+      description: Explain what you needed to learn; a proposed rewrite is optional.
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Before submitting
+      options:
+        - label: "I removed license keys, purchase emails, passwords, tokens, private code and project data from this report."
+          required: true
+        - label: "I searched existing issues and will follow the Code of Conduct."
+          required: true

@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: License recovery, billing and refunds
+    url: https://github.com/Michael-A-Kuykendall/openstate/blob/main/docs/LICENSE-HELP.md
+    about: Recover a key, manage machines, cancel billing or contact purchase support privately.
+  - name: Ask a usage question
+    url: https://github.com/Michael-A-Kuykendall/openstate/discussions/categories/q-a
+    about: Get help using OpenState and share answers with the community.
+  - name: Suggest a feature
+    url: https://github.com/Michael-A-Kuykendall/openstate/discussions/categories/ideas
+    about: Discuss the problem and desired outcome before proposing implementation.
+  - name: Report a security vulnerability privately
+    url: https://github.com/Michael-A-Kuykendall/openstate/blob/main/SECURITY.md
+    about: Use the documented security email; do not disclose vulnerabilities in public issues.
