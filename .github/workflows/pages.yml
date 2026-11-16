@@ -42,12 +42,15 @@ jobs:
             if curl --fail --silent --show-error --location --max-time 15 "$base/hosts.html" -o /tmp/hosts.html &&
                curl --fail --silent --show-error --location --max-time 15 "$base/pricing.html" -o /tmp/pricing.html &&
                curl --fail --silent --show-error --location --max-time 15 "$base/css/final.css" -o /tmp/final.css &&
+               curl --fail --silent --show-error --location --max-time 15 "$base/structural-tools-reference.html" -o /tmp/structural-reference.html &&
                curl --fail --silent --show-error --location --max-time 15 "$base/llms.txt" -o /tmp/llms.txt &&
                curl --fail --silent --show-error --location --max-time 15 "$base/llms-full.txt" -o /tmp/llms-full.txt &&
                curl --fail --silent --show-error --location --max-time 15 "$base/sitemap.xml" -o /tmp/sitemap.xml &&
                grep -q 'os-host-capability-grid' /tmp/hosts.html &&
                grep -q 'Responsive host capability cards' /tmp/final.css &&
                grep -q 'offer-action' /tmp/pricing.html &&
+               grep -q 'Structural tools: read, search and edit code by definition' /tmp/structural-reference.html &&
+               grep -q 'Source → GitHub' /tmp/structural-reference.html &&
                grep -q 'OpenState' /tmp/llms.txt &&
                grep -q 'openstate_capsule' /tmp/llms-full.txt &&
                grep -q 'hosts.html' /tmp/sitemap.xml; then
